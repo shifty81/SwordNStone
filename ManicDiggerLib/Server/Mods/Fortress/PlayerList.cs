@@ -12,7 +12,7 @@ namespace ManicDigger.Mods.Fortress
 		{
 			m = manager;
 			m.RegisterOnSpecialKey(OnTabKey);
-			m.RegisterOnDialogClick(OnTabResponse);
+			m.RegisterOnDialogClick2(OnTabResponse2);
 			m.RegisterTimer(UpdateTab, 1);
 		}
 		
@@ -239,8 +239,10 @@ namespace ManicDigger.Mods.Fortress
 			return text;
 		}
 		
-		void OnTabResponse(int player, string widgetid)
+		void OnTabResponse2(DialogClickArgs args)
 		{
+			int player = args.GetPlayer();
+			string widgetid = args.GetWidgetId();
 			if (widgetid == "Tab" || widgetid == "Esc")
 			{
 				m.SendDialog(player, "PlayerList", null);

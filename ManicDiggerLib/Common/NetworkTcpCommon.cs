@@ -35,7 +35,6 @@ namespace ManicDigger.Common
 				this);
 		}
 		byte[] dataRcvBuf = new byte[1024 * 8];
-		static int i = 0;
 		protected void OnBytesReceived(IAsyncResult result)
 		{
 			int nBytesRec;

@@ -108,6 +108,7 @@
     <Compile Include="Client\Mods\GuiCrafting.ci.cs" />
     <Compile Include="Client\Mods\GuiEscapeMenu.ci.cs" />
     <Compile Include="Client\Mods\GuiPlayerStats.ci.cs" />
+    <Compile Include="Client\Mods\GuiFrameRenderer.ci.cs" />
     <Compile Include="Client\Mods\GuiInventory.ci.cs" />
     <Compile Include="Client\Mods\GuiWoWActionBars.ci.cs" />
     <Compile Include="Client\Mods\GuiWoWMinimap.ci.cs" />

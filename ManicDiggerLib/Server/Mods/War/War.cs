@@ -22,13 +22,13 @@ namespace ManicDigger.Mods.War
 			
 			//Register specific functions
 			m.RegisterOnPlayerJoin(PlayerJoin);
-			m.RegisterOnDialogClick(DialogClickSelectTeam);
-			m.RegisterOnDialogClick(DialogClickSelectClass);
-			m.RegisterOnDialogClick(DialogClickSelectSubclass);
+			m.RegisterOnDialogClick2(DialogClickSelectTeam2);
+			m.RegisterOnDialogClick2(DialogClickSelectClass2);
+			m.RegisterOnDialogClick2(DialogClickSelectSubclass2);
 			m.RegisterOnWeaponHit(Hit);
 			m.RegisterOnSpecialKey(RespawnKey);
 			m.RegisterOnSpecialKey(OnTabKey);
-			m.RegisterOnDialogClick(OnTabResponse);
+			m.RegisterOnDialogClick2(OnTabResponse2);
 			m.RegisterOnSpecialKey(OnSelectTeamKey);
 			m.RegisterChangedActiveMaterialSlot(UpdatePlayerModel);
 			m.RegisterOnWeaponShot(Shot);
@@ -339,6 +339,10 @@ namespace ManicDigger.Mods.War
 				}
 			}
 		}
+		void DialogClickSelectTeam2(DialogClickArgs args)
+		{
+			DialogClickSelectTeam(args.GetPlayer(), args.GetWidgetId());
+		}
 		bool spawnedBot = false;
 		void DialogClickSelectClass(int playerid, string widget)
 		{
@@ -361,6 +365,10 @@ namespace ManicDigger.Mods.War
 			{
 				m.SendDialog(playerid, "SelectClass" + playerid, null);
 			}
+		}
+		void DialogClickSelectClass2(DialogClickArgs args)
+		{
+			DialogClickSelectClass(args.GetPlayer(), args.GetWidgetId());
 		}
 		void DialogClickSelectSubclass(int playerid, string widget)
 		{
@@ -412,6 +420,10 @@ namespace ManicDigger.Mods.War
 				}
 			}
 			ResetInventoryOnRespawn(playerid);
+		}
+		void DialogClickSelectSubclass2(DialogClickArgs args)
+		{
+			DialogClickSelectSubclass(args.GetPlayer(), args.GetWidgetId());
 		}
 		
 		void ResetInventoryOnRespawn(int playerid)
@@ -905,8 +917,10 @@ namespace ManicDigger.Mods.War
 			return text;
 		}
 		
-		void OnTabResponse(int player, string widgetid)
+		void OnTabResponse2(DialogClickArgs args)
 		{
+			int player = args.GetPlayer();
+			string widgetid = args.GetWidgetId();
 			if (widgetid == "Tab" || widgetid == "Esc")
 			{
 				m.SendDialog(player, "PlayerList", null);
