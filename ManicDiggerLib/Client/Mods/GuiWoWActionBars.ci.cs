@@ -166,44 +166,29 @@
         int buttonSize = ButtonSize();
         int spacing = ButtonSpacing();
         
-        // Draw action bar background
-        game.Draw2dBitmapFile("local/gui/wow/actionbar_bg.png", startX, startY, 
-            game.platform.FloatToInt(1024 * game.Scale()), 
-            game.platform.FloatToInt(128 * game.Scale()));
+        // Draw action bar background using dark panel
+        int bgWidth = 10 * (buttonSize + spacing) + spacing * 2;
+        int bgHeight = game.platform.FloatToInt(96 * game.Scale());
+        game.Draw2dTexture(game.WhiteTexture(), startX - spacing, startY, 
+            bgWidth, bgHeight, null, 0, 
+            Game.ColorFromArgb(200, 50, 50, 50), false);
         
-        // Draw 10 action buttons
+        // Draw 10 action buttons using standardized golden slots
         for (int i = 0; i < 10; i++)
         {
             int buttonX = startX + i * (buttonSize + spacing) + spacing;
             int buttonY = startY + 30;
             
-            // Draw button background based on state
-            string buttonTexture = "local/gui/wow/button_normal.png";
-            if (buttonStates[i] == 1)
-            {
-                buttonTexture = "local/gui/wow/button_hover.png";
-            }
-            else if (buttonStates[i] == 2)
-            {
-                buttonTexture = "local/gui/wow/button_pressed.png";
-            }
+            // Draw slot background using standardized golden UI
+            bool isHighlighted = (i == game.ActiveMaterial);
+            GuiFrameRenderer.DrawSlot(game, buttonX, buttonY, buttonSize, isHighlighted);
             
-            game.Draw2dBitmapFile(buttonTexture, buttonX, buttonY, buttonSize, buttonSize);
-            
-            // Draw item in slot
+            // Draw item in slot (inset slightly to fit within frame)
             Packet_Item item = game.d_Inventory.RightHand[i];
             if (item != null)
             {
-                DrawItem(buttonX, buttonY, item, buttonSize, buttonSize);
-            }
-            
-            // Highlight active material slot
-            if (i == game.ActiveMaterial)
-            {
-                // Draw golden highlight border
-                game.Draw2dTexture(game.WhiteTexture(), buttonX - 3, buttonY - 3, 
-                    buttonSize + 6, buttonSize + 6, null, 0, 
-                    Game.ColorFromArgb(255, 255, 215, 0), false);
+                int inset = game.platform.FloatToInt(6 * game.Scale());
+                DrawItem(buttonX + inset, buttonY + inset, item, buttonSize - inset * 2, buttonSize - inset * 2);
             }
             
             // Draw keybind number

@@ -90,9 +90,9 @@
             DrawPlayerDirection(game, centerX, centerY, scale);
         }
         
-        // Draw minimap border
-        game.Draw2dBitmapFile("local/gui/wow/minimap_border.png", x - 10, y - 10, 
-            scaledSize + 20, scaledSize + 20);
+        // Draw minimap border using standardized circular golden frame
+        int borderSize = scaledSize + game.platform.FloatToInt(20 * scale);
+        GuiFrameRenderer.DrawCircularFrame(game, x - 10, y - 10, borderSize);
         
         // Draw coordinates text
         FontCi font = new FontCi();
