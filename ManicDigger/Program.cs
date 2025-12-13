@@ -17,7 +17,7 @@ public class ManicDiggerProgram
 	{
 		#if !DEBUG
 		//Catch unhandled exceptions
-		CrashReporter.DefaultFileName = "ManicDiggerClientCrash.txt";
+		CrashReporter.DefaultFileName = "SwordAndStoneClientCrash.txt";
 		CrashReporter.EnableGlobalExceptionHandling(false);
 		#endif
 
