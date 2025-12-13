@@ -1126,6 +1126,12 @@ public enum EscapeMenuState
     Main,
     Options,
     Graphics,
+    Mouse,
+    Controls,
+    Accessibility,
+    Sound,
+    Interface,
+    Dev,
     Keys,
     Other
 }
