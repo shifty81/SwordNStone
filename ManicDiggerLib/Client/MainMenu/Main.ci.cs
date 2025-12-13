@@ -12,6 +12,11 @@
         cursorLoaded = false;
         fontDefault = new FontCi();
         fontDefault.size = 20;
+        
+        // Sword animation variables
+        swordAnimationProgress = 0;
+        swordAnimationSpeed = 0.5f;
+        swordAnimationStarted = false;
     }
 
     MenuWidget singleplayer;
@@ -22,6 +27,11 @@
     bool queryStringChecked;
     bool cursorLoaded;
     FontCi fontDefault;
+    
+    // Sword and Stone animation
+    float swordAnimationProgress;
+    float swordAnimationSpeed;
+    bool swordAnimationStarted;
 
     public override void Render(float dt)
     {
@@ -46,7 +56,9 @@
         UseQueryStringIpAndPort(menu);
 
         menu.DrawBackground();
-        menu.Draw2dQuad(menu.GetTexture("logo.png"), windowX / 2 - 1024 * scale / 2, 0, 1024 * scale, 512 * scale);
+        
+        // Draw "Sword and Stone" title screen
+        DrawSwordAndStone(dt, scale);
 
         int buttonheight = 64;
         int buttonwidth = 256;
@@ -93,6 +105,72 @@
         {
             menu.StartLogin(null, ip, portInt);
         }
+    }
+
+    void DrawSwordAndStone(float dt, float scale)
+    {
+        // Start animation after a short delay
+        if (!swordAnimationStarted)
+        {
+            swordAnimationStarted = true;
+        }
+        
+        // Stone logo background
+        float stoneWidth = 512 * scale;
+        float stoneHeight = 256 * scale;
+        float stoneX = windowX / 2 - stoneWidth / 2;
+        float stoneY = 50 * scale;
+        
+        menu.Draw2dQuad(menu.GetTexture("wow/stone_logo.png"), 
+            menu.p.FloatToInt(stoneX), menu.p.FloatToInt(stoneY), 
+            menu.p.FloatToInt(stoneWidth), menu.p.FloatToInt(stoneHeight));
+        
+        // Animate sword descending and sticking into stone
+        float swordWidth = 128 * scale;
+        float swordHeight = 512 * scale;
+        float swordX = windowX / 2 - swordWidth / 2;
+        float swordTargetY = stoneY + 20 * scale; // Final position inside stone
+        
+        if (swordAnimationProgress < 1.0f)
+        {
+            // Update animation
+            swordAnimationProgress += dt * swordAnimationSpeed;
+            if (swordAnimationProgress > 1.0f)
+            {
+                swordAnimationProgress = 1.0f;
+            }
+            
+            // Ease-out bounce effect
+            float t = swordAnimationProgress;
+            float bounce = 1;
+            if (t < 1)
+            {
+                // Simple ease-out
+                bounce = t * t * (3 - 2 * t);
+            }
+            
+            // Calculate current Y position
+            float swordStartY = -swordHeight;
+            float swordY = swordStartY + (swordTargetY - swordStartY) * bounce;
+            
+            menu.Draw2dQuad(menu.GetTexture("wow/sword.png"), 
+                menu.p.FloatToInt(swordX), menu.p.FloatToInt(swordY), 
+                menu.p.FloatToInt(swordWidth), menu.p.FloatToInt(swordHeight));
+        }
+        else
+        {
+            // Animation complete - draw sword in final position
+            menu.Draw2dQuad(menu.GetTexture("wow/sword.png"), 
+                menu.p.FloatToInt(swordX), menu.p.FloatToInt(swordTargetY), 
+                menu.p.FloatToInt(swordWidth), menu.p.FloatToInt(swordHeight));
+        }
+        
+        // Draw "SWORD AND STONE" title text
+        FontCi titleFont = new FontCi();
+        titleFont.size = 48;
+        float titleY = stoneY + stoneHeight + 30 * scale;
+        menu.DrawText("SWORD AND STONE", titleFont, windowX / 2, titleY, 
+            TextAlign.Center, TextBaseline.Top);
     }
 
     public override void OnButton(MenuWidget w)

@@ -289,7 +289,7 @@
         {
             return;
         }
-        DrawMaterialSelector();
+        // Disabled: DrawMaterialSelector() - now using WoW-style action bar
         if (game.guistate != GuiState.Inventory)
         {
             return;
