@@ -1,6 +1,6 @@
-# Quick Start Guide - Manic Digger Development
+# Quick Start Guide - Sword&Stone Development
 
-This guide will get you up and running with Manic Digger development quickly.
+This guide will get you up and running with Sword&Stone development quickly.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ Choose your platform:
 
 2. **Open in Visual Studio:**
    ```cmd
-   ManicDigger.sln
+   SwordAndStone.sln
    ```
 
 3. **Build the solution:**
@@ -34,7 +34,7 @@ Choose your platform:
    - Right-click solution → Build Solution
 
 4. **Run the client:**
-   - Set `ManicDigger` as startup project (right-click → Set as Startup Project)
+   - Set `SwordAndStone` as startup project (right-click → Set as Startup Project)
    - Press `F5` to run with debugging
    - Or `Ctrl+F5` to run without debugging
 
@@ -69,18 +69,18 @@ Choose your platform:
 
 4. **Restore packages:**
    ```bash
-   mono nuget.exe restore ManicDigger.sln
+   mono nuget.exe restore SwordAndStone.sln
    ```
 
 5. **Build:**
    ```bash
-   xbuild ManicDigger.sln /p:Configuration=Debug
+   xbuild SwordAndStone.sln /p:Configuration=Debug
    ```
 
 6. **Run the server:**
    ```bash
-   cd ManicDiggerServer/bin/Debug
-   mono ManicDiggerServer.exe
+   cd SwordAndStoneServer/bin/Debug
+   mono SwordAndStoneServer.exe
    ```
 
 **Done!** The server should start.
@@ -89,12 +89,12 @@ Choose your platform:
 
 ```
 manicdiggerVSCLONE/
-├── ManicDigger/           # Game client (Windows GUI application)
-├── ManicDiggerLib/        # Core game library (shared code)
-├── ManicDiggerServer/     # Dedicated server application
+├── SwordAndStone/         # Game client (Windows GUI application)
+├── SwordAndStoneLib/      # Core game library (shared code)
+├── SwordAndStoneServer/   # Dedicated server application
 ├── ScriptingApi/          # Server-side modding API
 ├── MdMonsterEditor/       # Monster model editor tool
-├── ManicDigger.Tests/     # Unit and integration tests
+├── SwordAndStone.Tests/   # Unit and integration tests
 ├── data/                  # Game assets (textures, sounds, etc.)
 ├── Lib/                   # Third-party native libraries
 └── packages/              # NuGet packages (generated)
@@ -106,10 +106,10 @@ manicdiggerVSCLONE/
 
 ```bash
 # Debug build (default)
-xbuild ManicDigger.sln
+xbuild SwordAndStone.sln
 
 # Release build
-xbuild ManicDigger.sln /p:Configuration=Release
+xbuild SwordAndStone.sln /p:Configuration=Release
 
 # Visual Studio: Ctrl+Shift+B
 ```
@@ -118,12 +118,12 @@ xbuild ManicDigger.sln /p:Configuration=Release
 
 ```bash
 # Server
-cd ManicDiggerServer/bin/Debug
-mono ManicDiggerServer.exe
+cd SwordAndStoneServer/bin/Debug
+mono SwordAndStoneServer.exe
 
 # Client (requires X11 on Linux)
-cd ManicDigger/bin/Debug
-mono ManicDigger.exe
+cd SwordAndStone/bin/Debug
+mono SwordAndStone.exe
 
 # Visual Studio: Press F5
 ```
@@ -134,7 +134,7 @@ mono ManicDigger.exe
 # Visual Studio: Ctrl+E, T (Test Explorer)
 
 # Command line (after installing NUnit.Console)
-mono packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe ManicDigger.Tests/bin/Debug/ManicDigger.Tests.dll
+mono packages/NUnit.ConsoleRunner.*/tools/nunit3-console.exe SwordAndStone.Tests/bin/Debug/SwordAndStone.Tests.dll
 ```
 
 ### Creating a Distribution
@@ -157,7 +157,7 @@ Let's add a simple feature to understand the workflow:
 
 1. **Open the server code:**
    ```
-   ManicDiggerLib/Server/Server.cs
+   SwordAndStoneLib/Server/Server.cs
    ```
 
 2. **Find the player join handler** (around line 200-300):
@@ -171,7 +171,7 @@ Let's add a simple feature to understand the workflow:
 
 4. **Build the project:**
    ```bash
-   xbuild ManicDigger.sln
+   xbuild SwordAndStone.sln
    ```
 
 5. **Test your change:**
@@ -216,7 +216,7 @@ Let's add a simple feature to understand the workflow:
 ## Key Files to Know
 
 ### Configuration
-- `ManicDigger.sln` - Solution file (open in VS)
+- `SwordAndStone.sln` - Solution file (open in VS)
 - `*.csproj` - Project files
 - `packages.config` - NuGet dependencies
 
@@ -245,7 +245,7 @@ Let's add a simple feature to understand the workflow:
 
 ```bash
 # Run with debugger
-mono --debug ManicDiggerServer.exe
+mono --debug SwordAndStoneServer.exe
 
 # Use logging
 # Add Console.WriteLine() statements
@@ -257,17 +257,14 @@ mono --debug ManicDiggerServer.exe
 ### Documentation
 - See `BUILD.md` for detailed build instructions
 - See `TESTING.md` for testing information
-- Check the Wiki: http://manicdigger.sourceforge.net/wiki/
 
 ### Community
-- **Forum**: http://manicdigger.sourceforge.net/forum/
-- **IRC**: #manicdigger on irc.esper.net
 - **GitHub Issues**: Report bugs and request features
 
 ### Common Issues
 
 **Q: Build fails with "missing reference"**
-A: Run `nuget restore ManicDigger.sln`
+A: Run `nuget restore SwordAndStone.sln`
 
 **Q: Can't run client on Linux**
 A: You need X11 display. Client is primarily for Windows.
@@ -283,14 +280,14 @@ A: Do a clean rebuild: Delete `bin/` and `obj/` folders, then rebuild
 Now that you're set up:
 
 1. **Explore the code:**
-   - Browse `ManicDiggerLib/` to understand core game logic
+   - Browse `SwordAndStoneLib/` to understand core game logic
    - Look at `ScriptingApi/` to see the modding API
-   - Check `ManicDigger.Tests/` for test examples
+   - Check `SwordAndStone.Tests/` for test examples
 
 2. **Try the examples:**
    - Run the server and client
    - Test different game modes
-   - Load some mods from `ManicDiggerLib/Server/Mods/`
+   - Load some mods from `SwordAndStoneLib/Server/Mods/`
 
 3. **Make improvements:**
    - Fix a bug from GitHub Issues
@@ -321,7 +318,7 @@ Now that you're set up:
 
 ---
 
-**Happy coding!** Welcome to the Manic Digger development community.
+**Happy coding!** Welcome to the Sword&Stone development community.
 
 For more detailed information, see:
 - [BUILD.md](BUILD.md) - Comprehensive build guide
