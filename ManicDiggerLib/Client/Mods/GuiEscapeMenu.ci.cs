@@ -19,6 +19,27 @@
         fontEscapeMenu = FontCi.Create("Arial", 20, 0);
     }
     float one;
+    
+    // UI Constants for tabbed interface
+    const int TAB_BORDER_THICKNESS = 2;
+    const int TAB_PANEL_Y = 35;
+    const int TAB_PANEL_HEIGHT = 35;
+    const int CONTENT_PANEL_MARGIN = 30;
+    const int TAB_FONT_SIZE = 14;
+    const int CONTROLS_TEXT_HEIGHT = 16;
+    const int STANDARD_TEXT_HEIGHT = 20;
+    
+    // Color constants for UI elements
+    int ColorTabPanelBg() { return Game.ColorFromArgb(180, 70, 70, 70); }
+    int ColorContentPanelBg() { return Game.ColorFromArgb(200, 50, 50, 50); }
+    int ColorActiveTabBg() { return Game.ColorFromArgb(255, 100, 100, 100); }
+    int ColorInactiveTabBg() { return Game.ColorFromArgb(200, 60, 60, 60); }
+    int ColorActiveTabText() { return Game.ColorFromArgb(255, 255, 215, 0); }
+    int ColorInactiveTabText() { return Game.ColorFromArgb(255, 180, 180, 180); }
+    int ColorHoverText() { return Game.ColorFromArgb(255, 255, 255, 255); }
+    int ColorActiveTabBorder() { return Game.ColorFromArgb(255, 180, 180, 180); }
+    int ColorInactiveTabBorder() { return Game.ColorFromArgb(255, 80, 80, 80); }
+    
     Button buttonMainReturnToGame;
     Button buttonMainOptions;
     Button buttonMainExit;
@@ -68,14 +89,15 @@
     Button tabDev;
     Button tabBack;
     
+    // Tab button array for the tabbed interface
+    // Stores all tab buttons for rendering and interaction
+    Button[] tabButtons;
+    int tabButtonsCount;
+    
     Button optionsGraphics;
     Button optionsKeys;
     Button optionsOther;
     Button optionsReturnToMainMenu;
-    
-    // Store tab buttons separately
-    Button[] tabButtons;
-    int tabButtonsCount;
     
     void InitTabButtons()
     {
@@ -644,44 +666,44 @@
         {
             InitTabButtons();
             GraphicsSet();
-            MakeTabLayout(fontEscapeMenu, 20);
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
         }
         else if (state == EscapeMenuState.Mouse)
         {
             InitTabButtons();
             MouseSet();
-            MakeTabLayout(fontEscapeMenu, 20);
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
         }
         else if (state == EscapeMenuState.Controls)
         {
             InitTabButtons();
             ControlsSet();
             FontCi fontKeys = FontCi.Create("Arial", 12, 0);
-            MakeTabLayout(fontKeys, 16);
+            MakeTabLayout(fontKeys, CONTROLS_TEXT_HEIGHT);
         }
         else if (state == EscapeMenuState.Accessibility)
         {
             InitTabButtons();
             AccessibilitySet();
-            MakeTabLayout(fontEscapeMenu, 20);
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
         }
         else if (state == EscapeMenuState.Sound)
         {
             InitTabButtons();
             SoundSet();
-            MakeTabLayout(fontEscapeMenu, 20);
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
         }
         else if (state == EscapeMenuState.Interface)
         {
             InitTabButtons();
             InterfaceSet();
-            MakeTabLayout(fontEscapeMenu, 20);
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
         }
         else if (state == EscapeMenuState.Dev)
         {
             InitTabButtons();
             DevSet();
-            MakeTabLayout(fontEscapeMenu, 20);
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
         }
         else if (state == EscapeMenuState.Other)
         {
@@ -846,9 +868,9 @@
     
     void MakeTabLayout(FontCi font, int textheight)
     {
-        FontCi tabFont = FontCi.Create("Arial", 14, 0);
+        FontCi tabFont = FontCi.Create("Arial", TAB_FONT_SIZE, 0);
         int tabHeight = 30;
-        int tabStartY = 40;
+        int tabStartY = TAB_PANEL_Y + 5;
         int tabSpacing = 5;
         
         // Calculate total width needed for all tabs
@@ -892,8 +914,8 @@
         }
         
         // Position content widgets below tabs
-        int contentStartY = tabStartY + tabHeight + 40;
-        int contentLeftMargin = 100;
+        int contentStartY = TAB_PANEL_Y + TAB_PANEL_HEIGHT + 45;
+        int contentLeftMargin = CONTENT_PANEL_MARGIN + 70;
         
         for (int i = 0; i < widgetsCount; i++)
         {
@@ -942,18 +964,14 @@
         if (IsTabbed(escapemenustate) && tabButtons != null)
         {
             // Draw background panel for tabs
-            int tabPanelY = 35;
-            int tabPanelHeight = 35;
-            int tabPanelColor = Game.ColorFromArgb(180, 70, 70, 70);
-            game.Draw2dTexture(game.WhiteTexture(), 0, tabPanelY, game.Width(), tabPanelHeight, null, 0, tabPanelColor, false);
+            game.Draw2dTexture(game.WhiteTexture(), 0, TAB_PANEL_Y, game.Width(), TAB_PANEL_HEIGHT, 
+                null, 0, ColorTabPanelBg(), false);
             
             // Draw content panel background
-            int contentPanelY = tabPanelY + tabPanelHeight + 5;
+            int contentPanelY = TAB_PANEL_Y + TAB_PANEL_HEIGHT + 5;
             int contentPanelHeight = game.Height() - contentPanelY - 50;
-            int contentPanelColor = Game.ColorFromArgb(200, 50, 50, 50);
-            int contentPanelMargin = 30;
-            game.Draw2dTexture(game.WhiteTexture(), contentPanelMargin, contentPanelY, 
-                game.Width() - contentPanelMargin * 2, contentPanelHeight, null, 0, contentPanelColor, false);
+            game.Draw2dTexture(game.WhiteTexture(), CONTENT_PANEL_MARGIN, contentPanelY, 
+                game.Width() - CONTENT_PANEL_MARGIN * 2, contentPanelHeight, null, 0, ColorContentPanelBg(), false);
             
             // Draw tabs
             for (int i = 0; i < tabButtonsCount; i++)
@@ -962,12 +980,12 @@
                 bool tabIsActive = IsActiveTab(i, escapemenustate);
                 
                 // Draw tab background
-                int tabBgColor = tabIsActive ? Game.ColorFromArgb(255, 100, 100, 100) : Game.ColorFromArgb(200, 60, 60, 60);
+                int tabBgColor = tabIsActive ? ColorActiveTabBg() : ColorInactiveTabBg();
                 game.Draw2dTexture(game.WhiteTexture(), tab.x, tab.y, tab.width, tab.height, null, 0, tabBgColor, false);
                 
                 // Draw tab border
-                int borderColor = tabIsActive ? Game.ColorFromArgb(255, 180, 180, 180) : Game.ColorFromArgb(255, 80, 80, 80);
-                DrawBorder(tab.x, tab.y, tab.width, tab.height, 2, borderColor);
+                int borderColor = tabIsActive ? ColorActiveTabBorder() : ColorInactiveTabBorder();
+                DrawBorder(tab.x, tab.y, tab.width, tab.height, TAB_BORDER_THICKNESS, borderColor);
                 
                 // Draw tab text
                 game.Draw2dText(tab.Text, tab.font, tab.x + 10, tab.y + 8, 
