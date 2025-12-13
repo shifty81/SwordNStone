@@ -91,7 +91,9 @@ public class ManicDiggerProgram
 			server.SaveFilenameOverride = savefilename;
 			server.exit = exit;
 			DummyNetServer netServer = new DummyNetServer();
-			netServer.SetPlatform(new GamePlatformNative());
+			GamePlatformNative serverPlatform = new GamePlatformNative();
+			serverPlatform.SetExit(exit);
+			netServer.SetPlatform(serverPlatform);
 			netServer.SetNetwork(dummyNetwork);
 			server.mainSockets = new NetServer[3];
 			server.mainSockets[0] = netServer;
