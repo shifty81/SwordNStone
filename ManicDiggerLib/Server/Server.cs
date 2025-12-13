@@ -2583,17 +2583,25 @@ public partial class Server : ICurrentTime, IDropItem
             
             // Determine what tool is being used
             ToolType toolUsed = ToolType.Hand;
-            var heldItem = inventory.RightHand[cmd.MaterialSlot];
-            if (heldItem != null && heldItem.ItemClass == ItemClass.Block)
+            if (cmd.MaterialSlot >= 0 && cmd.MaterialSlot < inventory.RightHand.Length)
             {
-                BlockType heldBlockType = BlockTypes[heldItem.BlockId];
-                if (heldBlockType.IsTool)
+                var heldItem = inventory.RightHand[cmd.MaterialSlot];
+                if (heldItem != null && heldItem.ItemClass == ItemClass.Block)
                 {
-                    toolUsed = heldBlockType.ToolType;
+                    if (heldItem.BlockId >= 0 && heldItem.BlockId < BlockTypes.Length)
+                    {
+                        BlockType heldBlockType = BlockTypes[heldItem.BlockId];
+                        if (heldBlockType != null && heldBlockType.IsTool)
+                        {
+                            toolUsed = heldBlockType.ToolType;
+                        }
+                    }
                 }
             }
             
-            // Check if tool requirement is met (either no tool preferred, or correct tool is used)
+            // Check if tool requirement is met
+            // - Blocks with PreferredTool.None can be broken with any tool
+            // - Blocks with a specific PreferredTool require that tool type
             bool toolRequirementMet = (blockType.PreferredTool == ToolType.None) || 
                                       (blockType.PreferredTool == toolUsed);
             
