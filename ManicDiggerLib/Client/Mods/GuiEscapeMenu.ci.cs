@@ -401,7 +401,6 @@
 
     // Mouse tab
     Button mouseCheckboxSneakSprint;
-    Button mouseResetButton;
     void MouseSet()
     {
         LanguageCi language = game.language;
@@ -565,6 +564,29 @@
 
     internal Game game;
     EscapeMenuState escapemenustate;
+    
+    bool IsTabbed(EscapeMenuState state)
+    {
+        return state == EscapeMenuState.Graphics 
+            || state == EscapeMenuState.Mouse 
+            || state == EscapeMenuState.Controls 
+            || state == EscapeMenuState.Accessibility 
+            || state == EscapeMenuState.Sound 
+            || state == EscapeMenuState.Interface 
+            || state == EscapeMenuState.Dev;
+    }
+    
+    bool IsActiveTab(int tabIndex, EscapeMenuState state)
+    {
+        if (tabIndex == 0 && state == EscapeMenuState.Graphics) { return true; }
+        else if (tabIndex == 1 && state == EscapeMenuState.Mouse) { return true; }
+        else if (tabIndex == 2 && state == EscapeMenuState.Controls) { return true; }
+        else if (tabIndex == 3 && state == EscapeMenuState.Accessibility) { return true; }
+        else if (tabIndex == 4 && state == EscapeMenuState.Sound) { return true; }
+        else if (tabIndex == 5 && state == EscapeMenuState.Interface) { return true; }
+        else if (tabIndex == 6 && state == EscapeMenuState.Dev) { return true; }
+        return false;
+    }
     void EscapeMenuMouse1()
     {
         // Check tabs first
@@ -855,16 +877,7 @@
             tabButtons[i].font = tabFont;
             
             // Highlight selected tab
-            bool isActiveTab = false;
-            if (i == 0 && escapemenustate == EscapeMenuState.Graphics) { isActiveTab = true; }
-            else if (i == 1 && escapemenustate == EscapeMenuState.Mouse) { isActiveTab = true; }
-            else if (i == 2 && escapemenustate == EscapeMenuState.Controls) { isActiveTab = true; }
-            else if (i == 3 && escapemenustate == EscapeMenuState.Accessibility) { isActiveTab = true; }
-            else if (i == 4 && escapemenustate == EscapeMenuState.Sound) { isActiveTab = true; }
-            else if (i == 5 && escapemenustate == EscapeMenuState.Interface) { isActiveTab = true; }
-            else if (i == 6 && escapemenustate == EscapeMenuState.Dev) { isActiveTab = true; }
-            
-            if (isActiveTab)
+            if (IsActiveTab(i, escapemenustate))
             {
                 tabButtons[i].fontcolor = Game.ColorFromArgb(255, 255, 215, 0);
                 tabButtons[i].fontcolorselected = Game.ColorFromArgb(255, 255, 215, 0);
@@ -926,15 +939,7 @@
         EscapeMenuMouse1();
         
         // Draw tabs if in a tabbed state
-        bool isTabbed = (escapemenustate == EscapeMenuState.Graphics 
-            || escapemenustate == EscapeMenuState.Mouse 
-            || escapemenustate == EscapeMenuState.Controls 
-            || escapemenustate == EscapeMenuState.Accessibility 
-            || escapemenustate == EscapeMenuState.Sound 
-            || escapemenustate == EscapeMenuState.Interface 
-            || escapemenustate == EscapeMenuState.Dev);
-        
-        if (isTabbed && tabButtons != null)
+        if (IsTabbed(escapemenustate) && tabButtons != null)
         {
             // Draw background panel for tabs
             int tabPanelY = 35;
@@ -954,21 +959,14 @@
             for (int i = 0; i < tabButtonsCount; i++)
             {
                 Button tab = tabButtons[i];
-                bool isActiveTab = false;
-                if (i == 0 && escapemenustate == EscapeMenuState.Graphics) { isActiveTab = true; }
-                else if (i == 1 && escapemenustate == EscapeMenuState.Mouse) { isActiveTab = true; }
-                else if (i == 2 && escapemenustate == EscapeMenuState.Controls) { isActiveTab = true; }
-                else if (i == 3 && escapemenustate == EscapeMenuState.Accessibility) { isActiveTab = true; }
-                else if (i == 4 && escapemenustate == EscapeMenuState.Sound) { isActiveTab = true; }
-                else if (i == 5 && escapemenustate == EscapeMenuState.Interface) { isActiveTab = true; }
-                else if (i == 6 && escapemenustate == EscapeMenuState.Dev) { isActiveTab = true; }
+                bool tabIsActive = IsActiveTab(i, escapemenustate);
                 
                 // Draw tab background
-                int tabBgColor = isActiveTab ? Game.ColorFromArgb(255, 100, 100, 100) : Game.ColorFromArgb(200, 60, 60, 60);
+                int tabBgColor = tabIsActive ? Game.ColorFromArgb(255, 100, 100, 100) : Game.ColorFromArgb(200, 60, 60, 60);
                 game.Draw2dTexture(game.WhiteTexture(), tab.x, tab.y, tab.width, tab.height, null, 0, tabBgColor, false);
                 
                 // Draw tab border
-                int borderColor = isActiveTab ? Game.ColorFromArgb(255, 180, 180, 180) : Game.ColorFromArgb(255, 80, 80, 80);
+                int borderColor = tabIsActive ? Game.ColorFromArgb(255, 180, 180, 180) : Game.ColorFromArgb(255, 80, 80, 80);
                 DrawBorder(tab.x, tab.y, tab.width, tab.height, 2, borderColor);
                 
                 // Draw tab text
@@ -1050,20 +1048,10 @@
         int eKey = args.GetKeyCode();
         if (eKey == game.GetKey(GlKeys.Escape))
         {
-            if (escapemenustate == EscapeMenuState.Graphics
-                || escapemenustate == EscapeMenuState.Mouse
-                || escapemenustate == EscapeMenuState.Controls
-                || escapemenustate == EscapeMenuState.Accessibility
-                || escapemenustate == EscapeMenuState.Sound
-                || escapemenustate == EscapeMenuState.Interface
-                || escapemenustate == EscapeMenuState.Dev
+            if (IsTabbed(escapemenustate) 
                 || escapemenustate == EscapeMenuState.Keys
-                || escapemenustate == EscapeMenuState.Other)
-            {
-                SaveOptions();
-                SetEscapeMenuState(EscapeMenuState.Main);
-            }
-            else if (escapemenustate == EscapeMenuState.Options)
+                || escapemenustate == EscapeMenuState.Other
+                || escapemenustate == EscapeMenuState.Options)
             {
                 SaveOptions();
                 SetEscapeMenuState(EscapeMenuState.Main);
