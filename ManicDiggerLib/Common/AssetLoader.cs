@@ -70,6 +70,8 @@ namespace ManicDigger.Common
 							
 							// Also add asset with just filename for backward compatibility (e.g., "actionbar_bg.png")
 							// This ensures old code that references just filenames continues to work
+							// Note: This creates duplicate Asset objects with shared data arrays (by reference)
+							// Future optimization: Use dictionary to map multiple names to single Asset instance
 							if (normalizedPath != f.Name.ToLowerInvariant())
 							{
 								Asset aCompat = new Asset();
@@ -91,7 +93,9 @@ namespace ManicDigger.Common
 			}
 			progress.value = 1;
 			list.count = assets.Count;
-			list.items = new Asset[2048];
+			// Ensure array is large enough to hold all assets
+			int arraySize = Math.Max(2048, assets.Count);
+			list.items = new Asset[arraySize];
 			for (int i = 0; i < assets.Count; i++)
 			{
 				list.items[i] = assets[i];
