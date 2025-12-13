@@ -24,9 +24,15 @@ public class GuiFrameRenderer
     
     /// <summary>
     /// Draws a standardized frame with golden borders.
+    /// First draws a dark panel background, then overlays the frame border.
     /// </summary>
     public static void DrawFrame(Game game, int x, int y, int width, int height, int frameType)
     {
+        // Draw dark background panel first
+        string panelPath = game.platform.StringFormat("{0}panel_dark.png", GOLDEN_UI_PATH);
+        game.Draw2dBitmapFile(panelPath, x + 8, y + 8, width - 16, height - 16);
+        
+        // Then draw the frame border on top
         string framePath = GOLDEN_UI_PATH;
         
         if (frameType == FRAME_SMALL)

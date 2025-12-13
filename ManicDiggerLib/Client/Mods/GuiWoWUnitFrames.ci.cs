@@ -6,8 +6,9 @@
         playerFrameY = 20;
         targetFrameX = 20;
         targetFrameY = 160;
-        frameWidth = 256;
-        frameHeight = 128;
+        // Match closer to actual frame_ornate.png size (128x96) to avoid distortion
+        frameWidth = 192;
+        frameHeight = 112;
     }
 
     internal int playerFrameX;
