@@ -56,7 +56,7 @@
         
         // Draw health bar using standardized golden bar
         float healthProgress = game.one * game.PlayerStats.CurrentHealth / game.PlayerStats.MaxHealth;
-        GuiFrameRenderer.DrawProgressBar(game, barX, barY, barWidth, barHeight, healthProgress, 0); // 0 = red bar
+        GuiFrameRenderer.DrawProgressBar(game, barX, barY, barWidth, barHeight, healthProgress, GuiFrameRenderer.BAR_TYPE_RED);
         
         // Draw health text
         FontCi font = new FontCi();
@@ -71,7 +71,7 @@
         {
             int oxygenBarY = barY + game.platform.FloatToInt(25 * scale);
             float oxygenProgress = game.one * game.PlayerStats.CurrentOxygen / game.PlayerStats.MaxOxygen;
-            GuiFrameRenderer.DrawProgressBar(game, barX, oxygenBarY, barWidth, barHeight, oxygenProgress, 1); // 1 = blue bar
+            GuiFrameRenderer.DrawProgressBar(game, barX, oxygenBarY, barWidth, barHeight, oxygenProgress, GuiFrameRenderer.BAR_TYPE_BLUE);
         }
         
         // Draw portrait placeholder (circular)
@@ -118,7 +118,7 @@
         
         // For now, show full health for blocks (in future could show block health)
         float targetHealth = 1.0f;
-        GuiFrameRenderer.DrawProgressBar(game, barX, barY, barWidth, barHeight, targetHealth, 0); // 0 = red bar
+        GuiFrameRenderer.DrawProgressBar(game, barX, barY, barWidth, barHeight, targetHealth, GuiFrameRenderer.BAR_TYPE_RED);
         
         // Draw target name (block name)
         FontCi nameFont = new FontCi();

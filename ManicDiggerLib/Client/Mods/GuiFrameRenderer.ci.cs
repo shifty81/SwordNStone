@@ -18,6 +18,10 @@ public class GuiFrameRenderer
     internal const int BUTTON_HOVER = 1;
     internal const int BUTTON_PRESSED = 2;
     
+    // Bar types
+    internal const int BAR_TYPE_RED = 0;    // Health, damage
+    internal const int BAR_TYPE_BLUE = 1;   // Oxygen, mana, stamina
+    
     /// <summary>
     /// Draws a standardized frame with golden borders.
     /// </summary>
@@ -71,10 +75,20 @@ public class GuiFrameRenderer
     
     /// <summary>
     /// Draws a progress/health bar using the golden bar pieces.
-    /// barType: 0=red (health), 1=blue (oxygen/mana)
     /// </summary>
+    /// <param name="game">Game instance</param>
+    /// <param name="x">X position</param>
+    /// <param name="y">Y position</param>
+    /// <param name="width">Bar width in pixels</param>
+    /// <param name="height">Bar height in pixels</param>
+    /// <param name="progress">Progress value (0.0 to 1.0, clamped automatically)</param>
+    /// <param name="barType">Bar color type (BAR_TYPE_RED or BAR_TYPE_BLUE)</param>
     public static void DrawProgressBar(Game game, int x, int y, int width, int height, float progress, int barType)
     {
+        // Clamp progress to valid range [0.0, 1.0]
+        if (progress < 0) { progress = 0; }
+        if (progress > game.one) { progress = game.one; }
+        
         // Draw background (dark gray)
         game.Draw2dTexture(game.WhiteTexture(), x, y, width, height, null, 0,
             Game.ColorFromArgb(220, 50, 50, 50), false);
@@ -84,7 +98,7 @@ public class GuiFrameRenderer
         if (filledWidth > 0)
         {
             string barPath = game.platform.StringFormat("{0}bar_full_red.png", GOLDEN_UI_PATH);
-            if (barType == 1) // Blue bar
+            if (barType == BAR_TYPE_BLUE)
             {
                 barPath = game.platform.StringFormat("{0}bar_full_blue.png", GOLDEN_UI_PATH);
             }

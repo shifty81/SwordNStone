@@ -3,12 +3,16 @@
     public ModGuiWoWMinimap()
     {
         minimapSize = 180;
+        minimapBorderOffset = 10;
+        minimapMargin = 20;
     }
 
     internal int minimapSize;
+    internal int minimapBorderOffset;  // Space around minimap for golden border
+    internal int minimapMargin;        // Distance from screen edge
 
-    int MinimapX(Game game) { return game.Width() - minimapSize - 20; }
-    int MinimapY(Game game) { return 20; }
+    int MinimapX(Game game) { return game.Width() - minimapSize - minimapMargin; }
+    int MinimapY(Game game) { return minimapMargin; }
 
     public override void OnNewFrameDraw2d(Game game, float deltaTime)
     {
@@ -91,8 +95,9 @@
         }
         
         // Draw minimap border using standardized circular golden frame
-        int borderSize = scaledSize + game.platform.FloatToInt(20 * scale);
-        GuiFrameRenderer.DrawCircularFrame(game, x - 10, y - 10, borderSize);
+        int scaledBorderOffset = game.platform.FloatToInt(minimapBorderOffset * scale);
+        int borderSize = scaledSize + scaledBorderOffset * 2;
+        GuiFrameRenderer.DrawCircularFrame(game, x - scaledBorderOffset, y - scaledBorderOffset, borderSize);
         
         // Draw coordinates text
         FontCi font = new FontCi();
