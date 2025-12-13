@@ -70,7 +70,8 @@ namespace ManicDigger.Common
 							
 							// Also add asset with just filename for backward compatibility (e.g., "actionbar_bg.png")
 							// This ensures old code that references just filenames continues to work
-							// Note: This creates duplicate Asset objects with shared data arrays (by reference)
+							// Note: This creates duplicate Asset objects, but they share the same byte array reference
+							// (C# arrays are reference types, so both assets point to the same data in memory)
 							// Future optimization: Use dictionary to map multiple names to single Asset instance
 							if (normalizedPath != f.Name.ToLowerInvariant())
 							{
