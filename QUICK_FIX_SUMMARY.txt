@@ -1,0 +1,41 @@
+GUI RENDERING FIX - QUICK SUMMARY
+==================================
+
+PROBLEM: GUI elements looked "jaggedly assembled" and distorted
+
+ROOT CAUSE: Textures being stretched too much
+- Unit frames: 256x128 pixels (2x stretch of 128x96 PNG)
+- Action slots: 64x64 pixels (1.33x stretch of 48x48 PNG)
+
+SOLUTION: Reduce stretching to match natural asset sizes
+
+CHANGES MADE:
+=============
+
+1. GuiFrameRenderer.ci.cs
+   - Added panel_dark.png background before frame borders
+   - Creates proper layered appearance
+
+2. GuiWoWUnitFrames.ci.cs  
+   - frameWidth: 256 → 192  (25% smaller)
+   - frameHeight: 128 → 112 (12% smaller)
+   - Result: Less pixelation, cleaner borders
+
+3. GuiWoWActionBars.ci.cs
+   - ButtonSize: 64px → 48px (matches PNG size)
+   - ButtonSpacing: 10px → 8px (maintains layout)
+   - Result: Crisp slots, no stretching
+
+EXPECTED IMPROVEMENTS:
+======================
+✅ Unit frames: Cleaner, less pixelated
+✅ Action bar: Crisp slots at natural size
+✅ Frames: Proper dark backgrounds
+✅ Overall: Professional, polished appearance
+
+FILES CHANGED: 3
+LINES CHANGED: ~18
+SECURITY: ✅ No issues (CodeQL passed)
+PERFORMANCE: ✅ No impact
+
+See GUI_RENDERING_FIX.md for complete details.

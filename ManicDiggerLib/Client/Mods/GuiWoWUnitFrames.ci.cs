@@ -6,8 +6,10 @@
         playerFrameY = 20;
         targetFrameX = 20;
         targetFrameY = 160;
-        frameWidth = 256;
-        frameHeight = 128;
+        // Reduced from 256x128 to minimize stretching of frame_ornate.png (128x96)
+        // Using 192x112 provides better fit than 256x128 while maintaining aspect ratio close to 16:9
+        frameWidth = 192;
+        frameHeight = 112;
     }
 
     internal int playerFrameX;

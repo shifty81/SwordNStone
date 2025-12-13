@@ -19,8 +19,10 @@
     // Layout constants
     int ActionBarStartX() { return game.Width() / 2 - 512; }
     int ActionBarStartY() { return game.Height() - 120; }
-    int ButtonSize() { return game.platform.FloatToInt(64 * game.Scale()); }
-    int ButtonSpacing() { return game.platform.FloatToInt(10 * game.Scale()); }
+    // Use 48px to match slot_normal.png natural size (48x48) - avoids stretching/distortion
+    int ButtonSize() { return game.platform.FloatToInt(48 * game.Scale()); }
+    // Spacing reduced from 10px to 8px to maintain compact layout with smaller 48px buttons
+    int ButtonSpacing() { return game.platform.FloatToInt(8 * game.Scale()); }
 
     public override void OnKeyPress(Game game_, KeyPressEventArgs args)
     {
