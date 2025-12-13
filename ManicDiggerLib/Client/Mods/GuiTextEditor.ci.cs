@@ -14,6 +14,7 @@
         font.family = "Courier New";
         font.size = 12;
     }
+    Game game;
     bool visible;
     const int maxLines = 128;
     const int maxColumns = 80;
@@ -21,8 +22,9 @@
     int startX;
     int startY;
     int charSize;
-    public override void OnNewFrameDraw2d(Game game, float deltaTime)
+    public override void OnNewFrameDraw2d(Game game_, float deltaTime)
     {
+        game = game_;
         float dt = deltaTime;
         if (!visible)
         {
@@ -47,6 +49,7 @@
     int cursorLine;
     public override void OnKeyDown(Game game_, KeyEventArgs e)
     {
+        game = game_;
         if (e.GetKeyCode() == game.GetKey(GlKeys.F9))
         {
             visible = !visible;
@@ -96,6 +99,7 @@
     }
     public override void OnKeyPress(Game game_, KeyPressEventArgs e)
     {
+        game = game_;
         if (!visible)
         {
             return;

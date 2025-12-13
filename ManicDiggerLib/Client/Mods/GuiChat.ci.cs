@@ -38,6 +38,7 @@
 
 	public override void OnMouseDown(Game game_, MouseEventArgs args)
 	{
+		game = game_;
 		for (int i = 0; i < chatlines2Count; i++)
 		{
 			float dx = 20;
@@ -172,6 +173,7 @@
 
 	public override void OnKeyDown(Game game_, KeyEventArgs args)
 	{
+		game = game_;
 		if (game.guistate != GuiState.Normal)
 		{
 			//Don't open chat when not in normal game
@@ -304,6 +306,7 @@
 
 	public override void OnKeyPress(Game game_, KeyPressEventArgs args)
 	{
+		game = game_;
 		if (game.guistate != GuiState.Normal)
 		{
 			//Don't open chat when not in normal game
