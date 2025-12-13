@@ -32,7 +32,7 @@ The War Mod is a gamemode that transforms the game into a fast-paced first-perso
 
 Code
 ----
-The OpenGL game client is written in a common subset of C# and [Ć programming lanuguage](http://cito.sourceforge.net/).  
+The OpenGL game client is written in a common subset of C# and [Ć programming language](http://cito.sourceforge.net/).  
 It can be transcompiled to Java, C#, JavaScript, ActionScript, Perl and D.
 The only external dependency is [GamePlatform interface](ManicDiggerLib/Client/Platform.ci.cs).
 
@@ -43,8 +43,8 @@ Server mods can be implemented in C# or interpreted Javascript.
 For detailed build instructions, see [BUILD.md](BUILD.md).
 
 Quick start:
-- **Windows**: Open `SwordAndStone.sln` in Visual Studio and build
-- **Linux/Mac**: Install Mono and run `xbuild SwordAndStone.sln`
+- **Windows**: Open `ManicDigger.sln` in Visual Studio and build
+- **Linux/Mac**: Install Mono and run `xbuild ManicDigger.sln`
 
 #### Contributing
 
