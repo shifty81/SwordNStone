@@ -44,9 +44,9 @@
         int scaledWidth = game.platform.FloatToInt(frameWidth * scale);
         int scaledHeight = game.platform.FloatToInt(frameHeight * scale);
         
-        // Draw frame background
-        game.Draw2dBitmapFile("local/gui/wow/player_frame.png", playerFrameX, playerFrameY, 
-            scaledWidth, scaledHeight);
+        // Draw frame background using standardized golden frame
+        GuiFrameRenderer.DrawFrame(game, playerFrameX, playerFrameY, 
+            scaledWidth, scaledHeight, GuiFrameRenderer.FRAME_LARGE_ORNATE);
         
         // Calculate bar dimensions
         int barX = playerFrameX + game.platform.FloatToInt(75 * scale);
@@ -54,11 +54,9 @@
         int barWidth = game.platform.FloatToInt(160 * scale);
         int barHeight = game.platform.FloatToInt(20 * scale);
         
-        // Draw health bar
+        // Draw health bar using standardized golden bar
         float healthProgress = game.one * game.PlayerStats.CurrentHealth / game.PlayerStats.MaxHealth;
-        DrawBar(game, barX, barY, barWidth, barHeight, healthProgress, 
-            Game.ColorFromArgb(255, 0, 150, 0), // Dark green
-            Game.ColorFromArgb(255, 0, 255, 0)); // Bright green
+        GuiFrameRenderer.DrawProgressBar(game, barX, barY, barWidth, barHeight, healthProgress, GuiFrameRenderer.BAR_TYPE_RED);
         
         // Draw health text
         FontCi font = new FontCi();
@@ -68,14 +66,12 @@
             game.platform.IntToString(game.PlayerStats.MaxHealth));
         game.Draw2dText(healthText, font, barX + barWidth / 2 - 20, barY + 5, null, false);
         
-        // Draw oxygen bar (if underwater)
+        // Draw oxygen bar (if underwater) using standardized golden bar
         if (game.PlayerStats.CurrentOxygen < game.PlayerStats.MaxOxygen)
         {
             int oxygenBarY = barY + game.platform.FloatToInt(25 * scale);
             float oxygenProgress = game.one * game.PlayerStats.CurrentOxygen / game.PlayerStats.MaxOxygen;
-            DrawBar(game, barX, oxygenBarY, barWidth, barHeight, oxygenProgress,
-                Game.ColorFromArgb(255, 0, 100, 150), // Dark blue
-                Game.ColorFromArgb(255, 0, 150, 255)); // Bright blue
+            GuiFrameRenderer.DrawProgressBar(game, barX, oxygenBarY, barWidth, barHeight, oxygenProgress, GuiFrameRenderer.BAR_TYPE_BLUE);
         }
         
         // Draw portrait placeholder (circular)
@@ -88,9 +84,9 @@
             portraitSize, portraitSize, null, 0, 
             Game.ColorFromArgb(255, 40, 40, 50), false);
         
-        // Portrait border
-        game.Draw2dBitmapFile("local/gui/wow/portrait_border.png", portraitX - 5, portraitY - 5,
-            portraitSize + 10, portraitSize + 10);
+        // Portrait border using standardized golden border
+        GuiFrameRenderer.DrawPortraitBorder(game, portraitX - 5, portraitY - 5,
+            portraitSize + 10);
         
         // Draw player name
         FontCi nameFont = new FontCi();
@@ -107,9 +103,9 @@
         int scaledWidth = game.platform.FloatToInt(frameWidth * scale);
         int scaledHeight = game.platform.FloatToInt(frameHeight * scale);
         
-        // Draw frame background
-        game.Draw2dBitmapFile("local/gui/wow/target_frame.png", targetFrameX, targetFrameY, 
-            scaledWidth, scaledHeight);
+        // Draw frame background using standardized golden frame
+        GuiFrameRenderer.DrawFrame(game, targetFrameX, targetFrameY, 
+            scaledWidth, scaledHeight, GuiFrameRenderer.FRAME_LARGE_ORNATE);
         
         // Calculate bar dimensions
         int barX = targetFrameX + game.platform.FloatToInt(75 * scale);
@@ -122,9 +118,7 @@
         
         // For now, show full health for blocks (in future could show block health)
         float targetHealth = 1.0f;
-        DrawBar(game, barX, barY, barWidth, barHeight, targetHealth,
-            Game.ColorFromArgb(255, 150, 0, 0), // Dark red
-            Game.ColorFromArgb(255, 255, 0, 0)); // Bright red
+        GuiFrameRenderer.DrawProgressBar(game, barX, barY, barWidth, barHeight, targetHealth, GuiFrameRenderer.BAR_TYPE_RED);
         
         // Draw target name (block name)
         FontCi nameFont = new FontCi();
@@ -157,12 +151,13 @@
                 game.texturesPacked(), Game.ColorFromArgb(255, 255, 255, 255), false);
         }
         
-        // Portrait border
-        game.Draw2dBitmapFile("local/gui/wow/portrait_border.png", portraitX - 5, portraitY - 5,
-            portraitSize + 10, portraitSize + 10);
+        // Portrait border using standardized golden border
+        GuiFrameRenderer.DrawPortraitBorder(game, portraitX - 5, portraitY - 5,
+            portraitSize + 10);
     }
 
-    void DrawBar(Game game, int x, int y, int width, int height, float progress, 
+    // Note: DrawBar method removed - now using GuiFrameRenderer.DrawProgressBar
+    void DrawBar_Unused(Game game, int x, int y, int width, int height, float progress, 
         int darkColor, int brightColor)
     {
         // Background (dark)
