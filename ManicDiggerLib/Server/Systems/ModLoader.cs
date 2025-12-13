@@ -155,7 +155,7 @@ namespace ManicDigger.Server
                         f.Delete();
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //meh, maybe next time
                 }

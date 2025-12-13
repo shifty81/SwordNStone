@@ -4096,7 +4096,7 @@ public static class MapUtil
         ulong v = 0;
         v = (ulong)x << 40;
         v |= (ulong)y << 20;
-        v |= (ulong)z;
+        v |= (ulong)(uint)z;
         return v;
     }
 

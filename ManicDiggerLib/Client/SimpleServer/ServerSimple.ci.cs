@@ -708,5 +708,4 @@ public class ClientSimple
 
 public class ChunkSimple
 {
-    int[] data;
 }

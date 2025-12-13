@@ -530,7 +530,6 @@
         int sizey = dataItems.ItemSizeY(item);
         IntRef tw = new IntRef();
         IntRef th = new IntRef();
-        float one = 1;
         FontCi font = new FontCi();
         font.size = 10;
         game.platform.TextSize(dataItems.ItemInfo(item), font, tw, th);

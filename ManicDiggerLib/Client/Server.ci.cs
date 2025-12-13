@@ -2,10 +2,8 @@
 {
     public ServerCi()
     {
-        one = 1;
         mainSocketsCount = 3;
     }
-    float one;
     internal NetServer[] mainSockets;
     internal int mainSocketsCount;
 }
