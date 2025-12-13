@@ -1,15 +1,7 @@
-[![Travis Build Status](https://img.shields.io/travis/manicdigger/manicdigger.svg?style=flat-square)](https://travis-ci.org/manicdigger/manicdigger)
-[![GitHub Issues](https://img.shields.io/github/issues/manicdigger/manicdigger.svg?style=flat-square)](https://github.com/manicdigger/manicdigger/issues)
-[![Latest GitHub Release](https://img.shields.io/github/release/manicdigger/manicdigger.svg?style=flat-square)](https://github.com/manicdigger/manicdigger/releases/latest)
-[![GitHub Downloads](https://img.shields.io/github/downloads/manicdigger/manicdigger/latest/total.svg?style=flat-square)](https://github.com/manicdigger/manicdigger/releases/latest)
-
-Manic Digger
+Sword&Stone
 ============
-Manic Digger is a 3D voxel building game similar to Minecraft.  
+Sword&Stone is a 3D voxel building game similar to Minecraft.  
 Build yourself a home in your own world or connect to an online server to team up with others to create great buildings!
-
-You can download the game directly from the GitHub releases page:  
-https://github.com/manicdigger/manicdigger/releases/latest
 
 
 Features
@@ -28,37 +20,19 @@ Game modes
 In creative mode there are no limits on the amount of blocks you can place. Build whatever you like without having to worry about collecting resources or crafting.  
 Build spaceships, flying islands or cool pixelart - your imagination is the only limit!
 
-[![Spaceship](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2014-11-27_18-35-13-thumb.png)](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2014-11-27_18-35-13.png)
-[![Floating Island](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2014-12-19_20-42-13-thumb.png)](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2014-12-19_20-42-13.png)
-[![Pixelart](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2014-12-19_20-43-46-thumb.png)](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2014-12-19_20-43-46.png)
-[![Mansion](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2014-12-25_22-38-53-thumb.png)](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2014-12-25_22-38-53.png)
-
 #### Survival Mode
 
 For those of you who like gathering resources and crafting stuff there is a survival mode.  
 Please note that this is still in development (no friendly/hostile mobs right now)
 
-[![City](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/9c1d22eac9aac5f36bf12a5fb5c8a856-300x240.png)](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/9c1d22eac9aac5f36bf12a5fb5c8a856.png)
-
 #### War Mod
 
-The War Mod is a gamemode that comes bundled with Manic Digger. It transforms the game into a fast-paced first-person shooter.
-
-[![War Mod 1](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2012-10-15_02-13-14-300x227.png)](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2012-10-15_02-13-14.png)
-[![War Mod 2](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2012-10-15_02-12-27-300x227.png)](https://raw.githubusercontent.com/manicdigger/manicdigger-screenshots/master/2012-10-15_02-12-27.png)
-
-
-Links
------
-- Serverlist: http://manicdigger.sourceforge.net/play/
-- Forum: http://manicdigger.sourceforge.net/forum/
-- Wiki: http://manicdigger.sourceforge.net/wiki/
-- IRC: http://chat.mibbit.com/?server=irc.esper.net&channel=%23manicdigger
+The War Mod is a gamemode that transforms the game into a fast-paced first-person shooter.
 
 
 Code
 ----
-The OpenGL game client is written in a common subset of C# and [Ć programming lanuguage](http://cito.sourceforge.net/).  
+The OpenGL game client is written in a common subset of C# and [Ć programming language](http://cito.sourceforge.net/).  
 It can be transcompiled to Java, C#, JavaScript, ActionScript, Perl and D.
 The only external dependency is [GamePlatform interface](ManicDiggerLib/Client/Platform.ci.cs).
 
@@ -74,13 +48,28 @@ Quick start:
 
 #### Contributing
 
-If you want to help developing Manic Digger feel free to fork this repository on GitHub and submit your changes by sending a pull request.  
-Once you've contributed some good patches you can also get direct push access to the repository.
+If you want to help developing Sword&Stone feel free to fork this repository on GitHub and submit your changes by sending a pull request.
+
+
+Credits
+-------
+**Sword&Stone** is a fork and evolution of the original **Manic Digger** project.
+
+### Original Project
+This project is based on **Manic Digger**, an open source voxel building game released into the public domain.
+- Original repository: https://github.com/manicdigger/manicdigger
+- The original Manic Digger was created by the Manic Digger development team
+
+### Procedural Generation
+The procedural world generation code in this project is derived from the original Manic Digger implementation and has been heavily modified and extended. The noise-based terrain generation algorithms (Noise2DWorldGenerator and related code) originated from the Manic Digger codebase.
+
+### Third-Party Libraries
+For detailed information about third-party libraries and their licenses, see [COPYING.md](COPYING.md)
 
 
 License
 -------
-Manic Digger is **free and open source software** released into the **public domain** under the [Unlicense](http://unlicense.org).
+Sword&Stone is **free and open source software** released into the **public domain** under the [Unlicense](http://unlicense.org).
 
 **This means you can:**
 - ✅ Use it to make your own game
@@ -91,15 +80,13 @@ Manic Digger is **free and open source software** released into the **public dom
 
 While attribution is not required, it is always appreciated!
 
-For detailed information about third-party libraries and their licenses, see [COPYING.md](COPYING.md)
-
 
 Frequently Asked Questions
 --------------------------
 
 ### Can I use this to make my own game?
 
-**Yes, absolutely!** Manic Digger is released into the public domain. You are free to:
+**Yes, absolutely!** Sword&Stone is released into the public domain. You are free to:
 - Fork this project and create your own game
 - Add your own features and modifications
 - Change and mold it to fit your vision

@@ -1,6 +1,6 @@
-# Testing Manic Digger
+# Testing Sword&Stone
 
-This document describes how to run tests for the Manic Digger project.
+This document describes how to run tests for the Sword&Stone project.
 
 ## Test Project
 

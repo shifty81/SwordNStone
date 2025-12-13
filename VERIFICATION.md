@@ -1,6 +1,6 @@
-# Verification Guide - Testing Manic Digger Build
+# Verification Guide - Testing Sword&Stone Build
 
-This guide documents how to verify that the Manic Digger project builds and runs correctly.
+This guide documents how to verify that the Sword&Stone project builds and runs correctly.
 
 ## Build Verification
 
@@ -76,7 +76,7 @@ This test verifies the server can start without crashing.
 
 **Expected Output:**
 ```
-Manic Digger Server
+Sword&Stone Server
 ...
 [Various initialization messages]
 ...
@@ -335,7 +335,7 @@ You can create a script to automate basic checks:
 #!/bin/bash
 set -e
 
-echo "=== Manic Digger Verification Script ==="
+echo "=== Sword&Stone Verification Script ==="
 
 # Test 1: Build
 echo "Test 1: Building solution..."

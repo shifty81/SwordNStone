@@ -6,16 +6,16 @@
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{119E2FCB-5CDD-4C24-BCB2-56A824E2BF0A}
-AppName=Manic Digger
-AppVerName=Manic Digger
-AppPublisher=Manic Digger development team
-AppPublisherURL=http://www.manicdigger.sourceforge.net/
-AppSupportURL=http://www.manicdigger.sourceforge.net/
-AppUpdatesURL=http://www.manicdigger.sourceforge.net/
-DefaultDirName={pf}\Manic Digger
-DefaultGroupName=Manic Digger
+AppName=Sword&Stone
+AppVerName=Sword&Stone
+AppPublisher=Sword&Stone development team
+AppPublisherURL=https://github.com/shifty81/manicdiggerVSCLONE
+AppSupportURL=https://github.com/shifty81/manicdiggerVSCLONE
+AppUpdatesURL=https://github.com/shifty81/manicdiggerVSCLONE
+DefaultDirName={pf}\SwordAndStone
+DefaultGroupName=Sword&Stone
 AllowNoIcons=yes
-OutputBaseFilename=ManicDiggerSetup
+OutputBaseFilename=SwordAndStoneSetup
 Compression=lzma
 SolidCompression=yes
 OutputDir=output2
@@ -35,18 +35,18 @@ Source: "output\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs create
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{cm:UninstallProgram,Manic Digger}"; Filename: "{uninstallexe}"
-Name: "{group}\Manic Digger"; Filename: "{app}\ManicDigger.exe"
+Name: "{group}\{cm:UninstallProgram,Sword&Stone}"; Filename: "{uninstallexe}"
+Name: "{group}\Sword&Stone"; Filename: "{app}\ManicDigger.exe"
 Name: "{group}\Configuration"; Filename: "{app}\UserData"
-Name: "{commondesktop}\Manic Digger"; Filename: "{app}\ManicDigger.exe"; IconFilename: "{app}\data\local\md.ico"; Tasks: desktopicon
+Name: "{commondesktop}\Sword&Stone"; Filename: "{app}\ManicDigger.exe"; IconFilename: "{app}\data\local\md.ico"; Tasks: desktopicon
 
 [Registry]
-Root: HKCR; Subkey: ".mdlink"; ValueType: string; ValueName: ""; ValueData: "ManicDigger"; Flags: uninsdeletevalue
-Root: HKCR; Subkey: "ManicDigger"; ValueType: string; ValueName: ""; ValueData: "Manic Digger multiplayer link"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "ManicDigger\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ManicDigger.exe,0"
-Root: HKCR; Subkey: "ManicDigger\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ManicDigger.exe"" ""%1"""
+Root: HKCR; Subkey: ".snslink"; ValueType: string; ValueName: ""; ValueData: "SwordAndStone"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "SwordAndStone"; ValueType: string; ValueName: ""; ValueData: "Sword&Stone multiplayer link"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "SwordAndStone\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ManicDigger.exe,0"
+Root: HKCR; Subkey: "SwordAndStone\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ManicDigger.exe"" ""%1"""
 
-Root: HKCR; Subkey: "md"; ValueType: string; ValueName: ""; ValueData: "URL:Manic Digger"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "md"; ValueType: string; ValueName: "URL Protocol"; ValueData: ""; Flags: uninsdeletekey
-Root: HKCR; Subkey: "md\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ManicDigger.exe,0"
-Root: HKCR; Subkey: "md\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ManicDigger.exe"" ""%1"""
+Root: HKCR; Subkey: "sns"; ValueType: string; ValueName: ""; ValueData: "URL:Sword&Stone"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "sns"; ValueType: string; ValueName: "URL Protocol"; ValueData: ""; Flags: uninsdeletekey
+Root: HKCR; Subkey: "sns\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ManicDigger.exe,0"
+Root: HKCR; Subkey: "sns\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ManicDigger.exe"" ""%1"""

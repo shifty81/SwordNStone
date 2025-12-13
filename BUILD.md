@@ -1,6 +1,6 @@
-# Building and Testing Manic Digger
+# Building and Testing Sword&Stone
 
-This document provides instructions for building and testing the Manic Digger project using Visual Studio and command-line tools.
+This document provides instructions for building and testing the Sword&Stone project using Visual Studio and command-line tools.
 
 ## Prerequisites
 
@@ -269,8 +269,6 @@ The project includes `.travis.yml` for Travis CI integration. On each commit:
 
 ## Additional Resources
 
-- **Wiki**: http://manicdigger.sourceforge.net/wiki/
-- **Forum**: http://manicdigger.sourceforge.net/forum/
 - **GitHub Issues**: Report bugs and request features
 
 ## Getting Help
@@ -279,7 +277,6 @@ If you encounter build issues:
 1. Check this document for common solutions
 2. Verify all prerequisites are installed
 3. Check the GitHub Issues page
-4. Ask on the forum or IRC channel
 
 ---
 

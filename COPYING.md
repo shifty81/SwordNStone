@@ -24,6 +24,22 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org>
 
 
+Credits
+=======
+
+Manic Digger (Original Project)
+--------------------------------
+Sword&Stone is a fork of Manic Digger, an open source voxel building game.
+The original Manic Digger was created by the Manic Digger development team
+and released into the public domain.
+
+Original repository: https://github.com/manicdigger/manicdigger
+
+The procedural world generation code (including Noise2DWorldGenerator and related 
+terrain generation algorithms) was derived from Manic Digger and has been 
+heavily modified and extended in this project.
+
+
 
 
 Creative Commons Sampling Plus 1.0 License

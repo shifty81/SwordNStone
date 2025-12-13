@@ -1,11 +1,11 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("ManicDigger.Tests")]
-[assembly: AssemblyDescription("Unit tests for ManicDigger")]
+[assembly: AssemblyTitle("SwordAndStone.Tests")]
+[assembly: AssemblyDescription("Unit tests for Sword&Stone")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ManicDigger.Tests")]
+[assembly: AssemblyProduct("SwordAndStone.Tests")]
 [assembly: AssemblyCopyright("Copyright © 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

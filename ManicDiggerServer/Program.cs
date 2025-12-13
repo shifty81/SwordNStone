@@ -60,7 +60,7 @@ namespace ManicDiggerServer
 			}
 
 			//Catch unhandled exceptions
-			CrashReporter.DefaultFileName = "ManicDiggerServerCrash.txt";
+			CrashReporter.DefaultFileName = "SwordAndStoneServerCrash.txt";
 			CrashReporter.EnableGlobalExceptionHandling(true);
 
 			new Program(args);
@@ -82,7 +82,7 @@ namespace ManicDiggerServer
 		int parentid;
 		static bool IsAutoRestarter = true;
 		static Server server;
-		const string lockFileName = "ManicDiggerServer.lck";
+		const string lockFileName = "SwordAndStoneServer.lck";
 
 		void Main2()
 		{

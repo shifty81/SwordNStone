@@ -1,6 +1,6 @@
-# Quick Start Guide - Manic Digger Development
+# Quick Start Guide - Sword&Stone Development
 
-This guide will get you up and running with Manic Digger development quickly.
+This guide will get you up and running with Sword&Stone development quickly.
 
 ## Prerequisites
 
@@ -257,11 +257,8 @@ mono --debug ManicDiggerServer.exe
 ### Documentation
 - See `BUILD.md` for detailed build instructions
 - See `TESTING.md` for testing information
-- Check the Wiki: http://manicdigger.sourceforge.net/wiki/
 
 ### Community
-- **Forum**: http://manicdigger.sourceforge.net/forum/
-- **IRC**: #manicdigger on irc.esper.net
 - **GitHub Issues**: Report bugs and request features
 
 ### Common Issues
@@ -321,7 +318,7 @@ Now that you're set up:
 
 ---
 
-**Happy coding!** Welcome to the Manic Digger development community.
+**Happy coding!** Welcome to the Sword&Stone development community.
 
 For more detailed information, see:
 - [BUILD.md](BUILD.md) - Comprehensive build guide

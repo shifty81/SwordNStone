@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Manic Digger Core")]
+[assembly: AssemblyTitle("Sword&Stone Core")]
 //[assembly: AssemblyDescription("")]
 //[assembly: AssemblyConfiguration("")]
 //[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Manic Digger")]
+[assembly: AssemblyProduct("Sword&Stone")]
 //[assembly: AssemblyCopyright("Copyright ©  2010")]
 //[assembly: AssemblyTrademark("")]
 //[assembly: AssemblyCulture("")]
