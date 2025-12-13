@@ -1,6 +1,6 @@
-# Verification Guide - Testing Manic Digger Build
+# Verification Guide - Testing Sword&Stone Build
 
-This guide documents how to verify that the Manic Digger project builds and runs correctly.
+This guide documents how to verify that the Sword&Stone project builds and runs correctly.
 
 ## Build Verification
 
@@ -9,7 +9,7 @@ This guide documents how to verify that the Manic Digger project builds and runs
 **Windows (Visual Studio):**
 ```cmd
 # Open Visual Studio
-# File → Open → Project/Solution → ManicDigger.sln
+# File → Open → Project/Solution → SwordAndStone.sln
 # Build → Rebuild Solution (Ctrl+Shift+B)
 # Check Output window for "Build: 6 succeeded, 0 failed"
 ```
@@ -17,8 +17,8 @@ This guide documents how to verify that the Manic Digger project builds and runs
 **Linux/Mac (Mono):**
 ```bash
 cd /path/to/manicdiggerVSCLONE
-mono nuget.exe restore ManicDigger.sln
-xbuild ManicDigger.sln /p:Configuration=Release
+mono nuget.exe restore SwordAndStone.sln
+xbuild SwordAndStone.sln /p:Configuration=Release
 # Look for "0 Error(s)" in output
 ```
 
@@ -34,16 +34,16 @@ Check that the following files exist:
 
 ```bash
 # Core libraries
-ls ManicDiggerLib/bin/Release/ManicDiggerLib.dll
+ls SwordAndStoneLib/bin/Release/SwordAndStoneLib.dll
 ls ScriptingApi/bin/Release/ScriptingApi.dll
 
 # Executables
-ls ManicDigger/bin/Release/ManicDigger.exe
-ls ManicDiggerServer/bin/Release/ManicDiggerServer.exe
+ls SwordAndStone/bin/Release/SwordAndStone.exe
+ls SwordAndStoneServer/bin/Release/SwordAndStoneServer.exe
 ls MdMonsterEditor/bin/Release/MdMonsterEditor.exe
 
 # Test assembly
-ls ManicDigger.Tests/bin/Release/ManicDigger.Tests.dll
+ls SwordAndStone.Tests/bin/Release/SwordAndStone.Tests.dll
 ```
 
 **Expected Result:**
@@ -60,23 +60,23 @@ This test verifies the server can start without crashing.
 **Steps:**
 1. Navigate to server directory:
    ```bash
-   cd ManicDiggerServer/bin/Release
+   cd SwordAndStoneServer/bin/Release
    ```
 
 2. Start the server:
    ```bash
    # Windows
-   ManicDiggerServer.exe
+   SwordAndStoneServer.exe
    
    # Linux/Mac
-   mono ManicDiggerServer.exe
+   mono SwordAndStoneServer.exe
    ```
 
 3. Observe console output
 
 **Expected Output:**
 ```
-Manic Digger Server
+Sword&Stone Server
 ...
 [Various initialization messages]
 ...
@@ -132,7 +132,7 @@ This test verifies all required libraries load correctly.
 - ✅ Native libraries (if any) found
 
 **Common Libraries:**
-- ManicDiggerLib.dll
+- SwordAndStoneLib.dll
 - ScriptingApi.dll
 - protobuf-net.dll
 - Jint.dll (JavaScript interpreter)
@@ -143,7 +143,7 @@ This test verifies all required libraries load correctly.
 If server mods are present, verify they load:
 
 **Steps:**
-1. Ensure `ManicDiggerLib/Server/Mods/` contains mod files
+1. Ensure `SwordAndStoneLib/Server/Mods/` contains mod files
 2. Start server
 3. Check console for mod loading messages
 
@@ -165,12 +165,12 @@ Mod [ModName] loaded successfully
 **Steps:**
 1. Build the test project:
    ```bash
-   xbuild ManicDigger.Tests/ManicDigger.Tests.csproj
+   xbuild SwordAndStone.Tests/SwordAndStone.Tests.csproj
    ```
 
 2. Check output:
    ```bash
-   ls ManicDigger.Tests/bin/Debug/ManicDigger.Tests.dll
+   ls SwordAndStone.Tests/bin/Debug/SwordAndStone.Tests.dll
    ```
 
 **Expected Result:**
@@ -190,7 +190,7 @@ mono nuget.exe install NUnit.ConsoleRunner -Version 3.15.4 -OutputDirectory pack
 1. Run tests:
    ```bash
    # Linux/Mac
-   mono packages/NUnit.ConsoleRunner.3.15.4/tools/nunit3-console.exe ManicDigger.Tests/bin/Debug/ManicDigger.Tests.dll
+   mono packages/NUnit.ConsoleRunner.3.15.4/tools/nunit3-console.exe SwordAndStone.Tests/bin/Debug/SwordAndStone.Tests.dll
    
    # Or in Visual Studio
    # Test Explorer → Run All
@@ -224,14 +224,14 @@ This test verifies client and server can communicate.
 **Steps:**
 1. Start the server:
    ```bash
-   cd ManicDiggerServer/bin/Release
-   mono ManicDiggerServer.exe
+   cd SwordAndStoneServer/bin/Release
+   mono SwordAndStoneServer.exe
    ```
 
 2. In another terminal, start the client:
    ```bash
-   cd ManicDigger/bin/Release
-   mono ManicDigger.exe
+   cd SwordAndStone/bin/Release
+   mono SwordAndStone.exe
    ```
 
 3. In client menu, connect to localhost
@@ -255,10 +255,10 @@ Basic performance check:
 2. Monitor resource usage:
    ```bash
    # Linux
-   top | grep -i manicdigger
+   top | grep -i swordandstone
    
    # Windows
-   # Task Manager → Details → ManicDiggerServer.exe
+   # Task Manager → Details → SwordAndStoneServer.exe
    ```
 
 **Success Criteria:**
@@ -288,9 +288,9 @@ Basic performance check:
 **Expected Contents:**
 ```
 output/
-├── ManicDigger.exe
-├── ManicDiggerServer.exe
-├── ManicDiggerLib.dll
+├── SwordAndStone.exe
+├── SwordAndStoneServer.exe
+├── SwordAndStoneLib.dll
 ├── ScriptingApi.dll
 ├── [Various DLLs]
 ├── data/
@@ -317,7 +317,7 @@ output/
 
 2. Run server:
    ```bash
-   mono ManicDiggerServer.exe
+   mono SwordAndStoneServer.exe
    ```
 
 **Success Criteria:**
@@ -335,7 +335,7 @@ You can create a script to automate basic checks:
 #!/bin/bash
 set -e
 
-echo "=== Manic Digger Verification Script ==="
+echo "=== Sword&Stone Verification Script ==="
 
 # Test 1: Build
 echo "Test 1: Building solution..."
