@@ -183,14 +183,14 @@ Mod [ModName] loaded successfully
 **Prerequisites:**
 Install NUnit Console Runner:
 ```bash
-mono nuget.exe install NUnit.ConsoleRunner -Version 3.16.3 -OutputDirectory packages
+mono nuget.exe install NUnit.ConsoleRunner -Version 3.15.4 -OutputDirectory packages
 ```
 
 **Steps:**
 1. Run tests:
    ```bash
    # Linux/Mac
-   mono packages/NUnit.ConsoleRunner.3.16.3/tools/nunit3-console.exe ManicDigger.Tests/bin/Debug/ManicDigger.Tests.dll
+   mono packages/NUnit.ConsoleRunner.3.15.4/tools/nunit3-console.exe ManicDigger.Tests/bin/Debug/ManicDigger.Tests.dll
    
    # Or in Visual Studio
    # Test Explorer → Run All

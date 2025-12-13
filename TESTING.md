@@ -52,16 +52,16 @@ To run tests from the command line, you need the NUnit Console Runner:
 
 1. **Install NUnit Console Runner:**
    ```bash
-   mono nuget.exe install NUnit.Console -Version 3.16.3 -OutputDirectory packages
+   mono nuget.exe install NUnit.ConsoleRunner -Version 3.15.4 -OutputDirectory packages
    ```
 
 2. **Run tests:**
    ```bash
    # Windows
-   .\packages\NUnit.ConsoleRunner.3.16.3\tools\nunit3-console.exe ManicDigger.Tests\bin\Debug\ManicDigger.Tests.dll
+   .\packages\NUnit.ConsoleRunner.3.15.4\tools\nunit3-console.exe ManicDigger.Tests\bin\Debug\ManicDigger.Tests.dll
    
    # Linux/Mac with Mono
-   mono ./packages/NUnit.ConsoleRunner.3.16.3/tools/nunit3-console.exe ManicDigger.Tests/bin/Debug/ManicDigger.Tests.dll
+   mono ./packages/NUnit.ConsoleRunner.3.15.4/tools/nunit3-console.exe ManicDigger.Tests/bin/Debug/ManicDigger.Tests.dll
    ```
 
 3. **View results:**
