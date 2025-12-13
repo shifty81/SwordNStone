@@ -24,7 +24,7 @@ This document provides instructions for building and testing the Sword&Stone pro
 
 1. **Open the solution:**
    ```
-   Open SwordAndStone.sln in Visual Studio
+   Open ManicDigger.sln in Visual Studio
    ```
 
 2. **Restore NuGet packages:**
@@ -50,17 +50,17 @@ This document provides instructions for building and testing the Sword&Stone pro
 
 2. **Restore NuGet packages:**
    ```cmd
-   nuget restore SwordAndStone.sln
+   nuget restore ManicDigger.sln
    ```
 
 3. **Build the solution:**
    ```cmd
-   msbuild SwordAndStone.sln /p:Configuration=Debug
+   msbuild ManicDigger.sln /p:Configuration=Debug
    ```
    
    Or for Release:
    ```cmd
-   msbuild SwordAndStone.sln /p:Configuration=Release
+   msbuild ManicDigger.sln /p:Configuration=Release
    ```
 
 ### Option 3: Linux/Mac with Mono
@@ -78,21 +78,21 @@ This document provides instructions for building and testing the Sword&Stone pro
 
 3. **Restore packages:**
    ```bash
-   mono nuget.exe restore SwordAndStone.sln
+   mono nuget.exe restore ManicDigger.sln
    ```
 
 4. **Build with xbuild:**
    ```bash
-   xbuild SwordAndStone.sln /p:Configuration=Debug
+   xbuild ManicDigger.sln /p:Configuration=Debug
    ```
 
 ## Project Structure
 
 The solution contains the following projects:
 
-- **SwordAndStone**: Main game client application (WinExe)
-- **SwordAndStoneLib**: Core game library containing game logic
-- **SwordAndStoneServer**: Dedicated server application (Console)
+- **ManicDigger**: Main game client application (WinExe)
+- **ManicDiggerLib**: Core game library containing game logic
+- **ManicDiggerServer**: Dedicated server application (Console)
 - **ScriptingApi**: Server-side scripting API for mods
 - **MdMonsterEditor**: Monster model editor tool
 
@@ -104,28 +104,28 @@ After building, the compiled binaries will be located in:
 ```
 
 For example:
-- `SwordAndStone/bin/Debug/SwordAndStone.exe` - Game client
-- `SwordAndStoneServer/bin/Debug/SwordAndStoneServer.exe` - Server
-- `SwordAndStoneLib/bin/Debug/SwordAndStoneLib.dll` - Core library
+- `ManicDigger/bin/Debug/ManicDigger.exe` - Game client
+- `ManicDiggerServer/bin/Debug/ManicDiggerServer.exe` - Server
+- `ManicDiggerLib/bin/Debug/ManicDiggerLib.dll` - Core library
 
 ## Running the Application
 
 ### Game Client
 ```bash
 # Windows
-SwordAndStone\bin\Debug\SwordAndStone.exe
+ManicDigger\bin\Debug\ManicDigger.exe
 
 # Linux/Mac with Mono
-mono SwordAndStone/bin/Debug/SwordAndStone.exe
+mono ManicDigger/bin/Debug/ManicDigger.exe
 ```
 
 ### Server
 ```bash
 # Windows
-SwordAndStoneServer\bin\Debug\SwordAndStoneServer.exe
+ManicDiggerServer\bin\Debug\ManicDiggerServer.exe
 
 # Linux/Mac with Mono
-mono SwordAndStoneServer/bin/Debug/SwordAndStoneServer.exe
+mono ManicDiggerServer/bin/Debug/ManicDiggerServer.exe
 ```
 
 ## Testing
@@ -137,16 +137,16 @@ The project currently uses manual testing. Here's how to verify the build:
 #### Test 1: Server Startup
 1. Navigate to the server build directory:
    ```bash
-   cd SwordAndStoneServer/bin/Debug
+   cd ManicDiggerServer/bin/Debug
    ```
 
 2. Start the server:
    ```bash
    # Windows
-   SwordAndStoneServer.exe
+   ManicDiggerServer.exe
    
    # Linux/Mac
-   mono SwordAndStoneServer.exe
+   mono ManicDiggerServer.exe
    ```
 
 3. **Expected output:**
@@ -163,16 +163,16 @@ The project currently uses manual testing. Here's how to verify the build:
 1. Ensure you have the data folder in the working directory
 2. Navigate to the client build directory:
    ```bash
-   cd SwordAndStone/bin/Debug
+   cd ManicDigger/bin/Debug
    ```
 
 3. Start the client:
    ```bash
    # Windows
-   SwordAndStone.exe
+   ManicDigger.exe
    
    # Linux/Mac (requires X11 display)
-   mono SwordAndStone.exe
+   mono ManicDigger.exe
    ```
 
 4. **Expected output:**
@@ -186,7 +186,7 @@ The project currently uses manual testing. Here's how to verify the build:
    - Can navigate menus without errors
 
 #### Test 3: Library Integration
-The SwordAndStoneLib.dll is the core library used by both client and server. It's automatically tested when:
+The ManicDiggerLib.dll is the core library used by both client and server. It's automatically tested when:
 - Server starts successfully (uses lib)
 - Client starts successfully (uses lib)
 - No missing dependency errors occur
@@ -210,9 +210,9 @@ The SwordAndStoneLib.dll is the core library used by both client and server. It'
 To add automated tests to this project:
 
 1. **Add a test project:**
-   - Create new Class Library project (e.g., SwordAndStone.Tests)
+   - Create new Class Library project (e.g., ManicDigger.Tests)
    - Add NUnit or xUnit NuGet package
-   - Reference SwordAndStoneLib project
+   - Reference ManicDiggerLib project
 
 2. **Write unit tests:**
    ```csharp
@@ -230,7 +230,7 @@ To add automated tests to this project:
 
 3. **Run tests:**
    - Use Test Explorer in Visual Studio
-   - Or command line: `nunit-console SwordAndStone.Tests.dll`
+   - Or command line: `nunit-console ManicDigger.Tests.dll`
 
 ## Distribution Build
 

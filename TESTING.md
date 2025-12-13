@@ -4,7 +4,7 @@ This document describes how to run tests for the Sword&Stone project.
 
 ## Test Project
 
-The solution includes a test project: **SwordAndStone.Tests**
+The solution includes a test project: **ManicDigger.Tests**
 
 This project contains:
 - Sample unit tests demonstrating the testing framework
