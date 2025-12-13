@@ -2578,11 +2578,67 @@ public partial class Server : ICurrentTime, IDropItem
         }
         else
         {
+            int blockid = d_Map.GetBlock(cmd.X, cmd.Y, cmd.Z);
+            // Validate blockid is within valid range
+            if (blockid < 0 || blockid >= BlockTypes.Length)
+            {
+                return false;
+            }
+            BlockType blockType = BlockTypes[blockid];
+            if (blockType == null)
+            {
+                return false;
+            }
+            
+            // Determine what tool is being used
+            ToolType toolUsed = ToolType.Hand;
+            if (cmd.MaterialSlot >= 0 && cmd.MaterialSlot < inventory.RightHand.Length)
+            {
+                var heldItem = inventory.RightHand[cmd.MaterialSlot];
+                if (heldItem != null && heldItem.ItemClass == ItemClass.Block)
+                {
+                    if (heldItem.BlockId >= 0 && heldItem.BlockId < BlockTypes.Length)
+                    {
+                        BlockType heldBlockType = BlockTypes[heldItem.BlockId];
+                        if (heldBlockType != null && heldBlockType.IsTool)
+                        {
+                            toolUsed = heldBlockType.ToolType;
+                        }
+                    }
+                }
+            }
+            
+            // Check if tool requirement is met
+            // - Blocks with PreferredTool.None can be broken with any tool (toolRequirementMet = true)
+            // - Blocks with a specific PreferredTool: toolRequirementMet = true only if correct tool is used
+            bool toolRequirementMet = (blockType.PreferredTool == ToolType.None) || 
+                                      (blockType.PreferredTool == toolUsed);
+            
             var item = new Item();
             item.ItemClass = ItemClass.Block;
-            int blockid = d_Map.GetBlock(cmd.X, cmd.Y, cmd.Z);
-            item.BlockId = d_Data.WhenPlayerPlacesGetsConvertedTo()[blockid];
-            if (!config.IsCreative)
+            
+            // Determine what item to drop
+            if (blockType.RequiresTool && !toolRequirementMet)
+            {
+                // Block requires correct tool but wrong tool was used
+                if (blockType.AlternativeDrop > 0)
+                {
+                    // Drop alternative item (e.g., small stones instead of stone block)
+                    item.BlockId = blockType.AlternativeDrop;
+                }
+                else
+                {
+                    // Drop nothing - block is destroyed without giving anything
+                    item = null;
+                }
+            }
+            else
+            {
+                // Tool requirement met - give the proper block item
+                item.BlockId = d_Data.WhenPlayerPlacesGetsConvertedTo()[blockid];
+            }
+            
+            if (item != null && !config.IsCreative)
             {
                 GetInventoryUtil(inventory).GrabItem(item, cmd.MaterialSlot);
             }

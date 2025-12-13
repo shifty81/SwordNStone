@@ -54,6 +54,9 @@ namespace ManicDigger.Mods
 			               	DrawType = DrawType.Solid,
 			               	WalkableType = WalkableType.Solid,
 			               	Sounds = solidSounds,
+			               	PreferredTool = ToolType.Pickaxe,
+			               	RequiresTool = true,
+			               	MiningSpeed = 1.5f,
 			               });
 			m.SetBlockType(2, "Grass", new BlockType()
 			               {
@@ -72,6 +75,8 @@ namespace ManicDigger.Mods
 			               	DrawType = DrawType.Solid,
 			               	WalkableType = WalkableType.Solid,
 			               	Sounds = solidSounds,
+			               	PreferredTool = ToolType.Shovel,
+			               	MiningSpeed = 0.8f,
 			               });
 			m.SetBlockType(4, "Cobblestone", new BlockType()
 			               {
@@ -139,6 +144,8 @@ namespace ManicDigger.Mods
 			               	DrawType = DrawType.Solid,
 			               	WalkableType = WalkableType.Solid,
 			               	Sounds = solidSounds,
+			               	PreferredTool = ToolType.Shovel,
+			               	MiningSpeed = 0.7f,
 			               });
 			m.SetBlockType(13, "Gravel", new BlockType()
 			               {
@@ -146,6 +153,8 @@ namespace ManicDigger.Mods
 			               	DrawType = DrawType.Solid,
 			               	WalkableType = WalkableType.Solid,
 			               	Sounds = solidSounds,
+			               	PreferredTool = ToolType.Shovel,
+			               	MiningSpeed = 0.7f,
 			               });
 			m.SetBlockType(14, "GoldOre", new BlockType()
 			               {
@@ -153,6 +162,9 @@ namespace ManicDigger.Mods
 			               	DrawType = DrawType.Solid,
 			               	WalkableType = WalkableType.Solid,
 			               	Sounds = solidSounds,
+			               	PreferredTool = ToolType.Pickaxe,
+			               	RequiresTool = true,
+			               	MiningSpeed = 2.0f,
 			               });
 			m.SetBlockType(15, "IronOre", new BlockType()
 			               {
@@ -160,6 +172,9 @@ namespace ManicDigger.Mods
 			               	DrawType = DrawType.Solid,
 			               	WalkableType = WalkableType.Solid,
 			               	Sounds = solidSounds,
+			               	PreferredTool = ToolType.Pickaxe,
+			               	RequiresTool = true,
+			               	MiningSpeed = 2.0f,
 			               });
 			m.SetBlockType(16, "CoalOre", new BlockType()
 			               {
@@ -167,6 +182,9 @@ namespace ManicDigger.Mods
 			               	DrawType = DrawType.Solid,
 			               	WalkableType = WalkableType.Solid,
 			               	Sounds = solidSounds,
+			               	PreferredTool = ToolType.Pickaxe,
+			               	RequiresTool = true,
+			               	MiningSpeed = 2.0f,
 			               });
 			m.SetBlockType(17, "OakTreeTrunk", new BlockType()
 			               {
@@ -176,6 +194,8 @@ namespace ManicDigger.Mods
 			               	DrawType = DrawType.Solid,
 			               	WalkableType = WalkableType.Solid,
 			               	Sounds = solidSounds,
+			               	PreferredTool = ToolType.Axe,
+			               	MiningSpeed = 1.2f,
 			               });
 			m.SetBlockType(18, "OakLeaves", new BlockType()
 			               {
