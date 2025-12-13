@@ -2578,11 +2578,50 @@ public partial class Server : ICurrentTime, IDropItem
         }
         else
         {
+            int blockid = d_Map.GetBlock(cmd.X, cmd.Y, cmd.Z);
+            BlockType blockType = BlockTypes[blockid];
+            
+            // Determine what tool is being used
+            ToolType toolUsed = ToolType.Hand;
+            var heldItem = inventory.RightHand[cmd.MaterialSlot];
+            if (heldItem != null && heldItem.ItemClass == ItemClass.Block)
+            {
+                BlockType heldBlockType = BlockTypes[heldItem.BlockId];
+                if (heldBlockType.IsTool)
+                {
+                    toolUsed = heldBlockType.ToolType;
+                }
+            }
+            
+            // Check if the block requires a specific tool
+            bool correctToolUsed = (blockType.PreferredTool == ToolType.None) || 
+                                   (blockType.PreferredTool == toolUsed);
+            
             var item = new Item();
             item.ItemClass = ItemClass.Block;
-            int blockid = d_Map.GetBlock(cmd.X, cmd.Y, cmd.Z);
-            item.BlockId = d_Data.WhenPlayerPlacesGetsConvertedTo()[blockid];
-            if (!config.IsCreative)
+            
+            // Determine what item to drop
+            if (blockType.RequiresTool && !correctToolUsed)
+            {
+                // Block requires correct tool but wrong tool was used
+                if (blockType.AlternativeDrop > 0)
+                {
+                    // Drop alternative item (e.g., small stones instead of stone block)
+                    item.BlockId = blockType.AlternativeDrop;
+                }
+                else
+                {
+                    // Drop nothing - block is destroyed without giving anything
+                    item = null;
+                }
+            }
+            else
+            {
+                // Correct tool used or block doesn't require specific tool
+                item.BlockId = d_Data.WhenPlayerPlacesGetsConvertedTo()[blockid];
+            }
+            
+            if (item != null && !config.IsCreative)
             {
                 GetInventoryUtil(inventory).GrabItem(item, cmd.MaterialSlot);
             }

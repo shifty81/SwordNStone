@@ -1229,6 +1229,16 @@ namespace ManicDigger
 		public int WhenPlayerPlacesGetsConvertedTo;
 		[ProtoMember(45)]
 		public float PickDistanceWhenUsed;
+		[ProtoMember(46)]
+		public ToolType PreferredTool;
+		[ProtoMember(47)]
+		public ToolType ToolType;
+		[ProtoMember(48)]
+		public float MiningSpeed = 1;
+		[ProtoMember(49)]
+		public bool RequiresTool;
+		[ProtoMember(50)]
+		public int AlternativeDrop;
 
 		public string AllTextures
 		{
@@ -1280,6 +1290,16 @@ namespace ManicDigger
 	{
 		Normal,
 		Grenade,
+	}
+
+	public enum ToolType
+	{
+		None,
+		Pickaxe,
+		Axe,
+		Shovel,
+		Sword,
+		Hand,
 	}
 
 	public delegate void Action();
