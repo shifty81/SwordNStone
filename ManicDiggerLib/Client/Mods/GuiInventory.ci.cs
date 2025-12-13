@@ -54,6 +54,7 @@
 
     public override void OnKeyPress(Game game_, KeyPressEventArgs args)
     {
+        game = game_;
         if (game.guistate != GuiState.Inventory)
         {
             return;
@@ -81,6 +82,7 @@
 
     public override void OnMouseDown(Game game_, MouseEventArgs args)
     {
+        game = game_;
         if (game.guistate != GuiState.Inventory)
         {
             return;
@@ -230,6 +232,7 @@
 
     public override void OnMouseUp(Game game_, MouseEventArgs args)
     {
+        game = game_;
         if (game.guistate != GuiState.Inventory)
         {
             return;

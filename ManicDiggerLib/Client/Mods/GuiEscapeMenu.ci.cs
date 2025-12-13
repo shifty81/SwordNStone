@@ -607,6 +607,7 @@
     int keyselectid;
     public override void OnKeyDown(Game game_, KeyEventArgs args)
     {
+        game = game_;
         int eKey = args.GetKeyCode();
         if (eKey == game.GetKey(GlKeys.Escape))
         {

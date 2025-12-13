@@ -24,6 +24,7 @@
 
     public override void OnKeyPress(Game game_, KeyPressEventArgs args)
     {
+        game = game_;
         if (game.guistate != GuiState.Normal)
         {
             return;
@@ -45,6 +46,7 @@
 
     public override void OnMouseDown(Game game_, MouseEventArgs args)
     {
+        game = game_;
         if (game.guistate != GuiState.Normal)
         {
             return;
@@ -73,6 +75,7 @@
 
     public override void OnMouseUp(Game game_, MouseEventArgs args)
     {
+        game = game_;
         if (game.guistate != GuiState.Normal)
         {
             return;
@@ -90,6 +93,7 @@
 
     public override void OnMouseMove(Game game_, MouseEventArgs args)
     {
+        game = game_;
         if (game.guistate != GuiState.Normal)
         {
             return;

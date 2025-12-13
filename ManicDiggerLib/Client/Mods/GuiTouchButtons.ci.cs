@@ -119,6 +119,7 @@
 
     public override void OnTouchStart(Game game_, TouchEventArgs e)
     {
+        game = game_;
         touchButtonsEnabled = true;
         ScreenOnTouchStart(e);
         if (e.GetHandled()) { return; }
@@ -187,6 +188,7 @@
 
     public override void OnTouchEnd(Game game_, TouchEventArgs e)
     {
+        game = game_;
         ScreenOnTouchEnd(e);
         if (e.GetHandled()) { return; }
         if (e.GetId() == touchIdMove)
