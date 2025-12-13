@@ -73,6 +73,11 @@
 
     public override void OnMouseUp(Game game_, MouseEventArgs args)
     {
+        if (game.guistate != GuiState.Normal)
+        {
+            return;
+        }
+
         // Reset all button states to normal or hover
         for (int i = 0; i < 10; i++)
         {
