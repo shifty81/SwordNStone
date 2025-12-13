@@ -165,7 +165,7 @@ namespace ManicDigger.ClientNative
 						{
 							break;
 						}
-						if (gameexit.GetExit())
+						if (gameexit != null && gameexit.GetExit())
 						{
 							break;
 						}
