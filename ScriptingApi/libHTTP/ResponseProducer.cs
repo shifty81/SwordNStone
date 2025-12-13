@@ -21,7 +21,7 @@ namespace FragLabs.HTTP
         void Disconnect();
         bool ReadAsync(ProducerEventArgs e);
         byte[] Read();
-        void Dispose();
+        new void Dispose();
         Dictionary<string, string> AdditionalHeaders(HttpRequest request);
 
         /// <summary>

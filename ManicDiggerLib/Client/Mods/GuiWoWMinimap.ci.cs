@@ -33,8 +33,8 @@
         
         // Draw simplified top-down view
         // Get player position
-        int playerX = game.platform.FloatToInt(game.playerpositionX);
-        int playerZ = game.platform.FloatToInt(game.playerpositionZ);
+        int playerX = game.platform.FloatToInt(game.player.position.x);
+        int playerZ = game.platform.FloatToInt(game.player.position.z);
         
         // Draw blocks around player in a grid
         int viewRange = 32; // blocks in each direction
@@ -99,7 +99,7 @@
         font.size = 10;
         string coords = game.platform.StringFormat3("{0}, {1}, {2}",
             game.platform.IntToString(playerX),
-            game.platform.IntToString(game.platform.FloatToInt(game.playerpositionY)),
+            game.platform.IntToString(game.platform.FloatToInt(game.player.position.y)),
             game.platform.IntToString(playerZ));
         game.Draw2dText(coords, font, x + scaledSize / 2 - 30, y + scaledSize + 5, 
             null, false);
