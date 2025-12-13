@@ -15,6 +15,7 @@ obj
 # NuGet package cache #
 #######################
 /packages
+nuget.exe
 
 # General #
 ###########
