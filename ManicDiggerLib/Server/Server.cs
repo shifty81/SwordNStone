@@ -2593,15 +2593,15 @@ public partial class Server : ICurrentTime, IDropItem
                 }
             }
             
-            // Check if the block requires a specific tool
-            bool correctToolUsed = (blockType.PreferredTool == ToolType.None) || 
-                                   (blockType.PreferredTool == toolUsed);
+            // Check if tool requirement is met (either no tool preferred, or correct tool is used)
+            bool toolRequirementMet = (blockType.PreferredTool == ToolType.None) || 
+                                      (blockType.PreferredTool == toolUsed);
             
             var item = new Item();
             item.ItemClass = ItemClass.Block;
             
             // Determine what item to drop
-            if (blockType.RequiresTool && !correctToolUsed)
+            if (blockType.RequiresTool && !toolRequirementMet)
             {
                 // Block requires correct tool but wrong tool was used
                 if (blockType.AlternativeDrop > 0)
@@ -2617,7 +2617,7 @@ public partial class Server : ICurrentTime, IDropItem
             }
             else
             {
-                // Correct tool used or block doesn't require specific tool
+                // Tool requirement met - give the proper block item
                 item.BlockId = d_Data.WhenPlayerPlacesGetsConvertedTo()[blockid];
             }
             
