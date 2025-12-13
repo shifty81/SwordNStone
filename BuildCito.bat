@@ -39,3 +39,5 @@ REM IF NOT "%1"=="fast" cito -D CITO -D CS -l cs -o cito\output\Cs\ManicDigger.c
 REM copy cito\platform\C\* cito\output\C\*
 REM copy cito\platform\Java\* cito\output\Java\*
 REM copy cito\platform\Cs\* cito\output\Cs\*
+
+exit /b 0
