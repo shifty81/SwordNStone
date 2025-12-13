@@ -940,7 +940,7 @@
             int tabPanelY = 35;
             int tabPanelHeight = 35;
             int tabPanelColor = Game.ColorFromArgb(180, 70, 70, 70);
-            game.Draw2dTexture(game.WhiteTexture(), 0, tabPanelY, game.Width(), tabPanelHeight, null, tabPanelColor, false);
+            game.Draw2dTexture(game.WhiteTexture(), 0, tabPanelY, game.Width(), tabPanelHeight, null, 0, tabPanelColor, false);
             
             // Draw content panel background
             int contentPanelY = tabPanelY + tabPanelHeight + 5;
@@ -948,7 +948,7 @@
             int contentPanelColor = Game.ColorFromArgb(200, 50, 50, 50);
             int contentPanelMargin = 30;
             game.Draw2dTexture(game.WhiteTexture(), contentPanelMargin, contentPanelY, 
-                game.Width() - contentPanelMargin * 2, contentPanelHeight, null, contentPanelColor, false);
+                game.Width() - contentPanelMargin * 2, contentPanelHeight, null, 0, contentPanelColor, false);
             
             // Draw tabs
             for (int i = 0; i < tabButtonsCount; i++)
@@ -965,11 +965,11 @@
                 
                 // Draw tab background
                 int tabBgColor = isActiveTab ? Game.ColorFromArgb(255, 100, 100, 100) : Game.ColorFromArgb(200, 60, 60, 60);
-                game.Draw2dTexture(game.WhiteTexture(), tab.x, tab.y, tab.width, tab.height, null, tabBgColor, false);
+                game.Draw2dTexture(game.WhiteTexture(), tab.x, tab.y, tab.width, tab.height, null, 0, tabBgColor, false);
                 
                 // Draw tab border
                 int borderColor = isActiveTab ? Game.ColorFromArgb(255, 180, 180, 180) : Game.ColorFromArgb(255, 80, 80, 80);
-                DrawBorder(game, tab.x, tab.y, tab.width, tab.height, 2, borderColor);
+                DrawBorder(tab.x, tab.y, tab.width, tab.height, 2, borderColor);
                 
                 // Draw tab text
                 game.Draw2dText(tab.Text, tab.font, tab.x + 10, tab.y + 8, 
@@ -985,16 +985,16 @@
         }
     }
     
-    void DrawBorder(Game game, int x, int y, int width, int height, int thickness, int color)
+    void DrawBorder(int x, int y, int width, int height, int thickness, int color)
     {
         // Top
-        game.Draw2dTexture(game.WhiteTexture(), x, y, width, thickness, null, color, false);
+        game.Draw2dTexture(game.WhiteTexture(), x, y, width, thickness, null, 0, color, false);
         // Bottom
-        game.Draw2dTexture(game.WhiteTexture(), x, y + height - thickness, width, thickness, null, color, false);
+        game.Draw2dTexture(game.WhiteTexture(), x, y + height - thickness, width, thickness, null, 0, color, false);
         // Left
-        game.Draw2dTexture(game.WhiteTexture(), x, y, thickness, height, null, color, false);
+        game.Draw2dTexture(game.WhiteTexture(), x, y, thickness, height, null, 0, color, false);
         // Right
-        game.Draw2dTexture(game.WhiteTexture(), x + width - thickness, y, thickness, height, null, color, false);
+        game.Draw2dTexture(game.WhiteTexture(), x + width - thickness, y, thickness, height, null, 0, color, false);
     }
     Button[] widgets;
     KeyHelp[] keyhelps()
