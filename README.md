@@ -80,4 +80,30 @@ Once you've contributed some good patches you can also get direct push access to
 
 License
 -------
-You can find detailed information in [COPYING.md](COPYING.md)
+Manic Digger is **free and open source software** released into the **public domain** under the [Unlicense](http://unlicense.org).
+
+**This means you can:**
+- ✅ Use it to make your own game
+- ✅ Modify and add features freely
+- ✅ Use it commercially or non-commercially
+- ✅ Distribute it in any form
+- ✅ Do all of this **without asking permission** or providing attribution
+
+While attribution is not required, it is always appreciated!
+
+For detailed information about third-party libraries and their licenses, see [COPYING.md](COPYING.md)
+
+
+Frequently Asked Questions
+--------------------------
+
+### Can I use this to make my own game?
+
+**Yes, absolutely!** Manic Digger is released into the public domain. You are free to:
+- Fork this project and create your own game
+- Add your own features and modifications
+- Change and mold it to fit your vision
+- Release it under your own name
+- Use it commercially
+
+You don't need to ask permission or provide attribution (though giving credit is always nice). The code is yours to use however you wish!
