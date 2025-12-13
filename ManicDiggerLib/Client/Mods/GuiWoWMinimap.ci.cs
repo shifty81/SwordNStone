@@ -64,7 +64,7 @@
                     int highestY = GetHighestBlockY(game, blockX, blockZ);
                     if (highestY > 0)
                     {
-                        int blockType = game.GetBlock(blockX, highestY, blockZ);
+                        int blockType = game.map.GetBlock(blockX, blockZ, highestY);
                         if (blockType != 0)
                         {
                             int color = GetBlockMinimapColor(blockType);
@@ -110,7 +110,7 @@
         // Start from a reasonable height and go down
         for (int y = 127; y >= 0; y--)
         {
-            int blockType = game.GetBlock(x, y, z);
+            int blockType = game.map.GetBlock(x, z, y);
             if (blockType != 0)
             {
                 return y;
@@ -168,11 +168,8 @@
 
     void DrawPlayerDirection(Game game, int centerX, int centerY, float scale)
     {
-        // Get player orientation
-        float headingDegrees = game.player.playerorientation.GetHeading();
-        
-        // Convert to radians
-        float headingRadians = headingDegrees * 3.14159f / 180.0f;
+        // Get player orientation (roty is in radians)
+        float headingRadians = game.player.position.roty;
         
         // Calculate triangle points for direction indicator
         int arrowLength = game.platform.FloatToInt(12 * scale);

@@ -118,7 +118,7 @@
         int barHeight = game.platform.FloatToInt(20 * scale);
         
         // Get target block type
-        int blockType = game.SelectedBlockPositionType;
+        int blockType = game.map.GetBlock(game.SelectedBlockPositionX, game.SelectedBlockPositionZ, game.SelectedBlockPositionY);
         
         // For now, show full health for blocks (in future could show block health)
         float targetHealth = 1.0f;
