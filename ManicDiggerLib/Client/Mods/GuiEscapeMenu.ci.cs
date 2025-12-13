@@ -19,6 +19,27 @@
         fontEscapeMenu = FontCi.Create("Arial", 20, 0);
     }
     float one;
+    
+    // UI Constants for tabbed interface
+    const int TAB_BORDER_THICKNESS = 2;
+    const int TAB_PANEL_Y = 35;
+    const int TAB_PANEL_HEIGHT = 35;
+    const int CONTENT_PANEL_MARGIN = 30;
+    const int TAB_FONT_SIZE = 14;
+    const int CONTROLS_TEXT_HEIGHT = 16;
+    const int STANDARD_TEXT_HEIGHT = 20;
+    
+    // Color constants for UI elements
+    int ColorTabPanelBg() { return Game.ColorFromArgb(180, 70, 70, 70); }
+    int ColorContentPanelBg() { return Game.ColorFromArgb(200, 50, 50, 50); }
+    int ColorActiveTabBg() { return Game.ColorFromArgb(255, 100, 100, 100); }
+    int ColorInactiveTabBg() { return Game.ColorFromArgb(200, 60, 60, 60); }
+    int ColorActiveTabText() { return Game.ColorFromArgb(255, 255, 215, 0); }
+    int ColorInactiveTabText() { return Game.ColorFromArgb(255, 180, 180, 180); }
+    int ColorHoverText() { return Game.ColorFromArgb(255, 255, 255, 255); }
+    int ColorActiveTabBorder() { return Game.ColorFromArgb(255, 180, 180, 180); }
+    int ColorInactiveTabBorder() { return Game.ColorFromArgb(255, 80, 80, 80); }
+    
     Button buttonMainReturnToGame;
     Button buttonMainOptions;
     Button buttonMainExit;
@@ -58,10 +79,65 @@
         }
     }
 
+    // Tab buttons
+    Button tabGraphics;
+    Button tabMouse;
+    Button tabControls;
+    Button tabAccessibility;
+    Button tabSound;
+    Button tabInterface;
+    Button tabDev;
+    Button tabBack;
+    
+    // Tab button array for the tabbed interface
+    // Stores all tab buttons for rendering and interaction
+    Button[] tabButtons;
+    int tabButtonsCount;
+    
     Button optionsGraphics;
     Button optionsKeys;
     Button optionsOther;
     Button optionsReturnToMainMenu;
+    
+    void InitTabButtons()
+    {
+        tabButtons = new Button[8];
+        tabButtonsCount = 0;
+        
+        LanguageCi language = game.language;
+        tabGraphics = new Button();
+        tabGraphics.Text = language.Graphics();
+        tabButtons[tabButtonsCount++] = tabGraphics;
+        
+        tabMouse = new Button();
+        tabMouse.Text = "Mouse";
+        tabButtons[tabButtonsCount++] = tabMouse;
+        
+        tabControls = new Button();
+        tabControls.Text = "Controls";
+        tabButtons[tabButtonsCount++] = tabControls;
+        
+        tabAccessibility = new Button();
+        tabAccessibility.Text = "Accessibility";
+        tabButtons[tabButtonsCount++] = tabAccessibility;
+        
+        tabSound = new Button();
+        tabSound.Text = "Sound";
+        tabButtons[tabButtonsCount++] = tabSound;
+        
+        tabInterface = new Button();
+        tabInterface.Text = "Interface";
+        tabButtons[tabButtonsCount++] = tabInterface;
+        
+        tabDev = new Button();
+        tabDev.Text = "Dev";
+        tabButtons[tabButtonsCount++] = tabDev;
+        
+        tabBack = new Button();
+        tabBack.Text = "Back";
+        tabButtons[tabButtonsCount++] = tabBack;
+    }
+    
     void OptionsSet()
     {
         LanguageCi language = game.language;
@@ -98,6 +174,43 @@
         if (b == optionsReturnToMainMenu)
         {
             SaveOptions(); SetEscapeMenuState(EscapeMenuState.Main);
+        }
+    }
+    
+    void HandleTabClick(Button b)
+    {
+        if (b == tabGraphics)
+        {
+            SetEscapeMenuState(EscapeMenuState.Graphics);
+        }
+        else if (b == tabMouse)
+        {
+            SetEscapeMenuState(EscapeMenuState.Mouse);
+        }
+        else if (b == tabControls)
+        {
+            SetEscapeMenuState(EscapeMenuState.Controls);
+        }
+        else if (b == tabAccessibility)
+        {
+            SetEscapeMenuState(EscapeMenuState.Accessibility);
+        }
+        else if (b == tabSound)
+        {
+            SetEscapeMenuState(EscapeMenuState.Sound);
+        }
+        else if (b == tabInterface)
+        {
+            SetEscapeMenuState(EscapeMenuState.Interface);
+        }
+        else if (b == tabDev)
+        {
+            SetEscapeMenuState(EscapeMenuState.Dev);
+        }
+        else if (b == tabBack)
+        {
+            SaveOptions();
+            SetEscapeMenuState(EscapeMenuState.Main);
         }
     }
 
@@ -308,6 +421,143 @@
         }
     }
 
+    // Mouse tab
+    Button mouseCheckboxSneakSprint;
+    void MouseSet()
+    {
+        LanguageCi language = game.language;
+        mouseCheckboxSneakSprint = new Button();
+        mouseCheckboxSneakSprint.Text = "Mouse click modifiers locked to Sneak/Sprint keys";
+        
+        WidgetsClear();
+        AddWidget(mouseCheckboxSneakSprint);
+    }
+    
+    void MouseHandleClick(Button b)
+    {
+        // Placeholder for mouse settings
+    }
+
+    // Controls tab (main one from the image)
+    Button[] controlButtons;
+    Button controlsResetButton;
+    Button controlsMacroEditorButton;
+    
+    void ControlsSet()
+    {
+        LanguageCi language = game.language;
+        
+        controlButtons = new Button[keyButtonsCount];
+        for (int i = 0; i < keyButtonsCount; i++)
+        {
+            controlButtons[i] = null;
+        }
+        
+        KeyHelp[] helps = keyhelps();
+        for (int i = 0; i < keyButtonsCount; i++)
+        {
+            if (helps[i] == null)
+            {
+                break;
+            }
+            int defaultkey = helps[i].DefaultKey;
+            int key = defaultkey;
+            if (game.options.Keys[defaultkey] != 0)
+            {
+                key = game.options.Keys[defaultkey];
+            }
+            controlButtons[i] = new Button();
+            controlButtons[i].Text = game.platform.StringFormat2("{0}: {1}", helps[i].Text, KeyName(key));
+            AddWidget(controlButtons[i]);
+        }
+        
+        controlsResetButton = new Button();
+        controlsResetButton.Text = "Reset Controls";
+        controlsMacroEditorButton = new Button();
+        controlsMacroEditorButton.Text = "Open Macro Editor";
+        
+        AddWidget(controlsResetButton);
+        AddWidget(controlsMacroEditorButton);
+    }
+    
+    void ControlsHandleClick(Button b)
+    {
+        if (controlButtons != null)
+        {
+            for (int i = 0; i < keyButtonsCount; i++)
+            {
+                if (controlButtons[i] == b)
+                {
+                    keyselectid = i;
+                }
+            }
+        }
+        if (b == controlsResetButton)
+        {
+            game.options.Keys = new int[256];
+        }
+        if (b == controlsMacroEditorButton)
+        {
+            // Placeholder for macro editor
+        }
+    }
+
+    // Accessibility tab
+    void AccessibilitySet()
+    {
+        WidgetsClear();
+        // Placeholder for accessibility options
+    }
+    
+    void AccessibilityHandleClick(Button b)
+    {
+        // Placeholder
+    }
+
+    // Sound tab
+    Button soundVolumeOption;
+    void SoundSet()
+    {
+        LanguageCi language = game.language;
+        soundVolumeOption = new Button();
+        soundVolumeOption.Text = game.platform.StringFormat(language.SoundOption(), (game.AudioEnabled ? language.On() : language.Off()));
+        
+        WidgetsClear();
+        AddWidget(soundVolumeOption);
+    }
+    
+    void SoundHandleClick(Button b)
+    {
+        if (b == soundVolumeOption)
+        {
+            game.AudioEnabled = !game.AudioEnabled;
+        }
+    }
+
+    // Interface tab
+    void InterfaceSet()
+    {
+        WidgetsClear();
+        // Placeholder for interface options
+    }
+    
+    void InterfaceHandleClick(Button b)
+    {
+        // Placeholder
+    }
+
+    // Dev tab
+    void DevSet()
+    {
+        WidgetsClear();
+        // Placeholder for developer options
+    }
+    
+    void DevHandleClick(Button b)
+    {
+        // Placeholder
+    }
+
     void HandleButtonClick(Button w)
     {
         MainHandleClick(w);
@@ -315,6 +565,13 @@
         GraphicsHandleClick(w);
         OtherHandleClick(w);
         KeysHandleClick(w);
+        HandleTabClick(w);
+        MouseHandleClick(w);
+        ControlsHandleClick(w);
+        AccessibilityHandleClick(w);
+        SoundHandleClick(w);
+        InterfaceHandleClick(w);
+        DevHandleClick(w);
     }
 
     void AddWidget(Button b)
@@ -329,8 +586,47 @@
 
     internal Game game;
     EscapeMenuState escapemenustate;
+    
+    bool IsTabbed(EscapeMenuState state)
+    {
+        return state == EscapeMenuState.Graphics 
+            || state == EscapeMenuState.Mouse 
+            || state == EscapeMenuState.Controls 
+            || state == EscapeMenuState.Accessibility 
+            || state == EscapeMenuState.Sound 
+            || state == EscapeMenuState.Interface 
+            || state == EscapeMenuState.Dev;
+    }
+    
+    bool IsActiveTab(int tabIndex, EscapeMenuState state)
+    {
+        if (tabIndex == 0 && state == EscapeMenuState.Graphics) { return true; }
+        else if (tabIndex == 1 && state == EscapeMenuState.Mouse) { return true; }
+        else if (tabIndex == 2 && state == EscapeMenuState.Controls) { return true; }
+        else if (tabIndex == 3 && state == EscapeMenuState.Accessibility) { return true; }
+        else if (tabIndex == 4 && state == EscapeMenuState.Sound) { return true; }
+        else if (tabIndex == 5 && state == EscapeMenuState.Interface) { return true; }
+        else if (tabIndex == 6 && state == EscapeMenuState.Dev) { return true; }
+        return false;
+    }
     void EscapeMenuMouse1()
     {
+        // Check tabs first
+        if (tabButtons != null)
+        {
+            for (int i = 0; i < tabButtonsCount; i++)
+            {
+                Button tab = tabButtons[i];
+                tab.selected = RectContains(tab.x, tab.y, tab.width, tab.height, game.mouseCurrentX, game.mouseCurrentY);
+                if (tab.selected && game.mouseleftclick)
+                {
+                    HandleTabClick(tab);
+                    return;
+                }
+            }
+        }
+        
+        // Then check content widgets
         for (int i = 0; i < widgetsCount; i++)
         {
             Button w = widgets[i];
@@ -368,8 +664,46 @@
         }
         else if (state == EscapeMenuState.Graphics)
         {
+            InitTabButtons();
             GraphicsSet();
-            MakeSimpleOptions(fontEscapeMenu, 50);
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
+        }
+        else if (state == EscapeMenuState.Mouse)
+        {
+            InitTabButtons();
+            MouseSet();
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
+        }
+        else if (state == EscapeMenuState.Controls)
+        {
+            InitTabButtons();
+            ControlsSet();
+            FontCi fontKeys = FontCi.Create("Arial", 12, 0);
+            MakeTabLayout(fontKeys, CONTROLS_TEXT_HEIGHT);
+        }
+        else if (state == EscapeMenuState.Accessibility)
+        {
+            InitTabButtons();
+            AccessibilitySet();
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
+        }
+        else if (state == EscapeMenuState.Sound)
+        {
+            InitTabButtons();
+            SoundSet();
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
+        }
+        else if (state == EscapeMenuState.Interface)
+        {
+            InitTabButtons();
+            InterfaceSet();
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
+        }
+        else if (state == EscapeMenuState.Dev)
+        {
+            InitTabButtons();
+            DevSet();
+            MakeTabLayout(fontEscapeMenu, STANDARD_TEXT_HEIGHT);
         }
         else if (state == EscapeMenuState.Other)
         {
@@ -531,6 +865,80 @@
             }
         }
     }
+    
+    void MakeTabLayout(FontCi font, int textheight)
+    {
+        FontCi tabFont = FontCi.Create("Arial", TAB_FONT_SIZE, 0);
+        int tabHeight = 30;
+        int tabStartY = TAB_PANEL_Y + 5;
+        int tabSpacing = 5;
+        
+        // Calculate total width needed for all tabs
+        int totalTabWidth = 0;
+        for (int i = 0; i < tabButtonsCount; i++)
+        {
+            string s = tabButtons[i].Text;
+            float sizeWidth = game.TextSizeWidth(s, tabFont);
+            totalTabWidth = totalTabWidth + game.platform.FloatToInt(sizeWidth) + 20 + tabSpacing;
+        }
+        
+        // Position tabs across the top
+        int tabStartX = game.xcenter(totalTabWidth);
+        int currentX = tabStartX;
+        
+        for (int i = 0; i < tabButtonsCount; i++)
+        {
+            string s = tabButtons[i].Text;
+            float sizeWidth = game.TextSizeWidth(s, tabFont);
+            int Width = game.platform.FloatToInt(sizeWidth) + 20;
+            
+            tabButtons[i].x = currentX;
+            tabButtons[i].y = tabStartY;
+            tabButtons[i].width = Width;
+            tabButtons[i].height = tabHeight;
+            tabButtons[i].font = tabFont;
+            
+            // Highlight selected tab
+            if (IsActiveTab(i, escapemenustate))
+            {
+                tabButtons[i].fontcolor = Game.ColorFromArgb(255, 255, 215, 0);
+                tabButtons[i].fontcolorselected = Game.ColorFromArgb(255, 255, 215, 0);
+            }
+            else
+            {
+                tabButtons[i].fontcolor = Game.ColorFromArgb(255, 180, 180, 180);
+                tabButtons[i].fontcolorselected = Game.ColorFromArgb(255, 255, 255, 255);
+            }
+            
+            currentX = currentX + Width + tabSpacing;
+        }
+        
+        // Position content widgets below tabs
+        int contentStartY = TAB_PANEL_Y + TAB_PANEL_HEIGHT + 45;
+        int contentLeftMargin = CONTENT_PANEL_MARGIN + 70;
+        
+        for (int i = 0; i < widgetsCount; i++)
+        {
+            string s = widgets[i].Text;
+            float sizeWidth = game.TextSizeWidth(s, font);
+            float sizeHeight = game.TextSizeHeight(s, font);
+            int Width = game.platform.FloatToInt(sizeWidth) + 10;
+            int Height = game.platform.FloatToInt(sizeHeight);
+            int X = contentLeftMargin;
+            int Y = contentStartY + textheight * i;
+            widgets[i].x = X;
+            widgets[i].y = Y;
+            widgets[i].width = Width;
+            widgets[i].height = Height;
+            widgets[i].font = font;
+            if (i == keyselectid)
+            {
+                widgets[i].fontcolor = Game.ColorFromArgb(255, 0, 255, 0);
+                widgets[i].fontcolorselected = Game.ColorFromArgb(255, 0, 255, 0);
+            }
+        }
+    }
+    
     bool loaded;
     public override void OnNewFrameDraw2d(Game game_, float deltaTime)
     {
@@ -551,11 +959,58 @@
         }
         SetEscapeMenuState(escapemenustate);
         EscapeMenuMouse1();
+        
+        // Draw tabs if in a tabbed state
+        if (IsTabbed(escapemenustate) && tabButtons != null)
+        {
+            // Draw background panel for tabs
+            game.Draw2dTexture(game.WhiteTexture(), 0, TAB_PANEL_Y, game.Width(), TAB_PANEL_HEIGHT, 
+                null, 0, ColorTabPanelBg(), false);
+            
+            // Draw content panel background
+            int contentPanelY = TAB_PANEL_Y + TAB_PANEL_HEIGHT + 5;
+            int contentPanelHeight = game.Height() - contentPanelY - 50;
+            game.Draw2dTexture(game.WhiteTexture(), CONTENT_PANEL_MARGIN, contentPanelY, 
+                game.Width() - CONTENT_PANEL_MARGIN * 2, contentPanelHeight, null, 0, ColorContentPanelBg(), false);
+            
+            // Draw tabs
+            for (int i = 0; i < tabButtonsCount; i++)
+            {
+                Button tab = tabButtons[i];
+                bool tabIsActive = IsActiveTab(i, escapemenustate);
+                
+                // Draw tab background
+                int tabBgColor = tabIsActive ? ColorActiveTabBg() : ColorInactiveTabBg();
+                game.Draw2dTexture(game.WhiteTexture(), tab.x, tab.y, tab.width, tab.height, null, 0, tabBgColor, false);
+                
+                // Draw tab border
+                int borderColor = tabIsActive ? ColorActiveTabBorder() : ColorInactiveTabBorder();
+                DrawBorder(tab.x, tab.y, tab.width, tab.height, TAB_BORDER_THICKNESS, borderColor);
+                
+                // Draw tab text
+                game.Draw2dText(tab.Text, tab.font, tab.x + 10, tab.y + 8, 
+                    IntRef.Create(tab.selected ? tab.fontcolorselected : tab.fontcolor), false);
+            }
+        }
+        
+        // Draw content widgets
         for (int i = 0; i < widgetsCount; i++)
         {
             Button w = widgets[i];
             game.Draw2dText(w.Text, w.font, w.x, w.y, IntRef.Create(w.selected ? w.fontcolorselected : w.fontcolor), false);
         }
+    }
+    
+    void DrawBorder(int x, int y, int width, int height, int thickness, int color)
+    {
+        // Top
+        game.Draw2dTexture(game.WhiteTexture(), x, y, width, thickness, null, 0, color, false);
+        // Bottom
+        game.Draw2dTexture(game.WhiteTexture(), x, y + height - thickness, width, thickness, null, 0, color, false);
+        // Left
+        game.Draw2dTexture(game.WhiteTexture(), x, y, thickness, height, null, 0, color, false);
+        // Right
+        game.Draw2dTexture(game.WhiteTexture(), x + width - thickness, y, thickness, height, null, 0, color, false);
     }
     Button[] widgets;
     KeyHelp[] keyhelps()
@@ -611,13 +1066,10 @@
         int eKey = args.GetKeyCode();
         if (eKey == game.GetKey(GlKeys.Escape))
         {
-            if (escapemenustate == EscapeMenuState.Graphics
+            if (IsTabbed(escapemenustate) 
                 || escapemenustate == EscapeMenuState.Keys
-                || escapemenustate == EscapeMenuState.Other)
-            {
-                SetEscapeMenuState(EscapeMenuState.Options);
-            }
-            else if (escapemenustate == EscapeMenuState.Options)
+                || escapemenustate == EscapeMenuState.Other
+                || escapemenustate == EscapeMenuState.Options)
             {
                 SaveOptions();
                 SetEscapeMenuState(EscapeMenuState.Main);
@@ -629,7 +1081,7 @@
             }
             args.SetHandled(true);
         }
-        if (escapemenustate == EscapeMenuState.Keys)
+        if (escapemenustate == EscapeMenuState.Keys || escapemenustate == EscapeMenuState.Controls)
         {
             if (keyselectid != -1)
             {

@@ -1,0 +1,160 @@
+TABBED GUI LAYOUT DIAGRAM
+=========================
+
+This diagram shows the visual layout of the tabbed settings interface.
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│                         MANIC DIGGER - SETTINGS                             │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│    ┌──────────┬───────┬──────────┬──────────────┬───────┬──────────┬─────┬────┐
+│    │Graphics  │ Mouse │ Controls │Accessibility │ Sound │Interface │ Dev │Back│
+│    │  (ACTIVE)│       │          │              │       │          │     │    │
+│    └──────────┴───────┴──────────┴──────────────┴───────┴──────────┴─────┴────┘
+│                                                                             │
+│    ┌─────────────────────────────────────────────────────────────────────┐│
+│    │                         CONTENT AREA                                 ││
+│    │                                                                      ││
+│    │  Graphics Settings:                                                 ││
+│    │                                                                      ││
+│    │    ┌──────────────────────────────────────────────────────┐        ││
+│    │    │ ☑ Smooth Shadows: On                                 │        ││
+│    │    └──────────────────────────────────────────────────────┘        ││
+│    │    ┌──────────────────────────────────────────────────────┐        ││
+│    │    │ ☑ Darken Block Sides: On                             │        ││
+│    │    └──────────────────────────────────────────────────────┘        ││
+│    │    ┌──────────────────────────────────────────────────────┐        ││
+│    │    │   View Distance: 128                                  │        ││
+│    │    └──────────────────────────────────────────────────────┘        ││
+│    │    ┌──────────────────────────────────────────────────────┐        ││
+│    │    │   Framerate: Vsync                                    │        ││
+│    │    └──────────────────────────────────────────────────────┘        ││
+│    │    ┌──────────────────────────────────────────────────────┐        ││
+│    │    │   Resolution: 1920x1080, 32, 60 Hz                   │        ││
+│    │    └──────────────────────────────────────────────────────┘        ││
+│    │    ┌──────────────────────────────────────────────────────┐        ││
+│    │    │ ☑ Fullscreen: Off                                     │        ││
+│    │    └──────────────────────────────────────────────────────┘        ││
+│    │    ┌──────────────────────────────────────────────────────┐        ││
+│    │    │ ☑ Use Server Textures: On                            │        ││
+│    │    └──────────────────────────────────────────────────────┘        ││
+│    │    ┌──────────────────────────────────────────────────────┐        ││
+│    │    │   Font: Nice                                          │        ││
+│    │    └──────────────────────────────────────────────────────┘        ││
+│    │                                                                      ││
+│    └─────────────────────────────────────────────────────────────────────┘│
+│                                                                             │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+CONTROLS TAB LAYOUT (Main Feature)
+===================================
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│                         MANIC DIGGER - SETTINGS                             │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│    ┌─────────┬───────┬──────────┬──────────────┬───────┬──────────┬─────┬────┐
+│    │Graphics │ Mouse │ Controls │Accessibility │ Sound │Interface │ Dev │Back│
+│    │         │       │ (ACTIVE) │              │       │          │     │    │
+│    └─────────┴───────┴──────────┴──────────────┴───────┴──────────┴─────┴────┘
+│                                                                             │
+│    ┌─────────────────────────────────────────────────────────────────────┐│
+│    │                                                                      ││
+│    │  ┌─────────────────────────────────────────────────────────────┐   ││
+│    │  │ ☐ Mouse click modifiers locked to Sneak/Sprint keys        │   ││
+│    │  └─────────────────────────────────────────────────────────────┘   ││
+│    │                                                                      ││
+│    │  ╔═══════════════════════════════════════════════════════════════╗ ││
+│    │  ║ Key Controls                                                  ║ ││
+│    │  ╠═══════════════════════════════════════════════════════════════╣ ││
+│    │  ║                                                               ║ ││
+│    │  ║ Movement controls                                             ║ ││
+│    │  ║ ─────────────────                                             ║ ││
+│    │  ║   Walk forward                                W               ║ ││
+│    │  ║   Walk backward                               S               ║ ││
+│    │  ║   Walk left                                   A               ║ ││
+│    │  ║   Walk right                                  D               ║ ││
+│    │  ║   Sneak                                       LShift          ║ ││
+│    │  ║   Sprint                                      LControl        ║ ││
+│    │  ║   Jump                                        BackSpace       ║ ││
+│    │  ║   Sit down                                    G               ║ ││
+│    │  ║                                                               ║ ││
+│    │  ║ Actions                                                       ║ ││
+│    │  ║ ───────                                                       ║ ││
+│    │  ║   Open Backpack & Crafting Inventory         E               ║ ││
+│    │  ║   Open Character Inventory                   C               ║ ││
+│    │  ║   Drop one item                              Q               ║ ││
+│    │  ║   (and more...)                                               ║ ││
+│    │  ║                                                               ║ ││
+│    │  ╚═══════════════════════════════════════════════════════════════╝ ││
+│    │                                                                      ││
+│    │  ┌───────────────────┐        ┌──────────────────────┐            ││
+│    │  │  Reset Controls   │        │  Open Macro Editor   │            ││
+│    │  └───────────────────┘        └──────────────────────────┘            ││
+│    │                                                                      ││
+│    └─────────────────────────────────────────────────────────────────────┘│
+│                                                                             │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+COLOR SCHEME
+============
+
+Tab Bar Background:       RGB(70, 70, 70) with 180 alpha
+Content Panel Background:  RGB(50, 50, 50) with 200 alpha
+
+Active Tab:
+  Background:  RGB(100, 100, 100) full opacity
+  Text:        Gold (#FFD700)
+  Border:      RGB(180, 180, 180)
+
+Inactive Tab:
+  Background:  RGB(60, 60, 60) with 200 alpha
+  Text:        Light Gray (#B4B4B4)
+  Border:      RGB(80, 80, 80)
+
+Hover State:
+  Text:        White (#FFFFFF)
+
+
+TAB ORGANIZATION
+================
+
+1. Graphics    - Display settings, resolution, fullscreen, shadows, etc.
+2. Mouse       - Mouse sensitivity, click modifiers
+3. Controls    - Key bindings for all actions (MAIN FEATURE)
+4. Accessibility - Font size, contrast, colorblind modes (future)
+5. Sound       - Volume, audio settings
+6. Interface   - UI customization, HUD layout (future)
+7. Dev         - Developer tools, debug options (future)
+8. Back        - Save and return to main menu
+
+
+KEY FEATURES
+============
+
+✓ Tab navigation with visual feedback
+✓ Organized key bindings display
+✓ Active tab highlighting (golden color)
+✓ Hover effects on tabs
+✓ Click to change tabs
+✓ ESC key to save and return
+✓ Reset Controls button
+✓ Macro Editor button (placeholder)
+✓ Dark, modern UI design
+✓ Consistent with game's aesthetic
+
+
+INTERACTION FLOW
+================
+
+1. User presses ESC → Opens main menu
+2. User clicks "Options" → Opens options screen
+3. User sees tabbed interface automatically
+4. Default tab: Graphics
+5. User clicks "Controls" tab → Switches to controls view
+6. User clicks on a key binding → Highlighted in green
+7. User presses new key → Binding updated
+8. User clicks "Reset Controls" → All bindings reset to defaults
+9. User clicks "Back" tab or presses ESC → Saves and returns
