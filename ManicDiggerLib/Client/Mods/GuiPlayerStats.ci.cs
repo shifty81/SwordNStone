@@ -9,8 +9,9 @@
 
         if (game.guistate != GuiState.MapLoading)
         {
-            DrawPlayerHealth(game);
-            DrawPlayerOxygen(game);
+            // Disabled: Now using WoW-style unit frames for health/oxygen display
+            // DrawPlayerHealth(game);
+            // DrawPlayerOxygen(game);
         }
     }
 

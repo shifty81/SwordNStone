@@ -279,6 +279,11 @@
         AddMod(new ModGuiChat());
         AddMod(new ModScreenshot());
         AddMod(new ModAudio());
+        
+        // WoW-style GUI enhancements
+        AddMod(new ModGuiWoWActionBars());
+        AddMod(new ModGuiWoWUnitFrames());
+        AddMod(new ModGuiWoWMinimap());
 
         s = new BlockOctreeSearcher();
         s.platform = platform;
