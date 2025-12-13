@@ -24,7 +24,7 @@
 
     public override void OnKeyPress(Game game_, KeyPressEventArgs args)
     {
-        if (game.guistate == GuiState.Inventory || game.guistate == GuiState.MapLoading)
+        if (game.guistate != GuiState.Normal)
         {
             return;
         }
@@ -45,7 +45,7 @@
 
     public override void OnMouseDown(Game game_, MouseEventArgs args)
     {
-        if (game.guistate == GuiState.Inventory || game.guistate == GuiState.MapLoading)
+        if (game.guistate != GuiState.Normal)
         {
             return;
         }
@@ -73,6 +73,11 @@
 
     public override void OnMouseUp(Game game_, MouseEventArgs args)
     {
+        if (game.guistate != GuiState.Normal)
+        {
+            return;
+        }
+
         // Reset all button states to normal or hover
         for (int i = 0; i < 10; i++)
         {
@@ -85,7 +90,7 @@
 
     public override void OnMouseMove(Game game_, MouseEventArgs args)
     {
-        if (game.guistate == GuiState.Inventory || game.guistate == GuiState.MapLoading)
+        if (game.guistate != GuiState.Normal)
         {
             return;
         }
