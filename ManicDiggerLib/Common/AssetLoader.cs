@@ -36,12 +36,52 @@ namespace ManicDigger.Common
 							{
 								continue;
 							}
+							
+							byte[] data = File.ReadAllBytes(s);
+							int dataLength = data.Length;
+							string md5Hash = Md5(data);
+							
+							// Calculate relative path from base data directory
+							string relativePath = s;
+							if (relativePath.StartsWith(path))
+							{
+								relativePath = relativePath.Substring(path.Length);
+								if (relativePath.StartsWith(Path.DirectorySeparatorChar.ToString()) || 
+								    relativePath.StartsWith(Path.AltDirectorySeparatorChar.ToString()))
+								{
+									relativePath = relativePath.Substring(1);
+								}
+							}
+							else
+							{
+								relativePath = f.Name;
+							}
+							
+							// Normalize path separators to forward slashes and convert to lowercase
+							string normalizedPath = relativePath.Replace(Path.DirectorySeparatorChar, '/').Replace(Path.AltDirectorySeparatorChar, '/').ToLowerInvariant();
+							
+							// Add asset with full relative path (e.g., "gui/wow/actionbar_bg.png")
 							Asset a = new Asset();
-							a.data = File.ReadAllBytes(s);
-							a.dataLength = a.data.Length;
-							a.name = f.Name.ToLowerInvariant();
-							a.md5 = Md5(a.data);
+							a.data = data;
+							a.dataLength = dataLength;
+							a.name = normalizedPath;
+							a.md5 = md5Hash;
 							assets.Add(a);
+							
+							// Also add asset with just filename for backward compatibility (e.g., "actionbar_bg.png")
+							// This ensures old code that references just filenames continues to work
+							// Note: This creates duplicate Asset objects, but they share the same byte array reference
+							// (C# arrays are reference types, so both assets point to the same data in memory)
+							// Future optimization: Use dictionary to map multiple names to single Asset instance
+							if (normalizedPath != f.Name.ToLowerInvariant())
+							{
+								Asset aCompat = new Asset();
+								aCompat.data = data;
+								aCompat.dataLength = dataLength;
+								aCompat.name = f.Name.ToLowerInvariant();
+								aCompat.md5 = md5Hash;
+								assets.Add(aCompat);
+							}
 						}
 						catch
 						{
@@ -54,7 +94,9 @@ namespace ManicDigger.Common
 			}
 			progress.value = 1;
 			list.count = assets.Count;
-			list.items = new Asset[2048];
+			// Ensure array is large enough to hold all assets
+			int arraySize = Math.Max(2048, assets.Count);
+			list.items = new Asset[arraySize];
 			for (int i = 0; i < assets.Count; i++)
 			{
 				list.items[i] = assets[i];
