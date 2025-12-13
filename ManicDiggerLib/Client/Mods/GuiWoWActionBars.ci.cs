@@ -167,7 +167,7 @@
         int spacing = ButtonSpacing();
         
         // Draw action bar background
-        game.Draw2dBitmapFile("gui/wow/actionbar_bg.png", startX, startY, 
+        game.Draw2dBitmapFile("local/gui/wow/actionbar_bg.png", startX, startY, 
             game.platform.FloatToInt(1024 * game.Scale()), 
             game.platform.FloatToInt(128 * game.Scale()));
         
@@ -178,14 +178,14 @@
             int buttonY = startY + 30;
             
             // Draw button background based on state
-            string buttonTexture = "gui/wow/button_normal.png";
+            string buttonTexture = "local/gui/wow/button_normal.png";
             if (buttonStates[i] == 1)
             {
-                buttonTexture = "gui/wow/button_hover.png";
+                buttonTexture = "local/gui/wow/button_hover.png";
             }
             else if (buttonStates[i] == 2)
             {
-                buttonTexture = "gui/wow/button_pressed.png";
+                buttonTexture = "local/gui/wow/button_pressed.png";
             }
             
             game.Draw2dBitmapFile(buttonTexture, buttonX, buttonY, buttonSize, buttonSize);

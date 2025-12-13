@@ -121,7 +121,7 @@
         float stoneX = windowX / 2 - stoneWidth / 2;
         float stoneY = 50 * scale;
         
-        menu.Draw2dQuad(menu.GetTexture("gui/wow/stone_logo.png"), 
+        menu.Draw2dQuad(menu.GetTexture("local/gui/wow/stone_logo.png"), 
             menu.p.FloatToInt(stoneX), menu.p.FloatToInt(stoneY), 
             menu.p.FloatToInt(stoneWidth), menu.p.FloatToInt(stoneHeight));
         
@@ -153,14 +153,14 @@
             float swordStartY = -swordHeight;
             float swordY = swordStartY + (swordTargetY - swordStartY) * bounce;
             
-            menu.Draw2dQuad(menu.GetTexture("gui/wow/sword.png"), 
+            menu.Draw2dQuad(menu.GetTexture("local/gui/wow/sword.png"), 
                 menu.p.FloatToInt(swordX), menu.p.FloatToInt(swordY), 
                 menu.p.FloatToInt(swordWidth), menu.p.FloatToInt(swordHeight));
         }
         else
         {
             // Animation complete - draw sword in final position
-            menu.Draw2dQuad(menu.GetTexture("gui/wow/sword.png"), 
+            menu.Draw2dQuad(menu.GetTexture("local/gui/wow/sword.png"), 
                 menu.p.FloatToInt(swordX), menu.p.FloatToInt(swordTargetY), 
                 menu.p.FloatToInt(swordWidth), menu.p.FloatToInt(swordHeight));
         }
