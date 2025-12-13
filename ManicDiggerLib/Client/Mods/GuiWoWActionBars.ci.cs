@@ -24,7 +24,7 @@
 
     public override void OnKeyPress(Game game_, KeyPressEventArgs args)
     {
-        if (game.guistate == GuiState.Inventory || game.guistate == GuiState.MapLoading)
+        if (game.guistate != GuiState.Normal)
         {
             return;
         }
@@ -45,7 +45,7 @@
 
     public override void OnMouseDown(Game game_, MouseEventArgs args)
     {
-        if (game.guistate == GuiState.Inventory || game.guistate == GuiState.MapLoading)
+        if (game.guistate != GuiState.Normal)
         {
             return;
         }
@@ -85,7 +85,7 @@
 
     public override void OnMouseMove(Game game_, MouseEventArgs args)
     {
-        if (game.guistate == GuiState.Inventory || game.guistate == GuiState.MapLoading)
+        if (game.guistate != GuiState.Normal)
         {
             return;
         }
