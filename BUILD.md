@@ -1,0 +1,286 @@
+# Building and Testing Manic Digger
+
+This document provides instructions for building and testing the Manic Digger project using Visual Studio and command-line tools.
+
+## Prerequisites
+
+### Windows - Visual Studio
+- **Visual Studio 2012 or later** (tested with VS 2022)
+- **.NET Framework 4.5** (included with Visual Studio)
+- The solution should open directly in Visual Studio
+
+### Windows - Command Line
+- **MSBuild** (included with Visual Studio or .NET Framework SDK)
+- **NuGet CLI** (for restoring packages)
+
+### Linux/Mac - Mono
+- **Mono 6.8+** with development tools
+- **xbuild** (included with mono-complete)
+- **wget** or **curl** (for downloading NuGet)
+
+## Building the Project
+
+### Option 1: Visual Studio (Recommended for Windows)
+
+1. **Open the solution:**
+   ```
+   Open ManicDigger.sln in Visual Studio
+   ```
+
+2. **Restore NuGet packages:**
+   - Right-click on the solution in Solution Explorer
+   - Select "Restore NuGet Packages"
+   - Visual Studio should automatically restore packages on build
+
+3. **Build the solution:**
+   - Select Build → Build Solution (Ctrl+Shift+B)
+   - Or select Build → Rebuild Solution for a clean build
+
+4. **Build configurations:**
+   - **Debug**: For development and debugging (includes symbols)
+   - **Release**: For optimized production builds
+   - **FastBuild**: Quick build configuration for rapid iteration
+
+### Option 2: Command Line (Windows)
+
+1. **Navigate to the project directory:**
+   ```cmd
+   cd /path/to/manicdiggerVSCLONE
+   ```
+
+2. **Restore NuGet packages:**
+   ```cmd
+   nuget restore ManicDigger.sln
+   ```
+
+3. **Build the solution:**
+   ```cmd
+   msbuild ManicDigger.sln /p:Configuration=Debug
+   ```
+   
+   Or for Release:
+   ```cmd
+   msbuild ManicDigger.sln /p:Configuration=Release
+   ```
+
+### Option 3: Linux/Mac with Mono
+
+1. **Install Mono (Ubuntu/Debian):**
+   ```bash
+   sudo apt-get update
+   sudo apt-get install -y mono-complete
+   ```
+
+2. **Download NuGet:**
+   ```bash
+   wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+   ```
+
+3. **Restore packages:**
+   ```bash
+   mono nuget.exe restore ManicDigger.sln
+   ```
+
+4. **Build with xbuild:**
+   ```bash
+   xbuild ManicDigger.sln /p:Configuration=Debug
+   ```
+
+## Project Structure
+
+The solution contains the following projects:
+
+- **ManicDigger**: Main game client application (WinExe)
+- **ManicDiggerLib**: Core game library containing game logic
+- **ManicDiggerServer**: Dedicated server application (Console)
+- **ScriptingApi**: Server-side scripting API for mods
+- **MdMonsterEditor**: Monster model editor tool
+
+## Build Output
+
+After building, the compiled binaries will be located in:
+```
+<ProjectName>/bin/<Configuration>/
+```
+
+For example:
+- `ManicDigger/bin/Debug/ManicDigger.exe` - Game client
+- `ManicDiggerServer/bin/Debug/ManicDiggerServer.exe` - Server
+- `ManicDiggerLib/bin/Debug/ManicDiggerLib.dll` - Core library
+
+## Running the Application
+
+### Game Client
+```bash
+# Windows
+ManicDigger\bin\Debug\ManicDigger.exe
+
+# Linux/Mac with Mono
+mono ManicDigger/bin/Debug/ManicDigger.exe
+```
+
+### Server
+```bash
+# Windows
+ManicDiggerServer\bin\Debug\ManicDiggerServer.exe
+
+# Linux/Mac with Mono
+mono ManicDiggerServer/bin/Debug/ManicDiggerServer.exe
+```
+
+## Testing
+
+### Manual Testing
+
+The project currently uses manual testing. Here's how to verify the build:
+
+#### Test 1: Server Startup
+1. Navigate to the server build directory:
+   ```bash
+   cd ManicDiggerServer/bin/Debug
+   ```
+
+2. Start the server:
+   ```bash
+   # Windows
+   ManicDiggerServer.exe
+   
+   # Linux/Mac
+   mono ManicDiggerServer.exe
+   ```
+
+3. **Expected output:**
+   - Server should start without errors
+   - Console should show initialization messages
+   - Server should listen on default port (usually 25565)
+
+4. **Success criteria:**
+   - No crash on startup
+   - Server displays "Ready" or similar message
+   - Can be stopped gracefully with Ctrl+C
+
+#### Test 2: Client Startup
+1. Ensure you have the data folder in the working directory
+2. Navigate to the client build directory:
+   ```bash
+   cd ManicDigger/bin/Debug
+   ```
+
+3. Start the client:
+   ```bash
+   # Windows
+   ManicDigger.exe
+   
+   # Linux/Mac (requires X11 display)
+   mono ManicDigger.exe
+   ```
+
+4. **Expected output:**
+   - Main menu should appear
+   - Options for singleplayer, multiplayer, settings
+   - No crash on startup
+
+5. **Success criteria:**
+   - Application launches and displays main menu
+   - UI is responsive
+   - Can navigate menus without errors
+
+#### Test 3: Library Integration
+The ManicDiggerLib.dll is the core library used by both client and server. It's automatically tested when:
+- Server starts successfully (uses lib)
+- Client starts successfully (uses lib)
+- No missing dependency errors occur
+
+### Common Build Issues
+
+#### Issue: Missing .NET Framework 4.5
+**Solution:** Install .NET Framework 4.5 Developer Pack from Microsoft or use Mono on Linux/Mac
+
+#### Issue: Missing NuGet packages
+**Solution:** Run `nuget restore` or right-click solution in VS and select "Restore NuGet Packages"
+
+#### Issue: OpenTK.dll not found
+**Solution:** Ensure NuGet packages are restored. OpenTK 2.0.0 should be in packages/OpenTK.2.0.0/
+
+#### Issue: Build warnings
+**Note:** The project has many warnings but these don't prevent building or running. They are mostly unused variables and obsolete API usage.
+
+## Adding Tests (Future Enhancement)
+
+To add automated tests to this project:
+
+1. **Add a test project:**
+   - Create new Class Library project (e.g., ManicDigger.Tests)
+   - Add NUnit or xUnit NuGet package
+   - Reference ManicDiggerLib project
+
+2. **Write unit tests:**
+   ```csharp
+   [TestFixture]
+   public class GameTests
+   {
+       [Test]
+       public void TestSomething()
+       {
+           // Test code here
+           Assert.IsTrue(true);
+       }
+   }
+   ```
+
+3. **Run tests:**
+   - Use Test Explorer in Visual Studio
+   - Or command line: `nunit-console ManicDigger.Tests.dll`
+
+## Distribution Build
+
+To create a distribution package, use the provided build scripts:
+
+### Windows:
+```cmd
+build.bat
+```
+
+### Linux/Mac:
+```bash
+./build.sh
+```
+
+These scripts:
+1. Build all projects in Release configuration
+2. Copy binaries to `output/` directory
+3. Include required data files and dependencies
+4. Create a ready-to-distribute package
+
+## Development Workflow
+
+1. **Make changes** to source code in Visual Studio or your preferred editor
+2. **Build** the solution to check for compilation errors
+3. **Run manual tests** to verify functionality
+4. **Build Release** when ready to distribute
+5. **Use build scripts** to create distribution packages
+
+## Continuous Integration
+
+The project includes `.travis.yml` for Travis CI integration. On each commit:
+- Dependencies are restored
+- All projects are built
+- Build status is reported
+
+## Additional Resources
+
+- **Wiki**: http://manicdigger.sourceforge.net/wiki/
+- **Forum**: http://manicdigger.sourceforge.net/forum/
+- **GitHub Issues**: Report bugs and request features
+
+## Getting Help
+
+If you encounter build issues:
+1. Check this document for common solutions
+2. Verify all prerequisites are installed
+3. Check the GitHub Issues page
+4. Ask on the forum or IRC channel
+
+---
+
+**Last Updated**: December 2025

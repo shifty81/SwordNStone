@@ -64,6 +64,14 @@ The only external dependency is [GamePlatform interface](ManicDiggerLib/Client/P
 
 Server mods can be implemented in C# or interpreted Javascript.
 
+#### Building
+
+For detailed build instructions, see [BUILD.md](BUILD.md).
+
+Quick start:
+- **Windows**: Open `ManicDigger.sln` in Visual Studio and build
+- **Linux/Mac**: Install Mono and run `xbuild ManicDigger.sln`
+
 #### Contributing
 
 If you want to help developing Manic Digger feel free to fork this repository on GitHub and submit your changes by sending a pull request.  
