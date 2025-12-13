@@ -14,7 +14,7 @@
         font.family = "Courier New";
         font.size = 12;
     }
-    new Game game;
+    Game game;
     bool visible;
     const int maxLines = 128;
     const int maxColumns = 80;
