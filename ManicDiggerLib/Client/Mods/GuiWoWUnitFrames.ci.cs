@@ -45,7 +45,7 @@
         int scaledHeight = game.platform.FloatToInt(frameHeight * scale);
         
         // Draw frame background
-        game.Draw2dBitmapFile("wow/player_frame.png", playerFrameX, playerFrameY, 
+        game.Draw2dBitmapFile("gui/wow/player_frame.png", playerFrameX, playerFrameY, 
             scaledWidth, scaledHeight);
         
         // Calculate bar dimensions
@@ -89,7 +89,7 @@
             Game.ColorFromArgb(255, 40, 40, 50), false);
         
         // Portrait border
-        game.Draw2dBitmapFile("wow/portrait_border.png", portraitX - 5, portraitY - 5,
+        game.Draw2dBitmapFile("gui/wow/portrait_border.png", portraitX - 5, portraitY - 5,
             portraitSize + 10, portraitSize + 10);
         
         // Draw player name
@@ -108,7 +108,7 @@
         int scaledHeight = game.platform.FloatToInt(frameHeight * scale);
         
         // Draw frame background
-        game.Draw2dBitmapFile("wow/target_frame.png", targetFrameX, targetFrameY, 
+        game.Draw2dBitmapFile("gui/wow/target_frame.png", targetFrameX, targetFrameY, 
             scaledWidth, scaledHeight);
         
         // Calculate bar dimensions
@@ -158,7 +158,7 @@
         }
         
         // Portrait border
-        game.Draw2dBitmapFile("wow/portrait_border.png", portraitX - 5, portraitY - 5,
+        game.Draw2dBitmapFile("gui/wow/portrait_border.png", portraitX - 5, portraitY - 5,
             portraitSize + 10, portraitSize + 10);
     }
 

@@ -91,7 +91,7 @@
         }
         
         // Draw minimap border
-        game.Draw2dBitmapFile("wow/minimap_border.png", x - 10, y - 10, 
+        game.Draw2dBitmapFile("gui/wow/minimap_border.png", x - 10, y - 10, 
             scaledSize + 20, scaledSize + 20);
         
         // Draw coordinates text

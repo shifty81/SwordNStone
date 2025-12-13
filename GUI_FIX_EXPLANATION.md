@@ -173,6 +173,22 @@ After this fix, the GUI should display properly:
 - Minimap with proper border graphics
 - All WoW-style GUI elements rendering correctly
 
+## UPDATE: Additional Fix Required (December 2025)
+
+After implementing the AssetLoader fix described above, the GUI still displayed as colored squares. 
+
+**Root Cause**: The GUI code was referencing textures as `"wow/actionbar_bg.png"` but the AssetLoader was indexing them as `"gui/wow/actionbar_bg.png"` (the full relative path from `data/local/`).
+
+**Solution**: Updated all GUI code to reference textures with the full path including the `"gui/"` prefix. See `PATH_FIX_SUMMARY.md` for complete details.
+
+**Files Updated**:
+- `GuiWoWActionBars.ci.cs` - Updated 4 texture paths
+- `GuiWoWUnitFrames.ci.cs` - Updated 4 texture paths
+- `GuiWoWMinimap.ci.cs` - Updated 1 texture path
+- `MainMenu/Main.ci.cs` - Updated 3 texture paths
+
+**Result**: GUI now displays properly with textured graphics instead of colored squares.
+
 ## Security Considerations
 
 ✅ **No vulnerabilities introduced:**
