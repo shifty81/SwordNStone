@@ -2579,7 +2579,16 @@ public partial class Server : ICurrentTime, IDropItem
         else
         {
             int blockid = d_Map.GetBlock(cmd.X, cmd.Y, cmd.Z);
+            // Validate blockid is within valid range
+            if (blockid < 0 || blockid >= BlockTypes.Length)
+            {
+                return false;
+            }
             BlockType blockType = BlockTypes[blockid];
+            if (blockType == null)
+            {
+                return false;
+            }
             
             // Determine what tool is being used
             ToolType toolUsed = ToolType.Hand;
@@ -2600,8 +2609,8 @@ public partial class Server : ICurrentTime, IDropItem
             }
             
             // Check if tool requirement is met
-            // - Blocks with PreferredTool.None can be broken with any tool
-            // - Blocks with a specific PreferredTool require that tool type
+            // - Blocks with PreferredTool.None can be broken with any tool (toolRequirementMet = true)
+            // - Blocks with a specific PreferredTool: toolRequirementMet = true only if correct tool is used
             bool toolRequirementMet = (blockType.PreferredTool == ToolType.None) || 
                                       (blockType.PreferredTool == toolUsed);
             
