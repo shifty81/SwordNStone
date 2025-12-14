@@ -129,6 +129,7 @@
     <Compile Include="Client\Mods\DrawTestModel.ci.cs" />
     <Compile Include="Client\Mods\DrawText.ci.cs" />
     <Compile Include="Client\Mods\Expire.ci.cs" />
+    <Compile Include="Client\Mods\EmoteSystem.ci.cs" />
     <Compile Include="Client\Mods\FallDamageToPlayer.ci.cs" />
     <Compile Include="Client\Mods\Grenade.ci.cs" />
     <Compile Include="Client\Mods\GuiMapLoading.ci.cs" />
