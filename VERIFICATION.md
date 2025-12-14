@@ -16,7 +16,7 @@ This guide documents how to verify that the Sword&Stone project builds and runs 
 
 **Linux/Mac (Mono):**
 ```bash
-cd /path/to/manicdiggerVSCLONE
+cd /path/to/SwordNStone
 mono nuget.exe restore ManicDigger.sln
 xbuild ManicDigger.sln /p:Configuration=Release
 # Look for "0 Error(s)" in output

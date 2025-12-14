@@ -20,8 +20,8 @@ Choose your platform:
 
 1. **Clone the repository:**
    ```cmd
-   git clone https://github.com/shifty81/manicdiggerVSCLONE.git
-   cd manicdiggerVSCLONE
+   git clone https://github.com/shifty81/SwordNStone.git
+   cd SwordNStone
    ```
 
 2. **Open in Visual Studio:**
@@ -58,8 +58,8 @@ Choose your platform:
 
 2. **Clone the repository:**
    ```bash
-   git clone https://github.com/shifty81/manicdiggerVSCLONE.git
-   cd manicdiggerVSCLONE
+   git clone https://github.com/shifty81/SwordNStone.git
+   cd SwordNStone
    ```
 
 3. **Download NuGet:**
@@ -88,7 +88,7 @@ Choose your platform:
 ## Project Structure
 
 ```
-manicdiggerVSCLONE/
+SwordNStone/
 ├── ManicDigger/           # Game client (Windows GUI application)
 ├── ManicDiggerLib/        # Core game library (shared code)
 ├── ManicDiggerServer/     # Dedicated server application

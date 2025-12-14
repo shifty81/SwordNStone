@@ -40,7 +40,7 @@ This project contains:
    - Install the C# Dev Kit extension
 
 2. **Open the folder:**
-   - File → Open Folder → Select manicdiggerVSCLONE
+   - File → Open Folder → Select SwordNStone
 
 3. **Run tests:**
    - Use the Testing sidebar

@@ -199,8 +199,16 @@ The SwordAndStoneLib.dll is the core library used by both client and server. It'
 #### Issue: Missing NuGet packages
 **Solution:** Run `nuget restore` or right-click solution in VS and select "Restore NuGet Packages"
 
+**Important:** Before building for the first time, you MUST restore NuGet packages. The packages folder is not included in the repository.
+
 #### Issue: OpenTK.dll not found
 **Solution:** Ensure NuGet packages are restored. OpenTK 2.0.0 should be in packages/OpenTK.2.0.0/
+
+#### Issue: protobuf-net.dll not found
+**Solution:** Ensure NuGet packages are restored. protobuf-net 2.1.0 should be in packages/protobuf-net.2.1.0/
+
+#### Issue: BuildCito.bat fails with "Could not find file '~1'"
+**Solution:** This was caused by spaces in the directory path and has been fixed. The PreBuildEvent now properly quotes the directory path.
 
 #### Issue: Build warnings
 **Note:** The project has many warnings but these don't prevent building or running. They are mostly unused variables and obsolete API usage.
