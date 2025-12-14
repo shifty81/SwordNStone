@@ -1,8 +1,8 @@
-# Project Status - Manic Digger VS Clone
+# Project Status - Sword & Stone
 
-## Current State
+## Current State - Alpha 0.0.1
 
-This repository is now fully configured for development with Visual Studio and can be built and tested on both Windows and Linux/Mac platforms.
+This repository has been fully rebranded from Manic Digger to Sword & Stone and is configured for development with Visual Studio. The project can be built and tested on both Windows and Linux/Mac platforms.
 
 ### ✅ What Works
 
@@ -13,12 +13,12 @@ This repository is now fully configured for development with Visual Studio and c
    - NuGet package restoration functional
 
 2. **Projects**
-   - ✅ ManicDigger (Game Client)
-   - ✅ ManicDiggerLib (Core Library)
-   - ✅ ManicDiggerServer (Dedicated Server)
+   - ✅ SwordAndStone (Game Client)
+   - ✅ SwordAndStoneLib (Core Library)
+   - ✅ SwordAndStoneServer (Dedicated Server)
    - ✅ ScriptingApi (Modding API)
-   - ✅ MdMonsterEditor (Monster Editor)
-   - ✅ ManicDigger.Tests (Test Project - NEW)
+   - ✅ SwordAndStoneMonsterEditor (Monster Editor)
+   - ✅ SwordAndStone.Tests (Test Project)
 
 3. **Testing Infrastructure**
    - NUnit 3.13.3 test framework integrated
@@ -104,7 +104,7 @@ This repository is now fully configured for development with Visual Studio and c
 
 ### For Development (Windows)
 1. Clone repository
-2. Open `ManicDigger.sln` in Visual Studio
+2. Open `SwordAndStone.sln` in Visual Studio
 3. Build and run
 4. Make changes, test, commit
 
@@ -114,8 +114,8 @@ This repository is now fully configured for development with Visual Studio and c
 1. Install Mono: `sudo apt-get install mono-complete`
 2. Clone repository
 3. Download NuGet: `wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe`
-4. Restore packages: `mono nuget.exe restore ManicDigger.sln`
-5. Build: `xbuild ManicDigger.sln`
+4. Restore packages: `mono nuget.exe restore SwordAndStone.sln`
+5. Build: `xbuild SwordAndStone.sln`
 6. Test modifications
 
 **Note**: Runtime testing limited - server has networking issues on Mono
@@ -250,4 +250,21 @@ See [COPYING.md](COPYING.md) for license information.
 
 See [QUICKSTART.md](QUICKSTART.md) to get started right away.
 
-**Last Updated**: December 13, 2025
+---
+
+## Alpha 0.0.1 - Full Rebrand Complete
+
+**Release Date**: December 14, 2025
+
+### Major Changes:
+- ✅ **Complete Rebrand**: All references to "Manic Digger" replaced with "Sword & Stone"
+- ✅ **Project Structure**: All directories renamed (SwordAndStone, SwordAndStoneLib, SwordAndStoneServer, etc.)
+- ✅ **Code Namespaces**: Updated 254+ namespace references throughout codebase
+- ✅ **GUI Asset Fix**: Fixed missing asset paths (orange/yellow box issue resolved)
+- ✅ **Title Screen**: Sword & Stone branding now displays correctly
+- ✅ **Documentation**: Updated all documentation to reflect new branding
+
+### What's Next:
+This marks the official start of Sword & Stone as Alpha 0.0.1. The project is now ready for active development with a clear identity and roadmap.
+
+**Last Updated**: December 14, 2025

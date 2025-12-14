@@ -24,7 +24,7 @@ This document provides instructions for building and testing the Sword&Stone pro
 
 1. **Open the solution:**
    ```
-   Open ManicDigger.sln in Visual Studio
+   Open SwordAndStone.sln in Visual Studio
    ```
 
 2. **Restore NuGet packages:**
@@ -45,22 +45,22 @@ This document provides instructions for building and testing the Sword&Stone pro
 
 1. **Navigate to the project directory:**
    ```cmd
-   cd /path/to/manicdiggerVSCLONE
+   cd /path/to/SwordNStone
    ```
 
 2. **Restore NuGet packages:**
    ```cmd
-   nuget restore ManicDigger.sln
+   nuget restore SwordAndStone.sln
    ```
 
 3. **Build the solution:**
    ```cmd
-   msbuild ManicDigger.sln /p:Configuration=Debug
+   msbuild SwordAndStone.sln /p:Configuration=Debug
    ```
    
    Or for Release:
    ```cmd
-   msbuild ManicDigger.sln /p:Configuration=Release
+   msbuild SwordAndStone.sln /p:Configuration=Release
    ```
 
 ### Option 3: Linux/Mac with Mono
@@ -78,12 +78,12 @@ This document provides instructions for building and testing the Sword&Stone pro
 
 3. **Restore packages:**
    ```bash
-   mono nuget.exe restore ManicDigger.sln
+   mono nuget.exe restore SwordAndStone.sln
    ```
 
 4. **Build with xbuild:**
    ```bash
-   xbuild ManicDigger.sln /p:Configuration=Debug
+   xbuild SwordAndStone.sln /p:Configuration=Debug
    ```
 
 ## Project Structure
