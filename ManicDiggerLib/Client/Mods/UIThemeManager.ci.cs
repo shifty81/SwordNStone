@@ -107,37 +107,37 @@ public class UIThemeManager
     void SetupAssetPaths(Game game)
     {
         // Sprite sheets
-        hudPiecesPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}hud_pieces.png", hudPath));
-        uiSplitPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}ui_split.png", uiPath));
-        speechBubbleSmallPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}speech_bubble_small_spritesheet.png", speechPath));
-        speechBubbleLargePath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}speech_bubble_large_spritesheet.png", speechPath));
+        hudPiecesPath = game.platform.StringFormat3("{0}{1}{2}", basePath, hudPath, "hud_pieces.png");
+        uiSplitPath = game.platform.StringFormat3("{0}{1}{2}", basePath, uiPath, "ui_split.png");
+        speechBubbleSmallPath = game.platform.StringFormat3("{0}{1}{2}", basePath, speechPath, "speech_bubble_small_spritesheet.png");
+        speechBubbleLargePath = game.platform.StringFormat3("{0}{1}{2}", basePath, speechPath, "speech_bubble_large_spritesheet.png");
         
         // Buttons
-        buttonNormalPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}button_normal.png", buttonsPath));
-        buttonHoverPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}button_hover.png", buttonsPath));
-        buttonPressedPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}button_pressed.png", buttonsPath));
-        buttonLongNormalPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}button_long_normal.png", buttonsPath));
-        buttonLongHoverPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}button_long_hover.png", buttonsPath));
-        buttonLongPressedPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}button_long_pressed.png", buttonsPath));
+        buttonNormalPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_normal.png");
+        buttonHoverPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_hover.png");
+        buttonPressedPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_pressed.png");
+        buttonLongNormalPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_long_normal.png");
+        buttonLongHoverPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_long_hover.png");
+        buttonLongPressedPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_long_pressed.png");
         
         // Frames
-        frameSmallPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}frame_small.png", framesPath));
-        frameOrnatePath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}frame_ornate.png", framesPath));
-        frameCircularPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}frame_circular.png", framesPath));
-        frameLarge1Path = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}frame_large_1.png", framesPath));
-        frameLarge2Path = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}frame_large_2.png", framesPath));
-        frameLarge3Path = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}frame_large_3.png", framesPath));
+        frameSmallPath = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_small.png");
+        frameOrnatePath = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_ornate.png");
+        frameCircularPath = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_circular.png");
+        frameLarge1Path = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_large_1.png");
+        frameLarge2Path = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_large_2.png");
+        frameLarge3Path = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_large_3.png");
         
         // Bars
-        barFullRedPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}bar_full_red.png", barsPath));
-        barFullBluePath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}bar_full_blue.png", barsPath));
-        barLeftPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}bar_left.png", barsPath));
-        barRightPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}bar_right.png", barsPath));
+        barFullRedPath = game.platform.StringFormat3("{0}{1}{2}", basePath, barsPath, "bar_full_red.png");
+        barFullBluePath = game.platform.StringFormat3("{0}{1}{2}", basePath, barsPath, "bar_full_blue.png");
+        barLeftPath = game.platform.StringFormat3("{0}{1}{2}", basePath, barsPath, "bar_left.png");
+        barRightPath = game.platform.StringFormat3("{0}{1}{2}", basePath, barsPath, "bar_right.png");
         
         // Inventory slots
-        slotNormalPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}slot_normal.png", inventoryPath));
-        slotActivePath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}slot_active.png", inventoryPath));
-        slotHighlightPath = game.platform.StringFormat2("{0}{1}", basePath, game.platform.StringFormat("{0}slot_highlight.png", inventoryPath));
+        slotNormalPath = game.platform.StringFormat3("{0}{1}{2}", basePath, inventoryPath, "slot_normal.png");
+        slotActivePath = game.platform.StringFormat3("{0}{1}{2}", basePath, inventoryPath, "slot_active.png");
+        slotHighlightPath = game.platform.StringFormat3("{0}{1}{2}", basePath, inventoryPath, "slot_highlight.png");
     }
     
     /// <summary>
