@@ -8,20 +8,22 @@ public class ModEmoteSystem : ClientMod
     {
         currentEmote = null;
         emoteEndTime = 0;
+        
+        // Initialize available emotes array
+        AVAILABLE_EMOTES = new string[AVAILABLE_EMOTES_COUNT];
+        AVAILABLE_EMOTES[0] = "wave";
+        AVAILABLE_EMOTES[1] = "point";
+        AVAILABLE_EMOTES[2] = "cheer";
+        AVAILABLE_EMOTES[3] = "talk";
     }
 
     internal string currentEmote;
     internal float emoteEndTime;
     internal const float EMOTE_COOLDOWN = 0.5f; // Half second between emotes
+    internal const int AVAILABLE_EMOTES_COUNT = 4;
 
     // Available emotes - these match the animations in playerenhanced.txt
-    internal static string[] AVAILABLE_EMOTES = new string[]
-    {
-        "wave",
-        "point",
-        "cheer",
-        "talk"
-    };
+    internal string[] AVAILABLE_EMOTES;
     
     // Override to identify this mod type (CiTo doesn't support 'is' operator)
     public override bool IsEmoteSystem() { return true; }
@@ -103,7 +105,7 @@ public class ModEmoteSystem : ClientMod
             return false;
         }
 
-        for (int i = 0; i < AVAILABLE_EMOTES.Length; i++)
+        for (int i = 0; i < AVAILABLE_EMOTES_COUNT; i++)
         {
             if (AVAILABLE_EMOTES[i] == emoteName)
             {
@@ -122,23 +124,35 @@ public class ModEmoteSystem : ClientMod
             return;
         }
 
+        IntRef messageLen = new IntRef();
+        int[] messageChars = game.platform.StringToCharArray(message, messageLen);
+        
         // Check if it's a command (starts with /)
-        if (message[0] != '/')
+        if (messageChars[0] != '/')
         {
             return;
         }
 
-        // Extract command (remove /)
-        string command = "";
-        for (int i = 1; i < message.Length; i++)
+        // Extract command (remove /) - find end of command
+        int commandEnd = 1;
+        for (int i = 1; i < messageLen.value; i++)
         {
-            char c = message[i];
+            int c = messageChars[i];
             if (c == ' ')
             {
                 break;
             }
-            command = game.platform.StringFormat("{0}{1}", command, game.platform.CharToString(c));
+            commandEnd = i + 1;
         }
+        
+        // Build command string from characters (skip the leading /)
+        int commandLen = commandEnd - 1;
+        int[] commandChars = new int[commandLen];
+        for (int i = 0; i < commandLen; i++)
+        {
+            commandChars[i] = messageChars[i + 1];
+        }
+        string command = game.platform.CharArrayToString(commandChars, commandLen);
 
         // Convert to lowercase for comparison
         command = game.platform.StringToLower(command);

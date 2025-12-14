@@ -286,7 +286,8 @@
         AddMod(new ModGuiWoWMinimap());
         
         // Emote system for player expression
-        AddMod(new ModEmoteSystem());
+        emoteSystem = new ModEmoteSystem();
+        AddMod(emoteSystem);
 
         s = new BlockOctreeSearcher();
         s.platform = platform;
@@ -1925,6 +1926,7 @@
     internal int clientmodsCount;
     internal bool SkySphereNight;
     internal ModDrawParticleEffectBlockBreak particleEffectBlockBreak;
+    internal ModEmoteSystem emoteSystem;
 
     public int SerializeFloat(float p)
     {
@@ -4047,13 +4049,6 @@
     // Helper method to get EmoteSystem mod
     public ModEmoteSystem GetMod_EmoteSystem()
     {
-        for (int i = 0; i < clientmodsCount; i++)
-        {
-            if (clientmods[i] != null && clientmods[i].IsEmoteSystem())
-            {
-                return (ModEmoteSystem)clientmods[i];
-            }
-        }
-        return null;
+        return emoteSystem;
     }
 }
