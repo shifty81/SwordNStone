@@ -73,7 +73,7 @@ namespace SwordAndStone.Tests
         public void TestScriptingApiAvailable()
         {
             // This test verifies that the ScriptingApi assembly can be loaded
-            Type modManagerType = typeof(SwordAndStone.ModManager);
+            Type modManagerType = typeof(ManicDigger.ModManager);
             Assert.IsNotNull(modManagerType, "ModManager type should be available");
         }
 

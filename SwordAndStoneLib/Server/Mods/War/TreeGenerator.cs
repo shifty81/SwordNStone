@@ -1,5 +1,6 @@
 ﻿using System;
 using LibNoise;
+using ManicDigger;
 
 namespace SwordAndStone.Mods.War
 {

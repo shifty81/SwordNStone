@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Jint.Delegates;
+using ManicDigger;
 
 namespace SwordAndStone.Server
 {
@@ -16,27 +17,27 @@ namespace SwordAndStone.Server
 
 		public void InjectConsoleCommands(IScriptInterpreter interpreter)
 		{
-			interpreter.SetFunction("out", new SwordAndStone.Action<object>(Print));
-			interpreter.SetFunction("materials", new SwordAndStone.Action(PrintMaterials));
-			interpreter.SetFunction("materials_between", new SwordAndStone.Action<double, double>(PrintMaterials));
-			interpreter.SetFunction("find_material", new SwordAndStone.Action<string>(FindMaterial));
-			interpreter.SetFunction("position", new SwordAndStone.Action(PrintPosition));
-			interpreter.SetFunction("get_position", new SwordAndStone.Func<Vector3i>(GetPosition));
+			interpreter.SetFunction("out", new ManicDigger.Action<object>(Print));
+			interpreter.SetFunction("materials", new ManicDigger.Action(PrintMaterials));
+			interpreter.SetFunction("materials_between", new ManicDigger.Action<double, double>(PrintMaterials));
+			interpreter.SetFunction("find_material", new ManicDigger.Action<string>(FindMaterial));
+			interpreter.SetFunction("position", new ManicDigger.Action(PrintPosition));
+			interpreter.SetFunction("get_position", new ManicDigger.Func<Vector3i>(GetPosition));
 			interpreter.SetVariable("turtle", Turtle);
-			interpreter.SetFunction("set_block", new SwordAndStone.Action<double, double, double, double>(SetBlock));
-			interpreter.SetFunction("get_block", new SwordAndStone.Func<double, double, double, int>(GetBlock));
-			interpreter.SetFunction("get_height", new SwordAndStone.Func<double, double, double>(GetHeight));
-			interpreter.SetFunction("get_mapsize", new SwordAndStone.Func<int[]>(GetMapSize));
-			interpreter.SetFunction("set_chunk", new SwordAndStone.Action<double, double, double, ushort[]>(SetChunk));
-			interpreter.SetFunction("set_chunks", new SwordAndStone.Action<Dictionary<Xyz, ushort[]>>(SetChunks));
-			interpreter.SetFunction("set_chunks_offset", new SwordAndStone.Action<double, double, double, Dictionary<Xyz, ushort[]>>(SetChunks));
-			interpreter.SetFunction("get_chunk", new SwordAndStone.Func<double, double, double, ushort[]>(GetChunk));
-			interpreter.SetFunction("get_chunks_from_database", new SwordAndStone.Func<double, double, double, double, double, double, string, Dictionary<Xyz, ushort[]>>(GetChunksFromDatabase));
-			interpreter.SetFunction("copy_chunks_to_database", new SwordAndStone.Action<double, double, double, double, double, double, string>(CopyChunksToDatabase));
-			interpreter.SetFunction("delete_chunk", new SwordAndStone.Action<double, double, double>(DeleteChunk));
-			interpreter.SetFunction("delete_chunk_range", new SwordAndStone.Action<double, double, double, double, double, double>(DeleteChunkRange));
-			interpreter.SetFunction("backup_database", new SwordAndStone.Action<string>(BackupDatabase));
-			interpreter.SetFunction("clear", new SwordAndStone.Action(Clear));
+			interpreter.SetFunction("set_block", new ManicDigger.Action<double, double, double, double>(SetBlock));
+			interpreter.SetFunction("get_block", new ManicDigger.Func<double, double, double, int>(GetBlock));
+			interpreter.SetFunction("get_height", new ManicDigger.Func<double, double, double>(GetHeight));
+			interpreter.SetFunction("get_mapsize", new ManicDigger.Func<int[]>(GetMapSize));
+			interpreter.SetFunction("set_chunk", new ManicDigger.Action<double, double, double, ushort[]>(SetChunk));
+			interpreter.SetFunction("set_chunks", new ManicDigger.Action<Dictionary<Xyz, ushort[]>>(SetChunks));
+			interpreter.SetFunction("set_chunks_offset", new ManicDigger.Action<double, double, double, Dictionary<Xyz, ushort[]>>(SetChunks));
+			interpreter.SetFunction("get_chunk", new ManicDigger.Func<double, double, double, ushort[]>(GetChunk));
+			interpreter.SetFunction("get_chunks_from_database", new ManicDigger.Func<double, double, double, double, double, double, string, Dictionary<Xyz, ushort[]>>(GetChunksFromDatabase));
+			interpreter.SetFunction("copy_chunks_to_database", new ManicDigger.Action<double, double, double, double, double, double, string>(CopyChunksToDatabase));
+			interpreter.SetFunction("delete_chunk", new ManicDigger.Action<double, double, double>(DeleteChunk));
+			interpreter.SetFunction("delete_chunk_range", new ManicDigger.Action<double, double, double, double, double, double>(DeleteChunkRange));
+			interpreter.SetFunction("backup_database", new ManicDigger.Action<string>(BackupDatabase));
+			interpreter.SetFunction("clear", new ManicDigger.Action(Clear));
 		}
 
 		private Server m_server;

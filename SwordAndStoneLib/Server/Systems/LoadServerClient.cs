@@ -5,6 +5,7 @@ using System.IO;
 using SwordAndStone.Common;
 using System.Xml.Serialization;
 using System.Xml;
+using ManicDigger;
 
 namespace SwordAndStone.Server
 {
@@ -85,7 +86,7 @@ namespace SwordAndStone.Server
 			}
 
 			server.defaultGroupGuest = server.serverClient.Groups.Find(
-				delegate(SwordAndStone.Group grp)
+				delegate(ManicDigger.Group grp)
 				{
 					return grp.Name.Equals(server.serverClient.DefaultGroupGuests);
 				}
@@ -95,7 +96,7 @@ namespace SwordAndStone.Server
 				throw new Exception(server.language.ServerClientConfigGuestGroupNotFound());
 			}
 			server.defaultGroupRegistered = server.serverClient.Groups.Find(
-				delegate(SwordAndStone.Group grp)
+				delegate(ManicDigger.Group grp)
 				{
 					return grp.Name.Equals(server.serverClient.DefaultGroupRegistered);
 				}
@@ -125,11 +126,11 @@ namespace SwordAndStone.Server
 			}
 			if (server.serverClient.Groups.Count == 0)
 			{
-				server.serverClient.Groups = ServerClientMisc.getDefaultGroups();
+				server.serverClient.Groups = ManicDigger.ServerClientMisc.getDefaultGroups();
 			}
 			if (server.serverClient.Clients.Count == 0)
 			{
-				server.serverClient.Clients = ServerClientMisc.getDefaultClients();
+				server.serverClient.Clients = ManicDigger.ServerClientMisc.getDefaultClients();
 			}
 			server.serverClient.Clients.Sort();
 			//Serialize the ServerConfig class to XML

@@ -1,6 +1,7 @@
 ﻿using System;
 using FragLabs.HTTP;
 using System.Diagnostics;
+using ManicDigger;
 
 namespace SwordAndStone.Mods.Fortress
 {

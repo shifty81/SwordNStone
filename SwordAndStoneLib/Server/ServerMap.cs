@@ -3,6 +3,7 @@ using System.IO;
 using ProtoBuf;
 using System.Collections.Generic;
 using Jint.Delegates;
+using ManicDigger;
 
 namespace SwordAndStone.Server
 {

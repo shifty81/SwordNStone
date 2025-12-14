@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using ManicDigger;
 
 namespace SwordAndStone.Server
 {
@@ -775,8 +776,8 @@ namespace SwordAndStone.Server
 			}
 
 			// Get related group from config file.
-			SwordAndStone.Group newGroup = serverClient.Groups.Find(
-				                             delegate(SwordAndStone.Group grp)
+			ManicDigger.Group newGroup = serverClient.Groups.Find(
+				                             delegate(ManicDigger.Group grp)
 				{
 					return grp.Name.Equals(newGroupName, StringComparison.InvariantCultureIgnoreCase);
 				}
@@ -795,8 +796,8 @@ namespace SwordAndStone.Server
 			}
 
 			// Get related client from config file
-			SwordAndStone.Client clientConfig = serverClient.Clients.Find(
-				                                  delegate(SwordAndStone.Client client)
+			ManicDigger.Client clientConfig = serverClient.Clients.Find(
+				                                  delegate(ManicDigger.Client client)
 				{
 					return client.Name.Equals(target, StringComparison.InvariantCultureIgnoreCase);
 				}
@@ -817,7 +818,7 @@ namespace SwordAndStone.Server
 				// Client is not yet in config file. Create a new entry.
 				if (clientConfig == null)
 				{
-					clientConfig = new SwordAndStone.Client();
+					clientConfig = new ManicDigger.Client();
 					clientConfig.Name = targetClient.playername;
 					clientConfig.Group = newGroup.Name;
 					serverClient.Clients.Add(clientConfig);
@@ -849,8 +850,8 @@ namespace SwordAndStone.Server
 			}
 
 			// Get related group from config file.
-			SwordAndStone.Group newGroup = serverClient.Groups.Find(
-				                             delegate(SwordAndStone.Group grp)
+			ManicDigger.Group newGroup = serverClient.Groups.Find(
+				                             delegate(ManicDigger.Group grp)
 				{
 					return grp.Name.Equals(newGroupName, StringComparison.InvariantCultureIgnoreCase);
 				}
@@ -869,8 +870,8 @@ namespace SwordAndStone.Server
 			}
 
 			// Get related client from config file.
-			SwordAndStone.Client clientConfig = serverClient.Clients.Find(
-				                                  delegate(SwordAndStone.Client client)
+			ManicDigger.Client clientConfig = serverClient.Clients.Find(
+				                                  delegate(ManicDigger.Client client)
 				{
 					return client.Name.Equals(target, StringComparison.InvariantCultureIgnoreCase);
 				}
@@ -889,7 +890,7 @@ namespace SwordAndStone.Server
 			string oldGroupColor = "";
 			if (clientConfig == null)
 			{
-				clientConfig = new SwordAndStone.Client();
+				clientConfig = new ManicDigger.Client();
 				clientConfig.Name = target;
 				clientConfig.Group = newGroup.Name;
 				serverClient.Clients.Add(clientConfig);
@@ -897,8 +898,8 @@ namespace SwordAndStone.Server
 			else
 			{
 				// Check if target's current group is superior.
-				SwordAndStone.Group oldGroup = serverClient.Groups.Find(
-					                             delegate(SwordAndStone.Group grp)
+				ManicDigger.Group oldGroup = serverClient.Groups.Find(
+					                             delegate(ManicDigger.Group grp)
 					{
 						return grp.Name.Equals(clientConfig.Group);
 					}
@@ -932,8 +933,8 @@ namespace SwordAndStone.Server
 			}
 
 			// Get related client from config file
-			SwordAndStone.Client targetClient = serverClient.Clients.Find(
-				                                  delegate(SwordAndStone.Client client)
+			ManicDigger.Client targetClient = serverClient.Clients.Find(
+				                                  delegate(ManicDigger.Client client)
 				{
 					return client.Name.Equals(target, StringComparison.InvariantCultureIgnoreCase);
 				}
@@ -942,8 +943,8 @@ namespace SwordAndStone.Server
 			if (targetClient != null)
 			{
 				// Get target's group.
-				SwordAndStone.Group targetGroup = serverClient.Groups.Find(
-					                                delegate(SwordAndStone.Group grp)
+				ManicDigger.Group targetGroup = serverClient.Groups.Find(
+					                                delegate(ManicDigger.Group grp)
 					{
 						return grp.Name.Equals(targetClient.Group);
 					}
@@ -983,8 +984,8 @@ namespace SwordAndStone.Server
 				SendMessage(sourceClientId, string.Format(language.Get("Server_CommandInsufficientPrivileges"), colorError));
 				return false;
 			}
-			SwordAndStone.Group targetGroup = serverClient.Groups.Find(
-				                                delegate(SwordAndStone.Group grp)
+			ManicDigger.Group targetGroup = serverClient.Groups.Find(
+				                                delegate(ManicDigger.Group grp)
 				{
 					return grp.Name.Equals(targetGroupString, StringComparison.InvariantCultureIgnoreCase);
 				}
@@ -1246,7 +1247,7 @@ namespace SwordAndStone.Server
 						return false;
 					}
 					SendMessage(sourceClientId, colorImportant + "List of groups:");
-					foreach (SwordAndStone.Group currenGroup in serverClient.Groups)
+					foreach (ManicDigger.Group currenGroup in serverClient.Groups)
 					{
 						SendMessage(sourceClientId, currenGroup.ToString());
 					}
@@ -1259,7 +1260,7 @@ namespace SwordAndStone.Server
 						return false;
 					}
 					SendMessage(sourceClientId, colorImportant + "List of saved clients:");
-					foreach (SwordAndStone.Client currenClient in serverClient.Clients)
+					foreach (ManicDigger.Client currenClient in serverClient.Clients)
 					{
 
 						SendMessage(sourceClientId, currenClient.ToString());
@@ -1604,7 +1605,7 @@ namespace SwordAndStone.Server
 			{
 				case "-default":
 				case "-d":
-					serverClient.DefaultSpawn = new SwordAndStone.Spawn() {
+					serverClient.DefaultSpawn = new ManicDigger.Spawn() {
 						x = x,
 						y = y,
 						z = z
@@ -1621,7 +1622,7 @@ namespace SwordAndStone.Server
 						}
 						else
 						{
-							foreach (SwordAndStone.Client client in serverClient.Clients)
+							foreach (ManicDigger.Client client in serverClient.Clients)
 							{
 								if (client.Name.Equals(k.Value.playername, StringComparison.InvariantCultureIgnoreCase))
 								{
@@ -1644,8 +1645,8 @@ namespace SwordAndStone.Server
 				case "-group":
 				case "-g":
                 // Check if group even exists.
-					SwordAndStone.Group targetGroup = serverClient.Groups.Find(
-						                                delegate(SwordAndStone.Group grp)
+					ManicDigger.Group targetGroup = serverClient.Groups.Find(
+						                                delegate(ManicDigger.Group grp)
 						{
 							return grp.Name.Equals(target, StringComparison.InvariantCultureIgnoreCase);
 						}
@@ -1655,7 +1656,7 @@ namespace SwordAndStone.Server
 						SendMessage(sourceClientId, string.Format(language.Get("Server_CommandGroupNotFound"), colorError, target));
 						return false;
 					}
-					targetGroup.Spawn = new SwordAndStone.Spawn() {
+					targetGroup.Spawn = new ManicDigger.Spawn() {
 						x = x,
 						y = y,
 						z = z,
@@ -1668,7 +1669,7 @@ namespace SwordAndStone.Server
 						if (k.Value.clientGroup.Name.Equals(targetGroup.Name))
 						{
 							// Inform only if there is no spawn set under clients.
-							foreach (SwordAndStone.Client client in serverClient.Clients)
+							foreach (ManicDigger.Client client in serverClient.Clients)
 							{
 								if (client.Name.Equals(k.Value.playername, StringComparison.InvariantCultureIgnoreCase))
 								{
@@ -1699,8 +1700,8 @@ namespace SwordAndStone.Server
 					}
 					string targetClientPlayername = targetClient == null ? target : targetClient.playername;
 
-					SwordAndStone.Client clientEntry = serverClient.Clients.Find(
-						                                 delegate(SwordAndStone.Client client)
+					ManicDigger.Client clientEntry = serverClient.Clients.Find(
+						                                 delegate(ManicDigger.Client client)
 						{
 							return client.Name.Equals(targetClientPlayername, StringComparison.InvariantCultureIgnoreCase);
 						}
@@ -1711,7 +1712,7 @@ namespace SwordAndStone.Server
 						return false;
 					}
                 // Change or add spawn entry of client.
-					clientEntry.Spawn = new SwordAndStone.Spawn() {
+					clientEntry.Spawn = new ManicDigger.Spawn() {
 						x = x,
 						y = y,
 						z = z,
@@ -1762,8 +1763,8 @@ namespace SwordAndStone.Server
 			}
 
 			// Get related client entry.
-			SwordAndStone.Client clientEntry = serverClient.Clients.Find(
-				                                 delegate(SwordAndStone.Client client)
+			ManicDigger.Client clientEntry = serverClient.Clients.Find(
+				                                 delegate(ManicDigger.Client client)
 				{
 					return client.Name.Equals(GetClient(sourceClientId).playername, StringComparison.InvariantCultureIgnoreCase);
 				}
@@ -1771,13 +1772,13 @@ namespace SwordAndStone.Server
 			// TODO: When guests have "set_home" privilege, count of client entries can quickly grow.
 			if (clientEntry == null)
 			{
-				clientEntry = new SwordAndStone.Client();
+				clientEntry = new ManicDigger.Client();
 				clientEntry.Name = GetClient(sourceClientId).playername;
 				clientEntry.Group = GetClient(sourceClientId).clientGroup.Name;
 				serverClient.Clients.Add(clientEntry);
 			}
 			// Change or add spawn entry of client.
-			clientEntry.Spawn = new SwordAndStone.Spawn() {
+			clientEntry.Spawn = new ManicDigger.Spawn() {
 				x = x,
 				y = y,
 				z = z,
@@ -1997,7 +1998,7 @@ namespace SwordAndStone.Server
 						}
 						else
 						{
-							foreach (SwordAndStone.Client client in serverClient.Clients)
+							foreach (ManicDigger.Client client in serverClient.Clients)
 							{
 								if (client.Name.Equals(k.Value.playername, StringComparison.InvariantCultureIgnoreCase))
 								{
@@ -2020,8 +2021,8 @@ namespace SwordAndStone.Server
 				case "-group":
 				case "-g":
                 // Check if group even exists.
-					SwordAndStone.Group targetGroup = serverClient.Groups.Find(
-						                                delegate(SwordAndStone.Group grp)
+					ManicDigger.Group targetGroup = serverClient.Groups.Find(
+						                                delegate(ManicDigger.Group grp)
 						{
 							return grp.Name.Equals(target, StringComparison.InvariantCultureIgnoreCase);
 						}
@@ -2040,7 +2041,7 @@ namespace SwordAndStone.Server
 						if (k.Value.clientGroup.Name.Equals(targetGroup.Name))
 						{
 							// Inform only if there is no spawn set under clients.
-							foreach (SwordAndStone.Client client in serverClient.Clients)
+							foreach (ManicDigger.Client client in serverClient.Clients)
 							{
 								if (client.Name.Equals(k.Value.playername, StringComparison.InvariantCultureIgnoreCase))
 								{
@@ -2071,8 +2072,8 @@ namespace SwordAndStone.Server
 					}
 					string targetClientPlayername = targetClient == null ? target : targetClient.playername;
 
-					SwordAndStone.Client clientEntry = serverClient.Clients.Find(
-						                                 delegate(SwordAndStone.Client client)
+					ManicDigger.Client clientEntry = serverClient.Clients.Find(
+						                                 delegate(ManicDigger.Client client)
 						{
 							return client.Name.Equals(targetClientPlayername, StringComparison.InvariantCultureIgnoreCase);
 						}

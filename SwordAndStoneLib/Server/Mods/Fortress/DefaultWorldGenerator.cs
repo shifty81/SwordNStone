@@ -1,6 +1,7 @@
 ﻿using System;
 using LibNoise;
 using LibNoise.Modifiers;
+using ManicDigger;
 
 namespace SwordAndStone.Mods
 {

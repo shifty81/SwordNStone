@@ -266,7 +266,7 @@ namespace SwordAndStone.Server
 
 		public bool Ban(Server server, int sourceClientId, int targetClientId, string reason)
 		{
-			if (!server.PlayerHasPrivilege(sourceClientId, ServerClientMisc.Privilege.ban))
+			if (!server.PlayerHasPrivilege(sourceClientId, ManicDigger.ServerClientMisc.Privilege.ban))
 			{
 				server.SendMessage(sourceClientId, string.Format(server.language.Get("Server_CommandInsufficientPrivileges"), server.colorError));
 				return false;
@@ -322,7 +322,7 @@ namespace SwordAndStone.Server
 
 		public bool BanIP(Server server, int sourceClientId, int targetClientId, string reason)
 		{
-			if (!server.PlayerHasPrivilege(sourceClientId, ServerClientMisc.Privilege.banip))
+			if (!server.PlayerHasPrivilege(sourceClientId, ManicDigger.ServerClientMisc.Privilege.banip))
 			{
 				server.SendMessage(sourceClientId, string.Format(server.language.Get("Server_CommandInsufficientPrivileges"), server.colorError));
 				return false;
@@ -378,7 +378,7 @@ namespace SwordAndStone.Server
 
 		public bool TimeBan(Server server, int sourceClientId, int targetClientId, string reason, int duration)
 		{
-			if (!server.PlayerHasPrivilege(sourceClientId, ServerClientMisc.Privilege.ban))
+			if (!server.PlayerHasPrivilege(sourceClientId, ManicDigger.ServerClientMisc.Privilege.ban))
 			{
 				server.SendMessage(sourceClientId, string.Format(server.language.Get("Server_CommandInsufficientPrivileges"), server.colorError));
 				return false;
@@ -434,7 +434,7 @@ namespace SwordAndStone.Server
 
 		public bool TimeBanIP(Server server, int sourceClientId, int targetClientId, string reason, int duration)
 		{
-			if (!server.PlayerHasPrivilege(sourceClientId, ServerClientMisc.Privilege.banip))
+			if (!server.PlayerHasPrivilege(sourceClientId, ManicDigger.ServerClientMisc.Privilege.banip))
 			{
 				server.SendMessage(sourceClientId, string.Format(server.language.Get("Server_CommandInsufficientPrivileges"), server.colorError));
 				return false;
@@ -474,7 +474,7 @@ namespace SwordAndStone.Server
 
 		public bool BanOffline(Server server, int sourceClientId, string target, string reason)
 		{
-			if (!server.PlayerHasPrivilege(sourceClientId, ServerClientMisc.Privilege.ban_offline))
+			if (!server.PlayerHasPrivilege(sourceClientId, ManicDigger.ServerClientMisc.Privilege.ban_offline))
 			{
 				server.SendMessage(sourceClientId, string.Format(server.language.Get("Server_CommandInsufficientPrivileges"), server.colorError));
 				return false;
@@ -493,8 +493,8 @@ namespace SwordAndStone.Server
 			// Target is at the moment not online. Check if there is an entry in ServerClient
 
 			// Get related client from config file
-			SwordAndStone.Client targetClient = server.serverClient.Clients.Find(
-				                                       delegate(SwordAndStone.Client client)
+			ManicDigger.Client targetClient = server.serverClient.Clients.Find(
+				                                       delegate(ManicDigger.Client client)
 				{
 					return client.Name.Equals(target, StringComparison.InvariantCultureIgnoreCase);
 				}
@@ -504,8 +504,8 @@ namespace SwordAndStone.Server
 			if (targetClient != null)
 			{
 				// Get target's group.
-				SwordAndStone.Group targetGroup = server.serverClient.Groups.Find(
-					                                        delegate(SwordAndStone.Group grp)
+				ManicDigger.Group targetGroup = server.serverClient.Groups.Find(
+					                                        delegate(ManicDigger.Group grp)
 					{
 						return grp.Name.Equals(targetClient.Group);
 					}
@@ -538,7 +538,7 @@ namespace SwordAndStone.Server
 
 		public bool Unban(Server server, int sourceClientId, string type, string target)
 		{
-			if (!server.PlayerHasPrivilege(sourceClientId, ServerClientMisc.Privilege.unban))
+			if (!server.PlayerHasPrivilege(sourceClientId, ManicDigger.ServerClientMisc.Privilege.unban))
 			{
 				server.SendMessage(sourceClientId, string.Format(server.language.Get("Server_CommandInsufficientPrivileges"), server.colorError));
 				return false;

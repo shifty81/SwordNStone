@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using ManicDigger;
 
 namespace SwordAndStone.Mods.War
 {

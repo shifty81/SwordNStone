@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using ManicDigger;
 
 namespace SwordAndStone.Mods.War
 {

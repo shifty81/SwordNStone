@@ -5,6 +5,7 @@ using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.IO;
 using SwordAndStone.Common;
+using ManicDigger;
 
 namespace SwordAndStone.Server
 {
