@@ -286,6 +286,10 @@
         AddMod(new ModGuiWoWUnitFrames());
         AddMod(new ModGuiWoWMinimap());
         
+        // Initialize UI Theme Manager
+        uiThemeManager = new UIThemeManager();
+        uiThemeManager.Initialize(this);
+        
         // Emote system for player expression
         emoteSystem = new ModEmoteSystem();
         AddMod(emoteSystem);
@@ -1928,6 +1932,7 @@
     internal bool SkySphereNight;
     internal ModDrawParticleEffectBlockBreak particleEffectBlockBreak;
     internal ModEmoteSystem emoteSystem;
+    internal UIThemeManager uiThemeManager;
 
     public int SerializeFloat(float p)
     {
@@ -4051,5 +4056,11 @@
     public ModEmoteSystem GetMod_EmoteSystem()
     {
         return emoteSystem;
+    }
+    
+    // Helper method to get UIThemeManager
+    public UIThemeManager GetUIThemeManager()
+    {
+        return uiThemeManager;
     }
 }

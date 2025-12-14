@@ -1,12 +1,12 @@
 /// <summary>
 /// Standardized frame rendering utility for all GUI components.
-/// Uses the golden UI pieces extracted from ui_big_pieces.png to provide consistent styling.
+/// Uses the theme system to provide consistent styling across all UI elements.
 /// All GUI implementations should use this helper for frames, buttons, bars, and slots.
 /// </summary>
 public class GuiFrameRenderer
 {
-    // Base path for golden UI assets
-    internal const string GOLDEN_UI_PATH = "local/gui/golden/";
+    // Legacy path for backward compatibility
+    internal const string GOLDEN_UI_PATH = "data/themes/default/";
     
     // Frame types
     internal const int FRAME_SMALL = 0;
@@ -23,64 +23,127 @@ public class GuiFrameRenderer
     internal const int BAR_TYPE_BLUE = 1;   // Oxygen, mana, stamina
     
     /// <summary>
-    /// Draws a standardized frame with golden borders.
+    /// Draws a standardized frame with borders using the current theme.
     /// First draws a dark panel background, then overlays the frame border.
     /// </summary>
     public static void DrawFrame(Game game, int x, int y, int width, int height, int frameType)
     {
+        UIThemeManager theme = game.GetUIThemeManager();
+        
         // Draw dark background panel first
-        string panelPath = game.platform.StringFormat("{0}panel_dark.png", GOLDEN_UI_PATH);
+        string panelPath;
+        if (theme != null)
+        {
+            panelPath = game.platform.StringFormat("{0}ui/panel_dark.png", theme.basePath);
+        }
+        else
+        {
+            // Fallback to legacy path
+            panelPath = "local/gui/golden/panel_dark.png";
+        }
         game.Draw2dBitmapFile(panelPath, x + 8, y + 8, width - 16, height - 16);
         
         // Then draw the frame border on top
-        string framePath = GOLDEN_UI_PATH;
+        string framePath;
         
-        if (frameType == FRAME_SMALL)
+        if (theme != null)
         {
-            framePath = game.platform.StringFormat("{0}frame_small.png", GOLDEN_UI_PATH);
+            if (frameType == FRAME_SMALL)
+            {
+                framePath = theme.GetFrameSmallPath();
+            }
+            else if (frameType == FRAME_LARGE_ORNATE)
+            {
+                framePath = theme.GetFrameOrnatePath();
+            }
+            else if (frameType == FRAME_CIRCULAR)
+            {
+                framePath = theme.GetFrameCircularPath();
+            }
+            else
+            {
+                framePath = theme.GetFrameSmallPath();
+            }
         }
-        else if (frameType == FRAME_LARGE_ORNATE)
+        else
         {
-            framePath = game.platform.StringFormat("{0}frame_ornate.png", GOLDEN_UI_PATH);
-        }
-        else if (frameType == FRAME_CIRCULAR)
-        {
-            framePath = game.platform.StringFormat("{0}frame_circular.png", GOLDEN_UI_PATH);
+            // Fallback to legacy paths
+            if (frameType == FRAME_SMALL)
+            {
+                framePath = "local/gui/golden/frame_small.png";
+            }
+            else if (frameType == FRAME_LARGE_ORNATE)
+            {
+                framePath = "local/gui/golden/frame_ornate.png";
+            }
+            else if (frameType == FRAME_CIRCULAR)
+            {
+                framePath = "local/gui/golden/frame_circular.png";
+            }
+            else
+            {
+                framePath = "local/gui/golden/frame_small.png";
+            }
         }
         
         game.Draw2dBitmapFile(framePath, x, y, width, height);
     }
     
     /// <summary>
-    /// Draws a button in normal, hover, or pressed state.
+    /// Draws a button in normal, hover, or pressed state using the current theme.
     /// </summary>
     public static void DrawButton(Game game, int x, int y, int width, int height, int state)
     {
-        string buttonPath = game.platform.StringFormat("{0}button_normal.png", GOLDEN_UI_PATH);
+        UIThemeManager theme = game.GetUIThemeManager();
+        string buttonPath;
         
-        if (state == BUTTON_HOVER)
+        if (theme != null)
         {
-            buttonPath = game.platform.StringFormat("{0}button_hover.png", GOLDEN_UI_PATH);
+            buttonPath = theme.GetButtonPath(state);
         }
-        else if (state == BUTTON_PRESSED)
+        else
         {
-            buttonPath = game.platform.StringFormat("{0}button_pressed.png", GOLDEN_UI_PATH);
+            // Fallback to legacy paths
+            if (state == BUTTON_HOVER)
+            {
+                buttonPath = "local/gui/golden/button_hover.png";
+            }
+            else if (state == BUTTON_PRESSED)
+            {
+                buttonPath = "local/gui/golden/button_pressed.png";
+            }
+            else
+            {
+                buttonPath = "local/gui/golden/button_normal.png";
+            }
         }
         
         game.Draw2dBitmapFile(buttonPath, x, y, width, height);
     }
     
     /// <summary>
-    /// Draws a circular frame (for minimap, portraits, etc).
+    /// Draws a circular frame (for minimap, portraits, etc) using the current theme.
     /// </summary>
     public static void DrawCircularFrame(Game game, int x, int y, int size)
     {
-        string framePath = game.platform.StringFormat("{0}frame_circular.png", GOLDEN_UI_PATH);
+        UIThemeManager theme = game.GetUIThemeManager();
+        string framePath;
+        
+        if (theme != null)
+        {
+            framePath = theme.GetFrameCircularPath();
+        }
+        else
+        {
+            // Fallback to legacy path
+            framePath = "local/gui/golden/frame_circular.png";
+        }
+        
         game.Draw2dBitmapFile(framePath, x, y, size, size);
     }
     
     /// <summary>
-    /// Draws a progress/health bar using the golden bar pieces.
+    /// Draws a progress/health bar using the theme bar pieces.
     /// </summary>
     /// <param name="game">Game instance</param>
     /// <param name="x">X position</param>
@@ -99,22 +162,53 @@ public class GuiFrameRenderer
         game.Draw2dTexture(game.WhiteTexture(), x, y, width, height, null, 0,
             Game.ColorFromArgb(220, 50, 50, 50), false);
         
-        // Draw filled portion using appropriate bar texture
+        // Draw filled portion using appropriate bar texture from theme
         int filledWidth = game.platform.FloatToInt(width * progress);
         if (filledWidth > 0)
         {
-            string barPath = game.platform.StringFormat("{0}bar_full_red.png", GOLDEN_UI_PATH);
-            if (barType == BAR_TYPE_BLUE)
+            UIThemeManager theme = game.GetUIThemeManager();
+            string barPath;
+            
+            if (theme != null)
             {
-                barPath = game.platform.StringFormat("{0}bar_full_blue.png", GOLDEN_UI_PATH);
+                if (barType == BAR_TYPE_BLUE)
+                {
+                    barPath = theme.GetBarBluePath();
+                }
+                else
+                {
+                    barPath = theme.GetBarRedPath();
+                }
+            }
+            else
+            {
+                // Fallback to legacy paths
+                if (barType == BAR_TYPE_BLUE)
+                {
+                    barPath = "local/gui/golden/bar_full_blue.png";
+                }
+                else
+                {
+                    barPath = "local/gui/golden/bar_full_red.png";
+                }
             }
             
             // Draw the bar (it will be stretched to fit)
             game.Draw2dBitmapFile(barPath, x + 2, y + 2, filledWidth - 4, height - 4);
         }
         
-        // Draw golden border
-        int borderColor = Game.ColorFromArgb(255, 160, 100, 40);
+        // Draw border using theme color or default golden
+        UIThemeManager theme2 = game.GetUIThemeManager();
+        int borderColor;
+        if (theme2 != null)
+        {
+            borderColor = theme2.GetPrimaryColor();
+        }
+        else
+        {
+            borderColor = Game.ColorFromArgb(255, 160, 100, 40);
+        }
+        
         game.Draw2dTexture(game.WhiteTexture(), x, y, width, 2, null, 0, borderColor, false); // Top
         game.Draw2dTexture(game.WhiteTexture(), x, y + height - 2, width, 2, null, 0, borderColor, false); // Bottom
         game.Draw2dTexture(game.WhiteTexture(), x, y, 2, height, null, 0, borderColor, false); // Left
@@ -122,25 +216,52 @@ public class GuiFrameRenderer
     }
     
     /// <summary>
-    /// Draws an inventory/action bar slot.
+    /// Draws an inventory/action bar slot using the current theme.
     /// </summary>
     public static void DrawSlot(Game game, int x, int y, int size, bool highlighted)
     {
-        string slotPath = game.platform.StringFormat("{0}slot_normal.png", GOLDEN_UI_PATH);
-        if (highlighted)
+        UIThemeManager theme = game.GetUIThemeManager();
+        string slotPath;
+        
+        if (theme != null)
         {
-            slotPath = game.platform.StringFormat("{0}slot_active.png", GOLDEN_UI_PATH);
+            slotPath = theme.GetSlotPath(highlighted);
+        }
+        else
+        {
+            // Fallback to legacy paths
+            if (highlighted)
+            {
+                slotPath = "local/gui/golden/slot_active.png";
+            }
+            else
+            {
+                slotPath = "local/gui/golden/slot_normal.png";
+            }
         }
         
         game.Draw2dBitmapFile(slotPath, x, y, size, size);
     }
     
     /// <summary>
-    /// Draws a portrait border (circular with golden frame).
+    /// Draws a portrait border (circular frame) using the current theme.
     /// </summary>
     public static void DrawPortraitBorder(Game game, int x, int y, int size)
     {
-        string borderPath = game.platform.StringFormat("{0}portrait_border.png", GOLDEN_UI_PATH);
+        UIThemeManager theme = game.GetUIThemeManager();
+        string borderPath;
+        
+        if (theme != null)
+        {
+            // Portrait borders use circular frames
+            borderPath = theme.GetFrameCircularPath();
+        }
+        else
+        {
+            // Fallback to legacy path
+            borderPath = "local/gui/golden/portrait_border.png";
+        }
+        
         game.Draw2dBitmapFile(borderPath, x, y, size, size);
     }
 }
