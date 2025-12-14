@@ -67,48 +67,53 @@ namespace ManicDigger.Mods
 		}
 		
 		/// <summary>
-		/// Calculate damage based on weapon type and strength
+		/// Calculate damage based on weapon strength
+		/// Returns weapon's Strength value, or BASE_PUNCH_DAMAGE if not a weapon
 		/// </summary>
-		int CalculateWeaponDamage(int blockId)
+		int CalculateWeaponDamage(int blockId, string blockName)
 		{
 			if (blockId <= 0 || blockId >= m.GetMaxBlockTypes())
 			{
 				return BASE_PUNCH_DAMAGE;  // Punching damage
 			}
 			
-			string blockName = m.GetBlockName(blockId);
-			int strength = 0;
-			
-			// Get weapon strength (damage value)
-			// Note: We need to check if it's a sword/weapon
-			if (blockName != null && (blockName.Contains("Sword") || blockName.Contains("Axe")))
+			// Check if it's a sword weapon by name (ToolType.Sword not available in scripting API)
+			if (blockName != null && blockName.Contains("Sword"))
 			{
-				// In a full implementation, we'd get BlockType.Strength
-				// For now, estimate based on name
-				if (blockName.Contains("Stone"))
+				// TODO: Get actual BlockType.Strength from ModManager API
+				// For now, lookup by name
+				if (blockName.Contains("Diamond"))
 				{
-					strength = 4;
+					return 8;
 				}
 				else if (blockName.Contains("Iron"))
 				{
-					strength = 6;
+					return 6;
 				}
-				else if (blockName.Contains("Diamond"))
+				else if (blockName.Contains("Stone"))
 				{
-					strength = 8;
+					return 4;
 				}
-				else
+				else if (blockName.Contains("Wood"))
 				{
-					strength = 3;  // Wood or basic
+					return 3;
 				}
 			}
-			else
+			// Axes can also be used as weapons (lower damage than swords)
+			else if (blockName != null && blockName.Contains("Axe"))
 			{
-				// Not a weapon, use punch damage
-				strength = BASE_PUNCH_DAMAGE;
+				if (blockName.Contains("Iron"))
+				{
+					return 5;
+				}
+				else if (blockName.Contains("Stone"))
+				{
+					return 3;
+				}
 			}
 			
-			return strength;
+			// Not a weapon, use punch damage
+			return BASE_PUNCH_DAMAGE;
 		}
 		
 		/// <summary>
@@ -151,25 +156,44 @@ namespace ManicDigger.Mods
 		}
 		
 		/// <summary>
-		/// Get damage reduction from shield
+		/// Get damage reduction from shield based on shield strength
+		/// Shield strength * 10% = damage reduction (e.g., strength 5 = 50% reduction)
 		/// </summary>
-		float GetShieldDamageReduction(int playerId)
+		float GetShieldDamageReduction(int playerId, int shieldBlockId, string shieldName)
 		{
 			if (!playerBlocking.ContainsKey(playerId) || !playerBlocking[playerId])
 			{
 				return 0f;  // Not blocking
 			}
 			
-			// Check if player is holding a shield
-			// In a full implementation, we'd check the active item
-			// For now, assume they have shield if blocking
-			return 0.5f;  // 50% damage reduction
+			// Check if holding a shield
+			if (shieldName == null || !shieldName.Contains("Shield"))
+			{
+				return 0f;  // Not a shield
+			}
+			
+			// Calculate reduction based on shield strength
+			// TODO: Get actual BlockType.Strength from ModManager API
+			int shieldStrength = 5;  // Default to wooden shield
+			if (shieldName.Contains("Iron"))
+			{
+				shieldStrength = 7;  // 70% reduction
+			}
+			
+			// Convert strength to reduction percentage (max 90%)
+			float reduction = (shieldStrength * 0.1f);
+			if (reduction > 0.9f)
+			{
+				reduction = 0.9f;  // Cap at 90% to prevent invulnerability
+			}
+			
+			return reduction;
 		}
 		
 		/// <summary>
 		/// Apply damage from attacker to target
 		/// </summary>
-		public void ApplyMeleeDamage(int attackerId, int targetId)
+		public void ApplyMeleeDamage(int attackerId, int targetId, int weaponBlockId, int shieldBlockId)
 		{
 			// Validate players exist
 			if (attackerId < 0 || targetId < 0)
@@ -191,12 +215,13 @@ namespace ManicDigger.Mods
 				return;
 			}
 			
-			// Get attacker's weapon (would need to query inventory/active slot)
-			// For now, assume stone sword (damage 4)
-			int weaponDamage = 4;  // TODO: Get actual weapon from player
+			// Get weapon name and calculate damage
+			string weaponName = weaponBlockId > 0 ? m.GetBlockName(weaponBlockId) : null;
+			int weaponDamage = CalculateWeaponDamage(weaponBlockId, weaponName);
 			
-			// Get target's shield reduction
-			float shieldReduction = GetShieldDamageReduction(targetId);
+			// Get shield name and calculate damage reduction
+			string shieldName = shieldBlockId > 0 ? m.GetBlockName(shieldBlockId) : null;
+			float shieldReduction = GetShieldDamageReduction(targetId, shieldBlockId, shieldName);
 			
 			// Calculate final damage
 			int finalDamage = (int)(weaponDamage * (1.0f - shieldReduction));
@@ -223,13 +248,15 @@ namespace ManicDigger.Mods
 			// Log combat event
 			string attackerName = m.GetPlayerName(attackerId);
 			string targetName = m.GetPlayerName(targetId);
-			Console.WriteLine("[CombatSystem] {0} hit {1} for {2} damage (health: {3}/{4})",
-				attackerName, targetName, finalDamage, newHealth, maxHealth);
+			Console.WriteLine("[CombatSystem] {0} hit {1} for {2} damage (weapon: {3}, health: {4}/{5})",
+				attackerName, targetName, finalDamage, weaponName ?? "fist", newHealth, maxHealth);
 			
 			// Send combat feedback message to attacker
 			if (shieldReduction > 0)
 			{
-				m.SendMessage(attackerId, string.Format("Hit {0} for {1} damage (blocked!)", targetName, finalDamage));
+				int blockedAmount = (int)(weaponDamage * shieldReduction);
+				m.SendMessage(attackerId, string.Format("Hit {0} for {1} damage ({2} blocked by shield)", 
+					targetName, finalDamage, blockedAmount));
 			}
 			else
 			{

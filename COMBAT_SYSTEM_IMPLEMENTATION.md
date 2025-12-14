@@ -408,7 +408,7 @@ None at this time - system not yet integrated for testing.
 
 ## Changelog
 
-### Version 1.0 - December 14, 2025
+### Version 1.0 - December 14, 2024
 - Initial implementation
 - Added Weapons.cs with 6 weapon types
 - Added CombatSystem.cs with core combat logic
@@ -440,4 +440,4 @@ For questions or issues with the combat system:
 
 **Implementation Status**: Phase 1 Complete (Framework Ready)  
 **Next Milestone**: Entity hit integration and testing  
-**Last Updated**: December 14, 2025
+**Last Updated**: December 14, 2024

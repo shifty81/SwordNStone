@@ -57,7 +57,7 @@ namespace ManicDigger.Mods
 				Name = "Wooden Shield",
 				IsTool = true,
 				ToolType = ToolType.None,  // Shield is not a tool for mining
-				Strength = 2,  // Damage reduction percentage (20%)
+				Strength = 5,  // Damage reduction value (used as multiplier * 10%)
 				TextureIdForInventory = "WoodenShield",
 				AllTextures = "WoodenShield",
 			});
@@ -68,7 +68,7 @@ namespace ManicDigger.Mods
 				Name = "Iron Shield",
 				IsTool = true,
 				ToolType = ToolType.None,
-				Strength = 4,  // Better damage reduction (40%)
+				Strength = 7,  // Better damage reduction (7 * 10% = 70%)
 				TextureIdForInventory = "IronShield",
 				AllTextures = "IronShield",
 			});
