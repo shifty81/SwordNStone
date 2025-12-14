@@ -127,8 +127,8 @@ public class ModEmoteSystem : ClientMod
         IntRef messageLen = new IntRef();
         int[] messageChars = game.platform.StringToCharArray(message, messageLen);
         
-        // Check if it's a command (starts with /)
-        if (messageChars[0] != '/')
+        // Check if it's a command (starts with /) - ASCII 47
+        if (messageChars[0] != 47)
         {
             return;
         }
@@ -138,7 +138,8 @@ public class ModEmoteSystem : ClientMod
         for (int i = 1; i < messageLen.value; i++)
         {
             int c = messageChars[i];
-            if (c == ' ')
+            // Check for space character - ASCII 32
+            if (c == 32)
             {
                 break;
             }
