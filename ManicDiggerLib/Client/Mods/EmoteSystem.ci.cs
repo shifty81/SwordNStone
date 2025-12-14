@@ -119,13 +119,19 @@ public class ModEmoteSystem : ClientMod
     // Process chat command for emotes
     public void ProcessChatCommand(Game game, string message)
     {
-        if (message == null || message.Length < 2)
+        if (message == null)
         {
             return;
         }
 
         IntRef messageLen = new IntRef();
         int[] messageChars = game.platform.StringToCharArray(message, messageLen);
+        
+        // Need at least 2 characters (/ and at least one command char)
+        if (messageLen.value < 2)
+        {
+            return;
+        }
         
         // Check if it's a command (starts with /) - ASCII 47
         if (messageChars[0] != 47)
@@ -134,16 +140,16 @@ public class ModEmoteSystem : ClientMod
         }
 
         // Extract command (remove /) - find end of command
-        int commandEnd = 1;
+        int commandEnd = messageLen.value;
         for (int i = 1; i < messageLen.value; i++)
         {
             int c = messageChars[i];
             // Check for space character - ASCII 32
             if (c == 32)
             {
+                commandEnd = i;
                 break;
             }
-            commandEnd = i + 1;
         }
         
         // Build command string from characters (skip the leading /)
