@@ -89,12 +89,12 @@ Choose your platform:
 
 ```
 SwordNStone/
-├── ManicDigger/           # Game client (Windows GUI application)
-├── ManicDiggerLib/        # Core game library (shared code)
-├── ManicDiggerServer/     # Dedicated server application
+├── SwordAndStone/         # Game client (Windows GUI application)
+├── SwordAndStoneLib/      # Core game library (shared code)
+├── SwordAndStoneServer/   # Dedicated server application
 ├── ScriptingApi/          # Server-side modding API
-├── MdMonsterEditor/       # Monster model editor tool
-├── ManicDigger.Tests/     # Unit and integration tests
+├── SwordAndStoneMonsterEditor/  # Monster model editor tool
+├── SwordAndStone.Tests/   # Unit and integration tests
 ├── data/                  # Game assets (textures, sounds, etc.)
 ├── Lib/                   # Third-party native libraries
 └── packages/              # NuGet packages (generated)
