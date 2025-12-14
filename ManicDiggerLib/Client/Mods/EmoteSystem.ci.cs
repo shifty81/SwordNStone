@@ -154,6 +154,13 @@ public class ModEmoteSystem : ClientMod
         
         // Build command string from characters (skip the leading /)
         int commandLen = commandEnd - 1;
+        
+        // Validate command has at least one character
+        if (commandLen <= 0)
+        {
+            return;
+        }
+        
         int[] commandChars = new int[commandLen];
         for (int i = 0; i < commandLen; i++)
         {
