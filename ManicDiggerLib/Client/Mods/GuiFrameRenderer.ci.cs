@@ -39,7 +39,7 @@ public class GuiFrameRenderer
         else
         {
             // Fallback to legacy path
-            panelPath = "local/gui/golden/panel_dark.png";
+            panelPath = "data/local/gui/golden/panel_dark.png";
         }
         game.Draw2dBitmapFile(panelPath, x + 8, y + 8, width - 16, height - 16);
         
@@ -70,19 +70,19 @@ public class GuiFrameRenderer
             // Fallback to legacy paths
             if (frameType == FRAME_SMALL)
             {
-                framePath = "local/gui/golden/frame_small.png";
+                framePath = "data/local/gui/golden/frame_small.png";
             }
             else if (frameType == FRAME_LARGE_ORNATE)
             {
-                framePath = "local/gui/golden/frame_ornate.png";
+                framePath = "data/local/gui/golden/frame_ornate.png";
             }
             else if (frameType == FRAME_CIRCULAR)
             {
-                framePath = "local/gui/golden/frame_circular.png";
+                framePath = "data/local/gui/golden/frame_circular.png";
             }
             else
             {
-                framePath = "local/gui/golden/frame_small.png";
+                framePath = "data/local/gui/golden/frame_small.png";
             }
         }
         
@@ -106,15 +106,15 @@ public class GuiFrameRenderer
             // Fallback to legacy paths
             if (state == BUTTON_HOVER)
             {
-                buttonPath = "local/gui/golden/button_hover.png";
+                buttonPath = "data/local/gui/golden/button_hover.png";
             }
             else if (state == BUTTON_PRESSED)
             {
-                buttonPath = "local/gui/golden/button_pressed.png";
+                buttonPath = "data/local/gui/golden/button_pressed.png";
             }
             else
             {
-                buttonPath = "local/gui/golden/button_normal.png";
+                buttonPath = "data/local/gui/golden/button_normal.png";
             }
         }
         
@@ -136,7 +136,7 @@ public class GuiFrameRenderer
         else
         {
             // Fallback to legacy path
-            framePath = "local/gui/golden/frame_circular.png";
+            framePath = "data/local/gui/golden/frame_circular.png";
         }
         
         game.Draw2dBitmapFile(framePath, x, y, size, size);
@@ -185,11 +185,11 @@ public class GuiFrameRenderer
                 // Fallback to legacy paths
                 if (barType == BAR_TYPE_BLUE)
                 {
-                    barPath = "local/gui/golden/bar_full_blue.png";
+                    barPath = "data/local/gui/golden/bar_full_blue.png";
                 }
                 else
                 {
-                    barPath = "local/gui/golden/bar_full_red.png";
+                    barPath = "data/local/gui/golden/bar_full_red.png";
                 }
             }
             
@@ -232,11 +232,11 @@ public class GuiFrameRenderer
             // Fallback to legacy paths
             if (highlighted)
             {
-                slotPath = "local/gui/golden/slot_active.png";
+                slotPath = "data/local/gui/golden/slot_active.png";
             }
             else
             {
-                slotPath = "local/gui/golden/slot_normal.png";
+                slotPath = "data/local/gui/golden/slot_normal.png";
             }
         }
         
@@ -259,7 +259,7 @@ public class GuiFrameRenderer
         else
         {
             // Fallback to legacy path
-            borderPath = "local/gui/golden/portrait_border.png";
+            borderPath = "data/local/gui/golden/portrait_border.png";
         }
         
         game.Draw2dBitmapFile(borderPath, x, y, size, size);

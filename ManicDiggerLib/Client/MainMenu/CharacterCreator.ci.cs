@@ -195,7 +195,7 @@ public class ScreenCharacterCreator : Screen
 		int previewY = p.FloatToInt(y);
 		
 		// Draw frame border using golden frame texture
-		string framePath = "local/gui/golden/frame_ornate.png";
+		string framePath = "data/local/gui/golden/frame_ornate.png";
 		int frameTexture = menu.GetTexture(framePath);
 		menu.Draw2dQuad(frameTexture, 
 			previewX - p.FloatToInt(16 * scale), 
@@ -204,7 +204,7 @@ public class ScreenCharacterCreator : Screen
 			previewHeight + p.FloatToInt(32 * scale));
 		
 		// Draw dark background panel
-		string panelPath = "local/gui/golden/panel_dark.png";
+		string panelPath = "data/local/gui/golden/panel_dark.png";
 		int panelTexture = menu.GetTexture(panelPath);
 		menu.Draw2dQuad(panelTexture, previewX, previewY, previewWidth, previewHeight);
 		
