@@ -66,8 +66,8 @@ Server mods can be implemented in C# or interpreted Javascript.
 For detailed build instructions, see [BUILD.md](BUILD.md).
 
 Quick start:
-- **Windows**: Open `ManicDigger.sln` in Visual Studio and build
-- **Linux/Mac**: Install Mono and run `xbuild ManicDigger.sln`
+- **Windows**: Open `SwordAndStone.sln` in Visual Studio and build
+- **Linux/Mac**: Install Mono and run `xbuild SwordAndStone.sln`
 
 #### Contributing
 

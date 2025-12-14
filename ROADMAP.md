@@ -1,7 +1,35 @@
 # Sword & Stone - Development Roadmap
 
-**Last Updated:** December 2025  
+**Last Updated:** December 14, 2025  
+**Current Version:** Alpha 0.0.1  
 **Project Status:** Active Development
+
+---
+
+## 🎉 Alpha 0.0.1 - Foundation Release (December 14, 2025)
+
+### What's New in Alpha 0.0.1:
+
+This release marks the official rebrand and foundation of Sword & Stone as an independent project.
+
+**Major Changes:**
+- ✅ **Complete Rebrand**: Fully transitioned from Manic Digger to Sword & Stone
+  - All project directories renamed
+  - All namespaces updated (254+ code references)
+  - Solution and project files restructured
+  - Documentation completely updated
+
+- ✅ **GUI Fixes**: 
+  - Fixed missing texture paths causing orange/yellow placeholder boxes
+  - Title screen now properly displays Sword & Stone branding
+  - All UI assets loading correctly
+
+- ✅ **Infrastructure**:
+  - Proper project structure for future development
+  - Clear separation of concerns (Client, Library, Server, Tests, Tools)
+  - Updated build system and documentation
+
+**This is Alpha 0.0.1** - The foundation is set, and we're ready to build!
 
 ---
 
@@ -621,11 +649,13 @@ Sword & Stone aims to be a comprehensive voxel-based adventure game combining th
 
 ## 🎯 2025 Goals
 
-### Q1 2025 (Jan-Mar)
+### Q4 2024 / Q1 2025 (Completed)
 - ✅ Enhanced character animations
 - ✅ Comprehensive roadmap
-- 🔄 VOIP system design and foundation
-- ⏳ Combat system alpha
+- ✅ Complete rebrand to Sword & Stone (Alpha 0.0.1)
+- ✅ GUI asset system fixes
+- 🔄 VOIP system design and foundation (in progress)
+- ⏳ Combat system alpha (planned)
 
 ### Q2 2025 (Apr-Jun)
 - ⏳ Enemy mobs implementation
