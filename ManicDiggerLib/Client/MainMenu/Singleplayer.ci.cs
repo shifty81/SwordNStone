@@ -23,19 +23,21 @@
         fontDefault = new FontCi();
         fontDefault.size = 16;
 
-        widgets[0] = play;
-        widgets[1] = newWorld;
-        widgets[2] = modify;
-        widgets[3] = back;
-        widgets[4] = open;
-        widgets[5] = character;
+        int widgetIndex = 0;
+        widgets[widgetIndex++] = play;
+        widgets[widgetIndex++] = newWorld;
+        widgets[widgetIndex++] = modify;
+        widgets[widgetIndex++] = back;
+        widgets[widgetIndex++] = open;
+        widgets[widgetIndex++] = character;
 
         worldButtons = new MenuWidget[10];
+        int worldButtonsStartIndex = widgetIndex;
         for (int i = 0; i < 10; i++)
         {
             worldButtons[i] = new MenuWidget();
             worldButtons[i].visible = false;
-            widgets[6 + i] = worldButtons[i];
+            widgets[worldButtonsStartIndex + i] = worldButtons[i];
         }
     }
 

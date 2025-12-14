@@ -65,6 +65,15 @@ public class ScreenCharacterCreator : Screen
 		returnToSingleplayer = false;
 	}
 	
+	// Initialize platform reference when menu is set
+	internal void InitializePlatform(GamePlatform p)
+	{
+		if (customization != null && customization.platform == null)
+		{
+			customization.platform = p;
+		}
+	}
+	
 	MenuWidget genderLeft;
 	MenuWidget genderRight;
 	MenuWidget hairstyleLeft;
@@ -94,6 +103,7 @@ public class ScreenCharacterCreator : Screen
 	public override void Render(float dt)
 	{
 		GamePlatform p = menu.p;
+		InitializePlatform(p);
 		float scale = menu.GetScale();
 		
 		menu.DrawBackground();

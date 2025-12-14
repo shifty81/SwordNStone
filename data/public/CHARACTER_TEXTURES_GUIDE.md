@@ -69,7 +69,7 @@ HAT = Hat overlay (drawn over head)
 B = Body/Torso (Front, Right, Back, Left)
 R = Right Arm (Front, Right, Back, Left)
 L = Left Leg (Front, Right, Back, Left)
-A = Right Leg (Front, Right, Back, Left)
+A = Left Arm (Front, Right, Back, Left)
 ```
 
 ## Creating Textures

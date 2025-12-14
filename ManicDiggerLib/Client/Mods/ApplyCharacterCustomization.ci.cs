@@ -2,17 +2,20 @@ public class ModApplyCharacterCustomization : ClientMod
 {
 	public override void OnNewFrame(Game game, NewFrameEventArgs args)
 	{
+		// Only check once when local player is spawned
+		if (customizationApplied)
+		{
+			return;
+		}
+		
 		// Apply character customization to local player
 		if (game.LocalPlayerId >= 0 && game.LocalPlayerId < game.entitiesCount)
 		{
 			Entity localPlayer = game.entities[game.LocalPlayerId];
 			if (localPlayer != null && localPlayer.drawModel != null)
 			{
-				if (!customizationApplied)
-				{
-					ApplyCustomization(game, localPlayer);
-					customizationApplied = true;
-				}
+				ApplyCustomization(game, localPlayer);
+				customizationApplied = true;
 			}
 		}
 	}
