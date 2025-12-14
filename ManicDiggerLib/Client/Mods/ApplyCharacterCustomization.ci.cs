@@ -25,7 +25,8 @@ public class ModApplyCharacterCustomization : ClientMod
 	void ApplyCustomization(Game game, Entity player)
 	{
 		// Load character customization from preferences
-		string data = game.platform.PreferencesGet("CharacterCustomization");
+		Preferences prefs = game.platform.GetPreferences();
+		string data = prefs.GetString("CharacterCustomization", null);
 		CharacterCustomization customization = CharacterCustomization.Deserialize(game.platform, data);
 		
 		// Set the model - use enhanced model for better animations
