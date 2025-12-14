@@ -502,9 +502,8 @@
         {
             int slotX = wearPlaceStart[i].X + InventoryStartX();
             int slotY = wearPlaceStart[i].Y + InventoryStartY();
-            int slotWidth = wearPlaceCells[i].X * CellDrawSize;
-            int slotHeight = wearPlaceCells[i].Y * CellDrawSize;
-            GuiFrameRenderer.DrawSlot(game, slotX, slotY, slotWidth, false);
+            // Equipment slots are square (1x1 cells)
+            GuiFrameRenderer.DrawSlot(game, slotX, slotY, CellDrawSize, false);
         }
         
         // Draw inventory grid slots
@@ -560,6 +559,9 @@
 
     public void DrawItemInfo(int screenposX, int screenposY, Packet_Item item)
     {
+        const int TOOLTIP_PADDING = 12; // Padding inside tooltip frame
+        const int TOOLTIP_MARGIN = 20;  // Margin from screen edges
+        
         int sizex = dataItems.ItemSizeX(item);
         int sizey = dataItems.ItemSizeY(item);
         IntRef tw = new IntRef();
@@ -569,20 +571,20 @@
         game.platform.TextSize(dataItems.ItemInfo(item), font, tw, th);
         tw.value += 6;
         th.value += 4;
-        int w = game.platform.FloatToInt(tw.value + CellDrawSize * sizex);
-        int h = game.platform.FloatToInt(th.value < CellDrawSize * sizey ? CellDrawSize * sizey + 4 : th.value);
-        if (screenposX < w + 20) { screenposX = w + 20; }
-        if (screenposY < h + 20) { screenposY = h + 20; }
-        if (screenposX > game.Width() - (w + 20)) { screenposX = game.Width() - (w + 20); }
-        if (screenposY > game.Height() - (h + 20)) { screenposY = game.Height() - (h + 20); }
+        int w = game.platform.FloatToInt(tw.value + CellDrawSize * sizex + TOOLTIP_PADDING);
+        int h = game.platform.FloatToInt(th.value < CellDrawSize * sizey ? CellDrawSize * sizey + TOOLTIP_PADDING : th.value + TOOLTIP_PADDING);
+        if (screenposX < w + TOOLTIP_MARGIN) { screenposX = w + TOOLTIP_MARGIN; }
+        if (screenposY < h + TOOLTIP_MARGIN) { screenposY = h + TOOLTIP_MARGIN; }
+        if (screenposX > game.Width() - (w + TOOLTIP_MARGIN)) { screenposX = game.Width() - (w + TOOLTIP_MARGIN); }
+        if (screenposY > game.Height() - (h + TOOLTIP_MARGIN)) { screenposY = game.Height() - (h + TOOLTIP_MARGIN); }
         
         // Use golden frame for tooltip instead of plain rectangles
         GuiFrameRenderer.DrawFrame(game, screenposX - w, screenposY - h, w, h, GuiFrameRenderer.FRAME_SMALL);
         
-        game.Draw2dText(dataItems.ItemInfo(item), font, screenposX - tw.value + 4, screenposY - h + 10, null, false);
+        game.Draw2dText(dataItems.ItemInfo(item), font, screenposX - tw.value + TOOLTIP_PADDING / 2, screenposY - h + TOOLTIP_PADDING, null, false);
         Packet_Item item2 = new Packet_Item();
         item2.BlockId = item.BlockId;
-        DrawItem(screenposX - w + 10, screenposY - h + 10, item2, 0, 0);
+        DrawItem(screenposX - w + TOOLTIP_PADDING, screenposY - h + TOOLTIP_PADDING, item2, 0, 0);
     }
 
     public override void OnMouseWheelChanged(Game game_, MouseWheelEventArgs args)
