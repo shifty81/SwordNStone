@@ -310,11 +310,9 @@
 
         PointRef scaledMouse = PointRef.Create(game.mouseCurrentX, game.mouseCurrentY);
 
-        game.Draw2dBitmapFile("inventory.png", InventoryStartX(), InventoryStartY(), 1024, 1024);
+        // Draw inventory using golden UI pieces instead of monolithic background
+        DrawInventoryBackground();
 
-        //the3d.Draw2dTexture(terrain, 50, 50, 50, 50, 0);
-        //the3d.Draw2dBitmapFile("inventory_weapon_shovel.png", 100, 100, 60 * 2, 60 * 4);
-        //the3d.Draw2dBitmapFile("inventory_gauntlet_gloves.png", 200, 200, 60 * 2, 60 * 2);
         //main inventory
         for (int i = 0; i < game.d_Inventory.ItemsCount; i++)
         {
@@ -448,21 +446,24 @@
 
     public void DrawMaterialSelector()
     {
-        game.Draw2dBitmapFile("materials.png", MaterialSelectorBackgroundStartX(), MaterialSelectorBackgroundStartY(), game.platform.FloatToInt(1024 * game.Scale()), game.platform.FloatToInt(128 * game.Scale()));
+        // Draw material selector using golden UI pieces instead of materials.png
         int materialSelectorStartX_ = MaterialSelectorStartX();
         int materialSelectorStartY_ = MaterialSelectorStartY();
+        
+        // Draw 10 slots for the material/action bar
         for (int i = 0; i < 10; i++)
         {
+            int slotX = materialSelectorStartX_ + i * ActiveMaterialCellSize();
+            int slotY = materialSelectorStartY_;
+            bool isActive = (i == game.ActiveMaterial);
+            GuiFrameRenderer.DrawSlot(game, slotX, slotY, ActiveMaterialCellSize(), isActive);
+            
             Packet_Item item = game.d_Inventory.RightHand[i];
             if (item != null)
             {
-                DrawItem(materialSelectorStartX_ + i * ActiveMaterialCellSize(), materialSelectorStartY_,
-                    item, ActiveMaterialCellSize(), ActiveMaterialCellSize());
+                DrawItem(slotX, slotY, item, ActiveMaterialCellSize(), ActiveMaterialCellSize());
             }
         }
-        game.Draw2dBitmapFile("activematerial.png",
-            MaterialSelectorStartX() + ActiveMaterialCellSize() * game.ActiveMaterial,
-            MaterialSelectorStartY(), ActiveMaterialCellSize() * 64 / 48, ActiveMaterialCellSize() * 64 / 48);
     }
 
     IntRef SelectedWearPlace(PointRef scaledMouse)
@@ -488,6 +489,39 @@
     PointRef[] wearPlaceStart;
     //indexed by enum WearPlace
     PointRef[] wearPlaceCells;
+
+    void DrawInventoryBackground()
+    {
+        // Draw main inventory frame
+        int frameWidth = CellCountInPageX * CellDrawSize + 80;
+        int frameHeight = CellCountInPageY * CellDrawSize + 200;
+        GuiFrameRenderer.DrawFrame(game, InventoryStartX(), InventoryStartY(), frameWidth, frameHeight, GuiFrameRenderer.FRAME_LARGE_ORNATE);
+        
+        // Draw equipment slots (hand, armor, helmet, gloves, boots) at the top
+        for (int i = 0; i < wearPlaceStartLength; i++)
+        {
+            int slotX = wearPlaceStart[i].X + InventoryStartX();
+            int slotY = wearPlaceStart[i].Y + InventoryStartY();
+            int slotWidth = wearPlaceCells[i].X * CellDrawSize;
+            int slotHeight = wearPlaceCells[i].Y * CellDrawSize;
+            GuiFrameRenderer.DrawSlot(game, slotX, slotY, slotWidth, false);
+        }
+        
+        // Draw inventory grid slots
+        for (int y = 0; y < CellCountInPageY; y++)
+        {
+            for (int x = 0; x < CellCountInPageX; x++)
+            {
+                int slotX = CellsStartX() + x * CellDrawSize;
+                int slotY = CellsStartY() + y * CellDrawSize;
+                GuiFrameRenderer.DrawSlot(game, slotX, slotY, CellDrawSize, false);
+            }
+        }
+        
+        // Draw scroll buttons using golden buttons
+        GuiFrameRenderer.DrawButton(game, ScrollUpButtonX(), ScrollUpButtonY(), ScrollButtonSize(), ScrollButtonSize(), GuiFrameRenderer.BUTTON_NORMAL);
+        GuiFrameRenderer.DrawButton(game, ScrollDownButtonX(), ScrollDownButtonY(), ScrollButtonSize(), ScrollButtonSize(), GuiFrameRenderer.BUTTON_NORMAL);
+    }
 
     void DrawItem(int screenposX, int screenposY, Packet_Item item, int drawsizeX, int drawsizeY)
     {
@@ -541,12 +575,14 @@
         if (screenposY < h + 20) { screenposY = h + 20; }
         if (screenposX > game.Width() - (w + 20)) { screenposX = game.Width() - (w + 20); }
         if (screenposY > game.Height() - (h + 20)) { screenposY = game.Height() - (h + 20); }
-        game.Draw2dTexture(game.WhiteTexture(), screenposX - w, screenposY - h, w, h, null, 0, Game.ColorFromArgb(255, 0, 0, 0), false);
-        game.Draw2dTexture(game.WhiteTexture(), screenposX - w + 2, screenposY - h + 2, w - 4, h - 4, null, 0, Game.ColorFromArgb(255, 105, 105, 105), false);
-        game.Draw2dText(dataItems.ItemInfo(item), font, screenposX - tw.value + 4, screenposY - h + 2, null, false);
+        
+        // Use golden frame for tooltip instead of plain rectangles
+        GuiFrameRenderer.DrawFrame(game, screenposX - w, screenposY - h, w, h, GuiFrameRenderer.FRAME_SMALL);
+        
+        game.Draw2dText(dataItems.ItemInfo(item), font, screenposX - tw.value + 4, screenposY - h + 10, null, false);
         Packet_Item item2 = new Packet_Item();
         item2.BlockId = item.BlockId;
-        DrawItem(screenposX - w + 2, screenposY - h + 2, item2, 0, 0);
+        DrawItem(screenposX - w + 10, screenposY - h + 10, item2, 0, 0);
     }
 
     public override void OnMouseWheelChanged(Game game_, MouseWheelEventArgs args)
