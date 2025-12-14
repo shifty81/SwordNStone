@@ -6,7 +6,7 @@ This document provides instructions for building and testing the Sword&Stone pro
 
 ### Windows - Visual Studio
 - **Visual Studio 2012 or later** (tested with VS 2022)
-- **.NET Framework 4.5** (included with Visual Studio)
+- **.NET Framework 4.8** (included with Visual Studio)
 - The solution should open directly in Visual Studio
 
 ### Windows - Command Line
@@ -193,8 +193,8 @@ The ManicDiggerLib.dll is the core library used by both client and server. It's 
 
 ### Common Build Issues
 
-#### Issue: Missing .NET Framework 4.5
-**Solution:** Install .NET Framework 4.5 Developer Pack from Microsoft or use Mono on Linux/Mac
+#### Issue: Missing .NET Framework 4.8
+**Solution:** Install .NET Framework 4.8 Developer Pack from Microsoft or use Mono on Linux/Mac
 
 #### Issue: Missing NuGet packages
 **Solution:** Run `nuget restore` or right-click solution in VS and select "Restore NuGet Packages"
