@@ -577,9 +577,9 @@
         ScreenCharacterCreator characterCreator = new ScreenCharacterCreator();
         characterCreator.returnToSingleplayer = fromSingleplayer;
         characterCreator.worldPath = worldPath_;
-        characterCreator.LoadCustomization();
         screen = characterCreator;
         screen.menu = this;
+        characterCreator.LoadCustomization();
         screen.LoadTranslations();
     }
 
