@@ -23,10 +23,11 @@
     
     int ActionBarStartX() 
     { 
-        // Calculate total width of action bar (10 slots + spacing)
-        int totalWidth = 10 * ButtonSize() + 11 * ButtonSpacing();
-        // Center it horizontally
-        return (game.Width() - totalWidth) / 2;
+        // Calculate total width of action bar background
+        // Background width: 10 * (buttonSize + spacing) + 2 * spacing (from DrawWoWActionBar)
+        int bgWidth = 10 * (ButtonSize() + ButtonSpacing()) + ButtonSpacing() * 2;
+        // Center the background horizontally, then add spacing to get button start position
+        return (game.Width() - bgWidth) / 2 + ButtonSpacing();
     }
     
     int ActionBarStartY() { return game.Height() - 120; }
