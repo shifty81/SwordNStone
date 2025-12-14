@@ -6,6 +6,7 @@ using Jint.Delegates;
 using System.Net;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using ManicDigger;
 
 namespace SwordAndStone.Server
 {
@@ -181,7 +182,7 @@ namespace SwordAndStone.Server
 			return MapUtil.IsValidPos(server.d_Map, x, y, z);
 		}
 
-		public void RegisterTimer(SwordAndStone.Action a, double interval)
+		public void RegisterTimer(ManicDigger.Action a, double interval)
 		{
 			server.timers[new Timer() { INTERVAL = interval }] = delegate { a(); };
 		}
@@ -340,12 +341,12 @@ namespace SwordAndStone.Server
 			server.moddata[name] = value;
 		}
 
-		public void RegisterOnLoad(Action f)
+		public void RegisterOnLoad(ManicDigger.Action f)
 		{
 			server.onload.Add(f);
 		}
 
-		public void RegisterOnSave(Action f)
+		public void RegisterOnSave(ManicDigger.Action f)
 		{
 			server.onsave.Add(f);
 		}
@@ -1018,7 +1019,7 @@ namespace SwordAndStone.Server
 			return server.GetGroupName(player);
 		}
 
-		public void InstallHttpModule(string name, SwordAndStone.Func<string> description, FragLabs.HTTP.IHttpModule module)
+		public void InstallHttpModule(string name, ManicDigger.Func<string> description, FragLabs.HTTP.IHttpModule module)
 		{
 			server.InstallHttpModule(name, description, module);
 		}

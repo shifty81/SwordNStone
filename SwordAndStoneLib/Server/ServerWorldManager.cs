@@ -5,6 +5,7 @@ using PointG = System.Drawing.Point;
 using System.Diagnostics;
 using ProtoBuf;
 using SwordAndStone.Common;
+using ManicDigger;
 
 namespace SwordAndStone.Server
 {
