@@ -328,13 +328,16 @@ public class ScreenCharacterCreator : Screen
 	{
 		// Save to preferences
 		string data = customization.Serialize();
-		menu.p.PreferencesSet("CharacterCustomization", data);
+		Preferences prefs = menu.p.GetPreferences();
+		prefs.SetString("CharacterCustomization", data);
+		menu.p.SetPreferences(prefs);
 	}
 	
 	public void LoadCustomization()
 	{
 		// Load from preferences
-		string data = menu.p.PreferencesGet("CharacterCustomization");
+		Preferences prefs = menu.p.GetPreferences();
+		string data = prefs.GetString("CharacterCustomization", null);
 		if (data != null)
 		{
 			customization = CharacterCustomization.Deserialize(menu.p, data);

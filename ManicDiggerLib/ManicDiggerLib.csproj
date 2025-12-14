@@ -94,6 +94,8 @@
     <Compile Include="Client\MainMenu\ModifyWorld.ci.cs" />
     <Compile Include="Client\MainMenu\Multiplayer.ci.cs" />
     <Compile Include="Client\MainMenu\Singleplayer.ci.cs" />
+    <Compile Include="Client\MainMenu\CharacterCreator.ci.cs" />
+    <Compile Include="Client\Misc\CharacterCustomization.ci.cs" />
     <Compile Include="Client\Misc\Collections.ci.cs" />
     <Compile Include="Client\Misc\Entities.ci.cs" />
     <Compile Include="Client\Misc\GameMisc.ci.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="Client\Misc\TaskScheduler.ci.cs" />
     <Compile Include="Client\Misc\TextColorRenderer.ci.cs" />
     <Compile Include="Client\Mods\Audio.ci.cs" />
+    <Compile Include="Client\Mods\ApplyCharacterCustomization.ci.cs" />
     <Compile Include="Client\Mods\DebugChunk.ci.cs" />
     <Compile Include="Client\Mods\Draw2dMisc.ci.cs" />
     <Compile Include="Client\Mods\DrawArea.ci.cs" />

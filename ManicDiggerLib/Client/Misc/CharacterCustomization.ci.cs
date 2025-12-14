@@ -67,24 +67,24 @@ public class CharacterCustomization
 	}
 	
 	// Deserialize from string
-	public static CharacterCustomization Deserialize(GamePlatform platform, string data)
+	public static CharacterCustomization Deserialize(GamePlatform p, string data)
 	{
 		CharacterCustomization custom = new CharacterCustomization();
-		custom.platform = platform;
+		custom.platform = p;
 		
-		if (data == null || platform.StringLength(data) == 0)
+		if (data == null || p.StringEmpty(data))
 		{
 			return custom;
 		}
 		
 		IntRef partsCount = new IntRef();
-		string[] parts = platform.StringSplit(data, ",", partsCount);
+		string[] parts = p.StringSplit(data, ",", partsCount);
 		if (parts != null && partsCount.value >= 4)
 		{
-			custom.Gender = platform.IntParse(parts[0]);
-			custom.Hairstyle = platform.IntParse(parts[1]);
-			custom.Beard = platform.IntParse(parts[2]);
-			custom.Outfit = platform.IntParse(parts[3]);
+			custom.Gender = p.IntParse(parts[0]);
+			custom.Hairstyle = p.IntParse(parts[1]);
+			custom.Beard = p.IntParse(parts[2]);
+			custom.Outfit = p.IntParse(parts[3]);
 		}
 		
 		return custom;
