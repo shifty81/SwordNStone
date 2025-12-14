@@ -90,7 +90,7 @@ Created three comprehensive guides:
 ## File Structure
 
 ```
-/home/runner/work/manicdiggerVSCLONE/manicdiggerVSCLONE/
+/home/runner/work/SwordNStone/SwordNStone/
 ├── data/local/gui/
 │   ├── ui_big_pieces.png          # Original atlas (49KB)
 │   └── golden/                     # Extracted assets (168KB total)

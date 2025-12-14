@@ -57,7 +57,7 @@ Code
 ----
 The OpenGL game client is written in a common subset of C# and [Ć programming language](http://cito.sourceforge.net/).  
 It can be transcompiled to Java, C#, JavaScript, ActionScript, Perl and D.
-The only external dependency is [GamePlatform interface](ManicDiggerLib/Client/Platform.ci.cs).
+The only external dependency is [GamePlatform interface](SwordAndStoneLib/Client/Platform.ci.cs).
 
 Server mods can be implemented in C# or interpreted Javascript.
 

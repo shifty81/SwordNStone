@@ -301,12 +301,12 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent Condition=" ('$(OS)' == 'Windows_NT') and ( $(Configuration) != 'FastBuild')">cd $(SolutionDir)
-cmd /c "$(SolutionDir)\BuildCito.bat"</PreBuildEvent>
+    <PreBuildEvent Condition=" ('$(OS)' == 'Windows_NT') and ( $(Configuration) != 'FastBuild')">cd "$(SolutionDir)"
+cmd /c ""$(SolutionDir)BuildCito.bat""</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent Condition=" ('$(OS)' == 'Windows_NT') and ( $(Configuration) == 'FastBuild')">cd $(SolutionDir)
-cmd /c "$(SolutionDir)BuildCito.bat" fast</PreBuildEvent>
+    <PreBuildEvent Condition=" ('$(OS)' == 'Windows_NT') and ( $(Configuration) == 'FastBuild')">cd "$(SolutionDir)"
+cmd /c ""$(SolutionDir)BuildCito.bat" fast"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">cd '$(MSBuildProjectDirectory)/../'

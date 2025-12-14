@@ -90,11 +90,11 @@ This document provides instructions for building and testing the Sword&Stone pro
 
 The solution contains the following projects:
 
-- **ManicDigger**: Main game client application (WinExe)
-- **ManicDiggerLib**: Core game library containing game logic
-- **ManicDiggerServer**: Dedicated server application (Console)
+- **SwordAndStone**: Main game client application (WinExe)
+- **SwordAndStoneLib**: Core game library containing game logic
+- **SwordAndStoneServer**: Dedicated server application (Console)
 - **ScriptingApi**: Server-side scripting API for mods
-- **MdMonsterEditor**: Monster model editor tool
+- **SwordAndStoneMonsterEditor**: Monster model editor tool
 
 ## Build Output
 
@@ -104,28 +104,28 @@ After building, the compiled binaries will be located in:
 ```
 
 For example:
-- `ManicDigger/bin/Debug/ManicDigger.exe` - Game client
-- `ManicDiggerServer/bin/Debug/ManicDiggerServer.exe` - Server
-- `ManicDiggerLib/bin/Debug/ManicDiggerLib.dll` - Core library
+- `SwordAndStone/bin/Debug/SwordAndStone.exe` - Game client
+- `SwordAndStoneServer/bin/Debug/SwordAndStoneServer.exe` - Server
+- `SwordAndStoneLib/bin/Debug/SwordAndStoneLib.dll` - Core library
 
 ## Running the Application
 
 ### Game Client
 ```bash
 # Windows
-ManicDigger\bin\Debug\ManicDigger.exe
+SwordAndStone\bin\Debug\SwordAndStone.exe
 
 # Linux/Mac with Mono
-mono ManicDigger/bin/Debug/ManicDigger.exe
+mono SwordAndStone/bin/Debug/SwordAndStone.exe
 ```
 
 ### Server
 ```bash
 # Windows
-ManicDiggerServer\bin\Debug\ManicDiggerServer.exe
+SwordAndStoneServer\bin\Debug\SwordAndStoneServer.exe
 
 # Linux/Mac with Mono
-mono ManicDiggerServer/bin/Debug/ManicDiggerServer.exe
+mono SwordAndStoneServer/bin/Debug/SwordAndStoneServer.exe
 ```
 
 ## Testing
@@ -137,16 +137,16 @@ The project currently uses manual testing. Here's how to verify the build:
 #### Test 1: Server Startup
 1. Navigate to the server build directory:
    ```bash
-   cd ManicDiggerServer/bin/Debug
+   cd SwordAndStoneServer/bin/Debug
    ```
 
 2. Start the server:
    ```bash
    # Windows
-   ManicDiggerServer.exe
+   SwordAndStoneServer.exe
    
    # Linux/Mac
-   mono ManicDiggerServer.exe
+   mono SwordAndStoneServer.exe
    ```
 
 3. **Expected output:**
@@ -163,16 +163,16 @@ The project currently uses manual testing. Here's how to verify the build:
 1. Ensure you have the data folder in the working directory
 2. Navigate to the client build directory:
    ```bash
-   cd ManicDigger/bin/Debug
+   cd SwordAndStone/bin/Debug
    ```
 
 3. Start the client:
    ```bash
    # Windows
-   ManicDigger.exe
+   SwordAndStone.exe
    
    # Linux/Mac (requires X11 display)
-   mono ManicDigger.exe
+   mono SwordAndStone.exe
    ```
 
 4. **Expected output:**
@@ -186,7 +186,7 @@ The project currently uses manual testing. Here's how to verify the build:
    - Can navigate menus without errors
 
 #### Test 3: Library Integration
-The ManicDiggerLib.dll is the core library used by both client and server. It's automatically tested when:
+The SwordAndStoneLib.dll is the core library used by both client and server. It's automatically tested when:
 - Server starts successfully (uses lib)
 - Client starts successfully (uses lib)
 - No missing dependency errors occur
@@ -199,8 +199,16 @@ The ManicDiggerLib.dll is the core library used by both client and server. It's 
 #### Issue: Missing NuGet packages
 **Solution:** Run `nuget restore` or right-click solution in VS and select "Restore NuGet Packages"
 
+**Important:** Before building for the first time, you MUST restore NuGet packages. The packages folder is not included in the repository.
+
 #### Issue: OpenTK.dll not found
 **Solution:** Ensure NuGet packages are restored. OpenTK 2.0.0 should be in packages/OpenTK.2.0.0/
+
+#### Issue: protobuf-net.dll not found
+**Solution:** Ensure NuGet packages are restored. protobuf-net 2.1.0 should be in packages/protobuf-net.2.1.0/
+
+#### Issue: BuildCito.bat fails with "Could not find file '~1'"
+**Solution:** This was caused by spaces in the directory path and has been fixed. The PreBuildEvent now properly quotes the directory path.
 
 #### Issue: Build warnings
 **Note:** The project has many warnings but these don't prevent building or running. They are mostly unused variables and obsolete API usage.
@@ -210,9 +218,9 @@ The ManicDiggerLib.dll is the core library used by both client and server. It's 
 To add automated tests to this project:
 
 1. **Add a test project:**
-   - Create new Class Library project (e.g., ManicDigger.Tests)
+   - Create new Class Library project (e.g., SwordAndStone.Tests)
    - Add NUnit or xUnit NuGet package
-   - Reference ManicDiggerLib project
+   - Reference SwordAndStoneLib project
 
 2. **Write unit tests:**
    ```csharp
@@ -230,7 +238,7 @@ To add automated tests to this project:
 
 3. **Run tests:**
    - Use Test Explorer in Visual Studio
-   - Or command line: `nunit-console ManicDigger.Tests.dll`
+   - Or command line: `nunit-console SwordAndStone.Tests.dll`
 
 ## Distribution Build
 

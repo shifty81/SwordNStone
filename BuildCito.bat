@@ -11,19 +11,19 @@ mkdir cito\output\JsTa
 REM Create list of input files
 setlocal enabledelayedexpansion enableextensions
 set LIST=
-for %%x in (ManicDiggerLib\Client\*.ci.cs) do set LIST=!LIST! %%x
-for %%x in (ManicDiggerLib\Client\MainMenu\*.ci.cs) do set LIST=!LIST! %%x
-for %%x in (ManicDiggerLib\Client\Mods\*.ci.cs) do set LIST=!LIST! %%x
-for %%x in (ManicDiggerLib\Client\Misc\*.ci.cs) do set LIST=!LIST! %%x
-for %%x in (ManicDiggerLib\Client\SimpleServer\*.ci.cs) do set LIST=!LIST! %%x
-for %%x in (ManicDiggerLib\Common\*.ci.cs) do set LIST=!LIST! %%x
+for %%x in (SwordAndStoneLib\Client\*.ci.cs) do set LIST=!LIST! %%x
+for %%x in (SwordAndStoneLib\Client\MainMenu\*.ci.cs) do set LIST=!LIST! %%x
+for %%x in (SwordAndStoneLib\Client\Mods\*.ci.cs) do set LIST=!LIST! %%x
+for %%x in (SwordAndStoneLib\Client\Misc\*.ci.cs) do set LIST=!LIST! %%x
+for %%x in (SwordAndStoneLib\Client\SimpleServer\*.ci.cs) do set LIST=!LIST! %%x
+for %%x in (SwordAndStoneLib\Common\*.ci.cs) do set LIST=!LIST! %%x
 set LIST=%LIST:~1%
 echo %LIST%
 
 REM Compile JavaScript files
 IF NOT "%1"=="fast" CitoAssets data Assets.ci.cs
 IF NOT "%1"=="fast" cito -D CITO -D JS -D JSTA -l js-ta -o cito\output\JsTa\Assets.js Assets.ci.cs
-IF NOT "%1"=="fast" cito -D CITO -D JS -D JSTA -l js-ta -o cito\output\JsTa\ManicDigger.js %LIST% Packet.Serializer.ci.cs
+IF NOT "%1"=="fast" cito -D CITO -D JS -D JSTA -l js-ta -o cito\output\JsTa\SwordAndStone.js %LIST% Packet.Serializer.ci.cs
 
 REM Copy skeleton files
 copy cito\platform\JsTa\* cito\output\JsTa\*
