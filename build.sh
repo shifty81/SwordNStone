@@ -7,22 +7,22 @@ mkdir output
 cp -R data output
 
 # Dll
-cp ManicDiggerLib/bin/Release/ManicDiggerLib.dll output
+cp SwordAndStoneLib/bin/Release/SwordAndStoneLib.dll output
 
 # Scripting API
 cp ScriptingApi/bin/Release/ScriptingApi.dll output
 
 # Game Client
-cp ManicDigger/bin/Release/*.exe output
+cp SwordAndStone/bin/Release/*.exe output
 
 # Server
-cp ManicDiggerServer/bin/Release/*.exe output
+cp SwordAndStoneServer/bin/Release/*.exe output
 
 # Monster editor
-cp MdMonsterEditor/bin/Release/*.exe output
+cp SwordAndStoneMonsterEditor/bin/Release/*.exe output
 
 # Server Mods
-cp -R ManicDiggerLib/Server/Mods output
+cp -R SwordAndStoneLib/Server/Mods output
 
 # Third-party libraries
 cp Lib/* output
