@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
-	[XmlRoot(ElementName = "ManicDiggerServerConfig")]
+	[XmlRoot(ElementName = "SwordAndStoneServerConfig")]
 	public class ServerConfig
 	{
 		public int Format { get; set; }

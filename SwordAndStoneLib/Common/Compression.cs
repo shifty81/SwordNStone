@@ -2,7 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 
-namespace ManicDigger.Common
+namespace SwordAndStone.Common
 {
 	/// <summary>
 	/// Generic compression interface for bytestreams

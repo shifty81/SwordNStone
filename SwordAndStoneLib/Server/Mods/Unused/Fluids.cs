@@ -14,7 +14,7 @@ using System.Text;
  * file into Manic Digger\Mods\Fortress
  * ******************************************************** */
 
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
     public class Fluids : IMod
     {

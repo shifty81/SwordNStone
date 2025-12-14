@@ -2,7 +2,7 @@
 using FragLabs.HTTP;
 using System.Diagnostics;
 
-namespace ManicDigger.Mods.Fortress
+namespace SwordAndStone.Mods.Fortress
 {
 	public class HttpStats : IMod
 	{

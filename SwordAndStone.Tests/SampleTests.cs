@@ -1,10 +1,10 @@
 using NUnit.Framework;
 using System;
 
-namespace ManicDigger.Tests
+namespace SwordAndStone.Tests
 {
     /// <summary>
-    /// Sample test class demonstrating how to add automated tests to ManicDigger.
+    /// Sample test class demonstrating how to add automated tests to SwordAndStone.
     /// These tests serve as examples and can be expanded to test actual game functionality.
     /// </summary>
     [TestFixture]
@@ -33,7 +33,7 @@ namespace ManicDigger.Tests
         public void TestStringOperations()
         {
             // Arrange
-            string testString = "ManicDigger";
+            string testString = "SwordAndStone";
             
             // Act & Assert
             Assert.IsNotNull(testString);
@@ -73,7 +73,7 @@ namespace ManicDigger.Tests
         public void TestScriptingApiAvailable()
         {
             // This test verifies that the ScriptingApi assembly can be loaded
-            Type modManagerType = typeof(ManicDigger.ModManager);
+            Type modManagerType = typeof(SwordAndStone.ModManager);
             Assert.IsNotNull(modManagerType, "ModManager type should be available");
         }
 

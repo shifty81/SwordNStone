@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ManicDigger.Common
+namespace SwordAndStone.Common
 {
 	/// <summary>
 	/// TODO: Rename or remove

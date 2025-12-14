@@ -7,7 +7,7 @@ using System.Net;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class ModManager1 : ModManager
 	{
@@ -181,7 +181,7 @@ namespace ManicDigger.Server
 			return MapUtil.IsValidPos(server.d_Map, x, y, z);
 		}
 
-		public void RegisterTimer(ManicDigger.Action a, double interval)
+		public void RegisterTimer(SwordAndStone.Action a, double interval)
 		{
 			server.timers[new Timer() { INTERVAL = interval }] = delegate { a(); };
 		}
@@ -1018,7 +1018,7 @@ namespace ManicDigger.Server
 			return server.GetGroupName(player);
 		}
 
-		public void InstallHttpModule(string name, ManicDigger.Func<string> description, FragLabs.HTTP.IHttpModule module)
+		public void InstallHttpModule(string name, SwordAndStone.Func<string> description, FragLabs.HTTP.IHttpModule module)
 		{
 			server.InstallHttpModule(name, description, module);
 		}

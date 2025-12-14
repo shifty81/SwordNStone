@@ -2,9 +2,9 @@
 using System.IO;
 using System;
 using csvorbis;
-using ManicDigger.Server;
+using SwordAndStone.Server;
 
-namespace ManicDigger.ClientNative
+namespace SwordAndStone.ClientNative
 {
 	public class AudioDataCs : AudioData
 	{

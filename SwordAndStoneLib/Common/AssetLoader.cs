@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ManicDigger.Common
+namespace SwordAndStone.Common
 {
 	/// <summary>
 	/// Provides functions for loading and reading asset files from given folders

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace ManicDigger.Mods.Fortress
+namespace SwordAndStone.Mods.Fortress
 {
 	public class PlayerList : IMod
 	{

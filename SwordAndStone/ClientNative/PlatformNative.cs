@@ -13,13 +13,13 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 using OpenTK;
 using OpenTK.Audio;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
-namespace ManicDigger.ClientNative
+namespace SwordAndStone.ClientNative
 {
 	public class GamePlatformNative : GamePlatform
 	{
@@ -231,7 +231,7 @@ namespace ManicDigger.ClientNative
 		{
 			System.Windows.Forms.Clipboard.SetText(s);
 		}
-		ManicDigger.Renderers.TextRenderer r = new ManicDigger.Renderers.TextRenderer();
+		SwordAndStone.Renderers.TextRenderer r = new SwordAndStone.Renderers.TextRenderer();
 		Dictionary<TextAndFont, SizeF> textsizes = new Dictionary<TextAndFont, SizeF>();
 		public SizeF TextSize(string text, FontCi font)
 		{
@@ -483,7 +483,7 @@ namespace ManicDigger.ClientNative
 			return LoadTexture(bmp_.bmp, false);
 		}
 
-		ManicDigger.Renderers.TextRenderer textrenderer = new ManicDigger.Renderers.TextRenderer();
+		SwordAndStone.Renderers.TextRenderer textrenderer = new SwordAndStone.Renderers.TextRenderer();
 
 		public override BitmapCi CreateTextTexture(Text_ t)
 		{

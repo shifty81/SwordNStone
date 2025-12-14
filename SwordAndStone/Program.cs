@@ -4,13 +4,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using ManicDigger.ClientNative;
-using ManicDigger.Common;
-using ManicDigger.Server;
+using SwordAndStone.ClientNative;
+using SwordAndStone.Common;
+using SwordAndStone.Server;
 using OpenTK.Graphics;
 #endregion
 
-public class ManicDiggerProgram
+public class SwordAndStoneProgram
 {
 	[STAThread]
 	public static void Main(string[] args)
@@ -21,10 +21,10 @@ public class ManicDiggerProgram
 		CrashReporter.EnableGlobalExceptionHandling(false);
 		#endif
 
-		new ManicDiggerProgram(args);
+		new SwordAndStoneProgram(args);
 	}
 
-	public ManicDiggerProgram(string[] args)
+	public SwordAndStoneProgram(string[] args)
 	{
 		dummyNetwork = new DummyNetwork();
 		dummyNetwork.Start(new MonitorObject(), new MonitorObject());

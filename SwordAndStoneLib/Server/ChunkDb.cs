@@ -5,9 +5,9 @@ using System.Data.Common;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public struct Xyz
 	{

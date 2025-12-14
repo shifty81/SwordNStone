@@ -7,7 +7,7 @@ using OpenTK.Graphics.OpenGL;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace ManicDigger
+namespace SwordAndStone
 {
 	public class TextureLoader
 	{

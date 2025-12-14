@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 
 // http://www.adp-gmbh.ch/csharp/avi/write_avi.html
 
-namespace ManicDigger.ClientNative
+namespace SwordAndStone.ClientNative
 {
 	public class AviWriter
 	{

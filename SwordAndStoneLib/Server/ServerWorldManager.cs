@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using PointG = System.Drawing.Point;
 using System.Diagnostics;
 using ProtoBuf;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public partial class Server
 	{

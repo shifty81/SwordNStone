@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
 	class EntitySigns : IMod
 	{

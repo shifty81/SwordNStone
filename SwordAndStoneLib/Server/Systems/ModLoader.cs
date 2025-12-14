@@ -4,9 +4,9 @@ using System.Text;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.IO;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
     public class ServerSystemModLoader : ServerSystem
     {
@@ -69,7 +69,7 @@ namespace ManicDigger.Server
 
         Dictionary<string, string> GetScriptSources(Server server)
         {
-            string[] modpaths = new[] { Path.Combine(Path.Combine(Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), "ManicDiggerLib"), "Server"), "Mods"), "Mods" };
+            string[] modpaths = new[] { Path.Combine(Path.Combine(Path.Combine(Path.Combine(Path.Combine("..", ".."), ".."), "SwordAndStoneLib"), "Server"), "Mods"), "Mods" };
 
             for (int i = 0; i < modpaths.Length; i++)
             {

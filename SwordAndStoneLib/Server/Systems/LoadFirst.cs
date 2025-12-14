@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class ServerSystemLoadFirst : ServerSystem
 	{

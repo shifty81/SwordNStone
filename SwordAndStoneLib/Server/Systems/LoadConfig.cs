@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class ServerSystemLoadConfig : ServerSystem
 	{
@@ -53,36 +53,36 @@ namespace ManicDigger.Server
 						StreamReader sr = new StreamReader(s);
 						XmlDocument d = new XmlDocument();
 						d.Load(sr);
-						server.config.Format = int.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/Format"));
-						server.config.Name = XmlTool.XmlVal(d, "/ManicDiggerServerConfig/Name");
-						server.config.Motd = XmlTool.XmlVal(d, "/ManicDiggerServerConfig/Motd");
-						server.config.Port = int.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/Port"));
-						string maxclients = XmlTool.XmlVal(d, "/ManicDiggerServerConfig/MaxClients");
+						server.config.Format = int.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/Format"));
+						server.config.Name = XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/Name");
+						server.config.Motd = XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/Motd");
+						server.config.Port = int.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/Port"));
+						string maxclients = XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/MaxClients");
 						if (maxclients != null)
 						{
 							server.config.MaxClients = int.Parse(maxclients);
 						}
-						string key = XmlTool.XmlVal(d, "/ManicDiggerServerConfig/Key");
+						string key = XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/Key");
 						if (key != null)
 						{
 							server.config.Key = key;
 						}
-						server.config.IsCreative = Misc.ReadBool(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/Creative"));
-						server.config.Public = Misc.ReadBool(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/Public"));
-						server.config.AllowGuests = Misc.ReadBool(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/AllowGuests"));
-						if (XmlTool.XmlVal(d, "/ManicDiggerServerConfig/MapSizeX") != null)
+						server.config.IsCreative = Misc.ReadBool(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/Creative"));
+						server.config.Public = Misc.ReadBool(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/Public"));
+						server.config.AllowGuests = Misc.ReadBool(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/AllowGuests"));
+						if (XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/MapSizeX") != null)
 						{
-							server.config.MapSizeX = int.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/MapSizeX"));
-							server.config.MapSizeY = int.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/MapSizeY"));
-							server.config.MapSizeZ = int.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/MapSizeZ"));
+							server.config.MapSizeX = int.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/MapSizeX"));
+							server.config.MapSizeY = int.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/MapSizeY"));
+							server.config.MapSizeZ = int.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/MapSizeZ"));
 						}
-						server.config.BuildLogging = bool.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/BuildLogging"));
-						server.config.ServerEventLogging = bool.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/ServerEventLogging"));
-						server.config.ChatLogging = bool.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/ChatLogging"));
-						server.config.AllowScripting = bool.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/AllowScripting"));
-						server.config.ServerMonitor = bool.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/ServerMonitor"));
-						server.config.ClientConnectionTimeout = int.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/ClientConnectionTimeout"));
-						server.config.ClientPlayingTimeout = int.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerConfig/ClientPlayingTimeout"));
+						server.config.BuildLogging = bool.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/BuildLogging"));
+						server.config.ServerEventLogging = bool.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/ServerEventLogging"));
+						server.config.ChatLogging = bool.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/ChatLogging"));
+						server.config.AllowScripting = bool.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/AllowScripting"));
+						server.config.ServerMonitor = bool.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/ServerMonitor"));
+						server.config.ClientConnectionTimeout = int.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/ClientConnectionTimeout"));
+						server.config.ClientPlayingTimeout = int.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerConfig/ClientPlayingTimeout"));
 					}
 					//Save with new version.
 					SaveConfig(server);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace ManicDigger.Common
+namespace SwordAndStone.Common
 {
 	/// <summary>
 	/// Provides basic XML operations

@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class ServerConsole
 	{

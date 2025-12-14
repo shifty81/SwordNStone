@@ -2,9 +2,9 @@ using NUnit.Framework;
 using System;
 using System.IO;
 using System.Linq;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 
-namespace ManicDigger.Tests
+namespace SwordAndStone.Tests
 {
     /// <summary>
     /// Tests for AssetLoader to verify texture loading functionality
@@ -18,7 +18,7 @@ namespace ManicDigger.Tests
         public void Setup()
         {
             // Create a temporary test directory structure
-            testDataPath = Path.Combine(Path.GetTempPath(), "ManicDiggerTest_" + Guid.NewGuid().ToString());
+            testDataPath = Path.Combine(Path.GetTempPath(), "SwordAndStoneTest_" + Guid.NewGuid().ToString());
             Directory.CreateDirectory(testDataPath);
             
             // Create subdirectories

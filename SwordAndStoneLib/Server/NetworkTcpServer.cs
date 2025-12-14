@@ -3,9 +3,9 @@ using System.Text;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class TcpNetServer : NetServer
 	{

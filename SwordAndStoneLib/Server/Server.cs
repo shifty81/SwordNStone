@@ -14,9 +14,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using Jint.Delegates;
 using System.Diagnostics;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 public class ClientException : Exception
 {
@@ -28,7 +28,7 @@ public class ClientException : Exception
     public int clientid;
 }
 [ProtoContract]
-public class ManicDiggerSave
+public class SwordAndStoneSave
 {
     [ProtoMember(1, IsRequired = false)]
     public int MapSizeX;
@@ -418,7 +418,7 @@ public partial class Server : ICurrentTime, IDropItem
             playername = "Server",
             queryClient = false
         };
-        ManicDigger.Group serverGroup = new ManicDigger.Group();
+        SwordAndStone.Group serverGroup = new SwordAndStone.Group();
         serverGroup.Name = "Server";
         serverGroup.Level = 255;
         serverGroup.GroupPrivileges = new List<string>();
@@ -538,7 +538,7 @@ public partial class Server : ICurrentTime, IDropItem
             this._time.Init(TimeSpan.Parse("08:00").Ticks);
             return;
         }
-        ManicDiggerSave save = Serializer.Deserialize<ManicDiggerSave>(new MemoryStream(globaldata));
+        SwordAndStoneSave save = Serializer.Deserialize<SwordAndStoneSave>(new MemoryStream(globaldata));
         Seed = save.Seed;
         d_Map.Reset(d_Map.MapSizeX, d_Map.MapSizeY, d_Map.MapSizeZ);
         if (config.IsCreative) this.Inventory = Inventory = new Dictionary<string, PacketServerInventory>(StringComparer.InvariantCultureIgnoreCase);
@@ -549,8 +549,8 @@ public partial class Server : ICurrentTime, IDropItem
         this.LastMonsterId = save.LastMonsterId;
         this.moddata = save.moddata;
     }
-    public List<ManicDigger.Action> onload = new List<ManicDigger.Action>();
-    public List<ManicDigger.Action> onsave = new List<ManicDigger.Action>();
+    public List<SwordAndStone.Action> onload = new List<SwordAndStone.Action>();
+    public List<SwordAndStone.Action> onsave = new List<SwordAndStone.Action>();
     public int LastMonsterId;
     public Dictionary<string, PacketServerInventory> Inventory = new Dictionary<string, PacketServerInventory>(StringComparer.InvariantCultureIgnoreCase);
     public Dictionary<string, PacketServerPlayerStats> PlayerStats = new Dictionary<string, PacketServerPlayerStats>(StringComparer.InvariantCultureIgnoreCase);
@@ -560,7 +560,7 @@ public partial class Server : ICurrentTime, IDropItem
         {
             onsave[i]();
         }
-        ManicDiggerSave save = new ManicDiggerSave();
+        SwordAndStoneSave save = new SwordAndStoneSave();
         SaveAllLoadedChunks();
         if (!config.IsCreative)
         {
@@ -1033,7 +1033,7 @@ public partial class Server : ICurrentTime, IDropItem
 
     Inventory StartInventory()
     {
-        Inventory inv = ManicDigger.Inventory.Create();
+        Inventory inv = SwordAndStone.Inventory.Create();
         int x = 0;
         int y = 0;
         for (int i = 0; i < d_Data.StartInventoryAmount().Length; i++)
@@ -1261,11 +1261,11 @@ public partial class Server : ICurrentTime, IDropItem
                     // Assign group to new client
                     //Check if client is in ServerClient.txt and assign corresponding group.
                     bool exists = false;
-                    foreach (ManicDigger.Client client in serverClient.Clients)
+                    foreach (SwordAndStone.Client client in serverClient.Clients)
                     {
                         if (client.Name.Equals(username, StringComparison.InvariantCultureIgnoreCase))
                         {
-                            foreach (ManicDigger.Group clientGroup in serverClient.Groups)
+                            foreach (SwordAndStone.Group clientGroup in serverClient.Groups)
                             {
                                 if (clientGroup.Name.Equals(client.Group))
                                 {
@@ -2042,14 +2042,14 @@ public partial class Server : ICurrentTime, IDropItem
     public Vector3i GetPlayerSpawnPositionMul32(int clientid)
     {
         Vector3i position;
-        ManicDigger.Spawn playerSpawn = null;
+        SwordAndStone.Spawn playerSpawn = null;
         // Check if there is a spawn entry for his assign group
         if (clients[clientid].clientGroup.Spawn != null)
         {
             playerSpawn = clients[clientid].clientGroup.Spawn;
         }
         // Check if there is an entry in clients with spawn member (overrides group spawn).
-        foreach (ManicDigger.Client client in serverClient.Clients)
+        foreach (SwordAndStone.Client client in serverClient.Clients)
         {
             if (client.Name.Equals(clients[clientid].playername, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -2460,7 +2460,7 @@ public partial class Server : ICurrentTime, IDropItem
         }
 
         // Check if there is an entry in clients with fill-limit member (overrides group fill-limit).
-        foreach (ManicDigger.Client clientConfig in serverClient.Clients)
+        foreach (SwordAndStone.Client clientConfig in serverClient.Clients)
         {
             if (clientConfig.Name.Equals(client.playername, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -3272,11 +3272,11 @@ public partial class Server : ICurrentTime, IDropItem
 
     internal bool serverClientNeedsSaving;
     public ServerClient serverClient;
-    public ManicDigger.Group defaultGroupGuest;
-    public ManicDigger.Group defaultGroupRegistered;
+    public SwordAndStone.Group defaultGroupGuest;
+    public SwordAndStone.Group defaultGroupRegistered;
     public Vector3i defaultPlayerSpawn;
 
-    private Vector3i SpawnToVector3i(ManicDigger.Spawn spawn)
+    private Vector3i SpawnToVector3i(SwordAndStone.Spawn spawn)
     {
         int x = spawn.x;
         int y = spawn.y;
@@ -3585,7 +3585,7 @@ public partial class Server : ICurrentTime, IDropItem
         return GetClient(playerid).clientGroup.Name;
     }
 
-    internal void InstallHttpModule(string name, ManicDigger.Func<string> description, FragLabs.HTTP.IHttpModule module)
+    internal void InstallHttpModule(string name, SwordAndStone.Func<string> description, FragLabs.HTTP.IHttpModule module)
     {
         ActiveHttpModule m = new ActiveHttpModule();
         m.name = name;

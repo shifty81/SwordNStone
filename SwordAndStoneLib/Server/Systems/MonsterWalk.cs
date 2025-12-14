@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	/// <summary>
 	/// TODO: Implement monster movement

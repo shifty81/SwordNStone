@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public interface IGetFileStream
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ManicDigger.Common
+namespace SwordAndStone.Common
 {
 	/// <summary>
 	/// Extracts the game version from "version.txt" in the working directory

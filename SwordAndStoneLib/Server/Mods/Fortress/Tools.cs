@@ -1,6 +1,6 @@
 using System;
 
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
 	/// <summary>
 	/// This class defines basic tools (pickaxe, axe, shovel)

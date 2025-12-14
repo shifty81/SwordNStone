@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class ClientOnServer
 	{
@@ -66,9 +66,9 @@ namespace ManicDigger.Server
 		internal bool IsPlayerStatsDirty;
 		internal int FillLimit;
 		//internal List<byte[]> blobstosend = new List<byte[]>();
-		internal ManicDigger.Group clientGroup;
+		internal SwordAndStone.Group clientGroup;
 		internal bool IsBot;
-		public void AssignGroup(ManicDigger.Group newGroup)
+		public void AssignGroup(SwordAndStone.Group newGroup)
 		{
 			this.clientGroup = newGroup;
 			this.privileges.Clear();

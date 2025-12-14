@@ -7,7 +7,7 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System.IO;
 
-namespace ManicDigger.ClientNative
+namespace SwordAndStone.ClientNative
 {
     public interface IScreenshot
     {

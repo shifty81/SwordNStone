@@ -1,6 +1,6 @@
 using System;
 
-namespace ManicDigger.Mods.War
+namespace SwordAndStone.Mods.War
 {
 	public class Noise2DWorldGeneratorWar : IMod
 	{

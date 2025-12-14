@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
 	public class RememberPosition : IMod
 	{

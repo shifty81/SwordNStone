@@ -1,7 +1,7 @@
 ﻿using System;
 using LibNoise;
 
-namespace ManicDigger.Mods.War
+namespace SwordAndStone.Mods.War
 {
 	public class TreeGenerator : IMod
 	{

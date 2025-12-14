@@ -1,7 +1,7 @@
 ﻿using System;
 using ProtoBuf;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	[ProtoContract]
 	public class PacketServerInventory
@@ -15,7 +15,7 @@ namespace ManicDigger.Server
     public int Max = 200;
     */
 		[ProtoMember(4, IsRequired = false)]
-		public ManicDigger.Inventory Inventory;
+		public SwordAndStone.Inventory Inventory;
 	}
 	[ProtoContract]
 	public class PacketServerPlayerStats

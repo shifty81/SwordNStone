@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	/// <summary>
 	/// Sends ping to all clients and disconnects timed-out players

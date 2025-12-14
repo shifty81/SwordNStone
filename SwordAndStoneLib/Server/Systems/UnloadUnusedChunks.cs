@@ -1,4 +1,4 @@
-﻿namespace ManicDigger.Server
+﻿namespace SwordAndStone.Server
 {
 	/// <summary>
 	/// Unload chunks currently not seen by players

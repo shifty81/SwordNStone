@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
-	[XmlRoot(ElementName = "ManicDiggerServerBanlist")]
+	[XmlRoot(ElementName = "SwordAndStoneServerBanlist")]
 	public class ServerBanlist
 	{
 		[XmlArrayItem(ElementName = "User")]

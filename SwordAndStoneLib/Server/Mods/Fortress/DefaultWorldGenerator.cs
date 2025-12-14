@@ -2,7 +2,7 @@
 using LibNoise;
 using LibNoise.Modifiers;
 
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
 	public class DefaultWorldGenerator : IMod
 	{

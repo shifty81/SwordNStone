@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class InfiniteMapChunked2dServer
 	{

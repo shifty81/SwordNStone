@@ -1,7 +1,7 @@
 ﻿using System;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	/// <summary>
 	/// Description of NetworkEnetServer.

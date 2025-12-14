@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class ServerSystemChunksSimulation : ServerSystem
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	/// <summary>
 	/// The main function for loading, unloading and sending chunks to players.

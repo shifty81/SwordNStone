@@ -1,5 +1,5 @@
 ﻿using System;
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
 	/// <summary>
 	/// This is a fix for backward compatibility issues of old Mods.

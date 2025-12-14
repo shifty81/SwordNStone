@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
 	//for debugging
 	public class Ghost : IMod

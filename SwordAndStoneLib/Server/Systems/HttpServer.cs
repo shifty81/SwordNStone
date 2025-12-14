@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class ServerSystemHttpServer : ServerSystem
 	{
@@ -67,7 +67,7 @@ namespace ManicDigger.Server
 	public class ActiveHttpModule
 	{
 		public string name;
-		public ManicDigger.Func<string> description;
+		public SwordAndStone.Func<string> description;
 		public FragLabs.HTTP.IHttpModule module;
 		public bool installed;
 	}

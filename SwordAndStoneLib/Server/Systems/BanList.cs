@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 using System.Xml.Serialization;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class ServerSystemBanList : ServerSystem
 	{
@@ -493,8 +493,8 @@ namespace ManicDigger.Server
 			// Target is at the moment not online. Check if there is an entry in ServerClient
 
 			// Get related client from config file
-			ManicDigger.Client targetClient = server.serverClient.Clients.Find(
-				                                       delegate(ManicDigger.Client client)
+			SwordAndStone.Client targetClient = server.serverClient.Clients.Find(
+				                                       delegate(SwordAndStone.Client client)
 				{
 					return client.Name.Equals(target, StringComparison.InvariantCultureIgnoreCase);
 				}
@@ -504,8 +504,8 @@ namespace ManicDigger.Server
 			if (targetClient != null)
 			{
 				// Get target's group.
-				ManicDigger.Group targetGroup = server.serverClient.Groups.Find(
-					                                        delegate(ManicDigger.Group grp)
+				SwordAndStone.Group targetGroup = server.serverClient.Groups.Find(
+					                                        delegate(SwordAndStone.Group grp)
 					{
 						return grp.Name.Equals(targetClient.Group);
 					}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
 	public class BuildLog : IMod
 	{

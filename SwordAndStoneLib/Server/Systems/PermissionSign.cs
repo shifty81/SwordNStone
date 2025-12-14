@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public class ServerSystemPermissionSign : ServerSystem
 	{
@@ -148,11 +148,11 @@ namespace ManicDigger.Server
 				server.SendMessage(player, server.colorError + server.language.Get("Server_CommandInsufficientPrivileges"));
 				return;
 			}
-			ManicDigger.Dialog d = new ManicDigger.Dialog();
+			SwordAndStone.Dialog d = new SwordAndStone.Dialog();
 			d.Width = 400;
 			d.Height = 400;
 			d.IsModal = true;
-			d.Widgets = new ManicDigger.Widget[4 + server.serverClient.Groups.Count * 2];
+			d.Widgets = new SwordAndStone.Widget[4 + server.serverClient.Groups.Count * 2];
 			int widgetCount = 0;
 			var font = new DialogFont("Verdana", 11f, DialogFontStyle.Bold);
 			d.Widgets[widgetCount++] = Widget.MakeSolid(0, 0, 400, 400, Game.ColorFromArgb(255, 50, 50, 50));

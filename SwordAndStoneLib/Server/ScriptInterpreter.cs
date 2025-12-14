@@ -7,7 +7,7 @@ using System.Text;
 using Jint;
 using Jint.Native;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	public interface IScriptInterpreter
 	{

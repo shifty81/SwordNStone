@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
 	/// <summary>
 	/// This class contains all command logic and event handling

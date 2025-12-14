@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using ProtoBuf;
 
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
 	public class BlockId : IMod
 	{

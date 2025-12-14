@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 using System.Xml.Serialization;
 using System.Xml;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	//Load server groups and spawnpoints
 	public class ServerSystemLoadServerClient : ServerSystem
@@ -55,9 +55,9 @@ namespace ManicDigger.Server
 						StreamReader sr = new StreamReader(s);
 						XmlDocument d = new XmlDocument();
 						d.Load(sr);
-						server.serverClient.Format = int.Parse(XmlTool.XmlVal(d, "/ManicDiggerServerClient/Format"));
-						server.serverClient.DefaultGroupGuests = XmlTool.XmlVal(d, "/ManicDiggerServerClient/DefaultGroupGuests");
-						server.serverClient.DefaultGroupRegistered = XmlTool.XmlVal(d, "/ManicDiggerServerClient/DefaultGroupRegistered");
+						server.serverClient.Format = int.Parse(XmlTool.XmlVal(d, "/SwordAndStoneServerClient/Format"));
+						server.serverClient.DefaultGroupGuests = XmlTool.XmlVal(d, "/SwordAndStoneServerClient/DefaultGroupGuests");
+						server.serverClient.DefaultGroupRegistered = XmlTool.XmlVal(d, "/SwordAndStoneServerClient/DefaultGroupRegistered");
 					}
 					//Save with new version.
 					SaveServerClient(server);
@@ -85,7 +85,7 @@ namespace ManicDigger.Server
 			}
 
 			server.defaultGroupGuest = server.serverClient.Groups.Find(
-				delegate(ManicDigger.Group grp)
+				delegate(SwordAndStone.Group grp)
 				{
 					return grp.Name.Equals(server.serverClient.DefaultGroupGuests);
 				}
@@ -95,7 +95,7 @@ namespace ManicDigger.Server
 				throw new Exception(server.language.ServerClientConfigGuestGroupNotFound());
 			}
 			server.defaultGroupRegistered = server.serverClient.Groups.Find(
-				delegate(ManicDigger.Group grp)
+				delegate(SwordAndStone.Group grp)
 				{
 					return grp.Name.Equals(server.serverClient.DefaultGroupRegistered);
 				}

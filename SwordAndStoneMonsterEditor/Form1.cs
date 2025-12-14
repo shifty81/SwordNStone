@@ -7,9 +7,9 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using ManicDigger;
-using ManicDigger.ClientNative;
-using ManicDigger.Server;
+using SwordAndStone;
+using SwordAndStone.ClientNative;
+using SwordAndStone.Server;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
@@ -39,7 +39,7 @@ namespace MdMonsterEditor
 			UpdateLabels();
 
 			// init 3D rendering
-			the3d = new ManicDigger.TextureLoader() { d_Config3d = config3d };
+			the3d = new SwordAndStone.TextureLoader() { d_Config3d = config3d };
 			glControl1.Paint += new PaintEventHandler(glControl1_Paint);
 			glControl1.MouseWheel += new System.Windows.Forms.MouseEventHandler(glControl1_MouseWheel);
 			loaded = true;

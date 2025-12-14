@@ -4,7 +4,7 @@ using System.Drawing;
 using ProtoBuf;
 using System.Runtime.Serialization;
 
-namespace ManicDigger.Server
+namespace SwordAndStone.Server
 {
 	//separate class because it's used by server and client. TODO: verify
 	public class InventoryUtil

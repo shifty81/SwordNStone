@@ -11,9 +11,9 @@ using System.Drawing.Imaging;
 using System.Xml.XPath;
 using System.Xml;
 using System.Threading;
-using ManicDigger.Common;
+using SwordAndStone.Common;
 
-namespace ManicDigger.ClientNative
+namespace SwordAndStone.ClientNative
 {
 	[XmlRoot("dictionary")]
 	public class SerializableDictionary<TKey, TValue>

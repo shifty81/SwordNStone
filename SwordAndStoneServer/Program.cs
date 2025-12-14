@@ -3,10 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
-using ManicDigger.Common;
-using ManicDigger.Server;
+using SwordAndStone.Common;
+using SwordAndStone.Server;
 
-namespace ManicDiggerServer
+namespace SwordAndStoneServer
 {
 	class Program
 	{

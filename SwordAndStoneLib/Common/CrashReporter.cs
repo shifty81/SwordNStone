@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace ManicDigger.Common
+namespace SwordAndStone.Common
 {
 	public delegate void Action();
 	
@@ -15,7 +15,7 @@ namespace ManicDigger.Common
 	public class CrashReporter
 	{
 		private static string gamepathcrash = GameStorePath.GetStorePath();
-		private static string s_strDefaultFileName = "ManicDiggerCrash.txt";
+		private static string s_strDefaultFileName = "SwordAndStoneCrash.txt";
 
 		private string m_strFileName = "";
 

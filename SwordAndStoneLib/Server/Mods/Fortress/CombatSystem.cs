@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ManicDigger.Mods
+namespace SwordAndStone.Mods
 {
 	/// <summary>
 	/// Basic melee combat system with sword attacks and shield blocking

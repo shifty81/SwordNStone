@@ -7,7 +7,7 @@ using System.Threading;
 using System.Diagnostics;
 using OpenTK;
 
-namespace ManicDigger.ClientNative
+namespace SwordAndStone.ClientNative
 {
 	public class AudioOpenAl
 	{
