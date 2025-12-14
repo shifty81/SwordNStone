@@ -571,6 +571,17 @@
     internal void StartModifyWorld()
     {
     }
+    
+    internal void StartCharacterCreator(bool fromSingleplayer, string worldPath_)
+    {
+        ScreenCharacterCreator characterCreator = new ScreenCharacterCreator();
+        characterCreator.returnToSingleplayer = fromSingleplayer;
+        characterCreator.worldPath = worldPath_;
+        characterCreator.LoadCustomization();
+        screen = characterCreator;
+        screen.menu = this;
+        screen.LoadTranslations();
+    }
 
     public void StartGame(bool singleplayer, string singleplayerSavePath, ConnectData connectData)
     {
