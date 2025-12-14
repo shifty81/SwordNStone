@@ -4049,7 +4049,7 @@
     {
         for (int i = 0; i < clientmodsCount; i++)
         {
-            if (clientmods[i] is ModEmoteSystem)
+            if (clientmods[i] != null && clientmods[i].IsEmoteSystem())
             {
                 return (ModEmoteSystem)clientmods[i];
             }

@@ -22,6 +22,9 @@ public class ModEmoteSystem : ClientMod
         "cheer",
         "talk"
     };
+    
+    // Override to identify this mod type (CiTo doesn't support 'is' operator)
+    public override bool IsEmoteSystem() { return true; }
 
     public override void OnNewFrameReadOnlyMainThread(Game game, float deltaTime)
     {
