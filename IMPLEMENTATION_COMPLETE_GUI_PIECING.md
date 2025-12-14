@@ -64,10 +64,10 @@ Comprehensive 10KB+ documentation covering:
 ## Technical Details
 
 ### Files Modified
-1. `ManicDiggerLib/Client/Mods/GuiInventory.ci.cs` - Inventory screen
-2. `ManicDiggerLib/Client/Mods/GuiCrafting.ci.cs` - Crafting interface
-3. `ManicDiggerLib/Client/Mods/GuiEscapeMenu.ci.cs` - Pause/settings menu
-4. `ManicDiggerLib/Client/Mods/GuiChat.ci.cs` - Chat interface
+1. `SwordAndStoneLib/Client/Mods/GuiInventory.ci.cs` - Inventory screen
+2. `SwordAndStoneLib/Client/Mods/GuiCrafting.ci.cs` - Crafting interface
+3. `SwordAndStoneLib/Client/Mods/GuiEscapeMenu.ci.cs` - Pause/settings menu
+4. `SwordAndStoneLib/Client/Mods/GuiChat.ci.cs` - Chat interface
 
 ### Assets Used
 All 35 golden UI pieces from `/data/local/gui/golden/`:

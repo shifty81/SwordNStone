@@ -138,7 +138,7 @@
 
 ### Server-Side Mod Structure
 ```
-ManicDiggerLib/Server/Mods/Fortress/
+SwordAndStoneLib/Server/Mods/Fortress/
 ├── Core.cs             - Core game mod (existing)
 ├── CoreBlocks.cs       - Block definitions (existing)
 ├── Tools.cs            - Tool items (existing)
@@ -247,7 +247,7 @@ SetPlayerHealth(targetId, newHealth, maxHealth)
 
 ### 🎯 Testing Plan
 ```
-1. Start ManicDigger Server
+1. Start SwordAndStone Server
 2. Load Fortress game mode (loads mods)
 3. Check console for "[CombatSystem] ... initialized"
 4. Connect client to server

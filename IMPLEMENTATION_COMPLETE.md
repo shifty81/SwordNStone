@@ -106,16 +106,16 @@ GuiFrameRenderer.DrawSlot(game, x, y, size, isActive);
 ## File Changes Summary
 
 ### New Files Created
-- `ManicDiggerLib/Client/Mods/GuiFrameRenderer.ci.cs` (+184 lines)
+- `SwordAndStoneLib/Client/Mods/GuiFrameRenderer.ci.cs` (+184 lines)
 - `data/local/gui/golden/*.png` (35 assets, 168KB)
 - `STANDARDIZED_UI_FRAMEWORK.md` (11KB documentation)
 - `UI_MIGRATION_GUIDE.md` (11KB documentation)
 - `GOLDEN_UI_IMPLEMENTATION_SUMMARY.md` (10KB documentation)
 
 ### Files Modified
-- `ManicDiggerLib/Client/Mods/GuiWoWUnitFrames.ci.cs` (-60 lines, +40 lines)
-- `ManicDiggerLib/Client/Mods/GuiWoWActionBars.ci.cs` (-33 lines, +18 lines)
-- `ManicDiggerLib/Client/Mods/GuiWoWMinimap.ci.cs` (-2 lines, +8 lines)
+- `SwordAndStoneLib/Client/Mods/GuiWoWUnitFrames.ci.cs` (-60 lines, +40 lines)
+- `SwordAndStoneLib/Client/Mods/GuiWoWActionBars.ci.cs` (-33 lines, +18 lines)
+- `SwordAndStoneLib/Client/Mods/GuiWoWMinimap.ci.cs` (-2 lines, +8 lines)
 
 **Net Result:** +40 framework lines, -95 duplicate lines = **55 fewer total lines**
 
@@ -208,7 +208,7 @@ The framework supports easy additions:
 
 ## Summary
 
-This implementation establishes the Golden UI framework as **the standard** for all GUI development in Manic Digger. The requirement has been fully met:
+This implementation establishes the Golden UI framework as **the standard** for all GUI development in Sword&Stone. The requirement has been fully met:
 
 ✅ **Same Frames:** All components use ui_big_pieces assets  
 ✅ **Same Generation:** All components use GuiFrameRenderer  

@@ -16,8 +16,8 @@
 
 ### Files to Know
 - **Animations:** `data/public/playerenhanced.txt`
-- **Emote System:** `ManicDiggerLib/Client/Mods/EmoteSystem.ci.cs`
-- **Animation Selection:** `ManicDiggerLib/Client/Mods/DrawPlayers.ci.cs`
+- **Emote System:** `SwordAndStoneLib/Client/Mods/EmoteSystem.ci.cs`
+- **Animation Selection:** `SwordAndStoneLib/Client/Mods/DrawPlayers.ci.cs`
 - **Roadmap:** `ROADMAP.md`
 - **VOIP Design:** `VOIP_AND_EMOTE_SYSTEM.md`
 - **Guide:** `ANIMATION_SYSTEM_GUIDE.md`

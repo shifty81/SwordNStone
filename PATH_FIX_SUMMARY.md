@@ -56,22 +56,22 @@ game.Draw2dBitmapFile("gui/wow/player_frame.png", ...);
 
 ## Files Modified
 
-### 1. ManicDiggerLib/Client/Mods/GuiWoWActionBars.ci.cs
+### 1. SwordAndStoneLib/Client/Mods/GuiWoWActionBars.ci.cs
 - **Line 170**: `"wow/actionbar_bg.png"` → `"gui/wow/actionbar_bg.png"`
 - **Line 181**: `"wow/button_normal.png"` → `"gui/wow/button_normal.png"`
 - **Line 184**: `"wow/button_hover.png"` → `"gui/wow/button_hover.png"`
 - **Line 188**: `"wow/button_pressed.png"` → `"gui/wow/button_pressed.png"`
 
-### 2. ManicDiggerLib/Client/Mods/GuiWoWUnitFrames.ci.cs
+### 2. SwordAndStoneLib/Client/Mods/GuiWoWUnitFrames.ci.cs
 - **Line 48**: `"wow/player_frame.png"` → `"gui/wow/player_frame.png"`
 - **Line 92**: `"wow/portrait_border.png"` → `"gui/wow/portrait_border.png"`
 - **Line 111**: `"wow/target_frame.png"` → `"gui/wow/target_frame.png"`
 - **Line 161**: `"wow/portrait_border.png"` → `"gui/wow/portrait_border.png"`
 
-### 3. ManicDiggerLib/Client/Mods/GuiWoWMinimap.ci.cs
+### 3. SwordAndStoneLib/Client/Mods/GuiWoWMinimap.ci.cs
 - **Line 94**: `"wow/minimap_border.png"` → `"gui/wow/minimap_border.png"`
 
-### 4. ManicDiggerLib/Client/MainMenu/Main.ci.cs
+### 4. SwordAndStoneLib/Client/MainMenu/Main.ci.cs
 - **Line 124**: `"wow/stone_logo.png"` → `"gui/wow/stone_logo.png"`
 - **Line 156**: `"wow/sword.png"` → `"gui/wow/sword.png"`
 - **Line 163**: `"wow/sword.png"` → `"gui/wow/sword.png"`
@@ -119,14 +119,14 @@ To verify the fix works:
 1. **Build the game**:
    ```bash
    # On Windows
-   msbuild ManicDigger.sln /p:Configuration=Release
+   msbuild SwordAndStone.sln /p:Configuration=Release
    
    # On Linux with Mono
-   xbuild ManicDigger.sln /p:Configuration=Release
+   xbuild SwordAndStone.sln /p:Configuration=Release
    ```
 
 2. **Run the game client**:
-   - Launch ManicDigger.exe
+   - Launch SwordAndStone.exe
    - Check title screen displays sword and stone animation
    - Enter game world
 

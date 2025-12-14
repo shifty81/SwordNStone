@@ -10,7 +10,7 @@ This document summarizes the implementation of the character customization syste
 ## What Was Implemented
 
 ### 1. Core Data Structure
-**File**: `ManicDiggerLib/Client/Misc/CharacterCustomization.ci.cs`
+**File**: `SwordAndStoneLib/Client/Misc/CharacterCustomization.ci.cs`
 
 - `CharacterCustomization` class that stores:
   - Gender (0=Male, 1=Female)
@@ -23,7 +23,7 @@ This document summarizes the implementation of the character customization syste
   - Model selection (uses enhanced model with better animations)
 
 ### 2. Character Creator UI
-**File**: `ManicDiggerLib/Client/MainMenu/CharacterCreator.ci.cs`
+**File**: `SwordAndStoneLib/Client/MainMenu/CharacterCreator.ci.cs`
 
 - New menu screen with:
   - Arrow buttons (< >) to cycle through each option
@@ -34,7 +34,7 @@ This document summarizes the implementation of the character customization syste
 - Integrated with main menu flow
 
 ### 3. Player Model Application
-**File**: `ManicDiggerLib/Client/Mods/ApplyCharacterCustomization.ci.cs`
+**File**: `SwordAndStoneLib/Client/Mods/ApplyCharacterCustomization.ci.cs`
 
 - New mod that:
   - Loads saved customization from preferences when player spawns
@@ -45,9 +45,9 @@ This document summarizes the implementation of the character customization syste
 
 ### 4. Menu Integration
 **Files Modified**:
-- `ManicDiggerLib/Client/MainMenu.ci.cs` - Added `StartCharacterCreator()` method
-- `ManicDiggerLib/Client/MainMenu/Singleplayer.ci.cs` - Added "Character..." button
-- `ManicDiggerLib/Client/Game.ci.cs` - Registered the customization mod
+- `SwordAndStoneLib/Client/MainMenu.ci.cs` - Added `StartCharacterCreator()` method
+- `SwordAndStoneLib/Client/MainMenu/Singleplayer.ci.cs` - Added "Character..." button
+- `SwordAndStoneLib/Client/Game.ci.cs` - Registered the customization mod
 
 The character creator is accessible:
 - Via "Character..." button in Singleplayer menu
@@ -218,18 +218,18 @@ The system is designed to be extensible. Potential additions:
 ## Files Summary
 
 **New Files (7)**:
-- `ManicDiggerLib/Client/Misc/CharacterCustomization.ci.cs`
-- `ManicDiggerLib/Client/MainMenu/CharacterCreator.ci.cs`
-- `ManicDiggerLib/Client/Mods/ApplyCharacterCustomization.ci.cs`
+- `SwordAndStoneLib/Client/Misc/CharacterCustomization.ci.cs`
+- `SwordAndStoneLib/Client/MainMenu/CharacterCreator.ci.cs`
+- `SwordAndStoneLib/Client/Mods/ApplyCharacterCustomization.ci.cs`
 - `CHARACTER_CUSTOMIZATION.md`
 - `data/public/CHARACTER_TEXTURES_GUIDE.md`
 - `data/public/player_0_0_0_0.png`
 - `IMPLEMENTATION_SUMMARY_CHARACTER_CUSTOMIZATION.md`
 
 **Modified Files (4)**:
-- `ManicDiggerLib/Client/Game.ci.cs` - Register mod
-- `ManicDiggerLib/Client/MainMenu.ci.cs` - Add StartCharacterCreator
-- `ManicDiggerLib/Client/MainMenu/Singleplayer.ci.cs` - Add button & integration
+- `SwordAndStoneLib/Client/Game.ci.cs` - Register mod
+- `SwordAndStoneLib/Client/MainMenu.ci.cs` - Add StartCharacterCreator
+- `SwordAndStoneLib/Client/MainMenu/Singleplayer.ci.cs` - Add button & integration
 - `README.md` - Document feature
 
 **Total Lines Added**: ~800 lines of code and documentation

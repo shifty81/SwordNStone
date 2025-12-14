@@ -200,15 +200,15 @@ After implementing the AssetLoader fix described above, the GUI still displayed 
 
 ## Files Modified
 
-1. **ManicDiggerLib/Common/AssetLoader.cs** - Core fix
-2. **ManicDigger.Tests/AssetLoaderTests.cs** - New test suite  
-3. **ManicDigger.Tests/ManicDigger.Tests.csproj** - Added test file
+1. **SwordAndStoneLib/Common/AssetLoader.cs** - Core fix
+2. **SwordAndStone.Tests/AssetLoaderTests.cs** - New test suite  
+3. **SwordAndStone.Tests/SwordAndStone.Tests.csproj** - Added test file
 
 ## Verification Steps
 
 To verify the fix works:
 1. Build the solution
-2. Run the unit tests: `nunit-console ManicDigger.Tests.dll`
+2. Run the unit tests: `nunit-console SwordAndStone.Tests.dll`
 3. Launch the game client
 4. Observe that GUI textures display correctly instead of colored squares
 5. Check that old functionality (inventory, etc.) still works

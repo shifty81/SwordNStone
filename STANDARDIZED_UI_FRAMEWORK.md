@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the standardized UI framework for Manic Digger, based on the "GOLDEN UI - BIGGER THAN EVER EDITION" asset sheet (`ui_big_pieces.png`). All GUI implementations should use this consistent style moving forward.
+This document describes the standardized UI framework for Sword&Stone, based on the "GOLDEN UI - BIGGER THAN EVER EDITION" asset sheet (`ui_big_pieces.png`). All GUI implementations should use this consistent style moving forward.
 
 ## Design Philosophy
 
@@ -21,7 +21,7 @@ This document describes the standardized UI framework for Manic Digger, based on
 
 Central utility class that provides standardized rendering methods for all UI components. This ensures consistency across all GUI implementations.
 
-**Location:** `/ManicDiggerLib/Client/Mods/GuiFrameRenderer.ci.cs`
+**Location:** `/SwordAndStoneLib/Client/Mods/GuiFrameRenderer.ci.cs`
 
 ### Extracted Assets
 
@@ -350,7 +350,7 @@ To add new frame types, follow this pattern:
 
 ## License
 
-This UI framework follows the same license as Manic Digger. See main LICENSE file.
+This UI framework follows the same license as Sword&Stone. See main LICENSE file.
 
 ---
 

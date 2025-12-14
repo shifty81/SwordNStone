@@ -107,7 +107,7 @@ Created three comprehensive guides:
 │       ├── portrait_border.png
 │       └── ... (24 more files)
 │
-├── ManicDiggerLib/Client/Mods/
+├── SwordAndStoneLib/Client/Mods/
 │   ├── GuiFrameRenderer.ci.cs      # NEW: Standardized renderer
 │   ├── GuiWoWUnitFrames.ci.cs      # UPDATED: Uses golden frames
 │   ├── GuiWoWActionBars.ci.cs      # UPDATED: Uses golden slots

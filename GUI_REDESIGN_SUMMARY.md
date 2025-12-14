@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project implements a complete redesign of the Manic Digger settings menu based on the design shown in `Settings-controls_tab-mode_1.png`. The new interface features a modern tabbed layout with 8 tabs and organized content areas.
+This project implements a complete redesign of the Sword&Stone settings menu based on the design shown in `Settings-controls_tab-mode_1.png`. The new interface features a modern tabbed layout with 8 tabs and organized content areas.
 
 ## Design Source
 
@@ -96,11 +96,11 @@ The main focus of the design - a comprehensive controls configuration screen:
 
 ### Files Modified
 
-1. **`ManicDiggerLib/Client/Misc/GameMisc.ci.cs`**
+1. **`SwordAndStoneLib/Client/Misc/GameMisc.ci.cs`**
    - Added 6 new states to `EscapeMenuState` enum
    - Lines changed: ~10
 
-2. **`ManicDiggerLib/Client/Mods/GuiEscapeMenu.ci.cs`**
+2. **`SwordAndStoneLib/Client/Mods/GuiEscapeMenu.ci.cs`**
    - Added tab navigation system
    - Added 6 new tab content methods
    - Added helper methods for code clarity
@@ -175,7 +175,7 @@ The main focus of the design - a comprehensive controls configuration screen:
 ## How to Use
 
 ### For End Users
-1. Launch Manic Digger
+1. Launch Sword&Stone
 2. Press ESC to open menu
 3. Click "Options"
 4. See the new tabbed interface
@@ -211,8 +211,8 @@ See `TABBED_GUI_IMPLEMENTATION.md` for detailed examples.
 - ESC key behavior
 
 ### How to Test Manually
-1. Build the project: `bash BuildCito.sh && xbuild ManicDigger.sln`
-2. Run the client: `mono ManicDigger/bin/Debug/ManicDigger.exe`
+1. Build the project: `bash BuildCito.sh && xbuild SwordAndStone.sln`
+2. Run the client: `mono SwordAndStone/bin/Debug/SwordAndStone.exe`
 3. Navigate to Settings menu
 4. Test each tab
 5. Test key binding changes
@@ -302,8 +302,8 @@ The new interface provides a solid foundation for future enhancements while main
 - `GUI_REDESIGN_SUMMARY.md` - This overview
 
 ### Modified Code Files
-- `ManicDiggerLib/Client/Misc/GameMisc.ci.cs`
-- `ManicDiggerLib/Client/Mods/GuiEscapeMenu.ci.cs`
+- `SwordAndStoneLib/Client/Misc/GameMisc.ci.cs`
+- `SwordAndStoneLib/Client/Mods/GuiEscapeMenu.ci.cs`
 
 ### Reference
 - `Settings-controls_tab-mode_1.png` - Original design image
@@ -318,7 +318,7 @@ For questions or issues:
 
 ## License
 
-This implementation follows the same license as Manic Digger.
+This implementation follows the same license as Sword&Stone.
 See main LICENSE file for details.
 
 ---

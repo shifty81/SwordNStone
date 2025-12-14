@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the implementation of a tabbed GUI interface for the Manic Digger settings menu, based on the `Settings-controls_tab-mode_1.png` design image.
+This document describes the implementation of a tabbed GUI interface for the Sword&Stone settings menu, based on the `Settings-controls_tab-mode_1.png` design image.
 
 ## Design Reference
 
@@ -16,7 +16,7 @@ The implementation follows the design shown in `Settings-controls_tab-mode_1.png
 
 ### 1. Enhanced Enum (`EscapeMenuState`)
 
-**File:** `ManicDiggerLib/Client/Misc/GameMisc.ci.cs`
+**File:** `SwordAndStoneLib/Client/Misc/GameMisc.ci.cs`
 
 Added new states to support the tabbed interface:
 - `Mouse` - Mouse settings tab
@@ -28,7 +28,7 @@ Added new states to support the tabbed interface:
 
 ### 2. Tab Navigation System
 
-**File:** `ManicDiggerLib/Client/Mods/GuiEscapeMenu.ci.cs`
+**File:** `SwordAndStoneLib/Client/Mods/GuiEscapeMenu.ci.cs`
 
 #### Tab Buttons
 - Created 8 tab buttons in `InitTabButtons()` method
@@ -251,10 +251,10 @@ void MouseHandleClick(Button b)
 ## File Changes Summary
 
 ### Modified Files
-1. **`ManicDiggerLib/Client/Misc/GameMisc.ci.cs`**
+1. **`SwordAndStoneLib/Client/Misc/GameMisc.ci.cs`**
    - Added new EscapeMenuState enum values
 
-2. **`ManicDiggerLib/Client/Mods/GuiEscapeMenu.ci.cs`**
+2. **`SwordAndStoneLib/Client/Mods/GuiEscapeMenu.ci.cs`**
    - Added tab button array and initialization
    - Added `InitTabButtons()` method
    - Added `MakeTabLayout()` method

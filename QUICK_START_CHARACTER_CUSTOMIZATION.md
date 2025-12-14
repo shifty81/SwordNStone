@@ -70,19 +70,19 @@ See [CHARACTER_TEXTURES_GUIDE.md](data/public/CHARACTER_TEXTURES_GUIDE.md) for d
 
 **Data Structure**:
 ```csharp
-ManicDiggerLib/Client/Misc/CharacterCustomization.ci.cs
+SwordAndStoneLib/Client/Misc/CharacterCustomization.ci.cs
 ```
 Handles customization options, serialization, and texture name generation.
 
 **UI Screen**:
 ```csharp
-ManicDiggerLib/Client/MainMenu/CharacterCreator.ci.cs
+SwordAndStoneLib/Client/MainMenu/CharacterCreator.ci.cs
 ```
 The character creator menu with controls and layout.
 
 **Application Mod**:
 ```csharp
-ManicDiggerLib/Client/Mods/ApplyCharacterCustomization.ci.cs
+SwordAndStoneLib/Client/Mods/ApplyCharacterCustomization.ci.cs
 ```
 Applies saved customization to the player entity when spawning.
 

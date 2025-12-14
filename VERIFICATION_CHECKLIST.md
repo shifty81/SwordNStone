@@ -11,8 +11,8 @@ This checklist helps verify that the GUI texture display issue has been resolved
 
 ## Pre-Build Verification ✅
 
-- [x] Core fix implemented in `ManicDiggerLib/Common/AssetLoader.cs`
-- [x] Unit tests created in `ManicDigger.Tests/AssetLoaderTests.cs`
+- [x] Core fix implemented in `SwordAndStoneLib/Common/AssetLoader.cs`
+- [x] Unit tests created in `SwordAndStone.Tests/AssetLoaderTests.cs`
 - [x] Documentation created in `GUI_FIX_EXPLANATION.md`
 - [x] Code review feedback addressed
 - [x] No security vulnerabilities introduced
@@ -23,10 +23,10 @@ This checklist helps verify that the GUI texture display issue has been resolved
 ### Step 1: Restore NuGet Packages
 ```bash
 # Windows
-nuget restore ManicDigger.sln
+nuget restore SwordAndStone.sln
 
 # Linux/Mac
-mono nuget.exe restore ManicDigger.sln
+mono nuget.exe restore SwordAndStone.sln
 ```
 
 **Expected**: Packages restore successfully without errors
@@ -34,10 +34,10 @@ mono nuget.exe restore ManicDigger.sln
 ### Step 2: Build Solution
 ```bash
 # Windows
-msbuild ManicDigger.sln /p:Configuration=Debug
+msbuild SwordAndStone.sln /p:Configuration=Debug
 
 # Linux/Mac
-xbuild ManicDigger.sln /p:Configuration=Debug
+xbuild SwordAndStone.sln /p:Configuration=Debug
 ```
 
 **Expected**: Build succeeds with no errors (warnings are OK)
@@ -45,10 +45,10 @@ xbuild ManicDigger.sln /p:Configuration=Debug
 ### Step 3: Run Unit Tests
 ```bash
 # Windows
-packages\NUnit.ConsoleRunner.3.x.x\tools\nunit3-console.exe ManicDigger.Tests\bin\Debug\ManicDigger.Tests.dll
+packages\NUnit.ConsoleRunner.3.x.x\tools\nunit3-console.exe SwordAndStone.Tests\bin\Debug\SwordAndStone.Tests.dll
 
 # Linux/Mac
-mono packages/NUnit.ConsoleRunner.3.x.x/tools/nunit3-console.exe ManicDigger.Tests/bin/Debug/ManicDigger.Tests.dll
+mono packages/NUnit.ConsoleRunner.3.x.x/tools/nunit3-console.exe SwordAndStone.Tests/bin/Debug/SwordAndStone.Tests.dll
 ```
 
 **Expected Results**:
@@ -63,12 +63,12 @@ mono packages/NUnit.ConsoleRunner.3.x.x/tools/nunit3-console.exe ManicDigger.Tes
 
 ### Test 1: Launch Game Client
 ```bash
-cd ManicDigger/bin/Debug
+cd SwordAndStone/bin/Debug
 # Windows
-ManicDigger.exe
+SwordAndStone.exe
 
 # Linux/Mac (requires X11)
-mono ManicDigger.exe
+mono SwordAndStone.exe
 ```
 
 **What to Check**:

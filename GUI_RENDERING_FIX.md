@@ -39,7 +39,7 @@ Frames were drawing only the border texture without proper background panels, ma
 
 ### 1. Reduced Frame Stretching
 
-**File**: `ManicDiggerLib/Client/Mods/GuiWoWUnitFrames.ci.cs`
+**File**: `SwordAndStoneLib/Client/Mods/GuiWoWUnitFrames.ci.cs`
 
 **Change**:
 ```csharp
@@ -59,7 +59,7 @@ frameHeight = 112;  // Was 128 (12% reduction)
 
 ### 2. Matched Slot Sizes to Assets
 
-**File**: `ManicDiggerLib/Client/Mods/GuiWoWActionBars.ci.cs`
+**File**: `SwordAndStoneLib/Client/Mods/GuiWoWActionBars.ci.cs`
 
 **Change**:
 ```csharp
@@ -79,7 +79,7 @@ int ButtonSpacing() { return game.platform.FloatToInt(8 * game.Scale()); }
 
 ### 3. Added Panel Backgrounds
 
-**File**: `ManicDiggerLib/Client/Mods/GuiFrameRenderer.ci.cs`
+**File**: `SwordAndStoneLib/Client/Mods/GuiFrameRenderer.ci.cs`
 
 **Change**:
 ```csharp
@@ -102,18 +102,18 @@ public static void DrawFrame(Game game, int x, int y, int width, int height, int
 
 ## Files Modified
 
-1. **ManicDiggerLib/Client/Mods/GuiFrameRenderer.ci.cs**
+1. **SwordAndStoneLib/Client/Mods/GuiFrameRenderer.ci.cs**
    - Added `panel_dark.png` background rendering
    - Enhanced frame drawing with layered approach
    - Total changes: ~10 lines
 
-2. **ManicDiggerLib/Client/Mods/GuiWoWUnitFrames.ci.cs**
+2. **SwordAndStoneLib/Client/Mods/GuiWoWUnitFrames.ci.cs**
    - Adjusted `frameWidth` from 256 to 192
    - Adjusted `frameHeight` from 128 to 112
    - Added explanatory comments
    - Total changes: ~5 lines
 
-3. **ManicDiggerLib/Client/Mods/GuiWoWActionBars.ci.cs**
+3. **SwordAndStoneLib/Client/Mods/GuiWoWActionBars.ci.cs**
    - Adjusted `ButtonSize()` from 64px to 48px
    - Adjusted `ButtonSpacing()` from 10px to 8px
    - Added explanatory comments

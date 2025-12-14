@@ -148,7 +148,7 @@ To verify the fix works in production:
 
 1. **Build the game**:
    ```bash
-   msbuild ManicDigger.sln /p:Configuration=Release
+   msbuild SwordAndStone.sln /p:Configuration=Release
    ```
 
 2. **Launch and check title screen**:

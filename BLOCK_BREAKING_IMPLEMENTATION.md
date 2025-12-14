@@ -2,7 +2,7 @@
 
 ## Overview
 
-This implementation adds Vintage Story-inspired block breaking mechanics to Manic Digger, where blocks can require specific tools to be collected properly.
+This implementation adds Vintage Story-inspired block breaking mechanics to Sword&Stone, where blocks can require specific tools to be collected properly.
 
 ## Problem Statement
 
@@ -221,16 +221,16 @@ All tools are:
    - Added ToolType enum (7 lines)
    - Added 5 new BlockType properties (11 lines)
 
-2. **ManicDiggerLib/Server/Server.cs**
+2. **SwordAndStoneLib/Server/Server.cs**
    - Enhanced DoCommandBuild() method (40 lines added)
    - Added tool validation logic
    - Added comprehensive error checking
 
-3. **ManicDiggerLib/Server/Mods/Fortress/CoreBlocks.cs**
+3. **SwordAndStoneLib/Server/Mods/Fortress/CoreBlocks.cs**
    - Updated 7 block definitions
    - Added tool requirements (35 lines modified)
 
-4. **ManicDiggerLib/Server/Mods/Fortress/Tools.cs** (NEW)
+4. **SwordAndStoneLib/Server/Mods/Fortress/Tools.cs** (NEW)
    - Created new mod file (103 lines)
    - Defined 6 basic tools
    - Added to creative inventory
@@ -270,7 +270,7 @@ Implementation based on Vintage Story game mechanics:
 - Block drop mechanics
 - Mining efficiency rules
 
-Adapted for Manic Digger architecture with security and compatibility in mind.
+Adapted for Sword&Stone architecture with security and compatibility in mind.
 
 ## Version History
 

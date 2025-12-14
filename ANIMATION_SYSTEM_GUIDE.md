@@ -472,7 +472,7 @@ Currently, animations must be edited by hand in text format. Future tools:
 
 ## ✨ Credits
 
-**Animation System:** Enhanced from Manic Digger base  
+**Animation System:** Enhanced from Manic Digger (original project) base  
 **Emote Design:** Community feedback and standard gaming conventions  
 **Documentation:** GitHub Copilot
 
