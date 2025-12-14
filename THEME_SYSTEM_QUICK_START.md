@@ -155,7 +155,7 @@ To test the implementation:
 ## File Changes
 
 ### Created
-- `ManicDiggerLib/Client/Mods/UIThemeManager.ci.cs` - Theme manager
+- `SwordAndStoneLib/Client/Mods/UIThemeManager.ci.cs` - Theme manager
 - `data/themes/default/theme.txt` - Theme configuration
 - `data/themes/README.md` - System documentation
 - `data/themes/THEME_CREATION_GUIDE.md` - Creation guide
@@ -163,8 +163,8 @@ To test the implementation:
 - This file - Quick start guide
 
 ### Modified
-- `ManicDiggerLib/Client/Mods/GuiFrameRenderer.ci.cs` - Theme integration
-- `ManicDiggerLib/Client/Game.ci.cs` - Theme manager integration
+- `SwordAndStoneLib/Client/Mods/GuiFrameRenderer.ci.cs` - Theme integration
+- `SwordAndStoneLib/Client/Game.ci.cs` - Theme manager integration
 
 ### Relocated
 - All sprite sheets moved to `data/themes/default/`

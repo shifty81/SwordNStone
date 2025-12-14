@@ -34,7 +34,7 @@ This document describes the basic melee combat system implementation for Sword &
 ### File Structure
 
 ```
-ManicDiggerLib/Server/Mods/Fortress/
+SwordAndStoneLib/Server/Mods/Fortress/
 ├── Weapons.cs         - Weapon and shield item definitions
 ├── CombatSystem.cs    - Combat logic and state management
 ├── Tools.cs           - Existing tool definitions (pickaxe, axe, shovel)
@@ -222,12 +222,12 @@ void OnPlayerHit(int attackerId, int targetId, int damage)
 
 1. **Start Server**
    ```
-   cd ManicDiggerServer/bin/Release
-   ./ManicDiggerServer.exe
+   cd SwordAndStoneServer/bin/Release
+   ./SwordAndStoneServer.exe
    ```
 
 2. **Start Client and Connect**
-   - Open ManicDigger client
+   - Open SwordAndStone client
    - Connect to localhost
 
 3. **Check Inventory**
@@ -258,7 +258,7 @@ void OnPlayerHit(int attackerId, int targetId, int damage)
 
 ### Adjusting Combat Balance
 
-Edit `ManicDiggerLib/Server/Mods/Fortress/CombatSystem.cs`:
+Edit `SwordAndStoneLib/Server/Mods/Fortress/CombatSystem.cs`:
 
 ```csharp
 // Attack speed
@@ -271,7 +271,7 @@ private const float MELEE_RANGE = 3.0f;  // Increase for longer reach
 private const int BASE_PUNCH_DAMAGE = 1;  // Fist damage
 ```
 
-Edit `ManicDiggerLib/Server/Mods/Fortress/Weapons.cs`:
+Edit `SwordAndStoneLib/Server/Mods/Fortress/Weapons.cs`:
 
 ```csharp
 // Sword damage

@@ -165,12 +165,12 @@ The default theme uses standardized sprite sheets:
 
 The theme system is integrated through:
 
-1. **UIThemeManager** (`ManicDiggerLib/Client/Mods/UIThemeManager.ci.cs`)
+1. **UIThemeManager** (`SwordAndStoneLib/Client/Mods/UIThemeManager.ci.cs`)
    - Loads theme configurations
    - Provides asset path lookup
    - Manages theme colors
 
-2. **GuiFrameRenderer** (`ManicDiggerLib/Client/Mods/GuiFrameRenderer.ci.cs`)
+2. **GuiFrameRenderer** (`SwordAndStoneLib/Client/Mods/GuiFrameRenderer.ci.cs`)
    - Renders UI elements using theme assets
    - Provides standardized drawing methods
 

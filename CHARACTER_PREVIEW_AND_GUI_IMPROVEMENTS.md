@@ -9,7 +9,7 @@ This update addresses the GUI improvements requested in the issue:
 
 ## Changes Made
 
-### 1. Character Creator Preview (`ManicDiggerLib/Client/MainMenu/CharacterCreator.ci.cs`)
+### 1. Character Creator Preview (`SwordAndStoneLib/Client/MainMenu/CharacterCreator.ci.cs`)
 
 #### Visual Character Preview
 - Added a `DrawCharacterPreview()` method that displays the currently selected character appearance
@@ -24,7 +24,7 @@ This update addresses the GUI improvements requested in the issue:
 - Positioned character preview in the right two-thirds of the screen
 - This provides clear visual feedback of character choices while maintaining easy access to controls
 
-### 2. Hotbar Centering (`ManicDiggerLib/Client/Mods/GuiWoWActionBars.ci.cs`)
+### 2. Hotbar Centering (`SwordAndStoneLib/Client/Mods/GuiWoWActionBars.ci.cs`)
 
 #### Fixed Centering Algorithm
 - **Old behavior**: Used a hardcoded offset of 512 pixels, which didn't scale properly
@@ -33,7 +33,7 @@ This update addresses the GUI improvements requested in the issue:
   - Centers horizontally: `(screen width - total width) / 2`
 - This ensures the hotbar is perfectly centered regardless of screen resolution or scaling
 
-### 3. Chat Window Improvements (`ManicDiggerLib/Client/Mods/GuiChat.ci.cs`)
+### 3. Chat Window Improvements (`SwordAndStoneLib/Client/Mods/GuiChat.ci.cs`)
 
 #### Bottom-Left Positioning
 - Repositioned chat from top (y=90) to bottom-left of screen
@@ -111,6 +111,6 @@ Potential improvements for future iterations:
 
 ## Files Modified
 
-1. `ManicDiggerLib/Client/MainMenu/CharacterCreator.ci.cs` - Character preview
-2. `ManicDiggerLib/Client/Mods/GuiWoWActionBars.ci.cs` - Hotbar centering
-3. `ManicDiggerLib/Client/Mods/GuiChat.ci.cs` - Chat positioning and visibility
+1. `SwordAndStoneLib/Client/MainMenu/CharacterCreator.ci.cs` - Character preview
+2. `SwordAndStoneLib/Client/Mods/GuiWoWActionBars.ci.cs` - Hotbar centering
+3. `SwordAndStoneLib/Client/Mods/GuiChat.ci.cs` - Chat positioning and visibility

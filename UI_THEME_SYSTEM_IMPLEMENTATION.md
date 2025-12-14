@@ -111,7 +111,7 @@ accent=255,215,0         # Golden yellow
 
 ### 3. Core Framework Classes
 
-#### UIThemeManager (`ManicDiggerLib/Client/Mods/UIThemeManager.ci.cs`)
+#### UIThemeManager (`SwordAndStoneLib/Client/Mods/UIThemeManager.ci.cs`)
 
 **Purpose**: Centralized theme management and asset loading
 
@@ -139,7 +139,7 @@ int GetAccentColor()
 - Initialized in Game constructor
 - Accessible via `game.GetUIThemeManager()`
 
-#### SpeechBubbleRenderer (`ManicDiggerLib/Client/Mods/UIThemeManager.ci.cs`)
+#### SpeechBubbleRenderer (`SwordAndStoneLib/Client/Mods/UIThemeManager.ci.cs`)
 
 **Purpose**: Render animated speech bubbles for chat and emotes
 
@@ -159,7 +159,7 @@ void DrawPlayerSpeechBubble(Game game, int playerX, int playerY, string text, bo
 
 ### 4. Updated GuiFrameRenderer
 
-Modified `ManicDiggerLib/Client/Mods/GuiFrameRenderer.ci.cs` to use theme system:
+Modified `SwordAndStoneLib/Client/Mods/GuiFrameRenderer.ci.cs` to use theme system:
 
 **Changes**:
 - Updated all drawing methods to use `UIThemeManager`
@@ -198,7 +198,7 @@ public static void DrawButton(Game game, int x, int y, int width, int height, in
 
 ### 5. Game Class Integration
 
-Modified `ManicDiggerLib/Client/Game.ci.cs`:
+Modified `SwordAndStoneLib/Client/Game.ci.cs`:
 
 **Added**:
 ```csharp
@@ -240,15 +240,15 @@ Created comprehensive documentation:
 ## File Changes Summary
 
 ### New Files Created
-1. `ManicDiggerLib/Client/Mods/UIThemeManager.ci.cs` - Theme manager and speech bubble renderer
+1. `SwordAndStoneLib/Client/Mods/UIThemeManager.ci.cs` - Theme manager and speech bubble renderer
 2. `data/themes/default/theme.txt` - Theme configuration
 3. `data/themes/README.md` - Theme system overview
 4. `data/themes/THEME_CREATION_GUIDE.md` - Theme creation guide
 5. `UI_THEME_SYSTEM_IMPLEMENTATION.md` - This document
 
 ### Files Modified
-1. `ManicDiggerLib/Client/Mods/GuiFrameRenderer.ci.cs` - Updated to use theme system
-2. `ManicDiggerLib/Client/Game.ci.cs` - Added theme manager integration
+1. `SwordAndStoneLib/Client/Mods/GuiFrameRenderer.ci.cs` - Updated to use theme system
+2. `SwordAndStoneLib/Client/Game.ci.cs` - Added theme manager integration
 
 ### Files Relocated
 1. `hud-pieces (1).png` → `data/themes/default/hud/hud_pieces.png`

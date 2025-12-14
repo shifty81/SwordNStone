@@ -58,7 +58,7 @@ This implementation **fully addresses** the original request for enhanced charac
    - 9-bone skeletal system
    - Equipment attachment points
 
-2. **`ManicDiggerLib/Client/Mods/EmoteSystem.ci.cs`**
+2. **`SwordAndStoneLib/Client/Mods/EmoteSystem.ci.cs`**
    - Complete emote management system
    - Chat command processing
    - Cooldown and duration handling
@@ -84,12 +84,12 @@ This implementation **fully addresses** the original request for enhanced charac
    - Performance tips
 
 ### Modified Files
-1. **`ManicDiggerLib/Client/Mods/DrawPlayers.ci.cs`**
+1. **`SwordAndStoneLib/Client/Mods/DrawPlayers.ci.cs`**
    - Added `GetPlayerAnimation()` method
    - Equipment-based animation detection
    - Emote system integration
 
-2. **`ManicDiggerLib/Client/Game.ci.cs`**
+2. **`SwordAndStoneLib/Client/Game.ci.cs`**
    - Registered `ModEmoteSystem`
    - Added `GetMod_EmoteSystem()` helper
 

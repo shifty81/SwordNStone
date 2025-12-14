@@ -62,7 +62,7 @@ This repository has been fully rebranded from Manic Digger to Sword & Stone and 
 ### 📦 What's Included
 
 **New Files:**
-- `ManicDigger.Tests/` - Complete test project with samples
+- `SwordAndStone.Tests/` - Complete test project with samples
 - `BUILD.md` - Detailed build instructions
 - `TESTING.md` - Testing documentation
 - `QUICKSTART.md` - Quick start guide
@@ -70,7 +70,7 @@ This repository has been fully rebranded from Manic Digger to Sword & Stone and 
 - `PROJECT_STATUS.md` - This status document
 
 **Modified Files:**
-- `ManicDigger.sln` - Added test project
+- `SwordAndStone.sln` - Added test project
 - `README.md` - Added build section
 - `.gitignore` - Added nuget.exe exclusion
 
@@ -154,7 +154,7 @@ This repository has been fully rebranded from Manic Digger to Sword & Stone and 
   - Rendering components
 
 ### How to Add Tests
-1. Open `ManicDigger.Tests` project
+1. Open `SwordAndStone.Tests` project
 2. Add new test class or expand existing
 3. Write tests using NUnit attributes
 4. Build and run tests
@@ -228,7 +228,7 @@ See [TESTING.md](TESTING.md) for detailed instructions.
 - Keep documentation updated as project evolves
 
 ### Common Maintenance Tasks
-1. **Update NuGet packages**: `mono nuget.exe update ManicDigger.sln`
+1. **Update NuGet packages**: `mono nuget.exe update SwordAndStone.sln`
 2. **Clean build**: Delete `bin/`, `obj/`, `packages/` then rebuild
 3. **Add new project**: Update solution file and dependencies
 4. **Update docs**: Keep BUILD.md, TESTING.md current

@@ -141,7 +141,7 @@ All texture assets are located in `/data/local/gui/wow/`:
 
 ## Integration
 
-The WoW GUI mods are registered in `/ManicDiggerLib/Client/Game.ci.cs`:
+The WoW GUI mods are registered in `/SwordAndStoneLib/Client/Game.ci.cs`:
 
 ```csharp
 // WoW-style GUI enhancements

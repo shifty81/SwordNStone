@@ -49,30 +49,30 @@ Remove the DEBUG rectangle drawing code entirely (lines 156-158).
 
 ## Files Modified
 
-### 1. ManicDigger/ClientNative/TextRenderer.cs
+### 1. SwordAndStone/ClientNative/TextRenderer.cs
 **Change**: Removed DEBUG rectangle drawing code (4 lines removed)
 - Deleted lines 156-158 that drew green and yellow rectangles around text
 - No functional impact; only removes visual debugging aids
 
-### 2. ManicDiggerLib/Client/Mods/GuiWoWActionBars.ci.cs
+### 2. SwordAndStoneLib/Client/Mods/GuiWoWActionBars.ci.cs
 **Changes**: Updated 4 texture path references
 - Line 170: `"gui/wow/actionbar_bg.png"` → `"local/gui/wow/actionbar_bg.png"`
 - Line 181: `"gui/wow/button_normal.png"` → `"local/gui/wow/button_normal.png"`
 - Line 184: `"gui/wow/button_hover.png"` → `"local/gui/wow/button_hover.png"`
 - Line 188: `"gui/wow/button_pressed.png"` → `"local/gui/wow/button_pressed.png"`
 
-### 3. ManicDiggerLib/Client/Mods/GuiWoWUnitFrames.ci.cs
+### 3. SwordAndStoneLib/Client/Mods/GuiWoWUnitFrames.ci.cs
 **Changes**: Updated 4 texture path references
 - Line 48: `"gui/wow/player_frame.png"` → `"local/gui/wow/player_frame.png"`
 - Line 92: `"gui/wow/portrait_border.png"` → `"local/gui/wow/portrait_border.png"` (player)
 - Line 111: `"gui/wow/target_frame.png"` → `"local/gui/wow/target_frame.png"`
 - Line 161: `"gui/wow/portrait_border.png"` → `"local/gui/wow/portrait_border.png"` (target)
 
-### 4. ManicDiggerLib/Client/Mods/GuiWoWMinimap.ci.cs
+### 4. SwordAndStoneLib/Client/Mods/GuiWoWMinimap.ci.cs
 **Changes**: Updated 1 texture path reference
 - Line 94: `"gui/wow/minimap_border.png"` → `"local/gui/wow/minimap_border.png"`
 
-### 5. ManicDiggerLib/Client/MainMenu/Main.ci.cs
+### 5. SwordAndStoneLib/Client/MainMenu/Main.ci.cs
 **Changes**: Updated 3 texture path references
 - Line 124: `"gui/wow/stone_logo.png"` → `"local/gui/wow/stone_logo.png"`
 - Line 156: `"gui/wow/sword.png"` → `"local/gui/wow/sword.png"` (animating)
@@ -107,7 +107,7 @@ datapaths = new[] {
 
 For a file at absolute path:
 ```
-/path/to/ManicDigger/data/local/gui/wow/actionbar_bg.png
+/path/to/SwordAndStone/data/local/gui/wow/actionbar_bg.png
 ```
 
 The AssetLoader creates an Asset with:
@@ -146,11 +146,11 @@ However, this only works when filenames are unique across all subdirectories. Fo
 ### Manual Testing
 1. **Build the project**:
    ```bash
-   msbuild ManicDigger.sln /p:Configuration=Release
+   msbuild SwordAndStone.sln /p:Configuration=Release
    ```
 
 2. **Run the game**:
-   - Launch ManicDigger.exe
+   - Launch SwordAndStone.exe
    - Verify title screen shows "Sword and Stone" animation with textures
 
 3. **Enter game world**:

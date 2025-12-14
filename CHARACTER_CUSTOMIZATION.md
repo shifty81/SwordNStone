@@ -75,14 +75,14 @@ To add new character appearance options:
 ### Files Added/Modified
 
 1. **New Files**:
-   - `ManicDiggerLib/Client/Misc/CharacterCustomization.ci.cs` - Data structure for customization
-   - `ManicDiggerLib/Client/MainMenu/CharacterCreator.ci.cs` - Character creator UI screen
-   - `ManicDiggerLib/Client/Mods/ApplyCharacterCustomization.ci.cs` - Applies customization to player
+   - `SwordAndStoneLib/Client/Misc/CharacterCustomization.ci.cs` - Data structure for customization
+   - `SwordAndStoneLib/Client/MainMenu/CharacterCreator.ci.cs` - Character creator UI screen
+   - `SwordAndStoneLib/Client/Mods/ApplyCharacterCustomization.ci.cs` - Applies customization to player
 
 2. **Modified Files**:
-   - `ManicDiggerLib/Client/MainMenu.ci.cs` - Added StartCharacterCreator method
-   - `ManicDiggerLib/Client/MainMenu/Singleplayer.ci.cs` - Added Character button
-   - `ManicDiggerLib/Client/Game.ci.cs` - Registered new mod
+   - `SwordAndStoneLib/Client/MainMenu.ci.cs` - Added StartCharacterCreator method
+   - `SwordAndStoneLib/Client/MainMenu/Singleplayer.ci.cs` - Added Character button
+   - `SwordAndStoneLib/Client/Game.ci.cs` - Registered new mod
 
 ### Data Storage
 

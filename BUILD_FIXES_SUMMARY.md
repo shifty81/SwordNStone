@@ -6,7 +6,7 @@ This document summarizes the build issues that were fixed to resolve the compila
 
 ### 1. Duplicate Symbol 'platform' Error
 
-**File:** `ManicDiggerLib/Client/Misc/CharacterCustomization.ci.cs`  
+**File:** `SwordAndStoneLib/Client/Misc/CharacterCustomization.ci.cs`  
 **Line:** 70  
 **Error:** `Symbol platform already defined`
 
@@ -25,7 +25,7 @@ public static CharacterCustomization Deserialize(GamePlatform p, string data)
 
 ### 2. Unknown Symbol 'StringLength' Error
 
-**File:** `ManicDiggerLib/Client/Misc/CharacterCustomization.ci.cs`  
+**File:** `SwordAndStoneLib/Client/Misc/CharacterCustomization.ci.cs`  
 **Line:** 75  
 **Error:** `Unknown symbol StringLength`
 
@@ -47,19 +47,19 @@ Note: `StringEmpty()` uses `string.IsNullOrWhiteSpace()` which is more robust as
 ### 3. Missing Type Definitions
 
 **Files Missing from Project:**
-- `ManicDiggerLib/Client/Misc/CharacterCustomization.ci.cs`
-- `ManicDiggerLib/Client/Mods/ApplyCharacterCustomization.ci.cs`
-- `ManicDiggerLib/Client/MainMenu/CharacterCreator.ci.cs`
+- `SwordAndStoneLib/Client/Misc/CharacterCustomization.ci.cs`
+- `SwordAndStoneLib/Client/Mods/ApplyCharacterCustomization.ci.cs`
+- `SwordAndStoneLib/Client/MainMenu/CharacterCreator.ci.cs`
 
 **Errors:**
 - `The type or namespace name 'ModApplyCharacterCustomization' could not be found`
 - `The type or namespace name 'ScreenCharacterCreator' could not be found`
 
 **Root Cause:**
-These three files existed in the filesystem but were not included in the `ManicDiggerLib.csproj` file, so they weren't being compiled.
+These three files existed in the filesystem but were not included in the `SwordAndStoneLib.csproj` file, so they weren't being compiled.
 
 **Fix:**
-Added the following entries to `ManicDiggerLib/ManicDiggerLib.csproj`:
+Added the following entries to `SwordAndStoneLib/SwordAndStoneLib.csproj`:
 ```xml
 <Compile Include="Client\Misc\CharacterCustomization.ci.cs" />
 <Compile Include="Client\Mods\ApplyCharacterCustomization.ci.cs" />
@@ -69,8 +69,8 @@ Added the following entries to `ManicDiggerLib/ManicDiggerLib.csproj`:
 ### 4. Incorrect Preferences API Usage
 
 **Files:** 
-- `ManicDiggerLib/Client/Mods/ApplyCharacterCustomization.ci.cs`
-- `ManicDiggerLib/Client/MainMenu/CharacterCreator.ci.cs`
+- `SwordAndStoneLib/Client/Mods/ApplyCharacterCustomization.ci.cs`
+- `SwordAndStoneLib/Client/MainMenu/CharacterCreator.ci.cs`
 
 **Errors:**
 - `Type 'GamePlatform' does not contain a definition for 'PreferencesGet'`
@@ -110,7 +110,7 @@ The NuGet packages were not restored in the `packages/` directory.
 **Fix:**
 1. Installed Mono runtime: `sudo apt-get install mono-complete`
 2. Downloaded NuGet.exe: `wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe`
-3. Restored packages: `mono nuget.exe restore ManicDigger.sln`
+3. Restored packages: `mono nuget.exe restore SwordAndStone.sln`
 
 This created the required package directories:
 - `packages/protobuf-net.2.1.0/lib/net45/protobuf-net.dll`
@@ -122,7 +122,7 @@ This created the required package directories:
 **Error:** `The command "cd C:\GIT PROJECTS\...\BuildCito.bat" exited with code -1`
 
 **Analysis:**
-The `BuildCito.bat` is a Windows batch file that runs as a pre-build event. On Linux, the project is configured to use `BuildCito.sh` instead (see lines 308-309 in ManicDiggerLib.csproj). The Linux build script runs successfully with `sh ./BuildCito.sh`.
+The `BuildCito.bat` is a Windows batch file that runs as a pre-build event. On Linux, the project is configured to use `BuildCito.sh` instead (see lines 308-309 in SwordAndStoneLib.csproj). The Linux build script runs successfully with `sh ./BuildCito.sh`.
 
 **Conclusion:**
 This error only occurs on Windows and is not relevant to the Linux build environment. The project has proper OS-specific build events configured.
@@ -131,16 +131,16 @@ This error only occurs on Windows and is not relevant to the Linux build environ
 
 After applying all fixes, the following projects build successfully:
 
-✅ **ManicDiggerLib** (1.1 MB DLL)
+✅ **SwordAndStoneLib** (1.1 MB DLL)
 - Core game library containing game logic
 - All .ci.cs files compile successfully
 - Only warnings (unused variables, obsolete APIs) - no errors
 
-✅ **ManicDigger** (339 KB EXE)
+✅ **SwordAndStone** (339 KB EXE)
 - Main game client application
 - Builds with 103 warnings, 0 errors
 
-✅ **ManicDiggerServer** (9.0 KB EXE)
+✅ **SwordAndStoneServer** (9.0 KB EXE)
 - Dedicated server application
 - Builds with 105 warnings, 0 errors
 
@@ -152,7 +152,7 @@ After applying all fixes, the following projects build successfully:
 - Monster model editor tool
 - Builds with 105 warnings, 0 errors
 
-⚠️ **ManicDigger.Tests** (Test Project)
+⚠️ **SwordAndStone.Tests** (Test Project)
 - Has 20 compilation errors related to accessing internal fields
 - These are pre-existing issues unrelated to our fixes
 - Does not affect the main application builds
@@ -161,13 +161,13 @@ After applying all fixes, the following projects build successfully:
 
 ### Build Command
 ```bash
-xbuild ManicDigger.sln /p:Configuration=Debug
+xbuild SwordAndStone.sln /p:Configuration=Debug
 ```
 
 ### Build Output Locations
-- `ManicDiggerLib/bin/Debug/ManicDiggerLib.dll`
-- `ManicDigger/bin/Debug/ManicDigger.exe`
-- `ManicDiggerServer/bin/Debug/ManicDiggerServer.exe`
+- `SwordAndStoneLib/bin/Debug/SwordAndStoneLib.dll`
+- `SwordAndStone/bin/Debug/SwordAndStone.exe`
+- `SwordAndStoneServer/bin/Debug/SwordAndStoneServer.exe`
 - `ScriptingApi/bin/Debug/ScriptingApi.dll`
 - `MdMonsterEditor/bin/Debug/MdMonsterEditor.exe`
 

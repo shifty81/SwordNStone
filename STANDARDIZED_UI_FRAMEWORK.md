@@ -21,7 +21,7 @@ This document describes the standardized UI framework for Manic Digger, based on
 
 Central utility class that provides standardized rendering methods for all UI components. This ensures consistency across all GUI implementations.
 
-**Location:** `/ManicDiggerLib/Client/Mods/GuiFrameRenderer.ci.cs`
+**Location:** `/SwordAndStoneLib/Client/Mods/GuiFrameRenderer.ci.cs`
 
 ### Extracted Assets
 

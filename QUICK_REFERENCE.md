@@ -118,7 +118,7 @@ internal int playerFrameY = 20; // Vertical position
 ## File Structure
 
 ```
-ManicDiggerLib/Client/Mods/
+SwordAndStoneLib/Client/Mods/
 ├── GuiWoWActionBars.ci.cs    ← Action bar code
 ├── GuiWoWUnitFrames.ci.cs    ← Player/target frames
 └── GuiWoWMinimap.ci.cs        ← Minimap rendering

@@ -179,9 +179,9 @@ public class BlockBreakingTests
 ## Code References
 
 - **BlockType Definition**: `ScriptingApi/ModManager.cs` (lines 1139-1277)
-- **Tool Checking Logic**: `ManicDiggerLib/Server/Server.cs` (DoCommandBuild method, lines 2579-2627)
-- **Block Configurations**: `ManicDiggerLib/Server/Mods/Fortress/CoreBlocks.cs`
-- **Tool Definitions**: `ManicDiggerLib/Server/Mods/Fortress/Tools.cs`
+- **Tool Checking Logic**: `SwordAndStoneLib/Server/Server.cs` (DoCommandBuild method, lines 2579-2627)
+- **Block Configurations**: `SwordAndStoneLib/Server/Mods/Fortress/CoreBlocks.cs`
+- **Tool Definitions**: `SwordAndStoneLib/Server/Mods/Fortress/Tools.cs`
 
 ## Summary
 
