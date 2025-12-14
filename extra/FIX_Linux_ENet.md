@@ -12,7 +12,7 @@ ENet.ENetException: The ENet native library failed to initialize.
 	If you are running on MacOS, make sure libenet.dylib is in your path or program directory.
 ```
 
-This is caused by different package versions of the networking library Manic Digger uses.  
+This is caused by different package versions of the networking library Sword&Stone uses.  
 In general you need to **create a symlink** to redirect requests to the appropiate library if you get the issue:
 
 Below are instructions for the most common Linux variants.  

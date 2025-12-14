@@ -1,6 +1,6 @@
 # World of Warcraft-Style GUI System
 
-This document describes the WoW-style GUI implementation added to Manic Digger.
+This document describes the WoW-style GUI implementation added to Sword&Stone.
 
 ## Overview
 
@@ -322,10 +322,10 @@ Potential improvements for future versions:
 
 ## License
 
-This GUI system follows the same license as Manic Digger. See main LICENSE file.
+This GUI system follows the same license as Sword&Stone. See main LICENSE file.
 
 ---
 
 **Version:** 1.0  
 **Last Updated:** December 13, 2025  
-**Compatible with:** Manic Digger (current development branch)
+**Compatible with:** Sword&Stone (current development branch)

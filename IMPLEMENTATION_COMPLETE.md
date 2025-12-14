@@ -208,7 +208,7 @@ The framework supports easy additions:
 
 ## Summary
 
-This implementation establishes the Golden UI framework as **the standard** for all GUI development in Manic Digger. The requirement has been fully met:
+This implementation establishes the Golden UI framework as **the standard** for all GUI development in Sword&Stone. The requirement has been fully met:
 
 ✅ **Same Frames:** All components use ui_big_pieces assets  
 ✅ **Same Generation:** All components use GuiFrameRenderer  

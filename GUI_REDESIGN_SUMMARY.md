@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project implements a complete redesign of the Manic Digger settings menu based on the design shown in `Settings-controls_tab-mode_1.png`. The new interface features a modern tabbed layout with 8 tabs and organized content areas.
+This project implements a complete redesign of the Sword&Stone settings menu based on the design shown in `Settings-controls_tab-mode_1.png`. The new interface features a modern tabbed layout with 8 tabs and organized content areas.
 
 ## Design Source
 
@@ -175,7 +175,7 @@ The main focus of the design - a comprehensive controls configuration screen:
 ## How to Use
 
 ### For End Users
-1. Launch Manic Digger
+1. Launch Sword&Stone
 2. Press ESC to open menu
 3. Click "Options"
 4. See the new tabbed interface
@@ -318,7 +318,7 @@ For questions or issues:
 
 ## License
 
-This implementation follows the same license as Manic Digger.
+This implementation follows the same license as Sword&Stone.
 See main LICENSE file for details.
 
 ---

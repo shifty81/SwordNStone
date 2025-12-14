@@ -2,7 +2,7 @@
 
 ## Overview
 
-This implementation adds Vintage Story-inspired block breaking mechanics to Manic Digger, where blocks can require specific tools to be collected properly.
+This implementation adds Vintage Story-inspired block breaking mechanics to Sword&Stone, where blocks can require specific tools to be collected properly.
 
 ## Problem Statement
 
@@ -270,7 +270,7 @@ Implementation based on Vintage Story game mechanics:
 - Block drop mechanics
 - Mining efficiency rules
 
-Adapted for Manic Digger architecture with security and compatibility in mind.
+Adapted for Sword&Stone architecture with security and compatibility in mind.
 
 ## Version History
 

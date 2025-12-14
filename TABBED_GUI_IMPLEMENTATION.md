@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the implementation of a tabbed GUI interface for the Manic Digger settings menu, based on the `Settings-controls_tab-mode_1.png` design image.
+This document describes the implementation of a tabbed GUI interface for the Sword&Stone settings menu, based on the `Settings-controls_tab-mode_1.png` design image.
 
 ## Design Reference
 
