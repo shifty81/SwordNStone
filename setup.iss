@@ -9,9 +9,9 @@ AppId={{119E2FCB-5CDD-4C24-BCB2-56A824E2BF0A}
 AppName=Sword&Stone
 AppVerName=Sword&Stone
 AppPublisher=Sword&Stone development team
-AppPublisherURL=https://github.com/shifty81/manicdiggerVSCLONE
-AppSupportURL=https://github.com/shifty81/manicdiggerVSCLONE
-AppUpdatesURL=https://github.com/shifty81/manicdiggerVSCLONE
+AppPublisherURL=https://github.com/shifty81/SwordNStone
+AppSupportURL=https://github.com/shifty81/SwordNStone
+AppUpdatesURL=https://github.com/shifty81/SwordNStone
 DefaultDirName={pf}\SwordAndStone
 DefaultGroupName=Sword&Stone
 AllowNoIcons=yes
@@ -36,17 +36,17 @@ Source: "output\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs create
 
 [Icons]
 Name: "{group}\{cm:UninstallProgram,Sword&Stone}"; Filename: "{uninstallexe}"
-Name: "{group}\Sword&Stone"; Filename: "{app}\ManicDigger.exe"
+Name: "{group}\Sword&Stone"; Filename: "{app}\SwordAndStone.exe"
 Name: "{group}\Configuration"; Filename: "{app}\UserData"
-Name: "{commondesktop}\Sword&Stone"; Filename: "{app}\ManicDigger.exe"; IconFilename: "{app}\data\local\md.ico"; Tasks: desktopicon
+Name: "{commondesktop}\Sword&Stone"; Filename: "{app}\SwordAndStone.exe"; IconFilename: "{app}\data\local\md.ico"; Tasks: desktopicon
 
 [Registry]
 Root: HKCR; Subkey: ".snslink"; ValueType: string; ValueName: ""; ValueData: "SwordAndStone"; Flags: uninsdeletevalue
 Root: HKCR; Subkey: "SwordAndStone"; ValueType: string; ValueName: ""; ValueData: "Sword&Stone multiplayer link"; Flags: uninsdeletekey
-Root: HKCR; Subkey: "SwordAndStone\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ManicDigger.exe,0"
-Root: HKCR; Subkey: "SwordAndStone\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ManicDigger.exe"" ""%1"""
+Root: HKCR; Subkey: "SwordAndStone\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\SwordAndStone.exe,0"
+Root: HKCR; Subkey: "SwordAndStone\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\SwordAndStone.exe"" ""%1"""
 
 Root: HKCR; Subkey: "sns"; ValueType: string; ValueName: ""; ValueData: "URL:Sword&Stone"; Flags: uninsdeletekey
 Root: HKCR; Subkey: "sns"; ValueType: string; ValueName: "URL Protocol"; ValueData: ""; Flags: uninsdeletekey
-Root: HKCR; Subkey: "sns\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\ManicDigger.exe,0"
-Root: HKCR; Subkey: "sns\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\ManicDigger.exe"" ""%1"""
+Root: HKCR; Subkey: "sns\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\SwordAndStone.exe,0"
+Root: HKCR; Subkey: "sns\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\SwordAndStone.exe"" ""%1"""
