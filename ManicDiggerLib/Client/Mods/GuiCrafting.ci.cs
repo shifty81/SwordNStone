@@ -48,6 +48,10 @@
     internal int craftingselectedrecipe;
     internal CraftingTableTool d_CraftingTableTool;
     FontCi fontCraftingGui;
+    
+    // Color constants for text
+    int ColorSelectedText() { return Game.ColorFromArgb(255, 255, 215, 0); } // Golden
+    int ColorNormalText() { return Game.ColorFromArgb(255, 255, 255, 255); } // White
 
     internal void DrawCraftingRecipes(Game game)
     {
@@ -84,26 +88,41 @@
         int menustarty = game.ycenter(currentRecipesCount * 80);
         if (currentRecipesCount == 0)
         {
+            // Draw frame for empty crafting message
+            GuiFrameRenderer.DrawFrame(game, game.xcenter(250), game.ycenter(50), 250, 50, GuiFrameRenderer.FRAME_SMALL);
             game.Draw2dText(game.language.NoMaterialsForCrafting(), fontCraftingGui, game.xcenter(200), game.ycenter(20), null, false);
             return;
         }
+        
+        // Draw golden frame around crafting recipes
+        int frameWidth = 620;
+        int frameHeight = currentRecipesCount * 80 + 40;
+        GuiFrameRenderer.DrawFrame(game, menustartx - 10, menustarty - 10, frameWidth, frameHeight, GuiFrameRenderer.FRAME_LARGE_ORNATE);
+        
         for (int i = 0; i < currentRecipesCount; i++)
         {
             Packet_CraftingRecipe r = craftingrecipes2[currentRecipes[i]];
+            
+            // Draw button background for each recipe row
+            bool isSelected = (i == craftingselectedrecipe);
+            int rowY = menustarty + i * 80;
+            int buttonState = isSelected ? GuiFrameRenderer.BUTTON_PRESSED : GuiFrameRenderer.BUTTON_NORMAL;
+            GuiFrameRenderer.DrawButton(game, menustartx + 10, rowY + 5, 580, 60, buttonState);
+            
             for (int ii = 0; ii < r.IngredientsCount; ii++)
             {
                 int xx = menustartx + 20 + ii * 130;
                 int yy = menustarty + i * 80;
                 game.Draw2dTexture(game.d_TerrainTextures.terrainTexture(), xx, yy, 32, 32, IntRef.Create(game.TextureIdForInventory[r.Ingredients[ii].Type]), game.texturesPacked(), Game.ColorFromArgb(255, 255, 255, 255), false);
                 game.Draw2dText(game.platform.StringFormat2("{0} {1}", game.platform.IntToString(r.Ingredients[ii].Amount), game.blocktypes[r.Ingredients[ii].Type].Name), fontCraftingGui, xx + 50, yy,
-                   IntRef.Create(i == craftingselectedrecipe ? Game.ColorFromArgb(255, 255, 0, 0) : Game.ColorFromArgb(255, 255, 255, 255)), false);
+                   IntRef.Create(i == craftingselectedrecipe ? ColorSelectedText() : ColorNormalText()), false);
             }
             {
                 int xx = menustartx + 20 + 400;
                 int yy = menustarty + i * 80;
                 game.Draw2dTexture(game.d_TerrainTextures.terrainTexture(), xx, yy, 32, 32, IntRef.Create(game.TextureIdForInventory[r.Output.Type]), game.texturesPacked(), Game.ColorFromArgb(255, 255, 255, 255), false);
                 game.Draw2dText(game.platform.StringFormat2("{0} {1}", game.platform.IntToString(r.Output.Amount), game.blocktypes[r.Output.Type].Name), fontCraftingGui, xx + 50, yy,
-                  IntRef.Create(i == craftingselectedrecipe ? Game.ColorFromArgb(255, 255, 0, 0) : Game.ColorFromArgb(255, 255, 255, 255)), false);
+                  IntRef.Create(i == craftingselectedrecipe ? ColorSelectedText() : ColorNormalText()), false);
             }
         }
     }

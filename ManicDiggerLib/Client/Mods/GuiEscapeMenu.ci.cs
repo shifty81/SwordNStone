@@ -963,29 +963,22 @@
         // Draw tabs if in a tabbed state
         if (IsTabbed(escapemenustate) && tabButtons != null)
         {
-            // Draw background panel for tabs
-            game.Draw2dTexture(game.WhiteTexture(), 0, TAB_PANEL_Y, game.Width(), TAB_PANEL_HEIGHT, 
-                null, 0, ColorTabPanelBg(), false);
-            
-            // Draw content panel background
+            // Draw content panel background using golden frame
             int contentPanelY = TAB_PANEL_Y + TAB_PANEL_HEIGHT + 5;
             int contentPanelHeight = game.Height() - contentPanelY - 50;
-            game.Draw2dTexture(game.WhiteTexture(), CONTENT_PANEL_MARGIN, contentPanelY, 
-                game.Width() - CONTENT_PANEL_MARGIN * 2, contentPanelHeight, null, 0, ColorContentPanelBg(), false);
+            GuiFrameRenderer.DrawFrame(game, CONTENT_PANEL_MARGIN, contentPanelY, 
+                game.Width() - CONTENT_PANEL_MARGIN * 2, contentPanelHeight, GuiFrameRenderer.FRAME_LARGE_ORNATE);
             
-            // Draw tabs
+            // Draw tabs using golden buttons
             for (int i = 0; i < tabButtonsCount; i++)
             {
                 Button tab = tabButtons[i];
                 bool tabIsActive = IsActiveTab(i, escapemenustate);
                 
-                // Draw tab background
-                int tabBgColor = tabIsActive ? ColorActiveTabBg() : ColorInactiveTabBg();
-                game.Draw2dTexture(game.WhiteTexture(), tab.x, tab.y, tab.width, tab.height, null, 0, tabBgColor, false);
-                
-                // Draw tab border
-                int borderColor = tabIsActive ? ColorActiveTabBorder() : ColorInactiveTabBorder();
-                DrawBorder(tab.x, tab.y, tab.width, tab.height, TAB_BORDER_THICKNESS, borderColor);
+                // Draw tab button using golden UI
+                int buttonState = tabIsActive ? GuiFrameRenderer.BUTTON_PRESSED : 
+                                 (tab.selected ? GuiFrameRenderer.BUTTON_HOVER : GuiFrameRenderer.BUTTON_NORMAL);
+                GuiFrameRenderer.DrawButton(game, tab.x, tab.y, tab.width, tab.height, buttonState);
                 
                 // Draw tab text
                 game.Draw2dText(tab.Text, tab.font, tab.x + 10, tab.y + 8, 
