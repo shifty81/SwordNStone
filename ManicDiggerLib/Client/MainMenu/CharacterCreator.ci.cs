@@ -109,7 +109,9 @@ public class ScreenCharacterCreator : Screen
 		menu.DrawBackground();
 		menu.DrawText(title, fontTitle, p.GetCanvasWidth() / 2, 30 * scale, TextAlign.Center, TextBaseline.Top);
 		
-		float centerX = p.GetCanvasWidth() / 2;
+		// Calculate layout - move options to the left to make room for character preview
+		float optionsX = p.GetCanvasWidth() / 3;
+		float previewX = (p.GetCanvasWidth() / 3) * 2;
 		float startY = 120 * scale;
 		float rowHeight = 80 * scale;
 		float buttonWidth = 50 * scale;
@@ -118,30 +120,33 @@ public class ScreenCharacterCreator : Screen
 		
 		// Gender selection
 		DrawCustomizationRow(p, scale, "Gender:", GetGenderName(), 
-			centerX, startY, 
+			optionsX, startY, 
 			genderLeft, genderRight, 
 			buttonWidth, buttonHeight, labelWidth);
 		
 		// Hairstyle selection
 		DrawCustomizationRow(p, scale, "Hairstyle:", GetHairstyleName(), 
-			centerX, startY + rowHeight, 
+			optionsX, startY + rowHeight, 
 			hairstyleLeft, hairstyleRight, 
 			buttonWidth, buttonHeight, labelWidth);
 		
 		// Beard selection
 		DrawCustomizationRow(p, scale, "Beard:", GetBeardName(), 
-			centerX, startY + rowHeight * 2, 
+			optionsX, startY + rowHeight * 2, 
 			beardLeft, beardRight, 
 			buttonWidth, buttonHeight, labelWidth);
 		
 		// Outfit selection
 		DrawCustomizationRow(p, scale, "Outfit:", GetOutfitName(), 
-			centerX, startY + rowHeight * 3, 
+			optionsX, startY + rowHeight * 3, 
 			outfitLeft, outfitRight, 
 			buttonWidth, buttonHeight, labelWidth);
 		
+		// Draw character preview on the right side
+		DrawCharacterPreview(p, scale, previewX, startY);
+		
 		// Confirm button
-		confirmButton.x = centerX - 128 * scale;
+		confirmButton.x = p.GetCanvasWidth() / 2 - 128 * scale;
 		confirmButton.y = p.GetCanvasHeight() - 150 * scale;
 		confirmButton.sizex = 256 * scale;
 		confirmButton.sizey = 64 * scale;
@@ -179,6 +184,46 @@ public class ScreenCharacterCreator : Screen
 		rightButton.y = y;
 		rightButton.sizex = buttonWidth;
 		rightButton.sizey = buttonHeight;
+	}
+	
+	void DrawCharacterPreview(GamePlatform p, float scale, float x, float y)
+	{
+		// Draw a golden frame around the character preview
+		int previewWidth = p.FloatToInt(256 * scale);
+		int previewHeight = p.FloatToInt(384 * scale);
+		int previewX = p.FloatToInt(x - (256 * scale) / 2);
+		int previewY = p.FloatToInt(y);
+		
+		// Draw frame border using golden frame texture
+		string framePath = "local/gui/golden/frame_ornate.png";
+		int frameTexture = menu.GetTexture(framePath);
+		menu.Draw2dQuad(frameTexture, 
+			previewX - p.FloatToInt(16 * scale), 
+			previewY - p.FloatToInt(16 * scale),
+			previewWidth + p.FloatToInt(32 * scale),
+			previewHeight + p.FloatToInt(32 * scale));
+		
+		// Draw dark background panel
+		string panelPath = "local/gui/golden/panel_dark.png";
+		int panelTexture = menu.GetTexture(panelPath);
+		menu.Draw2dQuad(panelTexture, previewX, previewY, previewWidth, previewHeight);
+		
+		// Draw character texture preview
+		string textureName = customization.GetTextureName();
+		int textureId = menu.GetTexture(textureName);
+		
+		// Draw the character skin centered in the preview area
+		// Use a larger scale to make the character visible
+		int charWidth = p.FloatToInt(128 * scale);
+		int charHeight = p.FloatToInt(256 * scale);
+		int charX = previewX + (previewWidth - charWidth) / 2;
+		int charY = previewY + (previewHeight - charHeight) / 2;
+		
+		menu.Draw2dQuad(textureId, charX, charY, charWidth, charHeight);
+		
+		// Add a label below
+		menu.DrawText("Character Preview", fontDefault, x, y + previewHeight + 20 * scale, 
+			TextAlign.Center, TextBaseline.Top);
 	}
 	
 	string GetGenderName()

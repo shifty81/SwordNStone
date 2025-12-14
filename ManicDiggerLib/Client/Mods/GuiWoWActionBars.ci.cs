@@ -17,12 +17,20 @@
     int[] buttonStates;
 
     // Layout constants
-    int ActionBarStartX() { return game.Width() / 2 - 512; }
-    int ActionBarStartY() { return game.Height() - 120; }
-    // Use 48px to match slot_normal.png natural size (48x48) - avoids stretching/distortion
     int ButtonSize() { return game.platform.FloatToInt(48 * game.Scale()); }
     // Spacing reduced from 10px to 8px to maintain compact layout with smaller 48px buttons
     int ButtonSpacing() { return game.platform.FloatToInt(8 * game.Scale()); }
+    
+    int ActionBarStartX() 
+    { 
+        // Calculate total width of action bar background
+        // Background width: 10 * (buttonSize + spacing) + 2 * spacing (from DrawWoWActionBar)
+        int bgWidth = 10 * (ButtonSize() + ButtonSpacing()) + ButtonSpacing() * 2;
+        // Center the background horizontally, then add spacing to get button start position
+        return (game.Width() - bgWidth) / 2 + ButtonSpacing();
+    }
+    
+    int ActionBarStartY() { return game.Height() - 120; }
 
     public override void OnKeyPress(Game game_, KeyPressEventArgs args)
     {
