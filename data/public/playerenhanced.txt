@@ -1,0 +1,156 @@
+section=nodes
+name	paren	x	y	z	sizex	sizey	sizez	u	v	rotx	roty	rotz	pivx	pivy	pivz	scalx	scaly	scalz	head
+torso	root	0	18	0	8	12	4	16	16	0	0	0	0	0	0	0.83	0.83	0.83	0
+head	torso	0	6	0	8	8	8	0	0	0	0	0	0	4	0	0	0	0	1
+hat	head	0	0	0	8	8	8	32	0	0	0	0	0	0	0	1.1	1.1	1.1	0
+legr	torso	-2	-6	0	4	12	4	0	16	0	0	0	0	-6	0	0	0	0	0
+legl	torso	2	-6	0	4	12	4	0	16	0	0	0	0	-6	0	0	0	0	0
+armr	torso	-6	6	0	4	12	4	40	16	0	0	0	0	-6	0	0	0	0	0
+arml	torso	6	6	0	4	12	4	40	16	0	0	0	0	-6	0	0	0	0	0
+itemr	armr	0	-8	2	4	8	4	24	0	0	0	0	0	4	0	0.5	0.5	0.5	0
+iteml	arml	0	-8	2	4	8	4	24	0	0	0	0	0	4	0	0.5	0.5	0.5	0
+
+section=keyframes
+anim	node	frame	type	x	y	z
+# Idle animation
+idle	torso	0	pos	0	18	0
+idle	torso	30	pos	0	18.5	0
+idle	torso	60	pos	0	18	0
+idle	head	0	rot	0	0	0
+idle	head	40	rot	5	0	0
+idle	head	80	rot	0	0	0
+
+# Walking animation
+walk	legr	10	rot	-45	0	0
+walk	legr	30	rot	45	0	0
+walk	legl	10	rot	45	0	0
+walk	legl	30	rot	-45	0	0
+walk	armr	10	rot	45	0	0
+walk	armr	30	rot	-45	0	0
+walk	arml	10	rot	-45	0	0
+walk	arml	30	rot	45	0	0
+walk	torso	0	pos	0	18	0
+walk	torso	10	pos	0	19	0
+walk	torso	20	pos	0	18	0
+walk	torso	30	pos	0	19	0
+
+# Chopping/Mining animation (swinging tool overhead)
+chop	armr	0	rot	0	0	0
+chop	armr	5	rot	-120	0	0
+chop	armr	10	rot	-140	0	-10
+chop	armr	15	rot	30	0	10
+chop	armr	20	rot	0	0	0
+chop	arml	0	rot	0	0	0
+chop	arml	5	rot	-100	0	0
+chop	arml	10	rot	-120	0	10
+chop	arml	15	rot	20	0	-10
+chop	arml	20	rot	0	0	0
+chop	torso	0	rot	0	0	0
+chop	torso	10	rot	-10	5	0
+chop	torso	15	rot	10	-5	0
+chop	torso	20	rot	0	0	0
+chop	itemr	0	siz	4	8	4
+chop	itemr	5	siz	4	12	4
+chop	itemr	20	siz	4	8	4
+
+# Bow drawing and firing animation
+bow_draw	armr	0	rot	-90	0	-20
+bow_draw	armr	10	rot	-90	0	-20
+bow_draw	arml	0	rot	-90	0	30
+bow_draw	arml	10	rot	-90	-15	50
+bow_draw	iteml	0	pos	0	-8	2
+bow_draw	iteml	10	pos	0	-10	0
+bow_draw	torso	0	rot	0	0	0
+bow_draw	torso	5	rot	0	-5	0
+bow_draw	torso	10	rot	0	-10	0
+bow_fire	armr	0	rot	-90	0	-20
+bow_fire	arml	0	rot	-90	-15	50
+bow_fire	arml	5	rot	-90	0	30
+bow_fire	torso	0	rot	0	-10	0
+bow_fire	torso	5	rot	0	5	0
+bow_fire	torso	10	rot	0	0	0
+
+# Sword and shield combat - attack swing
+sword_attack	armr	0	rot	0	0	-45
+sword_attack	armr	5	rot	-90	0	-90
+sword_attack	armr	10	rot	-45	0	45
+sword_attack	armr	15	rot	0	0	-45
+sword_attack	arml	0	rot	-30	0	10
+sword_attack	arml	15	rot	-30	0	10
+sword_attack	itemr	0	rot	0	0	0
+sword_attack	itemr	5	rot	0	45	0
+sword_attack	itemr	10	rot	0	90	0
+sword_attack	itemr	15	rot	0	0	0
+sword_attack	torso	0	rot	0	-45	0
+sword_attack	torso	5	rot	0	0	0
+sword_attack	torso	10	rot	0	45	0
+sword_attack	torso	15	rot	0	0	0
+sword_attack	legr	5	rot	-20	0	0
+sword_attack	legl	5	rot	20	0	0
+
+# Shield block/defend stance
+shield_block	arml	0	rot	-90	0	45
+shield_block	arml	10	rot	-90	0	45
+shield_block	armr	0	rot	-45	0	-20
+shield_block	armr	10	rot	-45	0	-20
+shield_block	iteml	0	siz	6	10	2
+shield_block	iteml	10	siz	6	10	2
+shield_block	torso	0	rot	0	-15	0
+shield_block	torso	10	rot	0	-15	0
+
+# Talking/emote animation (for VOIP visual feedback)
+talk	head	0	rot	0	0	0
+talk	head	3	rot	2	0	0
+talk	head	6	rot	-1	0	0
+talk	head	9	rot	1	0	0
+talk	head	12	rot	0	0	0
+talk	armr	0	rot	-30	0	-15
+talk	armr	12	rot	-30	0	-15
+talk	arml	0	rot	-30	0	15
+talk	arml	12	rot	-30	0	15
+
+# Wave emote
+wave	armr	0	rot	-120	0	-30
+wave	armr	5	rot	-130	0	-20
+wave	armr	10	rot	-120	0	-35
+wave	armr	15	rot	-130	0	-20
+wave	armr	20	rot	-120	0	-30
+wave	head	0	rot	0	10	0
+wave	head	20	rot	0	10	0
+
+# Point emote
+point	armr	0	rot	-90	0	0
+point	armr	10	rot	-90	0	0
+point	head	0	rot	0	20	0
+point	head	10	rot	0	20	0
+
+# Cheer/celebrate emote
+cheer	armr	0	rot	-140	0	-45
+cheer	armr	5	rot	-160	0	-30
+cheer	armr	10	rot	-140	0	-45
+cheer	arml	0	rot	-140	0	45
+cheer	arml	5	rot	-160	0	30
+cheer	arml	10	rot	-140	0	45
+cheer	torso	0	pos	0	18	0
+cheer	torso	5	pos	0	20	0
+cheer	torso	10	pos	0	18	0
+cheer	legr	5	rot	-10	0	0
+cheer	legl	5	rot	-10	0	0
+
+section=animations
+name	len
+idle	120
+walk	40
+chop	20
+bow_draw	10
+bow_fire	10
+sword_attack	15
+shield_block	10
+talk	12
+wave	20
+point	10
+cheer	10
+
+section=global
+texw	texh
+64	32

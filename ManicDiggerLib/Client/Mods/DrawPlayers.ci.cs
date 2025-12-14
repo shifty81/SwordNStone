@@ -92,15 +92,9 @@
 				}
 			}
 
-			// switch animations based on player state
-			if (p_.playerDrawInfo.moves)
-			{
-				p_.drawModel.renderer.SetAnimation("walk");
-			}
-			else
-			{
-				p_.drawModel.renderer.SetAnimation("idle");
-			}
+			// switch animations based on player state and actions
+			string animationName = GetPlayerAnimation(game, p_, i);
+			p_.drawModel.renderer.SetAnimation(animationName);
 
 			game.GLPushMatrix();
 			game.GLTranslate(FeetPosX, FeetPosY, FeetPosZ);
@@ -111,5 +105,76 @@
 			p_.drawModel.renderer.Render(dt, PlayerInterpolate.RadToDeg(p_.position.rotx + Game.GetPi()), shadow);
 			game.GLPopMatrix();
 		}
+	}
+
+	// Determine which animation to play based on player state
+	string GetPlayerAnimation(Game game, Entity player, int playerId)
+	{
+		string baseAnimation = "idle";
+		
+		// Check for emote animations first (highest priority for local player)
+		if (playerId == game.LocalPlayerId)
+		{
+			ModEmoteSystem emoteSystem = game.GetMod_EmoteSystem();
+			if (emoteSystem != null && emoteSystem.IsPlayingEmote())
+			{
+				string emote = emoteSystem.GetCurrentEmote();
+				if (emote != null)
+				{
+					return emote;
+				}
+			}
+		}
+		
+		// Check if player is attacking/mining (left mouse button held)
+		if (playerId == game.LocalPlayerId && game.mouseLeft && game.currentAttackedBlock != null)
+		{
+			// Check what item is equipped
+			Packet_Item item = game.d_Inventory.RightHand[game.ActiveMaterial];
+			
+			if (item != null)
+			{
+				// Check if it's a tool (pickaxe, axe, shovel)
+				int blockId = item.BlockId;
+				if (game.blocktypes[blockId] != null)
+				{
+					string blockName = game.blocktypes[blockId].Name;
+					if (blockName != null)
+					{
+						// Tool animations
+						if (game.platform.StringContains(blockName, "Pickaxe") ||
+						    game.platform.StringContains(blockName, "Axe") ||
+						    game.platform.StringContains(blockName, "Shovel"))
+						{
+							return "chop";
+						}
+						
+						// Sword animation
+						if (game.platform.StringContains(blockName, "Sword"))
+						{
+							return "sword_attack";
+						}
+						
+						// Bow animation (if bow exists in game)
+						if (game.platform.StringContains(blockName, "Bow"))
+						{
+							return "bow_draw";
+						}
+					}
+				}
+			}
+		}
+		
+		// Default movement animations
+		if (player.playerDrawInfo.moves)
+		{
+			baseAnimation = "walk";
+		}
+		else
+		{
+			baseAnimation = "idle";
+		}
+		
+		return baseAnimation;
 	}
 }

@@ -284,6 +284,9 @@
         AddMod(new ModGuiWoWActionBars());
         AddMod(new ModGuiWoWUnitFrames());
         AddMod(new ModGuiWoWMinimap());
+        
+        // Emote system for player expression
+        AddMod(new ModEmoteSystem());
 
         s = new BlockOctreeSearcher();
         s.platform = platform;
@@ -4040,4 +4043,17 @@
     internal bool reachedwall_1blockhigh;
     internal bool reachedHalfBlock;
     internal float movedz;
+
+    // Helper method to get EmoteSystem mod
+    public ModEmoteSystem GetMod_EmoteSystem()
+    {
+        for (int i = 0; i < clientmodsCount; i++)
+        {
+            if (clientmods[i] is ModEmoteSystem)
+            {
+                return (ModEmoteSystem)clientmods[i];
+            }
+        }
+        return null;
+    }
 }
