@@ -107,37 +107,37 @@ public class UIThemeManager
     void SetupAssetPaths(Game game)
     {
         // Sprite sheets
-        hudPiecesPath = game.platform.StringFormat("{0}{1}hud_pieces.png", basePath, hudPath);
-        uiSplitPath = game.platform.StringFormat("{0}{1}ui_split.png", basePath, uiPath);
-        speechBubbleSmallPath = game.platform.StringFormat("{0}{1}speech_bubble_small_spritesheet.png", basePath, speechPath);
-        speechBubbleLargePath = game.platform.StringFormat("{0}{1}speech_bubble_large_spritesheet.png", basePath, speechPath);
+        hudPiecesPath = game.platform.StringFormat3("{0}{1}{2}", basePath, hudPath, "hud_pieces.png");
+        uiSplitPath = game.platform.StringFormat3("{0}{1}{2}", basePath, uiPath, "ui_split.png");
+        speechBubbleSmallPath = game.platform.StringFormat3("{0}{1}{2}", basePath, speechPath, "speech_bubble_small_spritesheet.png");
+        speechBubbleLargePath = game.platform.StringFormat3("{0}{1}{2}", basePath, speechPath, "speech_bubble_large_spritesheet.png");
         
         // Buttons
-        buttonNormalPath = game.platform.StringFormat("{0}{1}button_normal.png", basePath, buttonsPath);
-        buttonHoverPath = game.platform.StringFormat("{0}{1}button_hover.png", basePath, buttonsPath);
-        buttonPressedPath = game.platform.StringFormat("{0}{1}button_pressed.png", basePath, buttonsPath);
-        buttonLongNormalPath = game.platform.StringFormat("{0}{1}button_long_normal.png", basePath, buttonsPath);
-        buttonLongHoverPath = game.platform.StringFormat("{0}{1}button_long_hover.png", basePath, buttonsPath);
-        buttonLongPressedPath = game.platform.StringFormat("{0}{1}button_long_pressed.png", basePath, buttonsPath);
+        buttonNormalPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_normal.png");
+        buttonHoverPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_hover.png");
+        buttonPressedPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_pressed.png");
+        buttonLongNormalPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_long_normal.png");
+        buttonLongHoverPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_long_hover.png");
+        buttonLongPressedPath = game.platform.StringFormat3("{0}{1}{2}", basePath, buttonsPath, "button_long_pressed.png");
         
         // Frames
-        frameSmallPath = game.platform.StringFormat("{0}{1}frame_small.png", basePath, framesPath);
-        frameOrnatePath = game.platform.StringFormat("{0}{1}frame_ornate.png", basePath, framesPath);
-        frameCircularPath = game.platform.StringFormat("{0}{1}frame_circular.png", basePath, framesPath);
-        frameLarge1Path = game.platform.StringFormat("{0}{1}frame_large_1.png", basePath, framesPath);
-        frameLarge2Path = game.platform.StringFormat("{0}{1}frame_large_2.png", basePath, framesPath);
-        frameLarge3Path = game.platform.StringFormat("{0}{1}frame_large_3.png", basePath, framesPath);
+        frameSmallPath = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_small.png");
+        frameOrnatePath = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_ornate.png");
+        frameCircularPath = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_circular.png");
+        frameLarge1Path = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_large_1.png");
+        frameLarge2Path = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_large_2.png");
+        frameLarge3Path = game.platform.StringFormat3("{0}{1}{2}", basePath, framesPath, "frame_large_3.png");
         
         // Bars
-        barFullRedPath = game.platform.StringFormat("{0}{1}bar_full_red.png", basePath, barsPath);
-        barFullBluePath = game.platform.StringFormat("{0}{1}bar_full_blue.png", basePath, barsPath);
-        barLeftPath = game.platform.StringFormat("{0}{1}bar_left.png", basePath, barsPath);
-        barRightPath = game.platform.StringFormat("{0}{1}bar_right.png", basePath, barsPath);
+        barFullRedPath = game.platform.StringFormat3("{0}{1}{2}", basePath, barsPath, "bar_full_red.png");
+        barFullBluePath = game.platform.StringFormat3("{0}{1}{2}", basePath, barsPath, "bar_full_blue.png");
+        barLeftPath = game.platform.StringFormat3("{0}{1}{2}", basePath, barsPath, "bar_left.png");
+        barRightPath = game.platform.StringFormat3("{0}{1}{2}", basePath, barsPath, "bar_right.png");
         
         // Inventory slots
-        slotNormalPath = game.platform.StringFormat("{0}{1}slot_normal.png", basePath, inventoryPath);
-        slotActivePath = game.platform.StringFormat("{0}{1}slot_active.png", basePath, inventoryPath);
-        slotHighlightPath = game.platform.StringFormat("{0}{1}slot_highlight.png", basePath, inventoryPath);
+        slotNormalPath = game.platform.StringFormat3("{0}{1}{2}", basePath, inventoryPath, "slot_normal.png");
+        slotActivePath = game.platform.StringFormat3("{0}{1}{2}", basePath, inventoryPath, "slot_active.png");
+        slotHighlightPath = game.platform.StringFormat3("{0}{1}{2}", basePath, inventoryPath, "slot_highlight.png");
     }
     
     /// <summary>
@@ -277,9 +277,11 @@ public class SpeechBubbleRenderer
         game.Draw2dBitmapFile(theme.GetSpeechBubbleSmallPath(), x, y, 24, 24);
         
         // Draw text inside bubble
+        FontCi font = new FontCi();
+        font.size = 8;
         int textX = x + 4;
         int textY = y + 6;
-        game.Draw2dText(text, game.fontDefault, textX, textY, null);
+        game.Draw2dText(text, font, textX, textY, null, false);
     }
     
     /// <summary>
@@ -297,9 +299,11 @@ public class SpeechBubbleRenderer
         game.Draw2dBitmapFile(theme.GetSpeechBubbleLargePath(), x, y, 32, 32);
         
         // Draw text inside bubble
+        FontCi font = new FontCi();
+        font.size = 10;
         int textX = x + 6;
         int textY = y + 8;
-        game.Draw2dText(text, game.fontDefault, textX, textY, null);
+        game.Draw2dText(text, font, textX, textY, null, false);
     }
     
     /// <summary>
