@@ -116,6 +116,7 @@
     <Compile Include="Client\Mods\GuiWoWActionBars.ci.cs" />
     <Compile Include="Client\Mods\GuiWoWMinimap.ci.cs" />
     <Compile Include="Client\Mods\GuiWoWUnitFrames.ci.cs" />
+    <Compile Include="Client\Mods\UIThemeManager.ci.cs" />
     <Compile Include="Client\Mods\BlockDamageToPlayer.ci.cs" />
     <Compile Include="Client\Mods\Bullet.ci.cs" />
     <Compile Include="Client\Mods\Camera.ci.cs" />
