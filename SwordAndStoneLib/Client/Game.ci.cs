@@ -281,10 +281,15 @@
         AddMod(new ModScreenshot());
         AddMod(new ModAudio());
         
-        // WoW-style GUI enhancements
-        AddMod(new ModGuiWoWActionBars());
-        AddMod(new ModGuiWoWUnitFrames());
-        AddMod(new ModGuiWoWMinimap());
+        // WoW-style GUI enhancements (legacy - consider deprecating in favor of new assembled GUI)
+        // AddMod(new ModGuiWoWActionBars());
+        // AddMod(new ModGuiWoWUnitFrames());
+        // AddMod(new ModGuiWoWMinimap());
+        
+        // New assembled GUI system based on Assembled_Gui_Pieces.PNG
+        AddMod(new ModGuiCapsuleBars());      // HP/Mana/Stamina capsule bars (top-left)
+        AddMod(new ModGuiEnhancedMinimap());  // Minimap with zoom and world map (top-right)
+        AddMod(new ModGuiHotbar());           // Hotbar (bottom-center)
         
         // Initialize UI Theme Manager
         uiThemeManager = new UIThemeManager();
