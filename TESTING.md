@@ -4,7 +4,7 @@ This document describes how to run tests for the Sword&Stone project.
 
 ## Test Project
 
-The solution includes a test project: **ManicDigger.Tests**
+The solution includes a test project: **SwordAndStone.Tests**
 
 This project contains:
 - Sample unit tests demonstrating the testing framework
@@ -58,10 +58,10 @@ To run tests from the command line, you need the NUnit Console Runner:
 2. **Run tests:**
    ```bash
    # Windows
-   .\packages\NUnit.ConsoleRunner.3.15.4\tools\nunit3-console.exe ManicDigger.Tests\bin\Debug\ManicDigger.Tests.dll
+   .\packages\NUnit.ConsoleRunner.3.15.4\tools\nunit3-console.exe SwordAndStone.Tests\bin\Debug\SwordAndStone.Tests.dll
    
    # Linux/Mac with Mono
-   mono ./packages/NUnit.ConsoleRunner.3.15.4/tools/nunit3-console.exe ManicDigger.Tests/bin/Debug/ManicDigger.Tests.dll
+   mono ./packages/NUnit.ConsoleRunner.3.15.4/tools/nunit3-console.exe SwordAndStone.Tests/bin/Debug/SwordAndStone.Tests.dll
    ```
 
 3. **View results:**
@@ -73,7 +73,7 @@ To run tests from the command line, you need the NUnit Console Runner:
 If you migrate to modern .NET SDK-style projects:
 
 ```bash
-dotnet test ManicDigger.sln
+dotnet test SwordAndStone.sln
 ```
 
 This automatically:
@@ -101,7 +101,7 @@ Run tests by category in Visual Studio:
 ```csharp
 using NUnit.Framework;
 
-namespace ManicDigger.Tests
+namespace SwordAndStone.Tests
 {
     [TestFixture]
     public class MyTests
@@ -184,7 +184,7 @@ To measure test coverage:
    ```bash
    packages\OpenCover.4.7.1221\tools\OpenCover.Console.exe `
      -target:"nunit3-console.exe" `
-     -targetargs:"ManicDigger.Tests\bin\Debug\ManicDigger.Tests.dll" `
+     -targetargs:"SwordAndStone.Tests\bin\Debug\SwordAndStone.Tests.dll" `
      -register:user `
      -output:coverage.xml
    ```
@@ -195,7 +195,7 @@ To measure test coverage:
 
 ### Existing Tests
 
-The ManicDigger.Tests project includes:
+The SwordAndStone.Tests project includes:
 
 1. **SampleTests**
    - Basic assertion tests
@@ -263,11 +263,11 @@ jobs:
         with:
           dotnet-version: '4.5'
       - name: Restore packages
-        run: nuget restore ManicDigger.sln
+        run: nuget restore SwordAndStone.sln
       - name: Build
-        run: msbuild ManicDigger.sln /p:Configuration=Debug
+        run: msbuild SwordAndStone.sln /p:Configuration=Debug
       - name: Test
-        run: nunit3-console ManicDigger.Tests\bin\Debug\ManicDigger.Tests.dll
+        run: nunit3-console SwordAndStone.Tests\bin\Debug\SwordAndStone.Tests.dll
 ```
 
 ### Travis CI
@@ -276,8 +276,8 @@ The project already has `.travis.yml`. Add test execution:
 
 ```yaml
 script:
-  - xbuild ManicDigger.sln /p:Configuration=Debug
-  - mono packages/NUnit.ConsoleRunner.3.16.3/tools/nunit3-console.exe ManicDigger.Tests/bin/Debug/ManicDigger.Tests.dll
+  - xbuild SwordAndStone.sln /p:Configuration=Debug
+  - mono packages/NUnit.ConsoleRunner.3.16.3/tools/nunit3-console.exe SwordAndStone.Tests/bin/Debug/SwordAndStone.Tests.dll
 ```
 
 ## Best Practices
