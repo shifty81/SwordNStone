@@ -104,13 +104,13 @@
 
 		if (chatlines2Count > 0)
 		{
-			// draw chatbox background
-			game.Draw2dTexture(game.WhiteTexture(),
-				(posX - chatboxMargin) * game.Scale(),
-				(posY - chatboxMargin) * game.Scale(),
-				(750 + 2 * chatboxMargin) * game.Scale(),
-				(chatlines2Count * lineSpacing + chatboxMargin) * game.Scale(),
-				null, 0, color_background, false);
+			// draw chatbox background using golden frame
+			GuiFrameRenderer.DrawFrame(game,
+				game.platform.FloatToInt((posX - chatboxMargin) * game.Scale()),
+				game.platform.FloatToInt((posY - chatboxMargin) * game.Scale()),
+				game.platform.FloatToInt((750 + 2 * chatboxMargin) * game.Scale()),
+				game.platform.FloatToInt((chatlines2Count * lineSpacing + chatboxMargin) * game.Scale()),
+				GuiFrameRenderer.FRAME_SMALL);
 		}
 
 		for (int i = 0; i < chatlines2Count; i++)
@@ -159,13 +159,13 @@
 			posY = game.platform.GetCanvasHeight() - 150 * game.Scale();
 		}
 
-		// draw typing buffer background
-		game.Draw2dTexture(game.WhiteTexture(),
-			(posX - chatboxMargin) * game.Scale(),
-			(posY - chatboxMargin) * game.Scale(),
-			(750 + 2 * chatboxMargin) * game.Scale(),
-			(1.5f * font.size + 2 * chatboxMargin) * game.Scale(),
-			null, 0, color_background, false);
+		// draw typing buffer background using golden frame
+		GuiFrameRenderer.DrawFrame(game,
+			game.platform.FloatToInt((posX - chatboxMargin) * game.Scale()),
+			game.platform.FloatToInt((posY - chatboxMargin) * game.Scale()),
+			game.platform.FloatToInt((750 + 2 * chatboxMargin) * game.Scale()),
+			game.platform.FloatToInt((1.5f * font.size + 2 * chatboxMargin) * game.Scale()),
+			GuiFrameRenderer.FRAME_SMALL);
 
 		// draw text input
 		game.Draw2dText(game.platform.StringFormat("{0}_", s), font, posX, posY, null, true);
