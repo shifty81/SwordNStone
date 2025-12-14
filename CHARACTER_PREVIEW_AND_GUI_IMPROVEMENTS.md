@@ -42,7 +42,7 @@ This update addresses the GUI improvements requested in the issue:
 
 #### Transparency Enhancement
 - Increased transparency of chat background
-- Changed alpha from 80 to 120 (more transparent)
+- Changed alpha from 80 to 60 (more transparent)
 - Maintains readability while being less obtrusive
 
 #### Hide/Show Toggle
