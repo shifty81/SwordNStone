@@ -8,8 +8,8 @@
     <ProjectGuid>{650BC108-C744-4DA1-AEFD-CD8F011483B3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ManicDigger</RootNamespace>
-    <AssemblyName>ManicDigger</AssemblyName>
+    <RootNamespace>SwordAndStone</RootNamespace>
+    <AssemblyName>SwordAndStone</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkSubset>
     </TargetFrameworkSubset>
@@ -141,9 +141,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ManicDiggerLib\ManicDiggerLib.csproj">
+    <ProjectReference Include="..\SwordAndStoneLib\SwordAndStoneLib.csproj">
       <Project>{08056549-3BE8-454C-A09A-67EDCDC81261}</Project>
-      <Name>ManicDiggerLib</Name>
+      <Name>SwordAndStoneLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

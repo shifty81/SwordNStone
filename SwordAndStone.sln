@@ -4,17 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # SharpDevelop 5.1
 VisualStudioVersion = 12.0.20827.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManicDigger", "ManicDigger\ManicDigger.csproj", "{650BC108-C744-4DA1-AEFD-CD8F011483B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwordAndStone", "SwordAndStone\SwordAndStone.csproj", "{650BC108-C744-4DA1-AEFD-CD8F011483B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManicDiggerServer", "ManicDiggerServer\ManicDiggerServer.csproj", "{46D2CD51-9603-48B4-87D1-7377B5F1E51E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwordAndStoneServer", "SwordAndStoneServer\SwordAndStoneServer.csproj", "{46D2CD51-9603-48B4-87D1-7377B5F1E51E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManicDiggerLib", "ManicDiggerLib\ManicDiggerLib.csproj", "{08056549-3BE8-454C-A09A-67EDCDC81261}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwordAndStoneLib", "SwordAndStoneLib\SwordAndStoneLib.csproj", "{08056549-3BE8-454C-A09A-67EDCDC81261}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MdMonsterEditor", "MdMonsterEditor\MdMonsterEditor.csproj", "{DE9E0B36-6171-4DA3-9495-0A82445B6D74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwordAndStoneMonsterEditor", "SwordAndStoneMonsterEditor\SwordAndStoneMonsterEditor.csproj", "{DE9E0B36-6171-4DA3-9495-0A82445B6D74}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptingApi", "ScriptingApi\ScriptingApi.csproj", "{A3582245-A1D1-4135-BA90-8EFD7830DA83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManicDigger.Tests", "ManicDigger.Tests\ManicDigger.Tests.csproj", "{E8B5E4F7-8C3D-4F5A-9B2E-1D7F4C6E9A8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwordAndStone.Tests", "SwordAndStone.Tests\SwordAndStone.Tests.csproj", "{E8B5E4F7-8C3D-4F5A-9B2E-1D7F4C6E9A8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

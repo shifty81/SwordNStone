@@ -8,8 +8,8 @@
     <ProjectGuid>{08056549-3BE8-454C-A09A-67EDCDC81261}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ManicDigger</RootNamespace>
-    <AssemblyName>ManicDiggerLib</AssemblyName>
+    <RootNamespace>SwordAndStone</RootNamespace>
+    <AssemblyName>SwordAndStoneLib</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkSubset>
     </TargetFrameworkSubset>

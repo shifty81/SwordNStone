@@ -6,8 +6,8 @@
     <ProjectGuid>{E8B5E4F7-8C3D-4F5A-9B2E-1D7F4C6E9A8B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ManicDigger.Tests</RootNamespace>
-    <AssemblyName>ManicDigger.Tests</AssemblyName>
+    <RootNamespace>SwordAndStone.Tests</RootNamespace>
+    <AssemblyName>SwordAndStone.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,9 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ManicDiggerLib\ManicDiggerLib.csproj">
+    <ProjectReference Include="..\SwordAndStoneLib\SwordAndStoneLib.csproj">
       <Project>{08056549-3BE8-454C-A09A-67EDCDC81261}</Project>
-      <Name>ManicDiggerLib</Name>
+      <Name>SwordAndStoneLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScriptingApi\ScriptingApi.csproj">
       <Project>{A3582245-A1D1-4135-BA90-8EFD7830DA83}</Project>
