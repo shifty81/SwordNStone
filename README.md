@@ -7,6 +7,7 @@ Build yourself a home in your own world or connect to an online server to team u
 Features
 --------
 - Singleplayer and Multiplayer
+- **Character Customization** - Customize your character's appearance with different hairstyles, beards, outfits, and genders
 - Full support for custom textures
 - Powerful server side modding API
 - Large world: 9984x9984x128 by default
@@ -28,6 +29,28 @@ Please note that this is still in development (no friendly/hostile mobs right no
 #### War Mod
 
 The War Mod is a gamemode that transforms the game into a fast-paced first-person shooter.
+
+
+Character Customization
+-----------------------
+
+Customize your character's appearance to make them truly your own!
+
+**Features:**
+- **Gender Selection**: Choose between male and female character models
+- **Hairstyles**: 5 different hairstyle options (Short, Medium, Long, Bald, Ponytail)
+- **Facial Hair**: 4 beard options for that perfect look (None, Short, Long, Goatee)
+- **Outfits**: 4 outfit styles to match your playstyle (Default, Armor, Robe, Casual)
+
+**How to Use:**
+1. From the main menu, select **Singleplayer**
+2. Click the **Character...** button to open the Character Creator
+3. Use the arrow buttons to cycle through options for each category
+4. Click **Confirm** to save your customization
+5. Your character will appear with your chosen appearance in both first-person and third-person views
+
+**For Content Creators:**
+The system supports custom character textures! See [CHARACTER_CUSTOMIZATION.md](CHARACTER_CUSTOMIZATION.md) and [data/public/CHARACTER_TEXTURES_GUIDE.md](data/public/CHARACTER_TEXTURES_GUIDE.md) for details on creating your own character skins.
 
 
 Code

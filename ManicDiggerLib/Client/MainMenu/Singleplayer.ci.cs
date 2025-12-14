@@ -14,24 +14,30 @@
         open = new MenuWidget();
         open.text = "Create or open...";
         open.type = WidgetType.Button;
+        character = new MenuWidget();
+        character.text = "Character...";
+        character.type = WidgetType.Button;
 
         title = "Singleplayer";
         
         fontDefault = new FontCi();
         fontDefault.size = 16;
 
-        widgets[0] = play;
-        widgets[1] = newWorld;
-        widgets[2] = modify;
-        widgets[3] = back;
-        widgets[4] = open;
+        int widgetIndex = 0;
+        widgets[widgetIndex++] = play;
+        widgets[widgetIndex++] = newWorld;
+        widgets[widgetIndex++] = modify;
+        widgets[widgetIndex++] = back;
+        widgets[widgetIndex++] = open;
+        widgets[widgetIndex++] = character;
 
         worldButtons = new MenuWidget[10];
+        int worldButtonsStartIndex = widgetIndex;
         for (int i = 0; i < 10; i++)
         {
             worldButtons[i] = new MenuWidget();
             worldButtons[i].visible = false;
-            widgets[5 + i] = worldButtons[i];
+            widgets[worldButtonsStartIndex + i] = worldButtons[i];
         }
     }
 
@@ -40,6 +46,7 @@
     MenuWidget modify;
     MenuWidget back;
     MenuWidget open;
+    MenuWidget character;
 
     MenuWidget[] worldButtons;
 
@@ -91,6 +98,11 @@
         open.y = y + 0 * scale;
         open.sizex = 256 * scale;
         open.sizey = 64 * scale;
+        
+        character.x = p.GetCanvasWidth() - 296 * scale;
+        character.y = p.GetCanvasHeight() - 104 * scale;
+        character.sizex = 256 * scale;
+        character.sizey = 64 * scale;
 
         if (savegames == null)
         {
@@ -182,8 +194,15 @@
             string result = menu.p.FileOpenDialog(extension, "Manic Digger Savegame", menu.p.PathSavegames());
             if (result != null)
             {
-                menu.ConnectToSingleplayer(result);
+                // Show character creator before starting world
+                menu.StartCharacterCreator(true, result);
             }
+        }
+        
+        if (w == character)
+        {
+            // Open character customization from settings
+            menu.StartCharacterCreator(true, null);
         }
     }
 }

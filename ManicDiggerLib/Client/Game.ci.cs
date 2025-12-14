@@ -231,6 +231,7 @@
         AddMod(new ModFallDamageToPlayer());
         AddMod(new ModBlockDamageToPlayer());
         AddMod(new ModLoadPlayerTextures());
+        AddMod(new ModApplyCharacterCustomization());
         AddMod(new ModSendPosition());
         AddMod(new ModInterpolatePositions());
         AddMod(new ModRail());
