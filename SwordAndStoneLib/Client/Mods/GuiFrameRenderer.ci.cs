@@ -264,4 +264,137 @@ public class GuiFrameRenderer
         
         game.Draw2dBitmapFile(borderPath, x, y, size, size);
     }
+    
+    /// <summary>
+    /// Draws a capsule bar (HP, Mana, Stamina) with progress fill
+    /// Based on new assembled GUI design
+    /// </summary>
+    public static void DrawCapsuleBar(Game game, int x, int y, int width, int height, 
+        float progress, string capsuleType, int fillColor)
+    {
+        // Clamp progress
+        if (progress < 0) { progress = 0; }
+        if (progress > game.one) { progress = game.one; }
+        
+        // Draw capsule frame
+        string framePath = game.platform.StringFormat("data/themes/default/assembled_gui/bars/capsule_{0}_bar.png", capsuleType);
+        game.Draw2dBitmapFile(framePath, x, y, width, height);
+        
+        // Draw fill (inset from border)
+        int fillInset = 8;
+        int fillX = x + fillInset;
+        int fillY = y + fillInset;
+        int fillWidth = game.platform.FloatToInt((width - fillInset * 2) * progress);
+        int fillHeight = height - fillInset * 2;
+        
+        if (fillWidth > 0)
+        {
+            game.Draw2dTexture(game.WhiteTexture(), fillX, fillY, fillWidth, fillHeight,
+                null, 0, fillColor, false);
+        }
+    }
+    
+    /// <summary>
+    /// Draws a zoom button (+ or -) from assembled GUI
+    /// </summary>
+    public static void DrawZoomButton(Game game, int x, int y, int size, bool isZoomIn, bool hover)
+    {
+        string buttonPath;
+        if (isZoomIn)
+        {
+            buttonPath = "data/themes/default/assembled_gui/buttons/button_next.png";
+        }
+        else
+        {
+            buttonPath = "data/themes/default/assembled_gui/buttons/button_settings.png";
+        }
+        
+        game.Draw2dBitmapFile(buttonPath, x, y, size, size);
+        
+        // Draw + or - symbol
+        FontCi font = new FontCi();
+        font.size = 20;
+        string symbol = isZoomIn ? "+" : "-";
+        int textOffset = isZoomIn ? 12 : 15;
+        game.Draw2dText(symbol, font, x + textOffset, y + 8, null, false);
+    }
+    
+    /// <summary>
+    /// Draws a panel from assembled GUI collection
+    /// </summary>
+    public static void DrawAssembledPanel(Game game, int x, int y, int width, int height, string panelType)
+    {
+        string panelPath;
+        
+        if (panelType == "inventory_large")
+        {
+            panelPath = "data/themes/default/assembled_gui/inventory/panel_inventory_large.png";
+        }
+        else if (panelType == "crafting_large")
+        {
+            panelPath = "data/themes/default/assembled_gui/inventory/panel_crafting_large.png";
+        }
+        else if (panelType == "menu_long")
+        {
+            panelPath = "data/themes/default/assembled_gui/menus/panel_long_titled.png";
+        }
+        else if (panelType == "menu_medium")
+        {
+            panelPath = "data/themes/default/assembled_gui/menus/panel_medium_titled.png";
+        }
+        else if (panelType == "menu_small")
+        {
+            panelPath = "data/themes/default/assembled_gui/menus/panel_small_titled.png";
+        }
+        else
+        {
+            // Default to medium panel
+            panelPath = "data/themes/default/assembled_gui/menus/panel_medium.png";
+        }
+        
+        game.Draw2dBitmapFile(panelPath, x, y, width, height);
+    }
+    
+    /// <summary>
+    /// Draws the minimap circular frame from assembled GUI
+    /// </summary>
+    public static void DrawMinimapFrame(Game game, int x, int y, int size)
+    {
+        string framePath = "data/themes/default/assembled_gui/minimap/minimap_circular.png";
+        game.Draw2dBitmapFile(framePath, x, y, size, size);
+    }
+    
+    /// <summary>
+    /// Draws a generic icon button from assembled GUI
+    /// </summary>
+    public static void DrawIconButton(Game game, int x, int y, int size, string iconType, bool hover)
+    {
+        string buttonPath;
+        
+        if (iconType == "close")
+        {
+            buttonPath = "data/themes/default/assembled_gui/buttons/button_close.png";
+        }
+        else if (iconType == "menu")
+        {
+            buttonPath = "data/themes/default/assembled_gui/buttons/button_menu.png";
+        }
+        else if (iconType == "settings")
+        {
+            buttonPath = "data/themes/default/assembled_gui/buttons/button_settings.png";
+        }
+        else
+        {
+            buttonPath = "data/themes/default/assembled_gui/buttons/button_next.png";
+        }
+        
+        game.Draw2dBitmapFile(buttonPath, x, y, size, size);
+        
+        // Add hover effect if needed
+        if (hover)
+        {
+            int hoverColor = Game.ColorFromArgb(50, 255, 255, 255);
+            game.Draw2dTexture(game.WhiteTexture(), x, y, size, size, null, 0, hoverColor, false);
+        }
+    }
 }
