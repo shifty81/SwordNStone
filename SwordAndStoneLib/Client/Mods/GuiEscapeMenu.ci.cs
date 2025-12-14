@@ -963,22 +963,48 @@
         // Draw tabs if in a tabbed state
         if (IsTabbed(escapemenustate) && tabButtons != null)
         {
-            // Draw content panel background using golden frame
+            // Draw content panel background using new assembled GUI panel
             int contentPanelY = TAB_PANEL_Y + TAB_PANEL_HEIGHT + 5;
             int contentPanelHeight = game.Height() - contentPanelY - 50;
-            GuiFrameRenderer.DrawFrame(game, CONTENT_PANEL_MARGIN, contentPanelY, 
-                game.Width() - CONTENT_PANEL_MARGIN * 2, contentPanelHeight, GuiFrameRenderer.FRAME_LARGE_ORNATE);
+            int contentPanelWidth = game.Width() - CONTENT_PANEL_MARGIN * 2;
             
-            // Draw tabs using golden buttons
+            // Use the large panel from assembled GUI pieces
+            string panelPath = "data/themes/default/assembled_gui/menus/panel_long_titled.png";
+            game.Draw2dBitmapFile(panelPath, CONTENT_PANEL_MARGIN, contentPanelY, 
+                contentPanelWidth, contentPanelHeight);
+            
+            // Draw tabs using golden buttons with new assembled GUI style
             for (int i = 0; i < tabButtonsCount; i++)
             {
                 Button tab = tabButtons[i];
                 bool tabIsActive = IsActiveTab(i, escapemenustate);
                 
-                // Draw tab button using golden UI
-                int buttonState = tabIsActive ? GuiFrameRenderer.BUTTON_PRESSED : 
-                                 (tab.selected ? GuiFrameRenderer.BUTTON_HOVER : GuiFrameRenderer.BUTTON_NORMAL);
-                GuiFrameRenderer.DrawButton(game, tab.x, tab.y, tab.width, tab.height, buttonState);
+                // Determine button appearance - use lighter grey for selected (as per problem statement)
+                if (tabIsActive)
+                {
+                    // Active tab - lighter grey with golden highlight
+                    int lightGreyColor = Game.ColorFromArgb(220, 150, 145, 140);
+                    game.Draw2dTexture(game.WhiteTexture(), tab.x, tab.y, tab.width, tab.height, 
+                        null, 0, lightGreyColor, false);
+                    
+                    // Golden border for active tab
+                    int borderColor = Game.ColorFromArgb(255, 184, 134, 11);
+                    DrawBorder(tab.x, tab.y, tab.width, tab.height, 2, borderColor);
+                }
+                else if (tab.selected)
+                {
+                    // Hover state - medium grey
+                    int hoverColor = Game.ColorFromArgb(200, 120, 115, 110);
+                    game.Draw2dTexture(game.WhiteTexture(), tab.x, tab.y, tab.width, tab.height, 
+                        null, 0, hoverColor, false);
+                }
+                else
+                {
+                    // Normal state - darker
+                    int normalColor = Game.ColorFromArgb(180, 70, 70, 70);
+                    game.Draw2dTexture(game.WhiteTexture(), tab.x, tab.y, tab.width, tab.height, 
+                        null, 0, normalColor, false);
+                }
                 
                 // Draw tab text
                 game.Draw2dText(tab.Text, tab.font, tab.x + 10, tab.y + 8, 

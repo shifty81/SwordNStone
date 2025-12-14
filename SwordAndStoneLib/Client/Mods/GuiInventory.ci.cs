@@ -492,34 +492,60 @@
 
     void DrawInventoryBackground()
     {
-        // Draw main inventory frame
+        // Draw main inventory panel using new assembled GUI design
         int frameWidth = CellCountInPageX * CellDrawSize + 80;
         int frameHeight = CellCountInPageY * CellDrawSize + 200;
-        GuiFrameRenderer.DrawFrame(game, InventoryStartX(), InventoryStartY(), frameWidth, frameHeight, GuiFrameRenderer.FRAME_LARGE_ORNATE);
+        
+        // Use the large inventory panel from assembled GUI pieces
+        string panelPath = "data/themes/default/assembled_gui/inventory/panel_inventory_large.png";
+        game.Draw2dBitmapFile(panelPath, InventoryStartX(), InventoryStartY(), frameWidth, frameHeight);
         
         // Draw equipment slots (hand, armor, helmet, gloves, boots) at the top
         for (int i = 0; i < wearPlaceStartLength; i++)
         {
             int slotX = wearPlaceStart[i].X + InventoryStartX();
             int slotY = wearPlaceStart[i].Y + InventoryStartY();
-            // Equipment slots are square (1x1 cells)
-            GuiFrameRenderer.DrawSlot(game, slotX, slotY, CellDrawSize, false);
+            // Equipment slots are square (1x1 cells) - use new slot graphics
+            DrawInventorySlot(game, slotX, slotY, CellDrawSize, false);
         }
         
-        // Draw inventory grid slots
+        // Draw inventory grid slots with new assembled GUI slot style
         for (int y = 0; y < CellCountInPageY; y++)
         {
             for (int x = 0; x < CellCountInPageX; x++)
             {
                 int slotX = CellsStartX() + x * CellDrawSize;
                 int slotY = CellsStartY() + y * CellDrawSize;
-                GuiFrameRenderer.DrawSlot(game, slotX, slotY, CellDrawSize, false);
+                DrawInventorySlot(game, slotX, slotY, CellDrawSize, false);
             }
         }
         
-        // Draw scroll buttons using golden buttons
-        GuiFrameRenderer.DrawButton(game, ScrollUpButtonX(), ScrollUpButtonY(), ScrollButtonSize(), ScrollButtonSize(), GuiFrameRenderer.BUTTON_NORMAL);
-        GuiFrameRenderer.DrawButton(game, ScrollDownButtonX(), ScrollDownButtonY(), ScrollButtonSize(), ScrollButtonSize(), GuiFrameRenderer.BUTTON_NORMAL);
+        // Draw scroll buttons using new assembled GUI buttons
+        string upButtonPath = "data/themes/default/assembled_gui/buttons/button_next.png";
+        string downButtonPath = "data/themes/default/assembled_gui/buttons/button_settings.png";
+        game.Draw2dBitmapFile(upButtonPath, ScrollUpButtonX(), ScrollUpButtonY(), ScrollButtonSize(), ScrollButtonSize());
+        game.Draw2dBitmapFile(downButtonPath, ScrollDownButtonX(), ScrollDownButtonY(), ScrollButtonSize(), ScrollButtonSize());
+        
+        // Draw arrows on scroll buttons
+        FontCi font = new FontCi();
+        font.size = 16;
+        game.Draw2dText("^", font, ScrollUpButtonX() + 12, ScrollUpButtonY() + 8, null, false);
+        game.Draw2dText("v", font, ScrollDownButtonX() + 12, ScrollDownButtonY() + 8, null, false);
+    }
+    
+    void DrawInventorySlot(Game game, int x, int y, int size, bool isActive)
+    {
+        // Use the extracted slot textures from assembled GUI
+        string slotPath;
+        if (isActive)
+        {
+            slotPath = "data/themes/default/assembled_gui/bars/slot_active.png";
+        }
+        else
+        {
+            slotPath = "data/themes/default/assembled_gui/bars/slot_normal.png";
+        }
+        game.Draw2dBitmapFile(slotPath, x, y, size, size);
     }
 
     void DrawItem(int screenposX, int screenposY, Packet_Item item, int drawsizeX, int drawsizeY)
