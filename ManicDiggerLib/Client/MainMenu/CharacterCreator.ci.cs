@@ -342,6 +342,11 @@ public class ScreenCharacterCreator : Screen
 		{
 			customization = CharacterCustomization.Deserialize(menu.p, data);
 		}
+		else
+		{
+			// Initialize with defaults if no saved data
+			customization = new CharacterCustomization();
+		}
 		customization.platform = menu.p;
 	}
 }
