@@ -10,7 +10,7 @@
 		font.family = "Arial";
 		font.size = ChatFontSize;
 		chatlines2 = new Chatline[1024];
-		color_background = Game.ColorFromArgb(120, 0, 0, 0); // More transparent (was 80)
+		color_background = Game.ColorFromArgb(60, 0, 0, 0); // More transparent (was 80)
 		chatHidden = false;
 	}
 
