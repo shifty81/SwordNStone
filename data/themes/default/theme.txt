@@ -1,0 +1,205 @@
+# Default Theme Configuration
+# This theme uses the standardized UI sprite sheets as the base design
+
+[Theme]
+name=Default
+author=SwordNStone Team
+version=1.0
+description=Standard UI theme using hud-pieces, ui_split, and speech bubble sprite sheets
+
+[Paths]
+# Base paths for theme assets
+base_path=data/themes/default/
+hud_path=hud/
+ui_path=ui/
+speech_path=speech/
+menu_path=menu/
+inventory_path=inventory/
+buttons_path=buttons/
+frames_path=frames/
+bars_path=bars/
+
+[SpriteSheets]
+# Main sprite sheets for this theme
+hud_pieces=hud/hud_pieces.png
+ui_split=ui/ui_split.png
+speech_bubble_small=speech/speech_bubble_small_spritesheet.png
+speech_bubble_large=speech/speech_bubble_large_spritesheet.png
+
+[HUD.SpriteMap]
+# Sprite coordinates in hud_pieces.png (x, y, width, height)
+# Top row - metallic frames and borders
+frame_small_tl=0,0,16,16
+frame_small_t=16,0,16,16
+frame_small_tr=32,0,16,16
+frame_small_l=0,16,16,16
+frame_small_c=16,16,16,16
+frame_small_r=32,16,16,16
+frame_small_bl=0,32,16,16
+frame_small_b=16,32,16,16
+frame_small_br=32,32,16,16
+
+# Ornate frames
+frame_ornate_tl=48,0,16,16
+frame_ornate_t=64,0,16,16
+frame_ornate_tr=80,0,16,16
+frame_ornate_l=48,16,16,16
+frame_ornate_c=64,16,16,16
+frame_ornate_r=80,16,16,16
+frame_ornate_bl=48,32,16,16
+frame_ornate_b=64,32,16,16
+frame_ornate_br=80,32,16,16
+
+# Circular buttons/icons (red and blue)
+circular_button_red=96,0,16,16
+circular_button_blue=112,0,16,16
+
+# Additional circular variants
+circular_orange=96,16,16,16
+circular_darkblue=112,16,16,16
+circular_brown=96,32,16,16
+circular_green=112,32,16,16
+
+# Bottom section - bronze/orange UI elements
+button_segment_l=0,48,32,16
+button_segment_c=32,48,32,16
+button_segment_r=64,48,32,16
+
+# Ornate bronze segments
+ornate_segment_l=0,64,32,16
+ornate_segment_c=32,64,32,16
+ornate_segment_r=64,64,32,16
+
+# Additional decorative segments
+decorative_segment_1=0,80,32,16
+decorative_segment_2=32,80,32,16
+decorative_segment_3=64,80,32,16
+
+# Color circular buttons
+colored_button_1=96,48,16,16
+colored_button_2=112,48,16,16
+colored_button_3=128,48,16,16
+colored_button_4=96,64,16,16
+colored_button_5=112,64,16,16
+colored_button_6=128,64,16,16
+
+[UI.SpriteMap]
+# Sprite coordinates in ui_split.png (x, y, width, height)
+# Top row - frame pieces and buttons
+panel_tl=0,0,32,32
+panel_t=32,0,64,32
+panel_tr=96,0,32,32
+
+button_small_1=128,0,32,32
+button_small_2=160,0,32,32
+button_small_3=192,0,16,32
+
+# Dividers and connectors
+divider_vert=208,0,8,32
+connector_1=216,0,16,32
+connector_2=232,0,16,32
+connector_3=248,0,16,16
+
+# Progress bar elements
+bar_container_l=264,0,8,16
+bar_container_c=272,0,16,16
+bar_container_r=288,0,8,16
+
+# Small UI elements
+icon_circle_1=304,0,16,16
+icon_circle_2=320,0,16,16
+icon_circle_3=336,0,16,16
+
+# Color palette indicators
+color_red=352,0,16,16
+color_orange=368,0,16,16
+color_yellow=384,0,16,16
+color_green=400,0,16,16
+color_blue=416,0,16,16
+color_purple=432,0,16,16
+
+# Second row - panels and borders
+panel_l=0,32,32,64
+panel_c=32,32,64,64
+panel_r=96,32,32,64
+
+# Inventory grid
+inventory_background=128,32,160,224
+inventory_slot_grid=0,96,128,128
+
+# Player panel
+player_panel=176,32,112,160
+player_panel_bar=176,192,112,32
+
+# Additional UI elements
+scrollbar=288,32,16,64
+scrollbar_handle=304,32,16,16
+
+# Status icons
+icon_status_1=320,32,16,16
+icon_status_2=336,32,16,16
+icon_status_3=352,32,16,16
+icon_status_4=368,32,16,16
+
+# Character portraits and icons
+portrait_frame_1=304,48,48,48
+portrait_frame_2=352,48,48,48
+portrait_frame_3=400,48,48,48
+
+[Speech.SpriteMap]
+# Speech bubble small spritesheet (48x24) - 2 frames
+bubble_small_frame1=0,0,24,24
+bubble_small_frame2=24,0,24,24
+
+# Speech bubble large spritesheet (128x32) - 4 frames
+bubble_large_frame1=0,0,32,32
+bubble_large_frame2=32,0,32,32
+bubble_large_frame3=64,0,32,32
+bubble_large_frame4=96,0,32,32
+
+[Buttons]
+# Button states from buttons directory
+button_normal=buttons/button_normal.png
+button_hover=buttons/button_hover.png
+button_pressed=buttons/button_pressed.png
+button_long_normal=buttons/button_long_normal.png
+button_long_hover=buttons/button_long_hover.png
+button_long_pressed=buttons/button_long_pressed.png
+
+[Frames]
+# Frame types from frames directory
+frame_small=frames/frame_small.png
+frame_ornate=frames/frame_ornate.png
+frame_circular=frames/frame_circular.png
+frame_large_1=frames/frame_large_1.png
+frame_large_2=frames/frame_large_2.png
+frame_large_3=frames/frame_large_3.png
+
+[Bars]
+# Progress bar pieces
+bar_full_red=bars/bar_full_red.png
+bar_full_blue=bars/bar_full_blue.png
+bar_left=bars/bar_left.png
+bar_right=bars/bar_right.png
+
+[Inventory]
+# Inventory slot states
+slot_normal=inventory/slot_normal.png
+slot_active=inventory/slot_active.png
+slot_highlight=inventory/slot_highlight.png
+
+[Colors]
+# Theme color scheme
+primary=160,100,40
+secondary=100,80,60
+accent=255,215,0
+text_normal=255,255,255
+text_highlight=255,215,0
+text_disabled=128,128,128
+background_dark=30,30,40
+background_medium=50,50,60
+border_light=180,180,180
+border_dark=80,80,80
+health_red=220,20,20
+mana_blue=20,100,220
+stamina_green=20,180,20
