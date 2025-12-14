@@ -1593,6 +1593,9 @@ public abstract class ClientMod
     public virtual void OnUseEntity(Game game, OnUseEntityArgs e) { }
     public virtual void OnHitEntity(Game game, OnUseEntityArgs e) { }
     public virtual void Dispose(Game game) { }
+    
+    // Helper method for type checking (CiTo doesn't support 'is' operator)
+    public virtual bool IsEmoteSystem() { return false; }
 }
 
 public class ModDrawMain : ClientMod
