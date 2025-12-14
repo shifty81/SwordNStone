@@ -10,7 +10,8 @@
 		font.family = "Arial";
 		font.size = ChatFontSize;
 		chatlines2 = new Chatline[1024];
-		color_background = Game.ColorFromArgb(80, 0, 0, 0);
+		color_background = Game.ColorFromArgb(120, 0, 0, 0); // More transparent (was 80)
+		chatHidden = false;
 	}
 
 	internal Game game;
@@ -21,6 +22,7 @@
 	internal float one;
 	int color_background;
 	const int chatboxMargin = 4;
+	internal bool chatHidden;
 
 	public override void OnNewFrameDraw2d(Game game_, float deltaTime)
 	{
@@ -29,7 +31,10 @@
 		{
 			return;
 		}
-		DrawChatLines(game.GuiTyping == TypingState.Typing);
+		if (!chatHidden)
+		{
+			DrawChatLines(game.GuiTyping == TypingState.Typing);
+		}
 		if (game.GuiTyping == TypingState.Typing)
 		{
 			DrawTypingBuffer();
@@ -39,6 +44,14 @@
 	public override void OnMouseDown(Game game_, MouseEventArgs args)
 	{
 		game = game_;
+		if (chatHidden)
+		{
+			return;
+		}
+		
+		float lineSpacing = (ChatFontSize * game.Scale()) * 1.75f;
+		float posY = game.platform.GetCanvasHeight() - (chatlines2Count * lineSpacing) - 180 * game.Scale();
+		
 		for (int i = 0; i < chatlines2Count; i++)
 		{
 			float dx = 20;
@@ -47,9 +60,9 @@
 				dx += 100;
 			}
 			float chatlineStartX = dx * game.Scale();
-			float chatlineStartY = (90 + i * 25) * game.Scale();
+			float chatlineStartY = posY + (i * lineSpacing);
 			float chatlineSizeX = 500 * game.Scale();
-			float chatlineSizeY = 20 * game.Scale();
+			float chatlineSizeY = lineSpacing;
 			if (args.GetX() > chatlineStartX && args.GetX() < chatlineStartX + chatlineSizeX)
 			{
 				if (args.GetY() > chatlineStartY && args.GetY() < chatlineStartY + chatlineSizeY)
@@ -99,12 +112,13 @@
 		}
 		font.size = ChatFontSize * game.Scale();
 		float posX = 20;
-		float posY = 90;
 		float lineSpacing = font.size * 1.75f;
+		// Position chat at bottom-left, accounting for hotbar height
+		float posY = game.platform.GetCanvasHeight() - (chatlines2Count * lineSpacing) - 180 * game.Scale();
 
 		if (chatlines2Count > 0)
 		{
-			// draw chatbox background using golden frame
+			// draw chatbox background using golden frame with transparency
 			GuiFrameRenderer.DrawFrame(game,
 				game.platform.FloatToInt((posX - chatboxMargin) * game.Scale()),
 				game.platform.FloatToInt((posY - chatboxMargin) * game.Scale()),
@@ -180,6 +194,15 @@
 			return;
 		}
 		int eKey = args.GetKeyCode();
+		
+		// Toggle chat visibility with F12
+		if (eKey == game.GetKey(GlKeys.F12) && game.GuiTyping == TypingState.None)
+		{
+			chatHidden = !chatHidden;
+			args.SetHandled(true);
+			return;
+		}
+		
 		if (eKey == game.GetKey(GlKeys.Number7) && game.IsShiftPressed && game.GuiTyping == TypingState.None) // don't need to hit enter for typing commands starting with slash
 		{
 			game.GuiTyping = TypingState.Typing;
