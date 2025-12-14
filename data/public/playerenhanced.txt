@@ -90,7 +90,7 @@ sword_attack	legl	5	rot	20	0	0
 
 # Shield block/defend stance
 shield_block	arml	0	rot	-90	0	45
-arml	arml	10	rot	-90	0	45
+shield_block	arml	10	rot	-90	0	45
 shield_block	armr	0	rot	-45	0	-20
 shield_block	armr	10	rot	-45	0	-20
 shield_block	iteml	0	siz	6	10	2

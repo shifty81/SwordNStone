@@ -73,6 +73,9 @@ public class ModEmoteSystem : ClientMod
         Entity player = game.player;
         if (player != null && player.drawModel != null && player.drawModel.renderer != null)
         {
+            // Set the animation first so we can get its length
+            player.drawModel.renderer.SetAnimation(emoteName);
+            
             int animLength = player.drawModel.renderer.GetAnimationLength();
             float duration = animLength / 60.0f; // Assuming 60 FPS animation
 
