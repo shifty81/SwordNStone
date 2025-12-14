@@ -68,48 +68,34 @@ namespace ManicDigger.Mods
 		
 		/// <summary>
 		/// Calculate damage based on weapon strength
-		/// Returns weapon's Strength value, or BASE_PUNCH_DAMAGE if not a weapon
+		/// Returns weapon's Strength value from BlockType, or BASE_PUNCH_DAMAGE if not a weapon
 		/// </summary>
-		int CalculateWeaponDamage(int blockId, string blockName)
+		int CalculateWeaponDamage(int blockId)
 		{
 			if (blockId <= 0 || blockId >= m.GetMaxBlockTypes())
 			{
 				return BASE_PUNCH_DAMAGE;  // Punching damage
 			}
 			
-			// Check if it's a sword weapon by name (ToolType.Sword not available in scripting API)
-			if (blockName != null && blockName.Contains("Sword"))
+			// Get BlockType to access properties
+			BlockType blockType = m.GetBlockType(blockId);
+			if (blockType == null)
 			{
-				// TODO: Get actual BlockType.Strength from ModManager API
-				// For now, lookup by name
-				if (blockName.Contains("Diamond"))
-				{
-					return 8;
-				}
-				else if (blockName.Contains("Iron"))
-				{
-					return 6;
-				}
-				else if (blockName.Contains("Stone"))
-				{
-					return 4;
-				}
-				else if (blockName.Contains("Wood"))
-				{
-					return 3;
-				}
+				return BASE_PUNCH_DAMAGE;
 			}
-			// Axes can also be used as weapons (lower damage than swords)
-			else if (blockName != null && blockName.Contains("Axe"))
+			
+			// Check if it's a weapon (sword or axe)
+			if (blockType.ToolType == ToolType.Sword)
 			{
-				if (blockName.Contains("Iron"))
-				{
-					return 5;
-				}
-				else if (blockName.Contains("Stone"))
-				{
-					return 3;
-				}
+				// Return weapon's damage (Strength property)
+				return blockType.Strength > 0 ? blockType.Strength : BASE_PUNCH_DAMAGE;
+			}
+			// Axes can also be used as weapons (use tool strength)
+			else if (blockType.ToolType == ToolType.Axe)
+			{
+				// Axes do less damage than swords (use 75% of tool strength)
+				int axeDamage = (blockType.Strength * 3) / 4;
+				return axeDamage > 0 ? axeDamage : BASE_PUNCH_DAMAGE;
 			}
 			
 			// Not a weapon, use punch damage
@@ -159,32 +145,40 @@ namespace ManicDigger.Mods
 		/// Get damage reduction from shield based on shield strength
 		/// Shield strength * 10% = damage reduction (e.g., strength 5 = 50% reduction)
 		/// </summary>
-		float GetShieldDamageReduction(int playerId, int shieldBlockId, string shieldName)
+		float GetShieldDamageReduction(int playerId, int shieldBlockId)
 		{
 			if (!playerBlocking.ContainsKey(playerId) || !playerBlocking[playerId])
 			{
 				return 0f;  // Not blocking
 			}
 			
-			// Check if holding a shield
-			if (shieldName == null || !shieldName.Contains("Shield"))
+			if (shieldBlockId <= 0 || shieldBlockId >= m.GetMaxBlockTypes())
+			{
+				return 0f;  // No shield
+			}
+			
+			// Get BlockType to check if it's a shield
+			BlockType blockType = m.GetBlockType(shieldBlockId);
+			if (blockType == null || blockType.Name == null)
+			{
+				return 0f;
+			}
+			
+			// Check if it's a shield by name (no ToolType.Shield enum value)
+			if (!blockType.Name.Contains("Shield"))
 			{
 				return 0f;  // Not a shield
 			}
 			
-			// Calculate reduction based on shield strength
-			// TODO: Get actual BlockType.Strength from ModManager API
-			int shieldStrength = 5;  // Default to wooden shield
-			if (shieldName.Contains("Iron"))
-			{
-				shieldStrength = 7;  // 70% reduction
-			}
+			// Get shield strength from BlockType
+			int shieldStrength = blockType.Strength;
 			
-			// Convert strength to reduction percentage (max 90%)
+			// Convert strength to reduction percentage (strength * 10%)
+			// Cap at 90% to prevent invulnerability
 			float reduction = (shieldStrength * 0.1f);
 			if (reduction > 0.9f)
 			{
-				reduction = 0.9f;  // Cap at 90% to prevent invulnerability
+				reduction = 0.9f;
 			}
 			
 			return reduction;
@@ -215,13 +209,22 @@ namespace ManicDigger.Mods
 				return;
 			}
 			
-			// Get weapon name and calculate damage
-			string weaponName = weaponBlockId > 0 ? m.GetBlockName(weaponBlockId) : null;
-			int weaponDamage = CalculateWeaponDamage(weaponBlockId, weaponName);
+			// Calculate weapon damage
+			int weaponDamage = CalculateWeaponDamage(weaponBlockId);
 			
-			// Get shield name and calculate damage reduction
-			string shieldName = shieldBlockId > 0 ? m.GetBlockName(shieldBlockId) : null;
-			float shieldReduction = GetShieldDamageReduction(targetId, shieldBlockId, shieldName);
+			// Calculate shield damage reduction
+			float shieldReduction = GetShieldDamageReduction(targetId, shieldBlockId);
+			
+			// Get weapon name for logging (optional, for better messages)
+			string weaponName = null;
+			if (weaponBlockId > 0 && weaponBlockId < m.GetMaxBlockTypes())
+			{
+				BlockType weaponType = m.GetBlockType(weaponBlockId);
+				if (weaponType != null)
+				{
+					weaponName = weaponType.Name;
+				}
+			}
 			
 			// Calculate final damage
 			int finalDamage = (int)(weaponDamage * (1.0f - shieldReduction));
