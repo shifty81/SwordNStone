@@ -91,8 +91,20 @@ public class ModGuiHotbar : ClientMod
     bool CheckHotbarImageExists(Game game)
     {
         // Check if hotbar.png exists in theme directory
-        // This will be true once hotbar.png is added to the repository
-        return false; // Placeholder - will be updated when image is available
+        // Try both possible locations
+        string[] possiblePaths = new string[3];
+        possiblePaths[0] = "data/themes/default/assembled_gui/hotbar/hotbar.png";
+        possiblePaths[1] = "hotbar.png";
+        possiblePaths[2] = "data/hotbar.png";
+        
+        for (int i = 0; i < 3; i++)
+        {
+            // Basic file existence check - actual implementation depends on platform
+            // For now, return false until hotbar.png is added
+            // TODO: Replace with game.platform.FileExists(possiblePaths[i]) when available
+        }
+        
+        return false; // Will return true once hotbar.png is available
     }
     
     void DrawCustomHotbar(Game game, int startX, int startY, int slotSize, int spacing)

@@ -526,11 +526,18 @@
         game.Draw2dBitmapFile(upButtonPath, ScrollUpButtonX(), ScrollUpButtonY(), ScrollButtonSize(), ScrollButtonSize());
         game.Draw2dBitmapFile(downButtonPath, ScrollDownButtonX(), ScrollDownButtonY(), ScrollButtonSize(), ScrollButtonSize());
         
-        // Draw arrows on scroll buttons
+        // Draw arrows on scroll buttons - calculate centered positions
         FontCi font = new FontCi();
         font.size = 16;
-        game.Draw2dText("^", font, ScrollUpButtonX() + 12, ScrollUpButtonY() + 8, null, false);
-        game.Draw2dText("v", font, ScrollDownButtonX() + 12, ScrollDownButtonY() + 8, null, false);
+        int buttonSize = ScrollButtonSize();
+        int upArrowOffsetX = buttonSize / 2 - 6;
+        int upArrowOffsetY = buttonSize / 2 - 10;
+        int downArrowOffsetX = buttonSize / 2 - 6;
+        int downArrowOffsetY = buttonSize / 2 - 10;
+        
+        // Use Unicode arrows for better appearance
+        game.Draw2dText("↑", font, ScrollUpButtonX() + upArrowOffsetX, ScrollUpButtonY() + upArrowOffsetY, null, false);
+        game.Draw2dText("↓", font, ScrollDownButtonX() + downArrowOffsetX, ScrollDownButtonY() + downArrowOffsetY, null, false);
     }
     
     void DrawInventorySlot(Game game, int x, int y, int size, bool isActive)

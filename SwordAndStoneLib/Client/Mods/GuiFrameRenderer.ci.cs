@@ -269,9 +269,17 @@ public class GuiFrameRenderer
     /// Draws a capsule bar (HP, Mana, Stamina) with progress fill
     /// Based on new assembled GUI design
     /// </summary>
+    /// <param name="capsuleType">Bar type: "hp", "mana", "stamina", or "breath"</param>
     public static void DrawCapsuleBar(Game game, int x, int y, int width, int height, 
         float progress, string capsuleType, int fillColor)
     {
+        // Validate capsule type
+        if (capsuleType != "hp" && capsuleType != "mana" && capsuleType != "stamina" && capsuleType != "breath")
+        {
+            // Default to hp if invalid type provided
+            capsuleType = "hp";
+        }
+        
         // Clamp progress
         if (progress < 0) { progress = 0; }
         if (progress > game.one) { progress = game.one; }

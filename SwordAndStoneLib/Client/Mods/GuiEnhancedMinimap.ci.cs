@@ -174,13 +174,19 @@ public class ModGuiEnhancedMinimap : ClientMod
         
         FontCi font = new FontCi();
         font.size = 20;
-        game.Draw2dText("+", font, ZoomInButtonX(game) + 12, ZoomInButtonY(game) + 8, null, false);
+        // Center the + symbol relative to button size
+        int plusOffsetX = scaledButtonSize / 2 - game.platform.FloatToInt(6 * scale);
+        int plusOffsetY = scaledButtonSize / 2 - game.platform.FloatToInt(10 * scale);
+        game.Draw2dText("+", font, ZoomInButtonX(game) + plusOffsetX, ZoomInButtonY(game) + plusOffsetY, null, false);
         
         // Zoom Out button (-)
         string zoomOutPath = "data/themes/default/assembled_gui/buttons/button_settings.png";
         game.Draw2dBitmapFile(zoomOutPath, ZoomOutButtonX(game), ZoomOutButtonY(game),
             scaledButtonSize, scaledButtonSize);
-        game.Draw2dText("-", font, ZoomOutButtonX(game) + 15, ZoomOutButtonY(game) + 5, null, false);
+        // Center the - symbol relative to button size
+        int minusOffsetX = scaledButtonSize / 2 - game.platform.FloatToInt(5 * scale);
+        int minusOffsetY = scaledButtonSize / 2 - game.platform.FloatToInt(12 * scale);
+        game.Draw2dText("-", font, ZoomOutButtonX(game) + minusOffsetX, ZoomOutButtonY(game) + minusOffsetY, null, false);
         
         // World Map button (magnifying glass icon)
         string worldMapPath = "data/themes/default/assembled_gui/buttons/button_menu.png";

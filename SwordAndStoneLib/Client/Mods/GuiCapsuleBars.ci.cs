@@ -32,9 +32,20 @@ public class ModGuiCapsuleBars : ClientMod
     internal int barHeight;
     internal int barSpacing;
     
-    // Capsule upgrade levels (1-5)
+    /// <summary>
+    /// HP capsule upgrade level (1-5). Each level extends the bar by 20 pixels.
+    /// Level 1 = 195px (base), Level 5 = 275px (base + 80px)
+    /// </summary>
     internal int hpCapsuleLevel;
+    
+    /// <summary>
+    /// Mana capsule upgrade level (1-5). Each level extends the bar by 20 pixels.
+    /// </summary>
     internal int manaCapsuleLevel;
+    
+    /// <summary>
+    /// Stamina capsule upgrade level (1-5). Each level extends the bar by 20 pixels.
+    /// </summary>
     internal int staminaCapsuleLevel;
     
     // Breath bar underwater display
