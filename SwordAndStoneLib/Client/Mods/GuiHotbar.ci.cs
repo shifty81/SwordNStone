@@ -90,31 +90,23 @@ public class ModGuiHotbar : ClientMod
     
     bool CheckHotbarImageExists(Game game_)
     {
-        // Check if hotbar.png exists in theme directory
-        // Try both possible locations
-        string[] possiblePaths = new string[3];
-        possiblePaths[0] = "data/themes/default/assembled_gui/hotbar/hotbar.png";
-        possiblePaths[1] = "hotbar.png";
-        possiblePaths[2] = "data/hotbar.png";
-        
-        for (int i = 0; i < 3; i++)
-        {
-            // Basic file existence check - actual implementation depends on platform
-            // For now, return false until hotbar.png is added
-            // TODO: Replace with game_.platform.FileExists(possiblePaths[i]) when available
-        }
-        
-        return false; // Will return true once hotbar.png is available
+        // Hotbar.png has been integrated - use custom hotbar image
+        useCustomHotbarImage = true;
+        return true;
     }
     
     void DrawCustomHotbar(Game game_, int startX, int startY, int scaledSlotSize, int scaledSpacing)
     {
-        // Use the custom hotbar.png image when available
-        string hotbarPath = "hotbar.png"; // Will be moved to proper location
-        int hotbarWidth = slotCount * scaledSlotSize + (slotCount - 1) * scaledSpacing + 20;
-        int hotbarHeight = scaledSlotSize + 20;
+        // Use the custom hotbar template image
+        string hotbarPath = "data/hotbar.png";
         
-        game_.Draw2dBitmapFile(hotbarPath, startX - 10, startY - 10, hotbarWidth, hotbarHeight);
+        // Calculate hotbar dimensions based on the template
+        // Template has 10 slots with borders and rivets built-in
+        int hotbarWidth = slotCount * (scaledSlotSize + 8) + 20; // 8px for borders, 20px for end caps
+        int hotbarHeight = scaledSlotSize + 16; // Additional height for rivets and border
+        
+        // Draw the hotbar background image centered under the slots
+        game_.Draw2dBitmapFile(hotbarPath, startX - 8, startY - 8, hotbarWidth, hotbarHeight);
     }
     
     void DrawDefaultHotbar(Game game_, int startX, int startY, int scaledSlotSize, int scaledSpacing)
