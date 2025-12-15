@@ -11,9 +11,10 @@ This directory contains the hotbar UI assets for the game.
 - **Usage**: Used as the background for the main hotbar UI in-game
 
 ### hotbar_3slot.png
-- **Dimensions**: 160x40 pixels
+- **Dimensions**: 160x40 pixels (approximate)
 - **Description**: Original 3-slot hotbar extracted from Assembled_Gui_Pieces.PNG
 - **Purpose**: Reference design for creating extended hotbar versions
+- **Note**: This is the source template; actual slot dimensions may vary slightly from the 10-slot version
 
 ## Design Specifications
 
