@@ -35,3 +35,12 @@ packages/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Temporary preview/test files #
+################################
+hotbar_preview.png
+hotbar_comparison.png
+hotbar_direct.png
+final_hotbar_template.png
+gui_template_reference.png
+hotbar_template.png
