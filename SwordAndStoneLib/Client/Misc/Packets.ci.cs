@@ -222,7 +222,7 @@
         p.Width = width;
         p.Height = height;
         Packet_Client pp = new Packet_Client();
-        pp.Id = Packet_ClientIdEnum.GameResolution;
+        pp.Id = Packet_ClientIdEnum.ClientGameResolution;
         pp.GameResolution = p;
         return pp;
     }

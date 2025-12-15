@@ -540,7 +540,7 @@
         game.Draw2dText("↓", font, ScrollDownButtonX() + downArrowOffsetX, ScrollDownButtonY() + downArrowOffsetY, null, false);
     }
     
-    void DrawInventorySlot(Game game, int x, int y, int size, bool isActive)
+    void DrawInventorySlot(Game game_, int x, int y, int size, bool isActive)
     {
         // Use the extracted slot textures from assembled GUI
         string slotPath;
@@ -552,7 +552,7 @@
         {
             slotPath = "data/themes/default/assembled_gui/bars/slot_normal.png";
         }
-        game.Draw2dBitmapFile(slotPath, x, y, size, size);
+        game_.Draw2dBitmapFile(slotPath, x, y, size, size);
     }
 
     void DrawItem(int screenposX, int screenposY, Packet_Item item, int drawsizeX, int drawsizeY)
