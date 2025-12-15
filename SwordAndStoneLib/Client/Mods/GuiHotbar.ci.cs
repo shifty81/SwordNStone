@@ -90,31 +90,41 @@ public class ModGuiHotbar : ClientMod
     
     bool CheckHotbarImageExists(Game game_)
     {
-        // Check if hotbar.png exists in theme directory
-        // Try both possible locations
-        string[] possiblePaths = new string[3];
-        possiblePaths[0] = "data/themes/default/assembled_gui/hotbar/hotbar.png";
-        possiblePaths[1] = "hotbar.png";
-        possiblePaths[2] = "data/hotbar.png";
+        // Hotbar template is now integrated and available
+        // Using custom hotbar.png with bronze steampunk borders
+        useCustomHotbarImage = true;
+        return true;
         
-        for (int i = 0; i < 3; i++)
-        {
-            // Basic file existence check - actual implementation depends on platform
-            // For now, return false until hotbar.png is added
-            // TODO: Replace with game_.platform.FileExists(possiblePaths[i]) when available
-        }
-        
-        return false; // Will return true once hotbar.png is available
+        // Note: If hotbar.png is removed or unavailable, set this to false
+        // to fall back to DrawDefaultHotbar() using assembled GUI pieces
     }
     
     void DrawCustomHotbar(Game game_, int startX, int startY, int scaledSlotSize, int scaledSpacing)
     {
-        // Use the custom hotbar.png image when available
-        string hotbarPath = "hotbar.png"; // Will be moved to proper location
-        int hotbarWidth = slotCount * scaledSlotSize + (slotCount - 1) * scaledSpacing + 20;
-        int hotbarHeight = scaledSlotSize + 20;
+        // Use the custom hotbar template image (598x66 pixels)
+        string hotbarPath = "data/hotbar.png";
         
-        game_.Draw2dBitmapFile(hotbarPath, startX - 10, startY - 10, hotbarWidth, hotbarHeight);
+        // Template dimensions: 598x66 pixels
+        // Contains 10 slots (56x56 each with 4px borders) + 2px spacing + rivets
+        // Template design: [rivet][slot][gap][slot]...[slot][rivet]
+        
+        // Constants derived from template
+        int templateSlotWithBorder = 56;  // 48px inner + 4px border on each side
+        int templateSlotSpacing = 2;       // Gap between slots
+        int templateRivetSize = 10;        // Decorative rivet diameter
+        int templateBorderOffset = 8;      // Offset for positioning (border + rivet space)
+        int templateHeightOffset = 16;     // Additional height for rivets and borders
+        
+        // Calculate scaled dimensions for rendering
+        int hotbarWidth = slotCount * (scaledSlotSize + templateBorderOffset) + (templateRivetSize * 2);
+        int hotbarHeight = scaledSlotSize + templateHeightOffset;
+        
+        // Draw the hotbar background image centered under the slots
+        game_.Draw2dBitmapFile(hotbarPath, 
+            startX - templateBorderOffset, 
+            startY - templateBorderOffset, 
+            hotbarWidth, 
+            hotbarHeight);
     }
     
     void DrawDefaultHotbar(Game game_, int startX, int startY, int scaledSlotSize, int scaledSpacing)
