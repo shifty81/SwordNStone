@@ -35,15 +35,15 @@ public class ModGuiHotbar : ClientMod
     internal bool useCustomHotbarImage;
     
     // Positioning
-    int HotbarStartX(Game game) 
+    int HotbarStartX(Game game_) 
     { 
         int totalWidth = slotCount * slotSize + (slotCount - 1) * slotSpacing + 20; // +20 for frame padding
-        return (game.Width() - totalWidth) / 2;
+        return (game_.Width() - totalWidth) / 2;
     }
     
-    int HotbarStartY(Game game) 
+    int HotbarStartY(Game game_) 
     { 
-        return game.Height() - 100; 
+        return game_.Height() - 100; 
     }
     
     public override void OnNewFrameDraw2d(Game game_, float deltaTime)
@@ -62,33 +62,33 @@ public class ModGuiHotbar : ClientMod
         }
     }
     
-    void DrawHotbar(Game game)
+    void DrawHotbar(Game game_)
     {
-        float scale = game.Scale();
-        int scaledSlotSize = game.platform.FloatToInt(slotSize * scale);
-        int scaledSpacing = game.platform.FloatToInt(slotSpacing * scale);
+        float scale = game_.Scale();
+        int scaledSlotSize = game_.platform.FloatToInt(slotSize * scale);
+        int scaledSpacing = game_.platform.FloatToInt(slotSpacing * scale);
         
-        int startX = HotbarStartX(game);
-        int startY = HotbarStartY(game);
+        int startX = HotbarStartX(game_);
+        int startY = HotbarStartY(game_);
         
         // Check if hotbar.png exists and use it as background
-        if (CheckHotbarImageExists(game))
+        if (CheckHotbarImageExists(game_))
         {
-            DrawCustomHotbar(game, startX, startY, scaledSlotSize, scaledSpacing);
+            DrawCustomHotbar(game_, startX, startY, scaledSlotSize, scaledSpacing);
         }
         else
         {
-            DrawDefaultHotbar(game, startX, startY, scaledSlotSize, scaledSpacing);
+            DrawDefaultHotbar(game_, startX, startY, scaledSlotSize, scaledSpacing);
         }
         
         // Draw items in slots
-        DrawHotbarItems(game, startX, startY, scaledSlotSize, scaledSpacing);
+        DrawHotbarItems(game_, startX, startY, scaledSlotSize, scaledSpacing);
         
         // Draw slot numbers
-        DrawSlotNumbers(game, startX, startY, scaledSlotSize, scaledSpacing);
+        DrawSlotNumbers(game_, startX, startY, scaledSlotSize, scaledSpacing);
     }
     
-    bool CheckHotbarImageExists(Game game)
+    bool CheckHotbarImageExists(Game game_)
     {
         // Check if hotbar.png exists in theme directory
         // Try both possible locations
@@ -101,31 +101,31 @@ public class ModGuiHotbar : ClientMod
         {
             // Basic file existence check - actual implementation depends on platform
             // For now, return false until hotbar.png is added
-            // TODO: Replace with game.platform.FileExists(possiblePaths[i]) when available
+            // TODO: Replace with game_.platform.FileExists(possiblePaths[i]) when available
         }
         
         return false; // Will return true once hotbar.png is available
     }
     
-    void DrawCustomHotbar(Game game, int startX, int startY, int slotSize, int spacing)
+    void DrawCustomHotbar(Game game_, int startX, int startY, int scaledSlotSize, int scaledSpacing)
     {
         // Use the custom hotbar.png image when available
         string hotbarPath = "hotbar.png"; // Will be moved to proper location
-        int hotbarWidth = slotCount * slotSize + (slotCount - 1) * spacing + 20;
-        int hotbarHeight = slotSize + 20;
+        int hotbarWidth = slotCount * scaledSlotSize + (slotCount - 1) * scaledSpacing + 20;
+        int hotbarHeight = scaledSlotSize + 20;
         
-        game.Draw2dBitmapFile(hotbarPath, startX - 10, startY - 10, hotbarWidth, hotbarHeight);
+        game_.Draw2dBitmapFile(hotbarPath, startX - 10, startY - 10, hotbarWidth, hotbarHeight);
     }
     
-    void DrawDefaultHotbar(Game game, int startX, int startY, int slotSize, int spacing)
+    void DrawDefaultHotbar(Game game_, int startX, int startY, int scaledSlotSize, int scaledSpacing)
     {
         // Draw golden frame background
-        int totalWidth = slotCount * slotSize + (slotCount - 1) * spacing + 20;
-        int totalHeight = slotSize + 20;
+        int totalWidth = slotCount * scaledSlotSize + (slotCount - 1) * scaledSpacing + 20;
+        int totalHeight = scaledSlotSize + 20;
         
         // Background panel
         int bgColor = Game.ColorFromArgb(200, 40, 35, 30);
-        game.Draw2dTexture(game.WhiteTexture(), startX - 10, startY - 10, 
+        game_.Draw2dTexture(game_.WhiteTexture(), startX - 10, startY - 10, 
             totalWidth, totalHeight, null, 0, bgColor, false);
         
         // Golden border (simulating the steampunk theme)
@@ -133,31 +133,31 @@ public class ModGuiHotbar : ClientMod
         int borderWidth = 3;
         
         // Top border
-        game.Draw2dTexture(game.WhiteTexture(), startX - 10, startY - 10, 
+        game_.Draw2dTexture(game_.WhiteTexture(), startX - 10, startY - 10, 
             totalWidth, borderWidth, null, 0, borderColor, false);
         // Bottom border
-        game.Draw2dTexture(game.WhiteTexture(), startX - 10, startY + slotSize + 10 - borderWidth, 
+        game_.Draw2dTexture(game_.WhiteTexture(), startX - 10, startY + scaledSlotSize + 10 - borderWidth, 
             totalWidth, borderWidth, null, 0, borderColor, false);
         // Left border
-        game.Draw2dTexture(game.WhiteTexture(), startX - 10, startY - 10, 
+        game_.Draw2dTexture(game_.WhiteTexture(), startX - 10, startY - 10, 
             borderWidth, totalHeight, null, 0, borderColor, false);
         // Right border
-        game.Draw2dTexture(game.WhiteTexture(), startX + totalWidth - 10 - borderWidth, startY - 10, 
+        game_.Draw2dTexture(game_.WhiteTexture(), startX + totalWidth - 10 - borderWidth, startY - 10, 
             borderWidth, totalHeight, null, 0, borderColor, false);
         
         // Draw individual slots
         for (int i = 0; i < slotCount; i++)
         {
-            int slotX = startX + i * (slotSize + spacing);
+            int slotX = startX + i * (scaledSlotSize + scaledSpacing);
             int slotY = startY;
             
-            DrawHotbarSlot(game, slotX, slotY, slotSize, i);
+            DrawHotbarSlot(game_, slotX, slotY, scaledSlotSize, i);
         }
     }
     
-    void DrawHotbarSlot(Game game, int x, int y, int size, int slotIndex)
+    void DrawHotbarSlot(Game game_, int x, int y, int size, int slotIndex)
     {
-        bool isActive = game.ActiveMaterial == slotIndex;
+        bool isActive = game_.ActiveMaterial == slotIndex;
         bool isHovered = buttonStates[slotIndex] == 1;
         
         // Determine slot appearance based on state
@@ -175,7 +175,7 @@ public class ModGuiHotbar : ClientMod
             slotTexture = "data/themes/default/assembled_gui/bars/slot_normal.png";
         }
         
-        game.Draw2dBitmapFile(slotTexture, x, y, size, size);
+        game_.Draw2dBitmapFile(slotTexture, x, y, size, size);
         
         // Draw slot border highlight for active slot
         if (isActive)
@@ -184,23 +184,23 @@ public class ModGuiHotbar : ClientMod
             int borderSize = 2;
             
             // Top
-            game.Draw2dTexture(game.WhiteTexture(), x, y, size, borderSize, 
+            game_.Draw2dTexture(game_.WhiteTexture(), x, y, size, borderSize, 
                 null, 0, highlightColor, false);
             // Bottom
-            game.Draw2dTexture(game.WhiteTexture(), x, y + size - borderSize, size, borderSize, 
+            game_.Draw2dTexture(game_.WhiteTexture(), x, y + size - borderSize, size, borderSize, 
                 null, 0, highlightColor, false);
             // Left
-            game.Draw2dTexture(game.WhiteTexture(), x, y, borderSize, size, 
+            game_.Draw2dTexture(game_.WhiteTexture(), x, y, borderSize, size, 
                 null, 0, highlightColor, false);
             // Right
-            game.Draw2dTexture(game.WhiteTexture(), x + size - borderSize, y, borderSize, size, 
+            game_.Draw2dTexture(game_.WhiteTexture(), x + size - borderSize, y, borderSize, size, 
                 null, 0, highlightColor, false);
         }
     }
     
-    void DrawHotbarItems(Game game, int startX, int startY, int slotSize, int spacing)
+    void DrawHotbarItems(Game game_, int startX, int startY, int scaledSlotSize, int scaledSpacing)
     {
-        if (inventoryUtil == null || game.player == null || game.player.Inventory == null)
+        if (game_.d_Inventory == null || dataItems == null)
         {
             return;
         }
@@ -208,54 +208,49 @@ public class ModGuiHotbar : ClientMod
         // Draw items in hotbar slots (slots 0-9 in inventory)
         for (int i = 0; i < slotCount; i++)
         {
-            int slotX = startX + i * (slotSize + spacing);
+            int slotX = startX + i * (scaledSlotSize + scaledSpacing);
             int slotY = startY;
             
-            Inventory inventory = game.player.Inventory;
-            int itemId = inventory.RightHand[i * Inventory.MaxItemsInStack];
-            
-            if (itemId > 0)
+            Packet_Item item = game_.d_Inventory.RightHand[i];
+            if (item != null && item.BlockId > 0)
             {
-                // Draw item texture
-                string itemTexture = dataItems.ItemTexture(itemId);
-                if (itemTexture != null)
+                int itemSize = scaledSlotSize - 10; // Inset from slot border
+                int itemX = slotX + 5;
+                int itemY = slotY + 5;
+                
+                // Draw item texture from terrain atlas
+                game_.Draw2dTexture(game_.terrainTexture, itemX, itemY,
+                    itemSize, itemSize, IntRef.Create(dataItems.TextureIdForInventory()[item.BlockId]), 
+                    game_.texturesPacked(), Game.ColorFromArgb(255, 255, 255, 255), false);
+                
+                // Draw item count if stacked
+                if (item.BlockCount > 1)
                 {
-                    int itemSize = slotSize - 10; // Inset from slot border
-                    int itemX = slotX + 5;
-                    int itemY = slotY + 5;
-                    
-                    game.Draw2dBitmapFile(itemTexture, itemX, itemY, itemSize, itemSize);
-                    
-                    // Draw item count if stacked
-                    int count = inventory.RightHand[i * Inventory.MaxItemsInStack + 1];
-                    if (count > 1)
-                    {
-                        FontCi font = new FontCi();
-                        font.size = 10;
-                        string countText = game.platform.IntToString(count);
-                        game.Draw2dText(countText, font, slotX + slotSize - 20, slotY + slotSize - 18, 
-                            null, false);
-                    }
+                    FontCi font = new FontCi();
+                    font.size = 10;
+                    string countText = game_.platform.IntToString(item.BlockCount);
+                    game_.Draw2dText(countText, font, slotX + scaledSlotSize - 20, slotY + scaledSlotSize - 18, 
+                        null, false);
                 }
             }
         }
     }
     
-    void DrawSlotNumbers(Game game, int startX, int startY, int slotSize, int spacing)
+    void DrawSlotNumbers(Game game_, int startX, int startY, int scaledSlotSize, int scaledSpacing)
     {
         FontCi font = new FontCi();
         font.size = 11;
         
         for (int i = 0; i < slotCount; i++)
         {
-            int slotX = startX + i * (slotSize + spacing);
+            int slotX = startX + i * (scaledSlotSize + scaledSpacing);
             int slotY = startY;
             
             // Display 1-9, 0 for slots (matching keyboard layout)
-            string number = i == 9 ? "0" : game.platform.IntToString(i + 1);
+            string number = i == 9 ? "0" : game_.platform.IntToString(i + 1);
             
             // Draw number in top-left corner of slot
-            game.Draw2dText(number, font, slotX + 5, slotY + 3, null, false);
+            game_.Draw2dText(number, font, slotX + 5, slotY + 3, null, false);
         }
     }
     

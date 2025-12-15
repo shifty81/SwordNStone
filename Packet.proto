@@ -23,7 +23,7 @@ package Packet;
         Death = 60;
         EntityInteraction = 61;
         ServerQuery = 64;
-        GameResolution = 10;
+        ClientGameResolution = 10;
         ExtendedPacketCommand = 100;
 	}
 	
