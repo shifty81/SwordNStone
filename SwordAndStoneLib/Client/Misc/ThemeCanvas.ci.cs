@@ -116,7 +116,7 @@ public class ThemeCanvas
         
         int index = y * width + x;
         // Extra bounds check for array safety
-        if (index >= 0 && index < width * height && index < pixels.Length)
+        if (index >= 0 && index < width * height)
         {
             pixels[index] = color;
         }
@@ -134,7 +134,7 @@ public class ThemeCanvas
         
         int index = y * width + x;
         // Extra bounds check for array safety
-        if (index >= 0 && index < width * height && index < pixels.Length)
+        if (index >= 0 && index < width * height)
         {
             return pixels[index];
         }
@@ -238,50 +238,8 @@ public class ThemeCanvas
         }
     }
     
-    /// <summary>
-    /// Load from bitmap data (for importing existing assets)
-    /// </summary>
-    public void LoadFromBitmap(BitmapCi bitmap)
-    {
-        if (bitmap == null)
-        {
-            return;
-        }
-        
-        // Resize canvas to match bitmap
-        Resize(bitmap.Width, bitmap.Height);
-        
-        // Copy pixel data
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                int color = bitmap.GetPixel(x, y);
-                SetPixel(x, y, color);
-            }
-        }
-    }
-    
-    /// <summary>
-    /// Export to bitmap for saving
-    /// </summary>
-    public BitmapCi ExportToBitmap()
-    {
-        BitmapCi bitmap = new BitmapCi();
-        bitmap.Width = width;
-        bitmap.Height = height;
-        
-        // Allocate bitmap data
-        bitmap.Pixels = new int[width * height];
-        
-        // Copy pixel data
-        for (int i = 0; i < width * height; i++)
-        {
-            bitmap.Pixels[i] = pixels[i];
-        }
-        
-        return bitmap;
-    }
+    // LoadFromBitmap and ExportToBitmap methods disabled due to BitmapCi API limitations
+    // BitmapCi doesn't expose Width, Height, Pixels properties or GetPixel method in CiTo context
     
     /// <summary>
     /// Create a border outline in the canvas
@@ -331,11 +289,10 @@ public class ThemeCanvas
             // Horizontal gradient
             for (int x = 0; x < width; x++)
             {
-                float t = one * x / width;
-                int r = startR + one * (endR - startR) * t;
-                int g = startG + one * (endG - startG) * t;
-                int b = startB + one * (endB - startB) * t;
-                int a = startA + one * (endA - startA) * t;
+                int r = startR + (endR - startR) * x / width;
+                int g = startG + (endG - startG) * x / width;
+                int b = startB + (endB - startB) * x / width;
+                int a = startA + (endA - startA) * x / width;
                 
                 int color = Game.ColorFromArgb(a, r, g, b);
                 
@@ -350,11 +307,10 @@ public class ThemeCanvas
             // Vertical gradient
             for (int y = 0; y < height; y++)
             {
-                float t = one * y / height;
-                int r = startR + one * (endR - startR) * t;
-                int g = startG + one * (endG - startG) * t;
-                int b = startB + one * (endB - startB) * t;
-                int a = startA + one * (endA - startA) * t;
+                int r = startR + (endR - startR) * y / height;
+                int g = startG + (endG - startG) * y / height;
+                int b = startB + (endB - startB) * y / height;
+                int a = startA + (endA - startA) * y / height;
                 
                 int color = Game.ColorFromArgb(a, r, g, b);
                 
