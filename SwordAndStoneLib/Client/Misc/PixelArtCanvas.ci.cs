@@ -181,8 +181,8 @@ public class PixelArtCanvas
 		while (stackX.Count() > 0 && iterations < maxIterations)
 		{
 			iterations++;
-			int x = stackX.GetItem(stackX.Count() - 1);
-			int y = stackY.GetItem(stackY.Count() - 1);
+			int x = stackX.Get(stackX.Count() - 1);
+			int y = stackY.Get(stackY.Count() - 1);
 			stackX.RemoveAt(stackX.Count() - 1);
 			stackY.RemoveAt(stackY.Count() - 1);
 			

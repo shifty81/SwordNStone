@@ -8,32 +8,32 @@ public class ScreenPixelArtEditor : Screen
 		tools = new PixelArtTools();
 		
 		// Create widgets
-		brushButton = CreateButton("Brush");
-		eraserButton = CreateButton("Eraser");
-		fillButton = CreateButton("Fill");
-		pickerButton = CreateButton("Picker");
+		brushButton = CreateButtonPixelArt("Brush");
+		eraserButton = CreateButtonPixelArt("Eraser");
+		fillButton = CreateButtonPixelArt("Fill");
+		pickerButton = CreateButtonPixelArt("Picker");
 		
-		layerBaseButton = CreateButton("Base Layer");
-		layerOverlayButton = CreateButton("Overlay");
+		layerBaseButton = CreateButtonPixelArt("Base Layer");
+		layerOverlayButton = CreateButtonPixelArt("Overlay");
 		
-		brushSizeMinusButton = CreateButton("-");
-		brushSizePlusButton = CreateButton("+");
+		brushSizeMinusButton = CreateButtonPixelArt("-");
+		brushSizePlusButton = CreateButtonPixelArt("+");
 		
-		clearButton = CreateButton("Clear");
-		loadTemplateButton = CreateButton("Load Template");
-		saveButton = CreateButton("Save Skin");
-		backButton = CreateButton("Back");
+		clearButton = CreateButtonPixelArt("Clear");
+		loadTemplateButton = CreateButtonPixelArt("Load Template");
+		saveButton = CreateButtonPixelArt("Save Skin");
+		backButton = CreateButtonPixelArt("Back");
 		
-		genderMaleButton = CreateButton("Male");
-		genderFemaleButton = CreateButton("Female");
+		genderMaleButton = CreateButtonPixelArt("Male");
+		genderFemaleButton = CreateButtonPixelArt("Female");
 		
 		// Color component sliders (represented as buttons for simplicity)
-		colorRMinusButton = CreateButton("-");
-		colorRPlusButton = CreateButton("+");
-		colorGMinusButton = CreateButton("-");
-		colorGPlusButton = CreateButton("+");
-		colorBMinusButton = CreateButton("-");
-		colorBPlusButton = CreateButton("+");
+		colorRMinusButton = CreateButtonPixelArt("-");
+		colorRPlusButton = CreateButtonPixelArt("+");
+		colorGMinusButton = CreateButtonPixelArt("-");
+		colorGPlusButton = CreateButtonPixelArt("+");
+		colorBMinusButton = CreateButtonPixelArt("-");
+		colorBPlusButton = CreateButtonPixelArt("+");
 		
 		// Assign widgets to array
 		int widgetIndex = 0;
@@ -119,12 +119,12 @@ public class ScreenPixelArtEditor : Screen
 	internal float canvasOffsetY;
 	internal bool needsTextureUpdate;
 	
-	MenuWidget CreateButton(string text)
+	MenuWidget CreateButtonPixelArt(string text)
 	{
-		MenuWidget button = new MenuWidget();
-		button.text = text;
-		button.type = WidgetType.Button;
-		return button;
+		MenuWidget widget = new MenuWidget();
+		widget.text = text;
+		widget.type = WidgetType.Button;
+		return widget;
 	}
 	
 	public void Initialize(GamePlatform p)
@@ -141,7 +141,7 @@ public class ScreenPixelArtEditor : Screen
 		byte[] textureData = menu.GetFile(defaultTexture);
 		if (textureData != null)
 		{
-			canvas.LoadFromTexture(textureData, menu.platform.ByteArrayLength(textureData));
+			canvas.LoadFromTexture(textureData, menu.p.ByteArrayLength(textureData));
 		}
 	}
 	
@@ -484,7 +484,7 @@ public class ScreenPixelArtEditor : Screen
 	
 	public override void OnBackPressed()
 	{
-		menu.StartCharacterCreator();
+		menu.StartMainMenu();
 	}
 	
 	public override void OnButton(MenuWidget w)

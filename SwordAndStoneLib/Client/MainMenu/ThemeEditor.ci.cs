@@ -9,53 +9,53 @@ public class ScreenThemeEditor : Screen
         tools = new PixelArtTools(); // Reuse existing pixel art tools
         
         // Create widgets
-        brushButton = CreateButton("Brush");
-        eraserButton = CreateButton("Eraser");
-        fillButton = CreateButton("Fill");
-        pickerButton = CreateButton("Picker");
+        brushButton = CreateButtonTheme("Brush");
+        eraserButton = CreateButtonTheme("Eraser");
+        fillButton = CreateButtonTheme("Fill");
+        pickerButton = CreateButtonTheme("Picker");
         
-        brushSizeMinusButton = CreateButton("-");
-        brushSizePlusButton = CreateButton("+");
+        brushSizeMinusButton = CreateButtonTheme("-");
+        brushSizePlusButton = CreateButtonTheme("+");
         
         // Asset type selection buttons
-        buttonAssetButton = CreateButton("Button");
-        frameAssetButton = CreateButton("Frame");
-        barAssetButton = CreateButton("Bar");
-        slotAssetButton = CreateButton("Slot");
+        buttonAssetButton = CreateButtonTheme("Button");
+        frameAssetButton = CreateButtonTheme("Frame");
+        barAssetButton = CreateButtonTheme("Bar");
+        slotAssetButton = CreateButtonTheme("Slot");
         
         // Asset state buttons (for buttons/slots)
-        stateNormalButton = CreateButton("Normal");
-        stateHoverButton = CreateButton("Hover");
-        statePressedButton = CreateButton("Pressed");
+        stateNormalButton = CreateButtonTheme("Normal");
+        stateHoverButton = CreateButtonTheme("Hover");
+        statePressedButton = CreateButtonTheme("Pressed");
         
         // Theme color preset buttons
-        colorPrimaryButton = CreateButton("Primary");
-        colorSecondaryButton = CreateButton("Secondary");
-        colorAccentButton = CreateButton("Accent");
+        colorPrimaryButton = CreateButtonTheme("Primary");
+        colorSecondaryButton = CreateButtonTheme("Secondary");
+        colorAccentButton = CreateButtonTheme("Accent");
         
         // Utility buttons
-        clearButton = CreateButton("Clear");
-        loadDefaultButton = CreateButton("Load Default");
-        saveButton = CreateButton("Save Theme");
-        exportButton = CreateButton("Export Asset");
-        backButton = CreateButton("Back");
+        clearButton = CreateButtonTheme("Clear");
+        loadDefaultButton = CreateButtonTheme("Load Default");
+        saveButton = CreateButtonTheme("Save Theme");
+        exportButton = CreateButtonTheme("Export Asset");
+        backButton = CreateButtonTheme("Back");
         
         // Theme selection
-        themeListButton = CreateButton("Theme List");
-        newThemeButton = CreateButton("New Theme");
+        themeListButton = CreateButtonTheme("Theme List");
+        newThemeButton = CreateButtonTheme("New Theme");
         
         // Color component sliders
-        colorRMinusButton = CreateButton("-");
-        colorRPlusButton = CreateButton("+");
-        colorGMinusButton = CreateButton("-");
-        colorGPlusButton = CreateButton("+");
-        colorBMinusButton = CreateButton("-");
-        colorBPlusButton = CreateButton("+");
+        colorRMinusButton = CreateButtonTheme("-");
+        colorRPlusButton = CreateButtonTheme("+");
+        colorGMinusButton = CreateButtonTheme("-");
+        colorGPlusButton = CreateButtonTheme("+");
+        colorBMinusButton = CreateButtonTheme("-");
+        colorBPlusButton = CreateButtonTheme("+");
         
         // Gradient tools
-        gradientHorizButton = CreateButton("H Gradient");
-        gradientVertButton = CreateButton("V Gradient");
-        borderButton = CreateButton("Add Border");
+        gradientHorizButton = CreateButtonTheme("H Gradient");
+        gradientVertButton = CreateButtonTheme("V Gradient");
+        borderButton = CreateButtonTheme("Add Border");
         
         // Assign widgets to array
         int widgetIndex = 0;
@@ -123,6 +123,14 @@ public class ScreenThemeEditor : Screen
         
         showThemeList = false;
         showColorPresets = true;
+    }
+    
+    MenuWidget CreateButtonTheme(string text)
+    {
+        MenuWidget widget = new MenuWidget();
+        widget.text = text;
+        widget.type = WidgetType.Button;
+        return widget;
     }
     
     MenuWidget brushButton;
@@ -209,7 +217,8 @@ public class ScreenThemeEditor : Screen
         game.Draw2dText(title, fontTitle, 20, 20, null, false);
         
         // Current theme info
-        string themeInfo = game.platform.StringFormat("Theme: {0} by {1}", currentThemeName, currentThemeAuthor);
+        string themeInfo = game.platform.StringFormat("Theme: {0}", currentThemeName);
+        themeInfo = game.platform.StringFormat("{0} by {1}", themeInfo, currentThemeAuthor);
         game.Draw2dText(themeInfo, fontSmall, 20, 60, null, false);
         
         // Draw canvas with grid
@@ -317,7 +326,7 @@ public class ScreenThemeEditor : Screen
         game.Draw2dText("Colors", fontDefault, panelX + 10, panelY + 10, null, false);
         
         // Current color preview (large square)
-        int currentColor = colorPicker.GetCurrentColor();
+        int currentColor = colorPicker.GetSelectedColor();
         int colorPreviewSize = 60;
         int colorPreviewX = panelX + (panelWidth - colorPreviewSize) / 2;
         int colorPreviewY = panelY + 40;
@@ -361,8 +370,12 @@ public class ScreenThemeEditor : Screen
         }
         
         // Canvas size info
-        game.Draw2dText(game.platform.StringFormat("Size: {0}x{1}", canvas.width, canvas.height), 
-            fontSmall, panelX + 10, panelY + 90, null, false);
+        string widthStr = game.platform.IntToString(canvas.width);
+        string heightStr = game.platform.IntToString(canvas.height);
+        string sizeTextW = game.platform.StringFormat("W:{0}", widthStr);
+        string sizeTextH = game.platform.StringFormat(" H:{0}", heightStr);
+        game.Draw2dText(sizeTextW, fontSmall, panelX + 10, panelY + 90, null, false);
+        game.Draw2dText(sizeTextH, fontSmall, panelX + 60, panelY + 90, null, false);
     }
     
     void DrawPreviewPanel(Game game)
@@ -528,8 +541,7 @@ public class ScreenThemeEditor : Screen
     
     void ApplyTool(Game game, int canvasX, int canvasY)
     {
-        int tool = tools.GetCurrentTool();
-        int color = colorPicker.GetCurrentColor();
+        int color = colorPicker.GetSelectedColor();
         
         tools.ApplyToolToThemeCanvas(canvas, canvasX, canvasY, color);
         needsTextureUpdate = true;
@@ -658,7 +670,7 @@ public class ScreenThemeEditor : Screen
     
     void ApplyGradient(Game game, bool horizontal)
     {
-        int startColor = colorPicker.GetCurrentColor();
+        int startColor = colorPicker.GetSelectedColor();
         // Create a darker end color
         int endR = Game.ColorR(startColor) / 2;
         int endG = Game.ColorG(startColor) / 2;
@@ -670,7 +682,7 @@ public class ScreenThemeEditor : Screen
     
     void ApplyBorder(Game game)
     {
-        int borderColor = colorPicker.GetCurrentColor();
+        int borderColor = colorPicker.GetSelectedColor();
         canvas.DrawBorder(borderColor, 2);
     }
     
