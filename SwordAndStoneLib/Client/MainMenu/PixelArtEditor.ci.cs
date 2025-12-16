@@ -318,11 +318,10 @@ public class ScreenPixelArtEditor : Screen
 		y = y + 50 * scale;
 		
 		// RGB sliders (simplified as +/- buttons)
-		int a = 0;
-		int r = 0;
-		int g = 0;
-		int b = 0;
-		ColorPicker.GetColorComponents(color, ref a, ref r, ref g, ref b);
+		int a = (color >> 24) & 0xFF;
+		int r = (color >> 16) & 0xFF;
+		int g = (color >> 8) & 0xFF;
+		int b = color & 0xFF;
 		
 		// Red
 		menu.DrawText("R:", fontSmall, x, y, TextAlign.Left, TextBaseline.Middle);
@@ -577,11 +576,10 @@ public class ScreenPixelArtEditor : Screen
 	void AdjustColor(int component, int delta)
 	{
 		int color = colorPicker.GetSelectedColor();
-		int a = 0;
-		int r = 0;
-		int g = 0;
-		int b = 0;
-		ColorPicker.GetColorComponents(color, ref a, ref r, ref g, ref b);
+		int a = (color >> 24) & 0xFF;
+		int r = (color >> 16) & 0xFF;
+		int g = (color >> 8) & 0xFF;
+		int b = color & 0xFF;
 		
 		if (component == 0) // Red
 		{
