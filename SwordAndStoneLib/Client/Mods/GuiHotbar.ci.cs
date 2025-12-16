@@ -109,8 +109,8 @@ public class ModGuiHotbar : ClientMod
         // Template design: [rivet][slot][gap][slot]...[slot][rivet]
         
         // Constants derived from template
-        int templateSlotWithBorder = 56;  // 48px inner + 4px border on each side
-        int templateSlotSpacing = 2;       // Gap between slots
+        // int templateSlotWithBorder = 56;  // 48px inner + 4px border on each side (unused)
+        // int templateSlotSpacing = 2;       // Gap between slots (unused)
         int templateRivetSize = 10;        // Decorative rivet diameter
         int templateBorderOffset = 8;      // Offset for positioning (border + rivet space)
         int templateHeightOffset = 16;     // Additional height for rivets and borders
