@@ -60,12 +60,12 @@ public class ColorPicker
 		value = v;
 		
 		// Convert HSV to RGB
-		int r = 0;
-		int g = 0;
-		int b = 0;
-		HsvToRgb(h, s, v, ref r, ref g, ref b);
+		IntRef r = IntRef.Create(0);
+		IntRef g = IntRef.Create(0);
+		IntRef b = IntRef.Create(0);
+		HsvToRgb(h, s, v, r, g, b);
 		
-		selectedColor = ColorFromArgb(alpha, r, g, b);
+		selectedColor = ColorFromArgb(alpha, r.value, g.value, b.value);
 	}
 	
 	// Convert RGB to HSV
@@ -131,21 +131,21 @@ public class ColorPicker
 	}
 	
 	// Convert HSV to RGB
-	void HsvToRgb(float h, float s, float v, ref int r, ref int g, ref int b)
+	void HsvToRgb(float h, float s, float v, IntRef r, IntRef g, IntRef b)
 	{
 		if (platform == null)
 		{
-			r = 0;
-			g = 0;
-			b = 0;
+			r.value = 0;
+			g.value = 0;
+			b.value = 0;
 			return;
 		}
 		
 		if (s <= 0)
 		{
-			r = platform.FloatToInt(v * 255.0f);
-			g = r;
-			b = r;
+			r.value = platform.FloatToInt(v * 255.0f);
+			g.value = r.value;
+			b.value = r.value;
 			return;
 		}
 		
@@ -164,39 +164,39 @@ public class ColorPicker
 		
 		if (i == 0)
 		{
-			r = platform.FloatToInt(v * 255.0f);
-			g = platform.FloatToInt(t * 255.0f);
-			b = platform.FloatToInt(p * 255.0f);
+			r.value = platform.FloatToInt(v * 255.0f);
+			g.value = platform.FloatToInt(t * 255.0f);
+			b.value = platform.FloatToInt(p * 255.0f);
 		}
 		else if (i == 1)
 		{
-			r = platform.FloatToInt(q * 255.0f);
-			g = platform.FloatToInt(v * 255.0f);
-			b = platform.FloatToInt(p * 255.0f);
+			r.value = platform.FloatToInt(q * 255.0f);
+			g.value = platform.FloatToInt(v * 255.0f);
+			b.value = platform.FloatToInt(p * 255.0f);
 		}
 		else if (i == 2)
 		{
-			r = platform.FloatToInt(p * 255.0f);
-			g = platform.FloatToInt(v * 255.0f);
-			b = platform.FloatToInt(t * 255.0f);
+			r.value = platform.FloatToInt(p * 255.0f);
+			g.value = platform.FloatToInt(v * 255.0f);
+			b.value = platform.FloatToInt(t * 255.0f);
 		}
 		else if (i == 3)
 		{
-			r = platform.FloatToInt(p * 255.0f);
-			g = platform.FloatToInt(q * 255.0f);
-			b = platform.FloatToInt(v * 255.0f);
+			r.value = platform.FloatToInt(p * 255.0f);
+			g.value = platform.FloatToInt(q * 255.0f);
+			b.value = platform.FloatToInt(v * 255.0f);
 		}
 		else if (i == 4)
 		{
-			r = platform.FloatToInt(t * 255.0f);
-			g = platform.FloatToInt(p * 255.0f);
-			b = platform.FloatToInt(v * 255.0f);
+			r.value = platform.FloatToInt(t * 255.0f);
+			g.value = platform.FloatToInt(p * 255.0f);
+			b.value = platform.FloatToInt(v * 255.0f);
 		}
 		else
 		{
-			r = platform.FloatToInt(v * 255.0f);
-			g = platform.FloatToInt(p * 255.0f);
-			b = platform.FloatToInt(q * 255.0f);
+			r.value = platform.FloatToInt(v * 255.0f);
+			g.value = platform.FloatToInt(p * 255.0f);
+			b.value = platform.FloatToInt(q * 255.0f);
 		}
 	}
 	
@@ -259,11 +259,11 @@ public class ColorPicker
 	}
 	
 	// Extract color components
-	public static void GetColorComponents(int color, ref int a, ref int r, ref int g, ref int b)
+	public static void GetColorComponents(int color, IntRef a, IntRef r, IntRef g, IntRef b)
 	{
-		a = (color >> 24) & 0xFF;
-		r = (color >> 16) & 0xFF;
-		g = (color >> 8) & 0xFF;
-		b = color & 0xFF;
+		a.value = (color >> 24) & 0xFF;
+		r.value = (color >> 16) & 0xFF;
+		g.value = (color >> 8) & 0xFF;
+		b.value = color & 0xFF;
 	}
 }

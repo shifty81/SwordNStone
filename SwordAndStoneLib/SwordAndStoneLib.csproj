@@ -96,6 +96,7 @@
     <Compile Include="Client\MainMenu\Singleplayer.ci.cs" />
     <Compile Include="Client\MainMenu\CharacterCreator.ci.cs" />
     <Compile Include="Client\Misc\CharacterCustomization.ci.cs" />
+    <Compile Include="Client\Misc\ColorPicker.ci.cs" />
     <Compile Include="Client\Misc\Collections.ci.cs" />
     <Compile Include="Client\Misc\Entities.ci.cs" />
     <Compile Include="Client\Misc\GameMisc.ci.cs" />
