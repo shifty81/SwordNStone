@@ -240,7 +240,11 @@
     <Compile Include="Server\Mods\Fortress\TreeGenerator.cs" />
     <Compile Include="Server\Mods\Fortress\VandalFinder.cs" />
     <Compile Include="Server\Mods\Fortress\VegetationGrowth.cs" />
+    <Compile Include="Server\Mods\Fortress\CombatSystem.cs" />
+    <Compile Include="Server\Mods\Fortress\Weapons.cs" />
+    <Compile Include="Server\Mods\Fortress\Tools.cs" />
     <Compile Include="Server\Mods\Unused\BlockId.cs" />
+    <Compile Include="Server\Mods\Unused\Fluids.cs" />
     <Compile Include="Server\Mods\War\Core.cs" />
     <Compile Include="Server\Mods\War\CoreBlocks.cs" />
     <Compile Include="Server\Mods\War\WarBlocks.cs" />
