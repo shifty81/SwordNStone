@@ -272,8 +272,6 @@ public class ThemeCanvas
     /// </summary>
     public void DrawGradient(int startColor, int endColor, bool horizontal)
     {
-        float one = 1;  // For compatibility with fixed-point arithmetic
-        
         int startR = Game.ColorR(startColor);
         int startG = Game.ColorG(startColor);
         int startB = Game.ColorB(startColor);

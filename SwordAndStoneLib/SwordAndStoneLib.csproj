@@ -119,6 +119,9 @@
     <Compile Include="Client\Mods\GuiPlayerStats.ci.cs" />
     <Compile Include="Client\Mods\GuiFrameRenderer.ci.cs" />
     <Compile Include="Client\Mods\GuiInventory.ci.cs" />
+    <Compile Include="Client\Mods\GuiCapsuleBars.ci.cs" />
+    <Compile Include="Client\Mods\GuiEnhancedMinimap.ci.cs" />
+    <Compile Include="Client\Mods\GuiHotbar.ci.cs" />
     <Compile Include="Client\Mods\GuiWoWActionBars.ci.cs" />
     <Compile Include="Client\Mods\GuiWoWMinimap.ci.cs" />
     <Compile Include="Client\Mods\GuiWoWUnitFrames.ci.cs" />

@@ -111,7 +111,9 @@ namespace SwordAndStone.Server
 		internal float notifyEntitiesAccum;
 		internal ServerEntityId[] spawnedEntities;
 		internal int spawnedEntitiesCount;
+#pragma warning disable CS0649
 		internal ServerEntityId editingSign;
+#pragma warning restore CS0649
 		internal bool[] updateEntity;
 	}
 }

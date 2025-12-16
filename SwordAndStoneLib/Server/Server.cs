@@ -1799,7 +1799,7 @@ public partial class Server : ICurrentTime, IDropItem
                 SendPacket(clientid, ServerPackets.DisconnectPlayer("Query success."));
                 KillPlayer(clientid);
                 break;
-            case Packet_ClientIdEnum.GameResolution:
+            case Packet_ClientIdEnum.ClientGameResolution:
                 //Update client information
                 clients[clientid].WindowSize = new int[] { packet.GameResolution.Width, packet.GameResolution.Height };
                 //Console.WriteLine("client:{0} --> {1}x{2}", clientid, clients[clientid].WindowSize[0], clients[clientid].WindowSize[1]);

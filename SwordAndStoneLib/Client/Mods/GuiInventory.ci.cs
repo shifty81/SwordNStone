@@ -25,7 +25,6 @@
         }
         CellCountInPageX = 12;
         CellCountInPageY = 7;
-        CellCountTotalX = 12;
         CellCountTotalY = 7 * 6;
         CellDrawSize = 40;
     }
@@ -47,7 +46,6 @@
     int MaterialSelectorBackgroundStartY() { return game.platform.FloatToInt(game.Height() - 90 * game.Scale()); }
     int CellCountInPageX;
     int CellCountInPageY;
-    int CellCountTotalX;
     int CellCountTotalY;
 
     public int ActiveMaterialCellSize() { return game.platform.FloatToInt(48 * game.Scale()); }
