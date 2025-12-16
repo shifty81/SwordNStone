@@ -96,13 +96,17 @@
     <Compile Include="Client\MainMenu\Singleplayer.ci.cs" />
     <Compile Include="Client\MainMenu\CharacterCreator.ci.cs" />
     <Compile Include="Client\Misc\CharacterCustomization.ci.cs" />
+    <Compile Include="Client\Misc\ColorPicker.ci.cs" />
     <Compile Include="Client\Misc\Collections.ci.cs" />
     <Compile Include="Client\Misc\Entities.ci.cs" />
     <Compile Include="Client\Misc\GameMisc.ci.cs" />
     <Compile Include="Client\Misc\LanguageCi.ci.cs" />
     <Compile Include="Client\Misc\Packets.ci.cs" />
+    <Compile Include="Client\Misc\PixelArtCanvas.ci.cs" />
+    <Compile Include="Client\Misc\PixelArtTools.ci.cs" />
     <Compile Include="Client\Misc\TaskScheduler.ci.cs" />
     <Compile Include="Client\Misc\TextColorRenderer.ci.cs" />
+    <Compile Include="Client\Misc\ThemeCanvas.ci.cs" />
     <Compile Include="Client\Mods\Audio.ci.cs" />
     <Compile Include="Client\Mods\ApplyCharacterCustomization.ci.cs" />
     <Compile Include="Client\Mods\DebugChunk.ci.cs" />
