@@ -154,7 +154,6 @@
             game.lastplacedblockY = -1;
             game.lastplacedblockZ = -1;
         }
-        int updated = 0;
         for (; ; )
         {
             NearestDirty(tempnearestpos);

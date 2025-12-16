@@ -523,7 +523,7 @@ public class TerrainChunkTesselatorCi
             {
                 if (newxx >= chunksize + 1) { break; }
                 if (currentChunk[Index3d(newxx, yy, zz, chunksize + 2, chunksize + 2)] != tt) { break; }
-                int shadowratio2 = GetShadowRatioOld(newxx, yy, zz + shadowz, x + (newxx - xx), y, z + shadowz);
+                int shadowratio2 = GetShadowRatio(newxx, yy, zz + shadowz);
                 if (shadowratio != shadowratio2) { break; }
                 if ((currentChunkDraw16[Index3d(newxx - 1, yy - 1, zz - 1, chunksize, chunksize)] & dirflags) == 0) { break; } // fixes water and rail problem (chunk-long stripes)
                 currentChunkDrawCount16[Index3d(newxx - 1, yy - 1, zz - 1, chunksize, chunksize)][dir] = 0;
@@ -540,7 +540,7 @@ public class TerrainChunkTesselatorCi
             {
                 if (newyy >= chunksize + 1) { break; }
                 if (currentChunk[Index3d(xx, newyy, zz, chunksize + 2, chunksize + 2)] != tt) { break; }
-                int shadowratio2 = GetShadowRatioOld(xx + shadowx, newyy, zz, x + shadowx, y + (newyy - yy), z);
+                int shadowratio2 = GetShadowRatio(xx + shadowx, newyy, zz);
                 if (shadowratio != shadowratio2) { break; }
                 if ((currentChunkDraw16[Index3d(xx - 1, newyy - 1, zz - 1, chunksize, chunksize)] & dirflags) == 0) { break; } // fixes water and rail problem (chunk-long stripes)
                 currentChunkDrawCount16[Index3d(xx - 1, newyy - 1, zz - 1, chunksize, chunksize)][dir] = 0;
@@ -557,7 +557,7 @@ public class TerrainChunkTesselatorCi
             {
                 if (newxx >= chunksize + 1) { break; }
                 if (currentChunk[Index3d(newxx, yy, zz, chunksize + 2, chunksize + 2)] != tt) { break; }
-                int shadowratio2 = GetShadowRatioOld(newxx, yy + shadowy, zz, x + (newxx - xx), y + shadowy, z);
+                int shadowratio2 = GetShadowRatio(newxx, yy + shadowy, zz);
                 if (shadowratio != shadowratio2) { break; }
                 if ((currentChunkDraw16[Index3d(newxx - 1, yy - 1, zz - 1, chunksize, chunksize)] & dirflags) == 0) { break; } // fixes water and rail problem (chunk-long stripes)
                 currentChunkDrawCount16[Index3d(newxx - 1, yy - 1, zz - 1, chunksize, chunksize)][dir] = 0;
