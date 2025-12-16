@@ -262,7 +262,7 @@ public class UIThemeManager
         LoadTheme(game, newThemeName);
         
         // Notify game that theme has changed (UI may need to reload textures)
-        game.ShowChatMessage(game.platform.StringFormat("Switched to theme: {0}", newThemeName));
+        game.AddChatline(game.platform.StringFormat("Switched to theme: {0}", newThemeName));
     }
     
     /// <summary>

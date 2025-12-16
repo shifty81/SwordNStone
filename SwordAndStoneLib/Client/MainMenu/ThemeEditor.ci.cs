@@ -221,9 +221,7 @@ public class ScreenThemeEditor : Screen
         themeInfo = p.StringFormat2("{0} by {1}", themeInfo, currentThemeAuthor);
         menu.DrawText(themeInfo, fontSmall, 20, 60, TextAlign.Left, TextBaseline.Top);
         
-        // Note: Full canvas rendering functionality commented out due to API limitations
-        // The theme editor would require direct texture rendering capabilities
-        // that are not available in the MainMenu screen context
+        // Canvas rendering disabled: MainMenu context lacks required texture APIs for full editor functionality
         
         // Show simple message instead
         menu.DrawText("Theme Editor - Under Construction", fontDefault, 
@@ -233,7 +231,7 @@ public class ScreenThemeEditor : Screen
         // Update texture if needed
         if (needsTextureUpdate)
         {
-            // UpdateCanvasTexture(p); // Disabled - requires texture API
+            // Canvas texture updates disabled - would require direct texture rendering API not available in MainMenu context
             needsTextureUpdate = false;
         }
         
@@ -284,8 +282,7 @@ public class ScreenThemeEditor : Screen
     
     public override void OnMouseDown(MouseEventArgs e)
     {
-        // Handle widget clicks (base class functionality inlined)
-        // base.OnMouseDown(e); // Not supported in CiTo
+        // Base widget handling skipped - CiTo compilation doesn't support base method calls
         
         int x = e.GetX();
         int y = e.GetY();
@@ -317,8 +314,7 @@ public class ScreenThemeEditor : Screen
     
     public override void OnMouseMove(MouseEventArgs e)
     {
-        // Handle widget hover
-        // base.OnMouseMove(e); // Not supported in CiTo
+        // Base widget hover handling skipped - CiTo compilation doesn't support base method calls
         
         if (!isDrawing)
         {
@@ -353,8 +349,7 @@ public class ScreenThemeEditor : Screen
     
     public override void OnMouseUp(MouseEventArgs e)
     {
-        // Handle widget clicks
-        // base.OnMouseUp(e); // Not supported in CiTo
+        // Base widget click handling skipped - CiTo compilation doesn't support base method calls
         
         isDrawing = false;
     }
