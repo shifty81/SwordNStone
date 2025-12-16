@@ -201,11 +201,32 @@ The SwordAndStoneLib.dll is the core library used by both client and server. It'
 
 **Important:** Before building for the first time, you MUST restore NuGet packages. The packages folder is not included in the repository.
 
-#### Issue: OpenTK.dll not found
-**Solution:** Ensure NuGet packages are restored. OpenTK 2.0.0 should be in packages/OpenTK.2.0.0/
+#### Issue: "The referenced component 'OpenTK' could not be found"
+**Cause:** OpenTK NuGet package (2.0.0) is not restored in the packages directory.
+**Solution:** 
+1. Restore NuGet packages using one of these methods:
+   - Visual Studio: Right-click solution → "Restore NuGet Packages"
+   - Command line (Windows): `nuget restore SwordAndStone.sln`
+   - Command line (Linux/Mac): `mono nuget.exe restore SwordAndStone.sln`
+2. Verify that `packages/OpenTK.2.0.0/lib/net20/OpenTK.dll` exists
+3. If restoration fails, download manually from https://www.nuget.org/packages/OpenTK/2.0.0
 
-#### Issue: protobuf-net.dll not found
-**Solution:** Ensure NuGet packages are restored. protobuf-net 2.1.0 should be in packages/protobuf-net.2.1.0/
+#### Issue: "The referenced component 'protobuf-net' could not be found"
+**Cause:** protobuf-net NuGet package (2.1.0) is not restored in the packages directory.
+**Solution:**
+1. Restore NuGet packages (same methods as above)
+2. Verify that `packages/protobuf-net.2.1.0/lib/net45/protobuf-net.dll` exists
+3. If restoration fails, download manually from https://www.nuget.org/packages/protobuf-net/2.1.0
+
+#### Issue: "Metadata file 'SwordAndStoneLib.dll' could not be found"
+**Cause:** This is usually a cascading error from missing packages in SwordAndStoneLib project.
+**Solution:**
+1. First, resolve any missing package references (OpenTK, protobuf-net)
+2. Build SwordAndStoneLib project first: `msbuild SwordAndStoneLib/SwordAndStoneLib.csproj`
+3. Then build the main SwordAndStone project
+
+#### Issue: "Unknown symbol SetScreen" in ThemeEditor.ci.cs
+**Status:** **FIXED** - This error has been resolved by updating ThemeEditor.ci.cs to use the correct method signatures and API calls matching the Screen base class.
 
 #### Issue: BuildCito.bat fails with "Could not find file '~1'"
 **Solution:** This was caused by spaces in the directory path and has been fixed. The PreBuildEvent now properly quotes the directory path.
