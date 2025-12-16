@@ -531,7 +531,7 @@ public class ScreenThemeEditor : Screen
         int tool = tools.GetCurrentTool();
         int color = colorPicker.GetCurrentColor();
         
-        tools.ApplyTool(canvas, canvasX, canvasY, color);
+        tools.ApplyToolToThemeCanvas(canvas, canvasX, canvasY, color);
         needsTextureUpdate = true;
     }
     
