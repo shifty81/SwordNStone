@@ -38,6 +38,10 @@ public class ScreenCharacterCreator : Screen
 		confirmButton.text = "Confirm";
 		confirmButton.type = WidgetType.Button;
 		
+		skinEditorButton = new MenuWidget();
+		skinEditorButton.text = "Skin Editor";
+		skinEditorButton.type = WidgetType.Button;
+		
 		backButton = new MenuWidget();
 		backButton.text = "Back";
 		backButton.type = WidgetType.Button;
@@ -51,7 +55,8 @@ public class ScreenCharacterCreator : Screen
 		widgets[6] = outfitLeft;
 		widgets[7] = outfitRight;
 		widgets[8] = confirmButton;
-		widgets[9] = backButton;
+		widgets[9] = skinEditorButton;
+		widgets[10] = backButton;
 		
 		title = "Character Creator";
 		
@@ -83,6 +88,7 @@ public class ScreenCharacterCreator : Screen
 	MenuWidget outfitLeft;
 	MenuWidget outfitRight;
 	MenuWidget confirmButton;
+	MenuWidget skinEditorButton;
 	MenuWidget backButton;
 	
 	string title;
@@ -97,6 +103,7 @@ public class ScreenCharacterCreator : Screen
 	{
 		title = "Character Creator";
 		confirmButton.text = "Confirm";
+		skinEditorButton.text = "Skin Editor";
 		backButton.text = "Back";
 	}
 	
@@ -150,6 +157,12 @@ public class ScreenCharacterCreator : Screen
 		confirmButton.y = p.GetCanvasHeight() - 150 * scale;
 		confirmButton.sizex = 256 * scale;
 		confirmButton.sizey = 64 * scale;
+		
+		// Skin Editor button
+		skinEditorButton.x = p.GetCanvasWidth() - 260 * scale;
+		skinEditorButton.y = p.GetCanvasHeight() - 104 * scale;
+		skinEditorButton.sizex = 220 * scale;
+		skinEditorButton.sizey = 64 * scale;
 		
 		// Back button
 		backButton.x = 40 * scale;
@@ -362,6 +375,11 @@ public class ScreenCharacterCreator : Screen
 			{
 				menu.StartMainMenu();
 			}
+		}
+		else if (w == skinEditorButton)
+		{
+			// Open the Pixel Art Skin Editor
+			menu.StartPixelArtEditor();
 		}
 		else if (w == backButton)
 		{

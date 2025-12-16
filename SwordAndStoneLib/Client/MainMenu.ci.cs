@@ -583,6 +583,15 @@
         screen.LoadTranslations();
     }
 
+    internal void StartPixelArtEditor()
+    {
+        ScreenPixelArtEditor pixelArtEditor = new ScreenPixelArtEditor();
+        screen = pixelArtEditor;
+        screen.menu = this;
+        pixelArtEditor.Initialize(p);
+        screen.LoadTranslations();
+    }
+
     public void StartGame(bool singleplayer, string singleplayerSavePath, ConnectData connectData)
     {
         ScreenGame screenGame = new ScreenGame();

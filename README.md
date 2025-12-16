@@ -41,6 +41,7 @@ Customize your character's appearance to make them truly your own!
 - **Hairstyles**: 5 different hairstyle options (Short, Medium, Long, Bald, Ponytail)
 - **Facial Hair**: 4 beard options for that perfect look (None, Short, Long, Goatee)
 - **Outfits**: 4 outfit styles to match your playstyle (Default, Armor, Robe, Casual)
+- **🎨 Pixel Art Skin Editor**: Create fully custom character skins with an integrated in-game editor!
 
 **How to Use:**
 1. From the main menu, select **Singleplayer**
@@ -49,8 +50,16 @@ Customize your character's appearance to make them truly your own!
 4. Click **Confirm** to save your customization
 5. Your character will appear with your chosen appearance in both first-person and third-person views
 
+**Pixel Art Skin Editor:**
+Create your own unique character skins from scratch!
+- **Access:** Character Creator → **Skin Editor** button
+- **Tools:** Brush, Eraser, Fill Bucket, Color Picker
+- **Features:** RGB color picker, dual layers, real-time 3D preview
+- **Templates:** Start with blank templates or pre-made example skins
+- See [PIXEL_ART_SKIN_SYSTEM.md](PIXEL_ART_SKIN_SYSTEM.md) for complete guide
+
 **For Content Creators:**
-The system supports custom character textures! See [CHARACTER_CUSTOMIZATION.md](CHARACTER_CUSTOMIZATION.md) and [data/public/CHARACTER_TEXTURES_GUIDE.md](data/public/CHARACTER_TEXTURES_GUIDE.md) for details on creating your own character skins.
+The system supports custom character textures! See [CHARACTER_CUSTOMIZATION.md](CHARACTER_CUSTOMIZATION.md), [PIXEL_ART_SKIN_SYSTEM.md](PIXEL_ART_SKIN_SYSTEM.md), and [EXAMPLE_SKINS_GUIDE.md](EXAMPLE_SKINS_GUIDE.md) for details on creating your own character skins.
 
 
 Code
