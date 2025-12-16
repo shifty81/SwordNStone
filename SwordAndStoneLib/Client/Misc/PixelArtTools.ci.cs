@@ -32,6 +32,16 @@ public class PixelArtTools
 		brushSize = size;
 	}
 	
+	public void IncreaseBrushSize()
+	{
+		SetBrushSize(brushSize + 1);
+	}
+	
+	public void DecreaseBrushSize()
+	{
+		SetBrushSize(brushSize - 1);
+	}
+	
 	// Apply tool to canvas at position
 	public void ApplyTool(PixelArtCanvas canvas, int x, int y, int color)
 	{
@@ -98,8 +108,8 @@ public class PixelArtTools
 		return (a << 24) | (r << 16) | (g << 8) | b;
 	}
 	
-	// Overloaded methods for ThemeCanvas support
-	public void ApplyTool(ThemeCanvas canvas, int x, int y, int color)
+	// Methods for ThemeCanvas support
+	public void ApplyToolToThemeCanvas(ThemeCanvas canvas, int x, int y, int color)
 	{
 		if (canvas == null)
 		{
@@ -145,7 +155,7 @@ public class PixelArtTools
 		}
 	}
 	
-	public int PickColor(ThemeCanvas canvas, int x, int y)
+	public int PickColorFromThemeCanvas(ThemeCanvas canvas, int x, int y)
 	{
 		if (canvas == null)
 		{

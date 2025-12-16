@@ -266,4 +266,74 @@ public class ColorPicker
 		g.value = (color >> 8) & 0xFF;
 		b.value = color & 0xFF;
 	}
+	
+	// Get individual color components from selected color
+	public int GetRed()
+	{
+		return (selectedColor >> 16) & 0xFF;
+	}
+	
+	public int GetGreen()
+	{
+		return (selectedColor >> 8) & 0xFF;
+	}
+	
+	public int GetBlue()
+	{
+		return selectedColor & 0xFF;
+	}
+	
+	public int GetAlpha()
+	{
+		return (selectedColor >> 24) & 0xFF;
+	}
+	
+	// Set color from components
+	public void SetColor(int r, int g, int b)
+	{
+		SetColorRgb(r, g, b);
+	}
+	
+	// Adjust individual color components
+	public void IncreaseRed()
+	{
+		int r = GetRed();
+		if (r < 255) { r++; }
+		SetColorRgb(r, GetGreen(), GetBlue());
+	}
+	
+	public void DecreaseRed()
+	{
+		int r = GetRed();
+		if (r > 0) { r--; }
+		SetColorRgb(r, GetGreen(), GetBlue());
+	}
+	
+	public void IncreaseGreen()
+	{
+		int g = GetGreen();
+		if (g < 255) { g++; }
+		SetColorRgb(GetRed(), g, GetBlue());
+	}
+	
+	public void DecreaseGreen()
+	{
+		int g = GetGreen();
+		if (g > 0) { g--; }
+		SetColorRgb(GetRed(), g, GetBlue());
+	}
+	
+	public void IncreaseBlue()
+	{
+		int b = GetBlue();
+		if (b < 255) { b++; }
+		SetColorRgb(GetRed(), GetGreen(), b);
+	}
+	
+	public void DecreaseBlue()
+	{
+		int b = GetBlue();
+		if (b > 0) { b--; }
+		SetColorRgb(GetRed(), GetGreen(), b);
+	}
 }

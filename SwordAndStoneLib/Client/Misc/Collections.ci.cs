@@ -881,3 +881,55 @@ public class FastStackInt
         return count;
     }
 }
+
+// Simple integer array list for CiTo compatibility
+public class IntegerArrayList
+{
+    public IntegerArrayList()
+    {
+        capacity = 16;
+        items = new int[capacity];
+        count = 0;
+    }
+    
+    int[] items;
+    int capacity;
+    int count;
+    
+    public void Add(int value)
+    {
+        if (count >= capacity)
+        {
+            // Double capacity
+            int newCapacity = capacity * 2;
+            int[] newItems = new int[newCapacity];
+            for (int i = 0; i < capacity; i++)
+            {
+                newItems[i] = items[i];
+            }
+            items = newItems;
+            capacity = newCapacity;
+        }
+        items[count] = value;
+        count++;
+    }
+    
+    public int Count()
+    {
+        return count;
+    }
+    
+    public int Get(int index)
+    {
+        return items[index];
+    }
+    
+    public void RemoveAt(int index)
+    {
+        for (int i = index; i < count - 1; i++)
+        {
+            items[i] = items[i + 1];
+        }
+        count--;
+    }
+}
