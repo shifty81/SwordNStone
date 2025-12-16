@@ -206,48 +206,50 @@ public class ScreenThemeEditor : Screen
     internal bool showThemeList;
     internal bool showColorPresets;
     
-    public override void Render(Game game, float deltaTime)
+    public override void Render(float dt)
     {
+        GamePlatform p = menu.p;
+        
         // Background
         int bgColor = Game.ColorFromArgb(255, 30, 30, 40);
-        game.Draw2dTexture(game.WhiteTexture(), 0, 0, game.Width(), game.Height(), null, 0, bgColor, false);
+        p.Draw2dTexture(p.WhiteTexture(), 0, 0, p.GetCanvasWidth(), p.GetCanvasHeight(), null, 0, bgColor, false);
         
         // Title
         int titleColor = Game.ColorFromArgb(255, 255, 215, 0);
-        game.Draw2dText(title, fontTitle, 20, 20, null, false);
+        p.Draw2dText(title, fontTitle, 20, 20, null, false);
         
         // Current theme info
-        string themeInfo = game.platform.StringFormat("Theme: {0}", currentThemeName);
-        themeInfo = game.platform.StringFormat("{0} by {1}", themeInfo, currentThemeAuthor);
-        game.Draw2dText(themeInfo, fontSmall, 20, 60, null, false);
+        string themeInfo = p.StringFormat("Theme: {0}", currentThemeName);
+        themeInfo = p.StringFormat("{0} by {1}", themeInfo, currentThemeAuthor);
+        p.Draw2dText(themeInfo, fontSmall, 20, 60, null, false);
         
         // Draw canvas with grid
-        DrawCanvas(game);
+        DrawCanvas(p);
         
         // Draw tools panel (left side)
-        DrawToolsPanel(game);
+        DrawToolsPanel(p);
         
         // Draw color picker panel (left side, below tools)
-        DrawColorPickerPanel(game);
+        DrawColorPickerPanel(p);
         
         // Draw asset selection panel (right side)
-        DrawAssetPanel(game);
+        DrawAssetPanel(p);
         
         // Draw preview panel (right side, below asset selection)
-        DrawPreviewPanel(game);
+        DrawPreviewPanel(p);
         
         // Draw bottom buttons
-        DrawBottomButtons(game);
+        DrawBottomButtons(p);
         
         // Update texture if needed
         if (needsTextureUpdate)
         {
-            UpdateCanvasTexture(game);
+            UpdateCanvasTexture(p);
             needsTextureUpdate = false;
         }
     }
     
-    void DrawCanvas(Game game)
+    void DrawCanvas(GamePlatform p)
     {
         int canvasWidth = canvas.width;
         int canvasHeight = canvas.height;
@@ -256,13 +258,13 @@ public class ScreenThemeEditor : Screen
         
         // Canvas background (dark gray)
         int canvasBg = Game.ColorFromArgb(255, 50, 50, 60);
-        game.Draw2dTexture(game.WhiteTexture(), canvasOffsetX - 5, canvasOffsetY - 5, 
+        p.Draw2dTexture(p.WhiteTexture(), canvasOffsetX - 5, canvasOffsetY - 5, 
             scaledWidth + 10, scaledHeight + 10, null, 0, canvasBg, false);
         
         // Draw canvas texture
         if (canvasTextureId != -1)
         {
-            game.Draw2dTexture(canvasTextureId, canvasOffsetX, canvasOffsetY, 
+            p.Draw2dTexture(canvasTextureId, canvasOffsetX, canvasOffsetY, 
                 scaledWidth, scaledHeight, null, 0, Game.ColorFromArgb(255, 255, 255, 255), false);
         }
         
@@ -271,20 +273,20 @@ public class ScreenThemeEditor : Screen
         for (int x = 0; x <= canvasWidth; x++)
         {
             int xPos = canvasOffsetX + one * x * gridScale;
-            game.Draw2dTexture(game.WhiteTexture(), xPos, canvasOffsetY, 1, scaledHeight, null, 0, gridColor, false);
+            p.Draw2dTexture(p.WhiteTexture(), xPos, canvasOffsetY, 1, scaledHeight, null, 0, gridColor, false);
         }
         for (int y = 0; y <= canvasHeight; y++)
         {
             int yPos = canvasOffsetY + one * y * gridScale;
-            game.Draw2dTexture(game.WhiteTexture(), canvasOffsetX, yPos, scaledWidth, 1, null, 0, gridColor, false);
+            p.Draw2dTexture(p.WhiteTexture(), canvasOffsetX, yPos, scaledWidth, 1, null, 0, gridColor, false);
         }
         
         // Canvas label
         string canvasLabel = GetAssetTypeLabel();
-        game.Draw2dText(canvasLabel, fontDefault, canvasOffsetX, canvasOffsetY - 30, null, false);
+        p.Draw2dText(canvasLabel, fontDefault, canvasOffsetX, canvasOffsetY - 30, null, false);
     }
     
-    void DrawToolsPanel(Game game)
+    void DrawToolsPanel(GamePlatform p)
     {
         int panelX = 20;
         int panelY = 100;
@@ -293,10 +295,10 @@ public class ScreenThemeEditor : Screen
         
         // Panel background
         int panelBg = Game.ColorFromArgb(200, 40, 40, 50);
-        game.Draw2dTexture(game.WhiteTexture(), panelX, panelY, panelWidth, panelHeight, null, 0, panelBg, false);
+        p.Draw2dTexture(p.WhiteTexture(), panelX, panelY, panelWidth, panelHeight, null, 0, panelBg, false);
         
         // Title
-        game.Draw2dText("Tools", fontDefault, panelX + 10, panelY + 10, null, false);
+        p.Draw2dText("Tools", fontDefault, panelX + 10, panelY + 10, null, false);
         
         // Position buttons (simplified layout)
         int btnY = panelY + 40;
@@ -305,13 +307,13 @@ public class ScreenThemeEditor : Screen
         // Draw tool buttons (will be positioned by widget system)
         // Tool selection indicators
         string currentTool = GetCurrentToolName();
-        game.Draw2dText(game.platform.StringFormat("Current: {0}", currentTool), fontSmall, panelX + 10, btnY, null, false);
+        p.Draw2dText(p.StringFormat("Current: {0}", currentTool), fontSmall, panelX + 10, btnY, null, false);
         
         btnY += btnSpacing;
-        game.Draw2dText(game.platform.StringFormat("Brush Size: {0}", game.platform.IntToString(tools.GetBrushSize())), fontSmall, panelX + 10, btnY, null, false);
+        p.Draw2dText(p.StringFormat("Brush Size: {0}", p.IntToString(tools.GetBrushSize())), fontSmall, panelX + 10, btnY, null, false);
     }
     
-    void DrawColorPickerPanel(Game game)
+    void DrawColorPickerPanel(GamePlatform p)
     {
         int panelX = 20;
         int panelY = 420;
@@ -320,17 +322,17 @@ public class ScreenThemeEditor : Screen
         
         // Panel background
         int panelBg = Game.ColorFromArgb(200, 40, 40, 50);
-        game.Draw2dTexture(game.WhiteTexture(), panelX, panelY, panelWidth, panelHeight, null, 0, panelBg, false);
+        p.Draw2dTexture(p.WhiteTexture(), panelX, panelY, panelWidth, panelHeight, null, 0, panelBg, false);
         
         // Title
-        game.Draw2dText("Colors", fontDefault, panelX + 10, panelY + 10, null, false);
+        p.Draw2dText("Colors", fontDefault, panelX + 10, panelY + 10, null, false);
         
         // Current color preview (large square)
         int currentColor = colorPicker.GetSelectedColor();
         int colorPreviewSize = 60;
         int colorPreviewX = panelX + (panelWidth - colorPreviewSize) / 2;
         int colorPreviewY = panelY + 40;
-        game.Draw2dTexture(game.WhiteTexture(), colorPreviewX, colorPreviewY, 
+        p.Draw2dTexture(p.WhiteTexture(), colorPreviewX, colorPreviewY, 
             colorPreviewSize, colorPreviewSize, null, 0, currentColor, false);
         
         // RGB values
@@ -339,58 +341,58 @@ public class ScreenThemeEditor : Screen
         int b = colorPicker.GetBlue();
         
         int rgbY = colorPreviewY + colorPreviewSize + 10;
-        game.Draw2dText(game.platform.StringFormat("R: {0}", game.platform.IntToString(r)), fontSmall, panelX + 10, rgbY, null, false);
-        game.Draw2dText(game.platform.StringFormat("G: {0}", game.platform.IntToString(g)), fontSmall, panelX + 10, rgbY + 20, null, false);
-        game.Draw2dText(game.platform.StringFormat("B: {0}", game.platform.IntToString(b)), fontSmall, panelX + 10, rgbY + 40, null, false);
+        p.Draw2dText(p.StringFormat("R: {0}", p.IntToString(r)), fontSmall, panelX + 10, rgbY, null, false);
+        p.Draw2dText(p.StringFormat("G: {0}", p.IntToString(g)), fontSmall, panelX + 10, rgbY + 20, null, false);
+        p.Draw2dText(p.StringFormat("B: {0}", p.IntToString(b)), fontSmall, panelX + 10, rgbY + 40, null, false);
     }
     
-    void DrawAssetPanel(Game game)
+    void DrawAssetPanel(GamePlatform p)
     {
-        int panelX = game.Width() - 220;
+        int panelX = p.GetCanvasWidth() - 220;
         int panelY = 100;
         int panelWidth = 200;
         int panelHeight = 300;
         
         // Panel background
         int panelBg = Game.ColorFromArgb(200, 40, 40, 50);
-        game.Draw2dTexture(game.WhiteTexture(), panelX, panelY, panelWidth, panelHeight, null, 0, panelBg, false);
+        p.Draw2dTexture(p.WhiteTexture(), panelX, panelY, panelWidth, panelHeight, null, 0, panelBg, false);
         
         // Title
-        game.Draw2dText("Asset Type", fontDefault, panelX + 10, panelY + 10, null, false);
+        p.Draw2dText("Asset Type", fontDefault, panelX + 10, panelY + 10, null, false);
         
         // Asset type info
         string assetInfo = GetAssetTypeLabel();
-        game.Draw2dText(assetInfo, fontSmall, panelX + 10, panelY + 40, null, false);
+        p.Draw2dText(assetInfo, fontSmall, panelX + 10, panelY + 40, null, false);
         
         // State info (if applicable)
         if (currentAssetType == ThemeCanvas.CANVAS_TYPE_BUTTON || currentAssetType == ThemeCanvas.CANVAS_TYPE_SLOT)
         {
             string stateLabel = GetStateLabel();
-            game.Draw2dText(game.platform.StringFormat("State: {0}", stateLabel), fontSmall, panelX + 10, panelY + 65, null, false);
+            p.Draw2dText(p.StringFormat("State: {0}", stateLabel), fontSmall, panelX + 10, panelY + 65, null, false);
         }
         
         // Canvas size info
-        string widthStr = game.platform.IntToString(canvas.width);
-        string heightStr = game.platform.IntToString(canvas.height);
-        string sizeTextW = game.platform.StringFormat("W:{0}", widthStr);
-        string sizeTextH = game.platform.StringFormat(" H:{0}", heightStr);
-        game.Draw2dText(sizeTextW, fontSmall, panelX + 10, panelY + 90, null, false);
-        game.Draw2dText(sizeTextH, fontSmall, panelX + 60, panelY + 90, null, false);
+        string widthStr = p.IntToString(canvas.width);
+        string heightStr = p.IntToString(canvas.height);
+        string sizeTextW = p.StringFormat("W:{0}", widthStr);
+        string sizeTextH = p.StringFormat(" H:{0}", heightStr);
+        p.Draw2dText(sizeTextW, fontSmall, panelX + 10, panelY + 90, null, false);
+        p.Draw2dText(sizeTextH, fontSmall, panelX + 60, panelY + 90, null, false);
     }
     
-    void DrawPreviewPanel(Game game)
+    void DrawPreviewPanel(GamePlatform p)
     {
-        int panelX = game.Width() - 220;
+        int panelX = p.GetCanvasWidth() - 220;
         int panelY = 420;
         int panelWidth = 200;
         int panelHeight = 200;
         
         // Panel background
         int panelBg = Game.ColorFromArgb(200, 40, 40, 50);
-        game.Draw2dTexture(game.WhiteTexture(), panelX, panelY, panelWidth, panelHeight, null, 0, panelBg, false);
+        p.Draw2dTexture(p.WhiteTexture(), panelX, panelY, panelWidth, panelHeight, null, 0, panelBg, false);
         
         // Title
-        game.Draw2dText("Preview", fontDefault, panelX + 10, panelY + 10, null, false);
+        p.Draw2dText("Preview", fontDefault, panelX + 10, panelY + 10, null, false);
         
         // Draw preview of current asset in context
         int previewX = panelX + (panelWidth - 100) / 2;
@@ -399,35 +401,35 @@ public class ScreenThemeEditor : Screen
         // Show the asset as it would appear in UI
         if (canvasTextureId != -1)
         {
-            game.Draw2dTexture(canvasTextureId, previewX, previewY, 100, 50, null, 0, 
+            p.Draw2dTexture(canvasTextureId, previewX, previewY, 100, 50, null, 0, 
                 Game.ColorFromArgb(255, 255, 255, 255), false);
         }
         
-        game.Draw2dText("(Actual Size)", fontSmall, panelX + 50, previewY + 60, null, false);
+        p.Draw2dText("(Actual Size)", fontSmall, panelX + 50, previewY + 60, null, false);
     }
     
-    void DrawBottomButtons(Game game)
+    void DrawBottomButtons(GamePlatform p)
     {
         // Bottom action buttons are positioned by widget system
         // Just draw labels for context
-        int bottomY = game.Height() - 60;
+        int bottomY = p.GetCanvasHeight() - 60;
         string helpText = "Use tools to paint, or load preset theme elements";
-        game.Draw2dText(helpText, fontSmall, 20, bottomY, null, false);
+        p.Draw2dText(helpText, fontSmall, 20, bottomY, null, false);
     }
     
-    void UpdateCanvasTexture(Game game)
+    void UpdateCanvasTexture(GamePlatform p)
     {
         // Delete old texture if exists
         if (canvasTextureId != -1)
         {
-            game.platform.GlDeleteTexture(canvasTextureId);
+            p.GlDeleteTexture(canvasTextureId);
         }
         
         // Create bitmap from canvas
         BitmapCi bitmap = canvas.ExportToBitmap();
         
         // Create texture from bitmap
-        canvasTextureId = game.LoadTextureFromBitmap(bitmap);
+        canvasTextureId = p.LoadTextureFromBitmap(bitmap);
     }
     
     string GetAssetTypeLabel()
@@ -464,12 +466,13 @@ public class ScreenThemeEditor : Screen
         return "Unknown";
     }
     
-    public override void OnMouseDown(Game game, int x, int y, MouseButton button)
+    public override void OnMouseDown(MouseEventArgs e)
     {
-        if (button != MouseButton.Left)
-        {
-            return;
-        }
+        // First call base to handle widget clicks
+        base.OnMouseDown(e);
+        
+        int x = e.GetX();
+        int y = e.GetY();
         
         // Check if click is on canvas
         int canvasWidth = canvas.width;
@@ -492,16 +495,22 @@ public class ScreenThemeEditor : Screen
             }
             
             // Apply tool
-            ApplyTool(game, canvasX, canvasY);
+            ApplyTool(canvasX, canvasY);
         }
     }
     
-    public override void OnMouseMove(Game game, int x, int y)
+    public override void OnMouseMove(MouseEventArgs e)
     {
+        // First call base to handle widget hover
+        base.OnMouseMove(e);
+        
         if (!isDrawing)
         {
             return;
         }
+        
+        int x = e.GetX();
+        int y = e.GetY();
         
         // Convert to canvas coordinates
         int canvasWidth = canvas.width;
@@ -522,21 +531,19 @@ public class ScreenThemeEditor : Screen
             }
             
             // Apply tool
-            ApplyTool(game, canvasX, canvasY);
+            ApplyTool(canvasX, canvasY);
         }
     }
     
-    public override void OnMouseUp(Game game, int x, int y, MouseButton button)
+    public override void OnMouseUp(MouseEventArgs e)
     {
-        if (button != MouseButton.Left)
-        {
-            return;
-        }
+        // First call base to handle widget clicks
+        base.OnMouseUp(e);
         
         isDrawing = false;
     }
     
-    void ApplyTool(Game game, int canvasX, int canvasY)
+    void ApplyTool(int canvasX, int canvasY)
     {
         int color = colorPicker.GetSelectedColor();
         
@@ -544,7 +551,7 @@ public class ScreenThemeEditor : Screen
         needsTextureUpdate = true;
     }
     
-    public override void OnButtonClick(Game game, MenuWidget widget)
+    public override void OnButton(MenuWidget widget)
     {
         // Tool selection
         if (widget == brushButton) { tools.SetCurrentTool(PixelArtToolType.Brush); }
@@ -588,9 +595,9 @@ public class ScreenThemeEditor : Screen
         if (widget == statePressedButton) { currentAssetState = ASSET_STATE_PRESSED; }
         
         // Color presets (load theme colors)
-        if (widget == colorPrimaryButton) { LoadPrimaryColor(game); }
-        if (widget == colorSecondaryButton) { LoadSecondaryColor(game); }
-        if (widget == colorAccentButton) { LoadAccentColor(game); }
+        if (widget == colorPrimaryButton) { LoadPrimaryColor(); }
+        if (widget == colorSecondaryButton) { LoadSecondaryColor(); }
+        if (widget == colorAccentButton) { LoadAccentColor(); }
         
         // Color adjustments
         if (widget == colorRMinusButton) { colorPicker.DecreaseRed(); }
@@ -609,63 +616,63 @@ public class ScreenThemeEditor : Screen
         
         if (widget == loadDefaultButton)
         {
-            LoadDefaultAsset(game);
+            LoadDefaultAsset();
             needsTextureUpdate = true;
         }
         
         if (widget == gradientHorizButton)
         {
-            ApplyGradient(game, true);
+            ApplyGradient(true);
             needsTextureUpdate = true;
         }
         
         if (widget == gradientVertButton)
         {
-            ApplyGradient(game, false);
+            ApplyGradient(false);
             needsTextureUpdate = true;
         }
         
         if (widget == borderButton)
         {
-            ApplyBorder(game);
+            ApplyBorder();
             needsTextureUpdate = true;
         }
         
         if (widget == saveButton)
         {
-            SaveTheme(game);
+            SaveTheme();
         }
         
         if (widget == exportButton)
         {
-            ExportAsset(game);
+            ExportAsset();
         }
         
         if (widget == backButton)
         {
-            game.SetScreen(new ScreenMainMenu());
+            menu.StartMainMenu();
         }
     }
     
-    void LoadPrimaryColor(Game game)
+    void LoadPrimaryColor()
     {
         // Load primary color from current theme (default: bronze/orange)
         colorPicker.SetColor(160, 100, 40);
     }
     
-    void LoadSecondaryColor(Game game)
+    void LoadSecondaryColor()
     {
         // Load secondary color from current theme (default: dark bronze)
         colorPicker.SetColor(100, 80, 60);
     }
     
-    void LoadAccentColor(Game game)
+    void LoadAccentColor()
     {
         // Load accent color from current theme (default: golden)
         colorPicker.SetColor(255, 215, 0);
     }
     
-    void ApplyGradient(Game game, bool horizontal)
+    void ApplyGradient(bool horizontal)
     {
         int startColor = colorPicker.GetSelectedColor();
         // Create a darker end color
@@ -677,13 +684,13 @@ public class ScreenThemeEditor : Screen
         canvas.DrawGradient(startColor, endColor, horizontal);
     }
     
-    void ApplyBorder(Game game)
+    void ApplyBorder()
     {
         int borderColor = colorPicker.GetSelectedColor();
         canvas.DrawBorder(borderColor, 2);
     }
     
-    void LoadDefaultAsset(Game game)
+    void LoadDefaultAsset()
     {
         // Load a default asset based on current asset type
         // For now, create a simple default design
@@ -699,14 +706,14 @@ public class ScreenThemeEditor : Screen
         canvas.DrawBorder(borderColor, 3);
     }
     
-    void SaveTheme(Game game)
+    void SaveTheme()
     {
         // Save current theme configuration
         // This would write theme.txt and assets to disk
         // TODO: Implement theme saving
     }
     
-    void ExportAsset(Game game)
+    void ExportAsset()
     {
         // Export current canvas as PNG file
         // This would save to the appropriate theme directory
