@@ -38,10 +38,8 @@ dotnet_style_coalesce_expression = true:suggestion
 dotnet_style_null_propagation = true:suggestion
 dotnet_style_explicit_tuple_names = true:suggestion
 
-# Code quality rules - treat build errors seriously
+# Code quality rules - promote warnings to errors
 dotnet_diagnostic.CS0108.severity = error  # Member hiding without 'new'
-dotnet_diagnostic.CS0117.severity = error  # Type does not contain definition
-dotnet_diagnostic.CS0246.severity = error  # Type or namespace not found
 dotnet_diagnostic.CS0219.severity = error  # Variable assigned but never used
 dotnet_diagnostic.CS0414.severity = error  # Field assigned but never used
 dotnet_diagnostic.CS0618.severity = error  # Member is obsolete

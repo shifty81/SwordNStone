@@ -48,8 +48,6 @@ for csproj in $(find . -name "*.csproj" -not -path "*/bin/*" -not -path "*/obj/*
         # Skip generated and system files
         if [[ "$csfile" == *"Packet.Serializer"* ]] || \
            [[ "$csfile" == *"AssemblyInfo"* ]] || \
-           [[ "$csfile" == *"obj/"* ]] || \
-           [[ "$csfile" == *"bin/"* ]] || \
            [[ "$csfile" == *"Assets.ci.cs"* ]]; then
             continue
         fi
@@ -60,7 +58,7 @@ for csproj in $(find . -name "*.csproj" -not -path "*/bin/*" -not -path "*/obj/*
         if ! grep -q "$filename" "$csproj"; then
             error "$csfile not found in $csproj"
         fi
-    done < <(find "$dir" -name "*.cs" -o -name "*.ci.cs" 2>/dev/null | grep -v "/bin/" | grep -v "/obj/")
+    done < <(find "$dir" \( -name "*.cs" -o -name "*.ci.cs" \) -not -path "*/bin/*" -not -path "*/obj/*" 2>/dev/null)
 done
 
 if [ $errors -eq 0 ]; then

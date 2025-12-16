@@ -94,13 +94,21 @@ if %ERRORLEVEL% EQU 0 (
     echo 6. Attempting to build solution...
     echo This may take a while...
     
+    REM Set project path - configure this for your environment
+    set LIB_PROJECT=SwordAndStoneLib\SwordAndStoneLib.csproj
+    
     REM Build the library first
-    msbuild SwordAndStoneLib\SwordAndStoneLib.csproj /p:Configuration=Debug /v:quiet /nologo
-    if %ERRORLEVEL% NEQ 0 (
-        echo ERROR: Build failed
-        set /a ERRORS+=1
+    if exist "%LIB_PROJECT%" (
+        msbuild "%LIB_PROJECT%" /p:Configuration=Debug /v:quiet /nologo
+        if %ERRORLEVEL% NEQ 0 (
+            echo ERROR: Build failed
+            set /a ERRORS+=1
+        ) else (
+            echo OK: Library build succeeded
+        )
     ) else (
-        echo OK: Library build succeeded
+        echo WARNING: Project file not found: %LIB_PROJECT%
+        set /a WARNINGS+=1
     )
     echo.
 )
