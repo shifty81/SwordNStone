@@ -330,11 +330,9 @@ public class ConnectData
 
 public class ConnectedPlayer
 {
-#pragma warning disable CS0649
     internal int id;
     internal string name;
     internal int ping; // in ms
-#pragma warning restore CS0649
 }
 
 public class ServerInformation

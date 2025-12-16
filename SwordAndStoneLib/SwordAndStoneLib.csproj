@@ -208,7 +208,7 @@
     <Compile Include="Server\Mods\Fortress\Default.cs" />
     <Compile Include="Server\Mods\Fortress\EntitySigns.cs" />
     <Compile Include="Server\Mods\Fortress\Food.cs" />
-    <Compile Include="Server\Mods\Unused\Sign.cs" />
+    <!-- <Compile Include="Server\Mods\Unused\Sign.cs" /> -->
     <Compile Include="Server\Mods\War\Food.cs" />
     <Compile Include="Server\NetworkDummyServer.cs" />
     <Compile Include="Server\NetworkEnetServer.cs" />
@@ -232,7 +232,7 @@
     <Compile Include="Server\Mods\Fortress\OreGenerator.cs" />
     <Compile Include="Server\Mods\Fortress\HttpStats.cs" />
     <Compile Include="Server\Mods\Fortress\RememberPosition.cs" />
-    <Compile Include="Server\Mods\Unused\PermissionBlock.cs" />
+    <!-- <Compile Include="Server\Mods\Unused\PermissionBlock.cs" /> -->
     <Compile Include="Server\Mods\Fortress\PlayerList.cs" />
     <Compile Include="Server\Mods\Fortress\Revert.cs" />
     <Compile Include="Server\Mods\Fortress\SandPhysics.cs" />
@@ -243,8 +243,8 @@
     <Compile Include="Server\Mods\Fortress\CombatSystem.cs" />
     <Compile Include="Server\Mods\Fortress\Weapons.cs" />
     <Compile Include="Server\Mods\Fortress\Tools.cs" />
-    <Compile Include="Server\Mods\Unused\BlockId.cs" />
-    <Compile Include="Server\Mods\Unused\Fluids.cs" />
+    <!-- <Compile Include="Server\Mods\Unused\BlockId.cs" /> -->
+    <!-- <Compile Include="Server\Mods\Unused\Fluids.cs" /> -->
     <Compile Include="Server\Mods\War\Core.cs" />
     <Compile Include="Server\Mods\War\CoreBlocks.cs" />
     <Compile Include="Server\Mods\War\WarBlocks.cs" />
