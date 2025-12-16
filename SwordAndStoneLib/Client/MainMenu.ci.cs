@@ -591,6 +591,14 @@
         pixelArtEditor.Initialize(p);
         screen.LoadTranslations();
     }
+    
+    internal void StartThemeEditor()
+    {
+        ScreenThemeEditor themeEditor = new ScreenThemeEditor();
+        screen = themeEditor;
+        screen.menu = this;
+        screen.LoadTranslations();
+    }
 
     public void StartGame(bool singleplayer, string singleplayerSavePath, ConnectData connectData)
     {

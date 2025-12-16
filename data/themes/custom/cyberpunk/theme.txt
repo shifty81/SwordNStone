@@ -1,0 +1,103 @@
+# Cyberpunk Theme Configuration
+# An example custom theme demonstrating user-created content
+
+[Theme]
+name=Cyberpunk
+author=Theme Editor User
+version=1.0
+description=Futuristic sci-fi theme with blue/cyan accents and angular design
+
+[Paths]
+# Base paths for theme assets
+base_path=data/themes/custom/cyberpunk/
+hud_path=hud/
+ui_path=ui/
+speech_path=speech/
+menu_path=menu/
+inventory_path=inventory/
+buttons_path=buttons/
+frames_path=frames/
+bars_path=bars/
+
+[SpriteSheets]
+# Main sprite sheets for this theme (initially using default as fallback)
+hud_pieces=hud/hud_pieces.png
+ui_split=ui/ui_split.png
+speech_bubble_small=speech/speech_bubble_small_spritesheet.png
+speech_bubble_large=speech/speech_bubble_large_spritesheet.png
+
+[Buttons]
+# Button states - custom cyberpunk style
+button_normal=buttons/button_normal.png
+button_hover=buttons/button_hover.png
+button_pressed=buttons/button_pressed.png
+button_long_normal=buttons/button_long_normal.png
+button_long_hover=buttons/button_long_hover.png
+button_long_pressed=buttons/button_long_pressed.png
+
+[Frames]
+# Frame types with angular, tech-inspired design
+frame_small=frames/frame_small.png
+frame_ornate=frames/frame_ornate.png
+frame_circular=frames/frame_circular.png
+frame_large_1=frames/frame_large_1.png
+frame_large_2=frames/frame_large_2.png
+frame_large_3=frames/frame_large_3.png
+
+[Bars]
+# Progress bars with neon glow effects
+bar_full_red=bars/bar_full_red.png
+bar_full_blue=bars/bar_full_blue.png
+bar_left=bars/bar_left.png
+bar_right=bars/bar_right.png
+
+[Inventory]
+# Inventory slot states with hexagonal design
+slot_normal=inventory/slot_normal.png
+slot_active=inventory/slot_active.png
+slot_highlight=inventory/slot_highlight.png
+
+[Colors]
+# Cyberpunk color scheme - blue/cyan with neon accents
+primary=20,100,220
+secondary=10,50,100
+accent=0,220,255
+text_normal=200,240,255
+text_highlight=0,255,255
+text_disabled=80,100,120
+background_dark=10,15,25
+background_medium=20,30,50
+border_light=0,180,255
+border_dark=0,50,100
+health_red=255,0,80
+mana_blue=0,180,255
+stamina_green=0,255,120
+
+[HUD.SpriteMap]
+# Sprite coordinates in hud_pieces.png (x, y, width, height)
+# Using same layout as default but with cyberpunk colors
+frame_small_tl=0,0,16,16
+frame_small_t=16,0,16,16
+frame_small_tr=32,0,16,16
+frame_small_l=0,16,16,16
+frame_small_c=16,16,16,16
+frame_small_r=32,16,16,16
+frame_small_bl=0,32,16,16
+frame_small_b=16,32,16,16
+frame_small_br=32,32,16,16
+
+[UI.SpriteMap]
+# Sprite coordinates in ui_split.png (x, y, width, height)
+# Using same layout as default
+panel_tl=0,0,32,32
+panel_t=32,0,64,32
+panel_tr=96,0,32,32
+button_small_1=128,0,32,32
+button_small_2=160,0,32,32
+
+[Metadata]
+# Additional metadata for theme editor
+editable=true
+category=sci-fi
+difficulty=intermediate
+created_with=Theme Editor v1.0

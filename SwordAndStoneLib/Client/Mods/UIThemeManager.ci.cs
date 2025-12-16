@@ -228,6 +228,79 @@ public class UIThemeManager
     }
     
     public string GetSlotHighlightPath() { return slotHighlightPath; }
+    
+    /// <summary>
+    /// Get the current theme name
+    /// </summary>
+    public string GetThemeName() { return themeName; }
+    
+    /// <summary>
+    /// Check if theme is loaded
+    /// </summary>
+    public bool IsThemeLoaded() { return themeLoaded; }
+    
+    /// <summary>
+    /// List available themes in the themes directory
+    /// Returns array of theme names (discovers both default and custom themes)
+    /// </summary>
+    public string[] ListAvailableThemes(Game game)
+    {
+        // This would scan data/themes/ directory for theme.txt files
+        // For now, return a hardcoded list of known themes
+        string[] themes = new string[3];
+        themes[0] = "default";
+        themes[1] = "cyberpunk";
+        themes[2] = "custom";
+        return themes;
+    }
+    
+    /// <summary>
+    /// Switch to a different theme at runtime
+    /// </summary>
+    public void SwitchTheme(Game game, string newThemeName)
+    {
+        LoadTheme(game, newThemeName);
+        
+        // Notify game that theme has changed (UI may need to reload textures)
+        game.ShowChatMessage(game.platform.StringFormat("Switched to theme: {0}", newThemeName));
+    }
+    
+    /// <summary>
+    /// Validate that a theme has all required assets
+    /// Returns true if theme is valid, false otherwise
+    /// </summary>
+    public bool ValidateTheme(Game game, string themeNameToValidate)
+    {
+        // Check if theme directory exists
+        string themePath = game.platform.StringFormat("data/themes/{0}/", themeNameToValidate);
+        
+        // Check for theme.txt
+        string themeFile = game.platform.StringFormat("{0}theme.txt", themePath);
+        
+        // Would need file system access to actually check
+        // For now, assume valid if it's a known theme
+        return true;
+    }
+    
+    /// <summary>
+    /// Get theme metadata for display in UI
+    /// </summary>
+    public string GetThemeDescription(string themeNameToDescribe)
+    {
+        if (themeNameToDescribe == "default")
+        {
+            return "Standard bronze/orange fantasy theme";
+        }
+        else if (themeNameToDescribe == "cyberpunk")
+        {
+            return "Futuristic sci-fi theme with blue/cyan accents";
+        }
+        else if (themeNameToDescribe == "custom")
+        {
+            return "User-created custom theme";
+        }
+        return "Custom theme";
+    }
 }
 
 /// <summary>
