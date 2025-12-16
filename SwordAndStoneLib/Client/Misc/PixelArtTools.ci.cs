@@ -97,6 +97,62 @@ public class PixelArtTools
 	{
 		return (a << 24) | (r << 16) | (g << 8) | b;
 	}
+	
+	// Overloaded methods for ThemeCanvas support
+	public void ApplyTool(ThemeCanvas canvas, int x, int y, int color)
+	{
+		if (canvas == null)
+		{
+			return;
+		}
+		
+		if (currentTool == PixelArtToolType.Brush)
+		{
+			ApplyBrushTheme(canvas, x, y, color);
+		}
+		else if (currentTool == PixelArtToolType.Eraser)
+		{
+			ApplyEraserTheme(canvas, x, y);
+		}
+		else if (currentTool == PixelArtToolType.FillBucket)
+		{
+			canvas.FloodFill(x, y, color);
+		}
+	}
+	
+	void ApplyBrushTheme(ThemeCanvas canvas, int centerX, int centerY, int color)
+	{
+		int halfSize = brushSize / 2;
+		for (int dy = -halfSize; dy <= halfSize; dy++)
+		{
+			for (int dx = -halfSize; dx <= halfSize; dx++)
+			{
+				canvas.SetPixel(centerX + dx, centerY + dy, color);
+			}
+		}
+	}
+	
+	void ApplyEraserTheme(ThemeCanvas canvas, int centerX, int centerY)
+	{
+		int transparent = ColorFromArgb(0, 255, 255, 255);
+		int halfSize = brushSize / 2;
+		for (int dy = -halfSize; dy <= halfSize; dy++)
+		{
+			for (int dx = -halfSize; dx <= halfSize; dx++)
+			{
+				canvas.SetPixel(centerX + dx, centerY + dy, transparent);
+			}
+		}
+	}
+	
+	public int PickColor(ThemeCanvas canvas, int x, int y)
+	{
+		if (canvas == null)
+		{
+			return ColorFromArgb(255, 0, 0, 0);
+		}
+		return canvas.GetPixel(x, y);
+	}
 }
 
 // Tool type enumeration
