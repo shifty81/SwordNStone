@@ -284,10 +284,79 @@ These scripts:
 ## Development Workflow
 
 1. **Make changes** to source code in Visual Studio or your preferred editor
-2. **Build** the solution to check for compilation errors
-3. **Run manual tests** to verify functionality
-4. **Build Release** when ready to distribute
-5. **Use build scripts** to create distribution packages
+2. **Run validation** before committing (see Validation Tools below)
+3. **Build** the solution to check for compilation errors
+4. **Run manual tests** to verify functionality
+5. **Build Release** when ready to distribute
+6. **Use build scripts** to create distribution packages
+
+## Validation Tools (NEW!)
+
+To help prevent common build errors, the project now includes automated validation tools:
+
+### Pre-Commit Validation Script
+
+Run before committing to catch issues early:
+
+**Windows:**
+```cmd
+validate-build.bat
+```
+
+**Linux/Mac:**
+```bash
+./validate-build.sh
+```
+
+These scripts check for:
+- ✅ Missing project file references
+- ✅ Unused variables and fields
+- ✅ TODO/FIXME comments
+- ✅ XML configuration validity
+- ✅ Required configuration files
+- ✅ NuGet package status
+
+### EditorConfig
+
+The project now includes `.editorconfig` for consistent code style across IDEs:
+- Enforces code formatting rules
+- Treats certain warnings as errors (CS0108, CS0219, CS0414, CS0618)
+- Configures naming conventions
+- Works with Visual Studio, VS Code, Rider, and other modern editors
+
+### Continuous Integration
+
+GitHub Actions workflow (`.github/workflows/build-validation.yml`) automatically validates:
+- All source files are included in project files
+- Code quality checks pass
+- Configuration files are valid
+- Build succeeds without warnings
+
+### Best Practices
+
+To avoid build errors in the future:
+
+1. **Always run validation before committing:**
+   ```bash
+   ./validate-build.sh  # or validate-build.bat on Windows
+   ```
+
+2. **Enable all warnings in Visual Studio:**
+   - Project Properties → Build → Treat warnings as errors → All
+
+3. **Use the EditorConfig:**
+   - Modern IDEs will automatically use `.editorconfig`
+   - Ensures consistent code style across the team
+
+4. **Add new files to .csproj:**
+   - When creating new .cs files, add them to the appropriate .csproj
+   - Or use wildcard patterns for automatic inclusion
+
+5. **Keep packages updated:**
+   - Run `nuget restore` after pulling changes
+   - Check for package updates regularly
+
+For detailed information on preventing build errors, see [BUILD_ERROR_PREVENTION.md](BUILD_ERROR_PREVENTION.md).
 
 ## Continuous Integration
 

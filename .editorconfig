@@ -1,0 +1,97 @@
+# EditorConfig for SwordNStone project
+# https://editorconfig.org
+
+root = true
+
+# All files
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# C# files
+[*.cs]
+# Indentation
+indent_size = 4
+tab_width = 4
+
+# Sort using and Import directives with System.* appearing first
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# Avoid "this." if not necessary
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_event = false:warning
+
+# Use language keywords instead of framework type names
+dotnet_style_predefined_type_for_locals_parameters_members = true:warning
+dotnet_style_predefined_type_for_member_access = true:warning
+
+# Suggest more modern language features when available
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_explicit_tuple_names = true:suggestion
+
+# Code quality rules - treat build errors seriously
+dotnet_diagnostic.CS0108.severity = error  # Member hiding without 'new'
+dotnet_diagnostic.CS0117.severity = error  # Type does not contain definition
+dotnet_diagnostic.CS0246.severity = error  # Type or namespace not found
+dotnet_diagnostic.CS0219.severity = error  # Variable assigned but never used
+dotnet_diagnostic.CS0414.severity = error  # Field assigned but never used
+dotnet_diagnostic.CS0618.severity = error  # Member is obsolete
+
+# Unassigned fields - warning (can be intentional for serialization)
+dotnet_diagnostic.CS0649.severity = warning
+
+# IDE code quality rules
+dotnet_diagnostic.IDE0051.severity = warning # Remove unused private members
+dotnet_diagnostic.IDE0052.severity = warning # Remove unread private members
+dotnet_diagnostic.IDE0059.severity = warning # Unnecessary assignment
+
+# Naming conventions
+# Private fields should be camelCase with underscore prefix
+dotnet_naming_rule.private_fields_with_underscore.severity = suggestion
+dotnet_naming_rule.private_fields_with_underscore.symbols = private_fields
+dotnet_naming_rule.private_fields_with_underscore.style = underscore_camel_case
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_style.underscore_camel_case.capitalization = camel_case
+dotnet_naming_style.underscore_camel_case.required_prefix = _
+
+# Public members should be PascalCase
+dotnet_naming_rule.public_members_must_be_capitalized.severity = suggestion
+dotnet_naming_rule.public_members_must_be_capitalized.symbols = public_symbols
+dotnet_naming_rule.public_members_must_be_capitalized.style = first_word_upper_case
+
+dotnet_naming_symbols.public_symbols.applicable_kinds = property,method,field,event,delegate
+dotnet_naming_symbols.public_symbols.applicable_accessibilities = public,internal,protected
+
+dotnet_naming_style.first_word_upper_case.capitalization = pascal_case
+
+# Project files
+[*.csproj]
+indent_size = 2
+
+# XML files
+[*.xml]
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# YAML files
+[*.yml]
+indent_size = 2
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
