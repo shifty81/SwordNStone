@@ -103,6 +103,7 @@ public class ScreenThemeEditor : Screen
         fontSmall = new FontCi();
         fontSmall.size = 12;
         
+        one = 1;  // Initialize for fixed-point arithmetic
         isDrawing = false;
         canvasTextureId = -1;
         currentAssetType = ThemeCanvas.CANVAS_TYPE_BUTTON;
@@ -173,6 +174,7 @@ public class ScreenThemeEditor : Screen
     internal FontCi fontTitle;
     internal FontCi fontSmall;
     
+    internal float one;  // For compatibility with fixed-point arithmetic
     internal bool isDrawing;
     internal int canvasTextureId;
     internal float gridScale;
@@ -470,9 +472,14 @@ public class ScreenThemeEditor : Screen
         {
             isDrawing = true;
             
-            // Convert to canvas coordinates
-            int canvasX = (x - canvasOffsetX) / one / gridScale;
-            int canvasY = (y - canvasOffsetY) / one / gridScale;
+            // Convert to canvas coordinates (with safety check for gridScale)
+            int canvasX = 0;
+            int canvasY = 0;
+            if (gridScale > 0)
+            {
+                canvasX = (x - canvasOffsetX) / one / gridScale;
+                canvasY = (y - canvasOffsetY) / one / gridScale;
+            }
             
             // Apply tool
             ApplyTool(game, canvasX, canvasY);
@@ -495,8 +502,14 @@ public class ScreenThemeEditor : Screen
         if (x >= canvasOffsetX && x < canvasOffsetX + scaledWidth &&
             y >= canvasOffsetY && y < canvasOffsetY + scaledHeight)
         {
-            int canvasX = (x - canvasOffsetX) / one / gridScale;
-            int canvasY = (y - canvasOffsetY) / one / gridScale;
+            // Convert to canvas coordinates (with safety check for gridScale)
+            int canvasX = 0;
+            int canvasY = 0;
+            if (gridScale > 0)
+            {
+                canvasX = (x - canvasOffsetX) / one / gridScale;
+                canvasY = (y - canvasOffsetY) / one / gridScale;
+            }
             
             // Apply tool
             ApplyTool(game, canvasX, canvasY);

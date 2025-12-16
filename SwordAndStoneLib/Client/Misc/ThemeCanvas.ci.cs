@@ -49,7 +49,11 @@ public class ThemeCanvas
         }
         
         // Create new array with old data
-        int[] oldPixels = pixels;
+        int[] oldPixels = new int[width * height];
+        for (int i = 0; i < width * height; i++)
+        {
+            oldPixels[i] = pixels[i];
+        }
         int oldWidth = width;
         int oldHeight = height;
         
@@ -61,15 +65,14 @@ public class ThemeCanvas
         {
             for (int x = 0; x < width; x++)
             {
+                int newIndex = y * width + x;
                 if (x < oldWidth && y < oldHeight)
                 {
                     int oldIndex = y * oldWidth + x;
-                    int newIndex = y * width + x;
                     pixels[newIndex] = oldPixels[oldIndex];
                 }
                 else
                 {
-                    int newIndex = y * width + x;
                     pixels[newIndex] = 0; // Transparent
                 }
             }
@@ -112,7 +115,11 @@ public class ThemeCanvas
         }
         
         int index = y * width + x;
-        pixels[index] = color;
+        // Extra bounds check for array safety
+        if (index >= 0 && index < width * height && index < pixels.Length)
+        {
+            pixels[index] = color;
+        }
     }
     
     /// <summary>
@@ -126,7 +133,12 @@ public class ThemeCanvas
         }
         
         int index = y * width + x;
-        return pixels[index];
+        // Extra bounds check for array safety
+        if (index >= 0 && index < width * height && index < pixels.Length)
+        {
+            return pixels[index];
+        }
+        return 0;
     }
     
     /// <summary>
@@ -302,6 +314,8 @@ public class ThemeCanvas
     /// </summary>
     public void DrawGradient(int startColor, int endColor, bool horizontal)
     {
+        float one = 1;  // For compatibility with fixed-point arithmetic
+        
         int startR = Game.ColorR(startColor);
         int startG = Game.ColorG(startColor);
         int startB = Game.ColorB(startColor);
