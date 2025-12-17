@@ -177,9 +177,10 @@
         {
             GameDataItemsClient dataItems = new GameDataItemsClient();
             dataItems.game = game;
+            int textureId = dataItems.TextureIdForInventory()[blockType];
             game.Draw2dTexture(game.terrainTexture, portraitX + 5, portraitY + 5,
                 portraitSize - 10, portraitSize - 10, 
-                IntRef.Create(dataItems.TextureIdForInventory()[blockType]), 
+                IntRef.Create(textureId), 
                 game.texturesPacked(), Game.ColorFromArgb(255, 255, 255, 255), false);
         }
         

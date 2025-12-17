@@ -51,6 +51,11 @@ dotnet_diagnostic.CS0649.severity = warning
 dotnet_diagnostic.IDE0051.severity = warning # Remove unused private members
 dotnet_diagnostic.IDE0052.severity = warning # Remove unread private members
 dotnet_diagnostic.IDE0059.severity = warning # Unnecessary assignment
+dotnet_diagnostic.IDE0060.severity = warning # Remove unused parameter
+
+# Additional rules to prevent metadata errors
+dotnet_diagnostic.CS0246.severity = error  # Type or namespace not found (often due to missing project reference)
+dotnet_diagnostic.CS0006.severity = error  # Metadata file not found (build dependency issue)
 
 # Naming conventions
 # Private fields should be camelCase with underscore prefix
@@ -93,3 +98,11 @@ indent_size = 2
 # Markdown files
 [*.md]
 trim_trailing_whitespace = false
+
+# CiTo files (.ci.cs) - special rules for transpilation
+[*.ci.cs]
+# Same as C# but with additional notes for CiTo limitations
+# Avoid: complex nested expressions in method calls
+# Avoid: 'ref' parameters (limited support)
+# Avoid: complex lambda expressions
+# Extract array indexing operations to intermediate variables when using IntRef.Create()

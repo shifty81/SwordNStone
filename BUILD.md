@@ -2,6 +2,28 @@
 
 This document provides instructions for building and testing the Sword&Stone project using Visual Studio and command-line tools.
 
+## ⚠️ IMPORTANT: Preventing Metadata Errors
+
+**Before building, run the pre-build validation script to prevent common metadata errors:**
+
+**Windows:**
+```cmd
+pre-build-validation.bat
+```
+
+**Linux/Mac:**
+```bash
+./pre-build-validation.sh
+```
+
+This validation catches issues that cause metadata errors such as:
+- CS0006: Metadata file 'SwordAndStoneLib.dll' could not be found
+- Missing NuGet packages (protobuf-net, OpenTK)
+- CiTo transpilation errors
+- Missing project references
+
+**See [BUILD_VALIDATION_CHECKLIST.md](BUILD_VALIDATION_CHECKLIST.md) for complete validation procedures.**
+
 ## Prerequisites
 
 ### Windows - Visual Studio
@@ -95,6 +117,73 @@ The solution contains the following projects:
 - **SwordAndStoneServer**: Dedicated server application (Console)
 - **ScriptingApi**: Server-side scripting API for mods
 - **SwordAndStoneMonsterEditor**: Monster model editor tool
+
+## Automated Build Validation
+
+To ensure consistent builds and prevent metadata errors, use the provided validation scripts:
+
+### Pre-Build Validation
+
+Run **before** building to catch issues early:
+
+**Windows:**
+```cmd
+pre-build-validation.bat
+```
+
+**Linux/Mac:**
+```bash
+./pre-build-validation.sh
+```
+
+This checks:
+- ✓ Project files are well-formed XML
+- ✓ NuGet packages are restored
+- ✓ Required build tools (CiTo.exe, CodeGenerator.exe) are present
+- ✓ All .ci.cs files are referenced in project files
+- ✓ Common CiTo syntax issues
+
+### Post-Build Validation
+
+Run **after** building to verify outputs:
+
+**Windows:**
+```cmd
+post-build-validation.bat Debug
+```
+
+**Linux/Mac:**
+```bash
+./post-build-validation.sh Debug
+```
+
+This verifies:
+- ✓ SwordAndStoneLib.dll was generated
+- ✓ SwordAndStone.exe was created
+- ✓ NuGet package DLLs are in output directories
+- ✓ Generated files (Packet.Serializer.ci.cs) exist
+- ✓ CS0108 fix was applied
+
+## Complete Build Workflow (Recommended)
+
+For the most reliable builds, follow this workflow:
+
+```cmd
+# 1. Validate pre-requisites
+pre-build-validation.bat
+
+# 2. Clean previous build
+msbuild SwordAndStone.sln /t:Clean
+
+# 3. Restore NuGet packages (if needed)
+nuget restore SwordAndStone.sln
+
+# 4. Build the solution
+msbuild SwordAndStone.sln /p:Configuration=Debug
+
+# 5. Validate build output
+post-build-validation.bat Debug
+```
 
 ## Build Output
 
@@ -357,6 +446,103 @@ To avoid build errors in the future:
    - Check for package updates regularly
 
 For detailed information on preventing build errors, see [BUILD_ERROR_PREVENTION.md](BUILD_ERROR_PREVENTION.md).
+
+## Preventing Metadata Errors (New Standard)
+
+To prevent the recurring metadata errors (CS0006, missing DLLs, etc.), we've implemented a comprehensive validation system:
+
+### 1. Pre-Commit Hooks (Recommended)
+
+Install the pre-commit hook to automatically validate before each commit:
+
+**Windows:**
+```cmd
+copy .git-hooks\pre-commit .git\hooks\pre-commit
+```
+
+**Linux/Mac:**
+```bash
+cp .git-hooks/pre-commit .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+```
+
+The hook automatically:
+- Checks that new .ci.cs files are added to .csproj
+- Validates XML structure of .csproj files
+- Warns about complex CiTo expressions
+- Reminds to run validation scripts
+
+### 2. Validation Checklist
+
+Before **every** change that adds/modifies features:
+
+**✓ Before coding:**
+- [ ] Run `pre-build-validation` script
+- [ ] Verify NuGet packages are restored
+- [ ] Check build tools are present
+
+**✓ While coding:**
+- [ ] Add new .cs/.ci.cs files to .csproj immediately
+- [ ] Extract complex expressions in CiTo code to variables
+- [ ] Follow existing code patterns
+
+**✓ Before committing:**
+- [ ] Run `pre-build-validation` script again
+- [ ] Perform clean build
+- [ ] Run `post-build-validation` script
+- [ ] Verify all warnings addressed
+
+See [BUILD_VALIDATION_CHECKLIST.md](BUILD_VALIDATION_CHECKLIST.md) for complete details.
+
+### 3. Enhanced Build Scripts
+
+The BuildCito.bat/sh scripts now include:
+- ✅ Pre-requisite validation
+- ✅ Detailed error messages
+- ✅ Step-by-step progress reporting
+- ✅ Automatic CS0108 fix application
+- ✅ Better error diagnostics
+
+### 4. GitHub Actions Integration
+
+Every push and PR automatically validates:
+- Project file completeness
+- CiTo syntax correctness
+- Dependency configuration
+- XML file validity
+
+This catches errors **before** they reach the main branch.
+
+### 5. Common Metadata Error Scenarios and Prevention
+
+| Error | Cause | Prevention |
+|-------|-------|------------|
+| CS0006: Metadata file 'SwordAndStoneLib.dll' not found | Build dependency failed | Run pre-build-validation, restore NuGet packages |
+| BuildCito.bat exited with code -1 | CiTo syntax error | Extract complex expressions to variables |
+| Expected CiClassPtrType, got CiArrayPtrType | Complex nested array in IntRef.Create | Use intermediate variable |
+| Referenced component 'protobuf-net' not found | Missing NuGet packages | Run `nuget restore` |
+| Type or namespace not found | File not in .csproj | Add file to project or use validation script |
+
+### 6. Making It Standard
+
+To make validation part of the standard workflow:
+
+1. **Team Agreement:** Everyone runs validation before committing
+2. **CI Enforcement:** GitHub Actions fails builds with errors
+3. **Documentation:** This document and BUILD_VALIDATION_CHECKLIST.md
+4. **Automation:** Pre-commit hooks do it automatically
+5. **Code Review:** PRs must pass validation checks
+
+### Why This Matters
+
+Metadata errors are cascading failures:
+1. CiTo transpilation fails → Packet.Serializer.ci.cs not generated
+2. Missing .cs file in .csproj → Type not found error
+3. Type not found → SwordAndStoneLib.dll not built
+4. Missing DLL → CS0006 metadata error in dependent projects
+5. Build fails completely
+
+**Prevention at step 1 prevents all subsequent failures.**
 
 ## Continuous Integration
 
