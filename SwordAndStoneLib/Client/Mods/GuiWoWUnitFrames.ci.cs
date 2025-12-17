@@ -92,14 +92,25 @@
             Entity localPlayer = game.entities[game.LocalPlayerId];
             if (localPlayer != null && localPlayer.drawModel != null && localPlayer.drawModel.CurrentTexture != -1)
             {
-                // Draw the player's skin texture as portrait
-                // Using a portion of the skin that shows the head/face
+                // Draw the player's skin texture as portrait, showing just the head/face portion
+                // Minecraft-style skins have head texture in top-left (typically 8x8 pixels in a 64x32 or 64x64 texture)
                 // Add small padding (scaled) to avoid drawing over the border
                 int portraitPadding = game.platform.FloatToInt(2 * scale);
+                int innerSize = portraitSize - (portraitPadding * 2);
+                
+                // Use texture coordinates to show only the face portion of the skin
+                // For standard Minecraft skins, the front face is at position (8,8) with size (8,8) in a 64x32 texture
+                // We'll use normalized coordinates: x=8/64=0.125, y=8/32=0.25, width=8/64=0.125, height=8/32=0.25
+                int[] texCoords = new int[4];
+                texCoords[0] = game.platform.FloatToInt(8);  // source X in texture (pixels)
+                texCoords[1] = game.platform.FloatToInt(8);  // source Y in texture (pixels)
+                texCoords[2] = game.platform.FloatToInt(8);  // source width in texture (pixels)
+                texCoords[3] = game.platform.FloatToInt(8);  // source height in texture (pixels)
+                
                 game.Draw2dTexture(localPlayer.drawModel.CurrentTexture, 
                     portraitX + portraitPadding, portraitY + portraitPadding, 
-                    portraitSize - (portraitPadding * 2), portraitSize - (portraitPadding * 2), 
-                    null, 0, Game.ColorFromArgb(255, 255, 255, 255), false);
+                    innerSize, innerSize, 
+                    texCoords, 0, Game.ColorFromArgb(255, 255, 255, 255), false);
             }
         }
         

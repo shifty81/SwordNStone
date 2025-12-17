@@ -126,14 +126,15 @@
     internal void DrawButton(string text, FontCi font, float dx, float dy, float dw, float dh, bool pressed)
     {
         // Use golden UI buttons from the standardized theme
+        // The "pressed" parameter indicates hover or keyboard focus state
         string buttonTexture;
         if (pressed)
         {
-            buttonTexture = "data/local/gui/golden/button_pressed.png";
+            buttonTexture = "data/local/gui/golden/button_hover.png";
         }
         else
         {
-            buttonTexture = "data/local/gui/golden/button_hover.png";
+            buttonTexture = "data/local/gui/golden/button_normal.png";
         }
         
         Draw2dQuad(GetTexture(buttonTexture), dx, dy, dw, dh);

@@ -218,6 +218,8 @@ public class ScreenPixelArtEditor : Screen
 		float panelHeight = 600 * scale;
 		
 		// Draw panel background using golden UI theme
+		// Note: We can't use GuiFrameRenderer.DrawFrame() here because it requires a Game object
+		// and we're in MainMenu context. Manual rendering is necessary.
 		string framePath = "data/local/gui/golden/frame_small.png";
 		int frameTexture = menu.GetTexture(framePath);
 		menu.Draw2dQuad(frameTexture, 
