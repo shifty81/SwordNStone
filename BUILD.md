@@ -2,6 +2,28 @@
 
 This document provides instructions for building and testing the Sword&Stone project using Visual Studio and command-line tools.
 
+## ⚠️ IMPORTANT: Preventing Metadata Errors
+
+**Before building, run the pre-build validation script to prevent common metadata errors:**
+
+**Windows:**
+```cmd
+pre-build-validation.bat
+```
+
+**Linux/Mac:**
+```bash
+./pre-build-validation.sh
+```
+
+This validation catches issues that cause metadata errors such as:
+- CS0006: Metadata file 'SwordAndStoneLib.dll' could not be found
+- Missing NuGet packages (protobuf-net, OpenTK)
+- CiTo transpilation errors
+- Missing project references
+
+**See [BUILD_VALIDATION_CHECKLIST.md](BUILD_VALIDATION_CHECKLIST.md) for complete validation procedures.**
+
 ## Prerequisites
 
 ### Windows - Visual Studio
