@@ -93,19 +93,21 @@
             if (localPlayer != null && localPlayer.drawModel != null && localPlayer.drawModel.CurrentTexture != -1)
             {
                 // Draw the player's skin texture as portrait, showing just the head/face portion
-                // Minecraft-style skins have head texture in top-left (typically 8x8 pixels in a 64x32 or 64x64 texture)
+                // Minecraft-style skins: face is at (8,8) with size (8,8) in 64x32 or 64x64 texture
+                const int SKIN_FACE_X = 8;
+                const int SKIN_FACE_Y = 8;
+                const int SKIN_FACE_SIZE = 8;
+                
                 // Add small padding (scaled) to avoid drawing over the border
                 int portraitPadding = game.platform.FloatToInt(2 * scale);
                 int innerSize = portraitSize - (portraitPadding * 2);
                 
                 // Use texture coordinates to show only the face portion of the skin
-                // For standard Minecraft skins, the front face is at position (8,8) with size (8,8) in a 64x32 texture
-                // We'll use normalized coordinates: x=8/64=0.125, y=8/32=0.25, width=8/64=0.125, height=8/32=0.25
                 int[] texCoords = new int[4];
-                texCoords[0] = game.platform.FloatToInt(8);  // source X in texture (pixels)
-                texCoords[1] = game.platform.FloatToInt(8);  // source Y in texture (pixels)
-                texCoords[2] = game.platform.FloatToInt(8);  // source width in texture (pixels)
-                texCoords[3] = game.platform.FloatToInt(8);  // source height in texture (pixels)
+                texCoords[0] = SKIN_FACE_X;      // source X in texture (pixels)
+                texCoords[1] = SKIN_FACE_Y;      // source Y in texture (pixels)
+                texCoords[2] = SKIN_FACE_SIZE;   // source width in texture (pixels)
+                texCoords[3] = SKIN_FACE_SIZE;   // source height in texture (pixels)
                 
                 game.Draw2dTexture(localPlayer.drawModel.CurrentTexture, 
                     portraitX + portraitPadding, portraitY + portraitPadding, 

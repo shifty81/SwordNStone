@@ -220,6 +220,8 @@ public class ScreenPixelArtEditor : Screen
 		// Draw panel background using golden UI theme
 		// Note: We can't use GuiFrameRenderer.DrawFrame() here because it requires a Game object
 		// and we're in MainMenu context. Manual rendering is necessary.
+		// TODO: Consider refactoring GuiFrameRenderer to support both Game and MainMenu contexts
+		// by abstracting the drawing interface or creating a MainMenuFrameRenderer variant.
 		string framePath = "data/local/gui/golden/frame_small.png";
 		int frameTexture = menu.GetTexture(framePath);
 		menu.Draw2dQuad(frameTexture, 
