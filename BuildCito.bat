@@ -28,6 +28,10 @@ IF NOT "%1"=="fast" cito -D CITO -D JS -D JSTA -l js-ta -o cito\output\JsTa\Swor
 REM Copy skeleton files
 copy cito\platform\JsTa\* cito\output\JsTa\*
 
+REM Fix CS0108 warnings in generated file by adding 'new' keyword to GetType() methods
+REM This is done AFTER CiTo transpilation because CiTo doesn't support the 'new' keyword
+powershell -Command "(Get-Content Packet.Serializer.ci.cs) -replace '(\s+)public int GetType\(\)', '$1public new int GetType()' | Set-Content Packet.Serializer.ci.cs"
+
 REM mkdir cito\output\C
 REM mkdir cito\output\Java
 REM mkdir cito\output\Cs

@@ -15,3 +15,7 @@ mono CiTo.exe -D CITO -D JS -D JSTA -l js-ta -o cito/output/JsTa/SwordAndStone.j
 
 # Copy skeleton files
 cp -r cito/platform/JsTa/* cito/output/JsTa/
+
+# Fix CS0108 warnings in generated file by adding 'new' keyword to GetType() methods
+# This is done AFTER CiTo transpilation because CiTo doesn't support the 'new' keyword
+sed -i 's/^\([[:space:]]*\)public int GetType()/\1public new int GetType()/' Packet.Serializer.ci.cs
