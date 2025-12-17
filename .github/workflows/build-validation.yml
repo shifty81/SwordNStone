@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main, develop, master ]
 
+# Limit permissions for security
+permissions:
+  contents: read
+
 jobs:
   validate-project-files:
     name: Validate Project References
