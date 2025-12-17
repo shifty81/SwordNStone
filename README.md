@@ -72,11 +72,30 @@ Server mods can be implemented in C# or interpreted Javascript.
 
 #### Building
 
-For detailed build instructions, see [BUILD.md](BUILD.md).
+**⚠️ IMPORTANT:** To prevent metadata errors and build failures, always use the validation scripts:
+
+```bash
+# Before building (prevents errors)
+./pre-build-validation.sh    # Linux/Mac
+pre-build-validation.bat      # Windows
+
+# After building (verifies success)
+./post-build-validation.sh Debug
+post-build-validation.bat Debug
+```
+
+For detailed build instructions, see [BUILD.md](BUILD.md).  
+For validation procedures, see [QUICK_START_VALIDATION.md](QUICK_START_VALIDATION.md).
 
 Quick start:
 - **Windows**: Open `SwordAndStone.sln` in Visual Studio and build
 - **Linux/Mac**: Install Mono and run `xbuild SwordAndStone.sln`
+
+**New Standard:** All developers should install the pre-commit hook:
+```bash
+cp .git-hooks/pre-commit .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+```
 
 #### Contributing
 
