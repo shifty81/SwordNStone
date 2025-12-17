@@ -76,7 +76,7 @@
             GuiFrameRenderer.DrawProgressBar(game, barX, oxygenBarY, barWidth, barHeight, oxygenProgress, GuiFrameRenderer.BAR_TYPE_BLUE);
         }
         
-        // Draw portrait placeholder (circular)
+        // Draw character portrait in HP bar
         int portraitX = playerFrameX + game.platform.FloatToInt(15 * scale);
         int portraitY = playerFrameY + game.platform.FloatToInt(30 * scale);
         int portraitSize = game.platform.FloatToInt(55 * scale);
@@ -85,6 +85,36 @@
         game.Draw2dTexture(game.WhiteTexture(), portraitX, portraitY, 
             portraitSize, portraitSize, null, 0, 
             Game.ColorFromArgb(255, 40, 40, 50), false);
+        
+        // Draw player character portrait using their skin texture
+        if (game.entities != null && game.LocalPlayerId >= 0 && game.LocalPlayerId < game.entitiesCount)
+        {
+            Entity localPlayer = game.entities[game.LocalPlayerId];
+            if (localPlayer != null && localPlayer.drawModel != null && localPlayer.drawModel.CurrentTexture != -1)
+            {
+                // Draw the player's skin texture as portrait, showing just the head/face portion
+                // Minecraft-style skins: face is at (8,8) with size (8,8) in 64x32 or 64x64 texture
+                const int SKIN_FACE_X = 8;
+                const int SKIN_FACE_Y = 8;
+                const int SKIN_FACE_SIZE = 8;
+                
+                // Add small padding (scaled) to avoid drawing over the border
+                int portraitPadding = game.platform.FloatToInt(2 * scale);
+                int innerSize = portraitSize - (portraitPadding * 2);
+                
+                // Use texture coordinates to show only the face portion of the skin
+                int[] texCoords = new int[4];
+                texCoords[0] = SKIN_FACE_X;      // source X in texture (pixels)
+                texCoords[1] = SKIN_FACE_Y;      // source Y in texture (pixels)
+                texCoords[2] = SKIN_FACE_SIZE;   // source width in texture (pixels)
+                texCoords[3] = SKIN_FACE_SIZE;   // source height in texture (pixels)
+                
+                game.Draw2dTexture(localPlayer.drawModel.CurrentTexture, 
+                    portraitX + portraitPadding, portraitY + portraitPadding, 
+                    innerSize, innerSize, 
+                    texCoords, 0, Game.ColorFromArgb(255, 255, 255, 255), false);
+            }
+        }
         
         // Portrait border using standardized golden border
         GuiFrameRenderer.DrawPortraitBorder(game, portraitX - 5, portraitY - 5,
