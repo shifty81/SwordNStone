@@ -76,7 +76,7 @@
             GuiFrameRenderer.DrawProgressBar(game, barX, oxygenBarY, barWidth, barHeight, oxygenProgress, GuiFrameRenderer.BAR_TYPE_BLUE);
         }
         
-        // Draw portrait placeholder (circular)
+        // Draw character portrait in HP bar
         int portraitX = playerFrameX + game.platform.FloatToInt(15 * scale);
         int portraitY = playerFrameY + game.platform.FloatToInt(30 * scale);
         int portraitSize = game.platform.FloatToInt(55 * scale);
@@ -85,6 +85,21 @@
         game.Draw2dTexture(game.WhiteTexture(), portraitX, portraitY, 
             portraitSize, portraitSize, null, 0, 
             Game.ColorFromArgb(255, 40, 40, 50), false);
+        
+        // Draw player character portrait using their skin texture
+        if (game.LocalPlayerId >= 0 && game.LocalPlayerId < game.entitiesCount)
+        {
+            Entity localPlayer = game.entities[game.LocalPlayerId];
+            if (localPlayer != null && localPlayer.drawModel != null && localPlayer.drawModel.CurrentTexture != -1)
+            {
+                // Draw the player's skin texture as portrait
+                // Using a portion of the skin that shows the head/face
+                game.Draw2dTexture(localPlayer.drawModel.CurrentTexture, 
+                    portraitX + 2, portraitY + 2, 
+                    portraitSize - 4, portraitSize - 4, 
+                    null, 0, Game.ColorFromArgb(255, 255, 255, 255), false);
+            }
+        }
         
         // Portrait border using standardized golden border
         GuiFrameRenderer.DrawPortraitBorder(game, portraitX - 5, portraitY - 5,

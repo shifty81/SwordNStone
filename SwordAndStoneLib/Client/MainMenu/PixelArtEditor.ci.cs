@@ -214,9 +214,29 @@ public class ScreenPixelArtEditor : Screen
 	
 	void DrawToolsPanel(GamePlatform p, float scale, float x, float y, float width)
 	{
+		// Calculate panel height
+		float panelHeight = 600 * scale;
+		
+		// Draw panel background using golden UI theme
+		string framePath = "local/gui/golden/frame_small.png";
+		int frameTexture = menu.GetTexture(framePath);
+		menu.Draw2dQuad(frameTexture, 
+			p.FloatToInt(x - 8 * scale), 
+			p.FloatToInt(y - 8 * scale),
+			p.FloatToInt(width + 16 * scale),
+			p.FloatToInt(panelHeight + 16 * scale));
+		
+		string panelPath = "local/gui/golden/panel_dark.png";
+		int panelTexture = menu.GetTexture(panelPath);
+		menu.Draw2dQuad(panelTexture, 
+			p.FloatToInt(x), 
+			p.FloatToInt(y),
+			p.FloatToInt(width),
+			p.FloatToInt(panelHeight));
+		
 		float buttonHeight = 40 * scale;
 		float spacing = 10 * scale;
-		float currentY = y;
+		float currentY = y + 10 * scale;
 		
 		// Tools section
 		menu.DrawText("Tools:", fontDefault, x + width / 2, currentY, TextAlign.Center, TextBaseline.Top);

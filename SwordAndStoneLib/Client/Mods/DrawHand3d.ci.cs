@@ -156,7 +156,13 @@
             int x = 0;
             int y = 0;
             int z = 0;
-            if (IsEmptyHand() || IsCompass())
+            if (IsEmptyHand())
+            {
+                // Render empty hand as a smaller cube instead of torch to better represent a hand
+                // This avoids the stick-like appearance
+                DrawCube(modelData, x, y, z, Game.ColorFromArgb(255, light, light, light));
+            }
+            else if (IsCompass())
             {
                 d_BlockRendererTorch.TopTexture = GetWeaponTextureId(TileSide.Top);
                 d_BlockRendererTorch.SideTexture = GetWeaponTextureId(TileSide.Front);
