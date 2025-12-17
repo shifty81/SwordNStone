@@ -1428,15 +1428,15 @@ namespace SwordAndStone.ClientNative
 			GL.ColorPointer(4, ColorPointerType.UnsignedByte, 4 * 1, rgba);
 			GL.TexCoordPointer(2, TexCoordPointerType.Float, 2 * 4, uv);
 
-			BeginMode beginmode = BeginMode.Triangles;
+			PrimitiveType beginmode = PrimitiveType.Triangles;
 			if (data.getMode() == DrawModeEnum.Triangles)
 			{
-				beginmode = BeginMode.Triangles;
+				beginmode = PrimitiveType.Triangles;
 				GL.Enable(EnableCap.Texture2D);
 			}
 			else if (data.getMode() == DrawModeEnum.Lines)
 			{
-				beginmode = BeginMode.Lines;
+				beginmode = PrimitiveType.Lines;
 				GL.Disable(EnableCap.Texture2D);
 			}
 			else
@@ -1812,7 +1812,9 @@ namespace SwordAndStone.ClientNative
 		}
 
 		public CrashReporter crashreporter;
+#pragma warning disable CS0649 // Field is assigned in AddOnCrash method within non-DEBUG builds
 		OnCrashHandler onCrashHandler;
+#pragma warning restore CS0649
 		public override void AddOnCrash(OnCrashHandler handler)
 		{
 #if !DEBUG

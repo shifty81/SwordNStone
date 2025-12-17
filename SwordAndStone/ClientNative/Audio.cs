@@ -257,7 +257,6 @@ namespace SwordAndStone.ClientNative
 			}
 		}
 		Vector3 lastlistener;
-		Vector3 lastorientation;
 		public AudioTask CreateAudio(AudioDataCs sample)
 		{
 			return new AudioTask(d_GameExit, sample, this);

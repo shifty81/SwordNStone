@@ -852,12 +852,16 @@ public class AnimationState
 		bodyrotation = -1;
 		light = 1;
 	}
+#pragma warning disable CS0649 // Fields are assigned through animation or rendering systems
 	internal float interp;
 	internal float headbodydelta;
 	internal bool fullbodyrotate;
 	internal float lastheading;
+#pragma warning restore CS0649
 	internal float bodyrotation;
+#pragma warning disable CS0649 // Field is assigned through animation system
 	internal float speed;
+#pragma warning restore CS0649
 	internal float light;
 
 	public float GetInterp()
