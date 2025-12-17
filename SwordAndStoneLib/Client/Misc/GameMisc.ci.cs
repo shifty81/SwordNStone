@@ -554,10 +554,8 @@ public class PlayerInterpolationState : InterpolatedObject
     internal float rotx;
     internal float roty;
     internal float rotz;
-#pragma warning disable CS0649 // Fields are assigned via interpolation systems
     internal byte heading;
     internal byte pitch;
-#pragma warning restore CS0649
 }
 
 public class Bullet_
@@ -588,16 +586,12 @@ public class Expires
 
 public class DrawName
 {
-#pragma warning disable CS0649 // Fields are assigned via external entity systems
     internal float TextX;
     internal float TextY;
     internal float TextZ;
-#pragma warning restore CS0649
     internal string Name;
-#pragma warning disable CS0649 // Fields are assigned via external entity systems
     internal bool DrawHealth;
     internal float Health;
-#pragma warning restore CS0649
     internal bool OnlyWhenSelected;
     internal bool ClientAutoComplete;
 }
@@ -1053,7 +1047,6 @@ public class Player
         ModelHeight = DefaultModelHeight();
         CurrentTexture = -1;
     }
-#pragma warning disable CS0649 // Fields are assigned via network and game systems
     internal bool PositionLoaded;
     internal float PositionX;
     internal float PositionY;
@@ -1061,21 +1054,15 @@ public class Player
     internal byte Heading;
     internal byte Pitch;
     internal string Name;
-#pragma warning restore CS0649
     internal AnimationHint AnimationHint_;
-#pragma warning disable CS0649 // Fields are assigned via network and game systems
     internal PlayerType Type;
     internal int MonsterType;
     internal int Health;
     internal int LastUpdateMilliseconds;
-#pragma warning restore CS0649
     internal string Model_;
-#pragma warning disable CS0649 // Field is assigned via network systems
     internal string Texture;
-#pragma warning restore CS0649
     internal float EyeHeight;
     internal float ModelHeight;
-#pragma warning disable CS0649 // Fields are assigned via network systems
     internal float NetworkX;
     internal float NetworkY;
     internal float NetworkZ;
@@ -1083,11 +1070,8 @@ public class Player
     internal byte NetworkPitch;
     internal PlayerDrawInfo playerDrawInfo;
     internal bool moves;
-#pragma warning restore CS0649
     internal int CurrentTexture;
-#pragma warning disable CS0649 // Field is assigned via network systems
     internal HttpResponseCi SkinDownloadResponse;
-#pragma warning restore CS0649
 
     public float DefaultEyeHeight()
     {
@@ -1134,9 +1118,7 @@ public class GetCameraMatrix : IGetCameraMatrix
 
 public class MenuState
 {
-#pragma warning disable CS0649 // Field is assigned via menu systems
     internal int selected;
-#pragma warning restore CS0649
 }
 
 public enum EscapeMenuState
@@ -1780,18 +1762,14 @@ public class FontCi
 
 public class CameraMove
 {
-#pragma warning disable CS0649 // Fields are assigned via input systems
     internal bool TurnLeft;
     internal bool TurnRight;
     internal bool DistanceUp;
     internal bool DistanceDown;
-#pragma warning restore CS0649
     internal bool AngleUp;
     internal bool AngleDown;
-#pragma warning disable CS0649 // Fields are assigned via input systems
     internal int MoveX;
     internal int MoveY;
-#pragma warning restore CS0649
     internal float Distance;
 }
 
