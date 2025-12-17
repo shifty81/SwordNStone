@@ -24,7 +24,9 @@
 	internal EntityDrawText drawText;
 	internal Packet_ServerExplosion push;
 	internal bool usable;
+#pragma warning disable CS0649 // Field is assigned via network deserialization
 	internal Packet_ServerPlayerStats playerStats;
+#pragma warning restore CS0649
 	internal EntityDrawArea drawArea;
 }
 
@@ -74,8 +76,10 @@ public class EntityDrawText
 	internal float dx;
 	internal float dy;
 	internal float dz;
+#pragma warning disable CS0649 // Fields are assigned via external systems
 	internal float rotx;
 	internal float roty;
 	internal float rotz;
+#pragma warning restore CS0649
 	internal string text;
 }

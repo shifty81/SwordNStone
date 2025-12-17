@@ -50,6 +50,15 @@ public class ModGuiHotbar : ClientMod
     {
         game = game_;
         
+        // Initialize dependencies lazily
+        if (dataItems == null)
+        {
+            dataItems = new GameDataItemsClient();
+            dataItems.game = game_;
+            controller = ClientInventoryController.Create(game_);
+            inventoryUtil = game.d_InventoryUtil;
+        }
+        
         if (game.guistate == GuiState.MapLoading)
         {
             return;
