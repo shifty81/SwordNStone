@@ -4033,7 +4033,9 @@
     internal float moonPositionY;
     internal float moonPositionZ;
     internal bool isNight;
+#pragma warning disable CS0649 // Field is assigned through rendering or configuration systems
     internal bool fancySkysphere;
+#pragma warning restore CS0649
 
     internal static float Angle256ToRad(int value)
     {

@@ -37,7 +37,9 @@ public class SwordAndStoneProgram
 		#endif
 	}
 
+#pragma warning disable CS0649 // Field is assigned in non-DEBUG builds
 	CrashReporter crashreporter;
+#pragma warning restore CS0649
 
 	private void Start(string[] args)
 	{
