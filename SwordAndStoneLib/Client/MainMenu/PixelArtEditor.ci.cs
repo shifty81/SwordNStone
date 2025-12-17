@@ -218,7 +218,7 @@ public class ScreenPixelArtEditor : Screen
 		float panelHeight = 600 * scale;
 		
 		// Draw panel background using golden UI theme
-		string framePath = "local/gui/golden/frame_small.png";
+		string framePath = "data/local/gui/golden/frame_small.png";
 		int frameTexture = menu.GetTexture(framePath);
 		menu.Draw2dQuad(frameTexture, 
 			p.FloatToInt(x - 8 * scale), 
@@ -226,7 +226,7 @@ public class ScreenPixelArtEditor : Screen
 			p.FloatToInt(width + 16 * scale),
 			p.FloatToInt(panelHeight + 16 * scale));
 		
-		string panelPath = "local/gui/golden/panel_dark.png";
+		string panelPath = "data/local/gui/golden/panel_dark.png";
 		int panelTexture = menu.GetTexture(panelPath);
 		menu.Draw2dQuad(panelTexture, 
 			p.FloatToInt(x), 

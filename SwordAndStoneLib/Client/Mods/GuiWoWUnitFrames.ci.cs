@@ -87,16 +87,18 @@
             Game.ColorFromArgb(255, 40, 40, 50), false);
         
         // Draw player character portrait using their skin texture
-        if (game.LocalPlayerId >= 0 && game.LocalPlayerId < game.entitiesCount)
+        if (game.entities != null && game.LocalPlayerId >= 0 && game.LocalPlayerId < game.entitiesCount)
         {
             Entity localPlayer = game.entities[game.LocalPlayerId];
             if (localPlayer != null && localPlayer.drawModel != null && localPlayer.drawModel.CurrentTexture != -1)
             {
                 // Draw the player's skin texture as portrait
                 // Using a portion of the skin that shows the head/face
+                // Add small padding (scaled) to avoid drawing over the border
+                int portraitPadding = game.platform.FloatToInt(2 * scale);
                 game.Draw2dTexture(localPlayer.drawModel.CurrentTexture, 
-                    portraitX + 2, portraitY + 2, 
-                    portraitSize - 4, portraitSize - 4, 
+                    portraitX + portraitPadding, portraitY + portraitPadding, 
+                    portraitSize - (portraitPadding * 2), portraitSize - (portraitPadding * 2), 
                     null, 0, Game.ColorFromArgb(255, 255, 255, 255), false);
             }
         }

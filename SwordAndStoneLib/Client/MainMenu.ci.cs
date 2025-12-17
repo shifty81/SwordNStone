@@ -129,11 +129,11 @@
         string buttonTexture;
         if (pressed)
         {
-            buttonTexture = "local/gui/golden/button_pressed.png";
+            buttonTexture = "data/local/gui/golden/button_pressed.png";
         }
         else
         {
-            buttonTexture = "local/gui/golden/button_hover.png";
+            buttonTexture = "data/local/gui/golden/button_hover.png";
         }
         
         Draw2dQuad(GetTexture(buttonTexture), dx, dy, dw, dh);
