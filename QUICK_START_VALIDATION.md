@@ -188,7 +188,7 @@ IntRef.Create(dataItems.TextureIdForInventory()[blockType])
 To:
 ```csharp
 int textureId = dataItems.TextureIdForInventory()[blockType];
-IntRef.Create(textureId)
+IntRef.Create(textureId);
 ```
 
 ## Getting Help

@@ -120,10 +120,13 @@ echo.
 REM 6. Check for common CiTo syntax issues
 echo [6/8] Scanning for common CiTo syntax issues...
 set CITO_ISSUES=0
-REM Check for 'ref' parameters in method calls (not supported by CiTo)
-findstr /S /N /C:"Method.*ref " "SwordAndStoneLib\Client\*.ci.cs" >nul 2>&1
+REM Check for array indexing within IntRef.Create (may cause transpilation errors)
+REM Note: Basic pattern match - may have some false positives
+findstr /S /N /R "IntRef\.Create.*\[.*\]" "SwordAndStoneLib\Client\*.ci.cs" >nul 2>&1
 if !ERRORLEVEL! EQU 0 (
-    echo   WARNING: Found potential 'ref' parameter usage - may cause CiTo errors
+    echo   WARNING: Found potential array indexing within IntRef.Create
+    echo   Consider extracting to intermediate variables
+    echo   Example: int val = array[index]; IntRef.Create(val);
     set /a WARNINGS+=1
     set CITO_ISSUES=1
 )

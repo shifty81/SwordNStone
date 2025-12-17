@@ -65,11 +65,12 @@ jobs:
         echo "Checking for common CiTo transpilation issues..."
         issues=0
         
-        # Check for complex nested expressions in IntRef.Create
-        if grep -rn 'IntRef\.Create.*\[.*\].*\[.*\]' --include="*.ci.cs" SwordAndStoneLib/; then
-          echo "⚠️  WARNING: Found complex nested array expressions in IntRef.Create"
+        # Check for array indexing within IntRef.Create (more specific pattern)
+        if grep -rn 'IntRef\.Create([^)]*\[[^]]*\]' --include="*.ci.cs" SwordAndStoneLib/ | grep -v "//"; then
+          echo "⚠️  WARNING: Found array indexing within IntRef.Create"
           echo "This may cause 'Expected CiClassPtrType, got CiArrayPtrType' errors"
           echo "Consider extracting to intermediate variables"
+          echo "Example: int val = array[index]; IntRef.Create(val);"
           issues=$((issues + 1))
         fi
         

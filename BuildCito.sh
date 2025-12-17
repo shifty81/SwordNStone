@@ -49,7 +49,7 @@ echo "OK: Output directories prepared"
 
 # 4. Collect source files
 echo "[4/5] Collecting source files..."
-FILE_COUNT=$(find SwordAndStoneLib/Client SwordAndStoneLib/Common -name "*.ci.cs" | wc -l)
+FILE_COUNT=$(find SwordAndStoneLib/Client SwordAndStoneLib/Common -name "*.ci.cs" 2>/dev/null | wc -l)
 echo "OK: Found $FILE_COUNT source files"
 
 # 5. Compile JavaScript files

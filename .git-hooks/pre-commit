@@ -37,10 +37,11 @@ if [ -n "$MODIFIED_CI_FILES" ]; then
     # Check for common CiTo issues in modified files
     for file in $MODIFIED_CI_FILES; do
         if [ -f "$file" ]; then
-            # Check for complex nested array expressions in IntRef.Create
-            if grep -n 'IntRef\.Create.*\[.*\].*\[.*\]' "$file"; then
-                echo "WARNING: Complex nested array expression in IntRef.Create found in $file"
+            # Check for array indexing within IntRef.Create (more specific pattern)
+            if grep -n 'IntRef\.Create([^)]*\[[^]]*\]' "$file" | grep -v "//"; then
+                echo "WARNING: Array indexing within IntRef.Create found in $file"
                 echo "Consider extracting to intermediate variable"
+                echo "Example: int val = array[index]; IntRef.Create(val);"
                 echo "This may cause CiTo transpilation errors"
             fi
         fi

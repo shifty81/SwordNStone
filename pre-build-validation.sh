@@ -3,7 +3,8 @@
 # This script validates the project state before build to catch common metadata errors
 # Run this before building or committing changes
 
-set -e  # Exit on error for critical checks (we'll handle warnings separately)
+# Note: We don't use 'set -e' because we want to collect all errors/warnings
+# and exit only at the end with proper error count
 
 echo "========================================"
 echo "SwordNStone Pre-Build Validation"
@@ -145,18 +146,22 @@ echo ""
 echo "[6/8] Scanning for common CiTo syntax issues..."
 CITO_ISSUES=0
 
-# Check for 'ref' parameters in method calls (not supported by CiTo in some contexts)
-if grep -r "ref " SwordAndStoneLib/Client/*.ci.cs 2>/dev/null | grep -q "Method"; then
+# Check for 'ref' parameters in method calls (basic check)
+# Note: This is a simple heuristic and may have false positives
+ref_check=$(grep -rn "(.*ref\s\+\w" SwordAndStoneLib/Client/*.ci.cs 2>/dev/null | grep -v "//" || true)
+if [ -n "$ref_check" ]; then
     echo "  ⚠ WARNING: Found potential 'ref' parameter usage - may cause CiTo errors"
+    echo "    CiTo has limited support for ref parameters"
     WARNINGS=$((WARNINGS + 1))
     CITO_ISSUES=1
 fi
 
 # Check for complex nested expressions with array indexing in IntRef.Create
-# This is the pattern that caused the recent error
-if grep -r "IntRef\.Create.*\[.*\].*\[.*\]" SwordAndStoneLib/Client/*.ci.cs 2>/dev/null; then
-    echo "  ⚠ WARNING: Found complex nested array expressions in IntRef.Create"
+# More specific pattern to avoid false positives
+if grep -rn "IntRef\.Create([^)]*\[[^]]*\]" SwordAndStoneLib/Client/*.ci.cs 2>/dev/null | grep -v "//" ; then
+    echo "  ⚠ WARNING: Found array indexing within IntRef.Create"
     echo "    Consider extracting to intermediate variables"
+    echo "    Example: int val = array[index]; IntRef.Create(val);"
     WARNINGS=$((WARNINGS + 1))
     CITO_ISSUES=1
 fi
