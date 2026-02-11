@@ -37,6 +37,7 @@ public class ThemeCanvas
     internal int height;
     internal int canvasType;
     internal int[] pixels; // ARGB pixel data
+    internal bool isSaved; // Whether the current theme has been saved
     
     /// <summary>
     /// Resize canvas to specified dimensions
@@ -265,6 +266,19 @@ public class ThemeCanvas
                 SetPixel(width - 1 - t, y, borderColor);        // Right
             }
         }
+    }
+    
+    /// <summary>
+    /// Get a copy of the canvas pixel data
+    /// </summary>
+    public int[] GetPixels()
+    {
+        int[] result = new int[width * height];
+        for (int i = 0; i < width * height; i++)
+        {
+            result[i] = pixels[i];
+        }
+        return result;
     }
     
     /// <summary>

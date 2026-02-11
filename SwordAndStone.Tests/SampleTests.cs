@@ -38,7 +38,7 @@ namespace SwordAndStone.Tests
             // Act & Assert
             Assert.IsNotNull(testString);
             Assert.IsNotEmpty(testString);
-            Assert.IsTrue(testString.Contains("Manic"));
+            Assert.IsTrue(testString.Contains("Sword"));
         }
 
         [Test]

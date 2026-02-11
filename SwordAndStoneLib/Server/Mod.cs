@@ -900,6 +900,24 @@ namespace SwordAndStone.Server
 			server.disabledprivileges[privilege] = true;
 		}
 
+		public void GrantPlayerPrivilege(int player, string privilege)
+		{
+			ClientOnServer client = server.GetClient(player);
+			if (client != null && !client.privileges.Contains(privilege))
+			{
+				client.privileges.Add(privilege);
+			}
+		}
+
+		public void RevokePlayerPrivilege(int player, string privilege)
+		{
+			ClientOnServer client = server.GetClient(player);
+			if (client != null && client.privileges.Contains(privilege))
+			{
+				client.privileges.Remove(privilege);
+			}
+		}
+
 		public void RegisterChangedActiveMaterialSlot(ModDelegates.ChangedActiveMaterialSlot a)
 		{
 			server.modEventHandlers.changedactivematerialslot.Add(a);

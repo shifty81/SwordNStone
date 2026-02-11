@@ -92,8 +92,9 @@ public class ModEmoteSystem : ClientMod
 
             emoteEndTime = currentTime + duration + EMOTE_COOLDOWN;
 
-            // TODO: Send emote packet to server for synchronization
-            // SendEmotePacket(emoteName);
+            // Send emote to server for multiplayer synchronization
+            // Uses the chat system with /emote prefix so the server can relay to other players
+            game.SendChat(StringTools.StringAppend(game.platform, "/emote ", emoteName));
         }
     }
 

@@ -71,6 +71,10 @@
     float[] mvMatrix;
     float[] pMatrix;
 
+    // Custom skin from Pixel Art Editor
+    internal int customSkinTextureId;
+    internal bool customSkinApplied;
+
     bool[] currentlyPressedKeys;
 
     public void HandleKeyDown(KeyEventArgs e)
