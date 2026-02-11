@@ -139,6 +139,7 @@ public class GameDataItemsClient
         game.platform.ThrowException("ItemClass");
         return 1;
     }
+    public int MaxStackSize = 64;
     public Packet_Item Stack(Packet_Item itemA, Packet_Item itemB)
     {
         if (itemA.ItemClass == Packet_ItemClassEnum.Block
@@ -150,11 +151,20 @@ public class GameDataItemsClient
             //{
             //    return null;
             //}
-            //TODO: stack size limit
+            int maxStack = MaxStackSize;
+            if (maxStack <= 0)
+            {
+                maxStack = 64;
+            }
+            int totalCount = itemA.BlockCount + itemB.BlockCount;
+            if (totalCount > maxStack)
+            {
+                return null;
+            }
             Packet_Item ret = new Packet_Item();
             ret.ItemClass = itemA.ItemClass;
             ret.BlockId = itemA.BlockId;
-            ret.BlockCount = itemA.BlockCount + itemB.BlockCount;
+            ret.BlockCount = totalCount;
             return ret;
         }
         else

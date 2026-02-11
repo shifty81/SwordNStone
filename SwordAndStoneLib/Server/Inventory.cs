@@ -520,6 +520,7 @@ namespace SwordAndStone.Server
 			throw new NotImplementedException();
 		}
 
+		public int MaxStackSize = 64;
 		public Item Stack(Item itemA, Item itemB)
 		{
 			if (itemA.ItemClass == ItemClass.Block
@@ -531,11 +532,20 @@ namespace SwordAndStone.Server
 				{
 					return null;
 				}
-				//TODO: stack size limit
+				int maxStack = MaxStackSize;
+				if (maxStack <= 0)
+				{
+					maxStack = 64;
+				}
+				int totalCount = itemA.BlockCount + itemB.BlockCount;
+				if (totalCount > maxStack)
+				{
+					return null;
+				}
 				Item ret = new Item();
 				ret.ItemClass = itemA.ItemClass;
 				ret.BlockId = itemA.BlockId;
-				ret.BlockCount = itemA.BlockCount + itemB.BlockCount;
+				ret.BlockCount = totalCount;
 				return ret;
 			}
 			else

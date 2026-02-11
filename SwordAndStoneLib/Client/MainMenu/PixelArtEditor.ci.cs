@@ -629,15 +629,18 @@ public class ScreenPixelArtEditor : Screen
 	
 	void SaveSkin()
 	{
-		// Export canvas and save to file
-		// In actual implementation, would save PNG to user data folder
-		// For now, just show that it's saved
+		// Export canvas to bitmap and apply as player skin texture
 		BitmapCi bitmap = canvas.ExportToBitmap(true);
 		if (bitmap != null)
 		{
-			// TODO: Save bitmap to file
-			// string filename = "custom_skin_" + menu.p.Timestamp() + ".png";
-			// SaveBitmapToFile(bitmap, filename);
+			// Load bitmap as a texture so it can be applied to the player model
+			int skinTextureId = menu.p.LoadTextureFromBitmap(bitmap);
+			if (skinTextureId >= 0)
+			{
+				// Store the custom skin texture ID so the game can use it
+				menu.customSkinTextureId = skinTextureId;
+				menu.customSkinApplied = true;
+			}
 			
 			menu.p.BitmapDelete(bitmap);
 		}
