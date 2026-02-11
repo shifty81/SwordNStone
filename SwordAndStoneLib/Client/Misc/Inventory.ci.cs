@@ -139,7 +139,7 @@ public class GameDataItemsClient
         game.platform.ThrowException("ItemClass");
         return 1;
     }
-    public int MaxStackSize;
+    public int MaxStackSize = 64;
     public Packet_Item Stack(Packet_Item itemA, Packet_Item itemB)
     {
         if (itemA.ItemClass == Packet_ItemClassEnum.Block

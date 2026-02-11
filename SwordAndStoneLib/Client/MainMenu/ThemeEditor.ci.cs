@@ -544,7 +544,10 @@ public class ScreenThemeEditor : Screen
             {
                 // Register the exported texture with the current asset type name
                 string assetName = GetAssetTypeLabel();
-                menu.textures.Set(assetName, textureId);
+                if (assetName != null)
+                {
+                    menu.textures.Set(assetName, textureId);
+                }
             }
             menu.p.BitmapDelete(bitmap);
         }
