@@ -47,18 +47,18 @@ namespace SwordAndStone.Tests
             // Arrange
             AssetLoader loader = new AssetLoader(new string[] { testDataPath });
             AssetList assetList = new AssetList();
-            assetList.items = new Asset[2048];
+            assetList.SetItems(new Asset[2048]);
             FloatRef progress = new FloatRef();
             
             // Act
             loader.LoadAssetsAsync(assetList, progress);
             
             // Assert
-            Assert.Greater(assetList.count, 0, "Should load at least one asset");
-            Assert.AreEqual(1.0f, progress.value, "Progress should be complete");
+            Assert.Greater(assetList.GetCount(), 0, "Should load at least one asset");
+            Assert.AreEqual(1.0f, progress.GetValue(), "Progress should be complete");
             
             // Check that assets include both relative paths and filenames
-            var assetNames = assetList.items.Take(assetList.count).Select(a => a.name).ToList();
+            var assetNames = assetList.GetItems().Take(assetList.GetCount()).Select(a => a.name).ToList();
             
             // Should have full paths
             Assert.IsTrue(assetNames.Contains("gui/wow/actionbar_bg.png"), 
@@ -79,14 +79,14 @@ namespace SwordAndStone.Tests
             // Arrange
             AssetLoader loader = new AssetLoader(new string[] { testDataPath });
             AssetList assetList = new AssetList();
-            assetList.items = new Asset[2048];
+            assetList.SetItems(new Asset[2048]);
             FloatRef progress = new FloatRef();
             
             // Act
             loader.LoadAssetsAsync(assetList, progress);
             
             // Assert - all paths should use forward slashes
-            var assetNames = assetList.items.Take(assetList.count).Select(a => a.name).ToList();
+            var assetNames = assetList.GetItems().Take(assetList.GetCount()).Select(a => a.name).ToList();
             foreach (var name in assetNames)
             {
                 Assert.IsFalse(name.Contains("\\"), 
@@ -100,14 +100,14 @@ namespace SwordAndStone.Tests
             // Arrange
             AssetLoader loader = new AssetLoader(new string[] { testDataPath });
             AssetList assetList = new AssetList();
-            assetList.items = new Asset[2048];
+            assetList.SetItems(new Asset[2048]);
             FloatRef progress = new FloatRef();
             
             // Act
             loader.LoadAssetsAsync(assetList, progress);
             
             // Assert - all asset names should be lowercase
-            var assetNames = assetList.items.Take(assetList.count).Select(a => a.name).ToList();
+            var assetNames = assetList.GetItems().Take(assetList.GetCount()).Select(a => a.name).ToList();
             foreach (var name in assetNames)
             {
                 Assert.AreEqual(name.ToLowerInvariant(), name, 
@@ -121,14 +121,14 @@ namespace SwordAndStone.Tests
             // Arrange
             AssetLoader loader = new AssetLoader(new string[] { testDataPath });
             AssetList assetList = new AssetList();
-            assetList.items = new Asset[2048];
+            assetList.SetItems(new Asset[2048]);
             FloatRef progress = new FloatRef();
             
             // Act
             loader.LoadAssetsAsync(assetList, progress);
             
             // Assert - old code referencing just "actionbar_bg.png" should still work
-            var actionbarAsset = assetList.items.Take(assetList.count)
+            var actionbarAsset = assetList.GetItems().Take(assetList.GetCount())
                 .FirstOrDefault(a => a.name == "actionbar_bg.png");
             
             Assert.IsNotNull(actionbarAsset, 
@@ -145,14 +145,14 @@ namespace SwordAndStone.Tests
             // Arrange
             AssetLoader loader = new AssetLoader(new string[] { testDataPath });
             AssetList assetList = new AssetList();
-            assetList.items = new Asset[2048];
+            assetList.SetItems(new Asset[2048]);
             FloatRef progress = new FloatRef();
             
             // Act
             loader.LoadAssetsAsync(assetList, progress);
             
             // Assert - new code referencing "gui/wow/actionbar_bg.png" should work
-            var actionbarAsset = assetList.items.Take(assetList.count)
+            var actionbarAsset = assetList.GetItems().Take(assetList.GetCount())
                 .FirstOrDefault(a => a.name == "gui/wow/actionbar_bg.png");
             
             Assert.IsNotNull(actionbarAsset, 
@@ -170,14 +170,14 @@ namespace SwordAndStone.Tests
             File.WriteAllText(Path.Combine(testDataPath, "Thumbs.db"), "thumbs content");
             AssetLoader loader = new AssetLoader(new string[] { testDataPath });
             AssetList assetList = new AssetList();
-            assetList.items = new Asset[2048];
+            assetList.SetItems(new Asset[2048]);
             FloatRef progress = new FloatRef();
             
             // Act
             loader.LoadAssetsAsync(assetList, progress);
             
             // Assert
-            var assetNames = assetList.items.Take(assetList.count).Select(a => a.name).ToList();
+            var assetNames = assetList.GetItems().Take(assetList.GetCount()).Select(a => a.name).ToList();
             Assert.IsFalse(assetNames.Any(n => n.ToLower().Contains("thumbs.db")), 
                 "Should not load Thumbs.db files");
         }

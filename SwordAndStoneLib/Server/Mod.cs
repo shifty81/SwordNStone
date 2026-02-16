@@ -1184,7 +1184,12 @@ namespace SwordAndStone.Server
 		}
 		public void SetGameYearRealHours(double hours)
 		{
-			throw new NotImplementedException("SetGameYearRealHours is no longer supported!");
+			int daysPerYear = GetDaysPerYear();
+			if (daysPerYear <= 0)
+			{
+				daysPerYear = 1;
+			}
+			SetGameDayRealHours(hours / daysPerYear);
 		}
 
 		public void RegisterOnDialogClick(ModDelegates.DialogClick a)

@@ -1049,9 +1049,11 @@ namespace SwordAndStone.ClientNative
 
 		public override void TcpConnect(string ip, int port, BoolRef connected)
 		{
-			// FIXME: This code causes a SocketException when called multiple times.
-			// This effectively crashes the game in multiplayer server selection.
-			// Reason for this is that only a single socket exists to handle connections.
+			if (sock != null)
+			{
+				try { sock.Close(); } catch { }
+				sock = null;
+			}
 
 			this.connected = connected;
 			sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);

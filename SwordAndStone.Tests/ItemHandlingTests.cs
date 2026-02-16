@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using ManicDigger;
 using SwordAndStone.Server;
 
@@ -158,6 +159,53 @@ namespace SwordAndStone.Tests
             Assert.IsTrue(result, "Should find a free hand slot");
             Assert.AreEqual(weapon, inventory.RightHand[1],
                 "Weapon should be placed in slot 1 since slot 0 is occupied");
+        }
+
+        [Test]
+        public void FreeHand_ActiveSlotEmpty_ReturnsActiveMaterial()
+        {
+            Inventory inventory = new Inventory();
+            inventory.RightHand = new Item[10];
+
+            InventoryUtil util = new InventoryUtil();
+            util.d_Inventory = inventory;
+
+            int? result = util.FreeHand(3);
+            Assert.AreEqual(3, result, "Should return active material index when slot is empty");
+        }
+
+        [Test]
+        public void FreeHand_ActiveSlotOccupied_ReturnsNextFreeSlot()
+        {
+            Inventory inventory = new Inventory();
+            inventory.RightHand = new Item[10];
+
+            // Occupy slots 0 and 1
+            inventory.RightHand[0] = new Item();
+            inventory.RightHand[1] = new Item();
+
+            InventoryUtil util = new InventoryUtil();
+            util.d_Inventory = inventory;
+
+            int? result = util.FreeHand(0);
+            Assert.AreEqual(2, result, "Should return index 2 as the first free slot");
+        }
+
+        [Test]
+        public void FreeHand_AllSlotsOccupied_ReturnsNull()
+        {
+            Inventory inventory = new Inventory();
+            inventory.RightHand = new Item[10];
+            for (int i = 0; i < 10; i++)
+            {
+                inventory.RightHand[i] = new Item();
+            }
+
+            InventoryUtil util = new InventoryUtil();
+            util.d_Inventory = inventory;
+
+            int? result = util.FreeHand(0);
+            Assert.IsNull(result, "Should return null when all hand slots are full");
         }
     }
 }
