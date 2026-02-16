@@ -64,7 +64,7 @@ namespace SwordAndStone.Server
 
 		void UpdateMonster(Server server, Monster m, float dt)
 		{
-			m.WalkProgress += WalkSpeed * DirectionChangeInterval;
+			m.WalkProgress += WalkSpeed * dt;
 
 			if (m.WalkProgress >= 1.0f)
 			{

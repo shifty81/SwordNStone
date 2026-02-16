@@ -156,6 +156,8 @@ namespace SwordAndStone.Tests
 
             // Assert
             Assert.IsTrue(result, "Should find a free hand slot");
+            Assert.AreEqual(weapon, inventory.RightHand[1],
+                "Weapon should be placed in slot 1 since slot 0 is occupied");
         }
     }
 }
