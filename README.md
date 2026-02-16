@@ -1,7 +1,10 @@
 Sword&Stone
 ============
-Sword&Stone is a 3D voxel building game similar to Minecraft.  
-Build yourself a home in your own world or connect to an online server to team up with others to create great buildings!
+Sword&Stone is a 3D voxel survival adventure game with deep simulation systems.  
+Build, farm, trade, and survive in a world where seasons, weather, and soil shape civilization. Characters persist across worlds — your skills, inventory, and scars travel with you.
+
+**Design Vision:** Vintage Story simulation depth + Hytale character feel + Valheim persistence.  
+See [GAME_DESIGN.md](GAME_DESIGN.md) for the full design vision.
 
 
 Features
@@ -100,6 +103,15 @@ chmod +x .git/hooks/pre-commit
 #### Contributing
 
 If you want to help developing Sword&Stone feel free to fork this repository on GitHub and submit your changes by sending a pull request.
+
+
+Design Documentation
+--------------------
+- [GAME_DESIGN.md](GAME_DESIGN.md) — Core design vision (character persistence, skills, combat, visual style)
+- [WATER_SYSTEM_DESIGN.md](WATER_SYSTEM_DESIGN.md) — Water physics, rendering, boats, swimming, and ice
+- [WORLD_SIMULATION_DESIGN.md](WORLD_SIMULATION_DESIGN.md) — Seasons, weather, crops, NPC villages, trade, and emergent story
+- [ROADMAP.md](ROADMAP.md) — Development timeline and feature priorities
+- [COMBAT_SYSTEM_IMPLEMENTATION.md](COMBAT_SYSTEM_IMPLEMENTATION.md) — Combat mechanics (Phase 1)
 
 
 Credits
