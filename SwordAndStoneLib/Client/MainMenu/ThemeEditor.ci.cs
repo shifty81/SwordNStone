@@ -535,7 +535,7 @@ public class ScreenThemeEditor : Screen
         // Export current canvas as a texture that can be used by the UI system
         // Creates a texture from the canvas and registers it with the theme name
         int[] exportPixels = canvas.GetPixels();
-        if (exportPixels != null && exportPixels.Length > 0)
+        if (exportPixels != null && canvas.width > 0 && canvas.height > 0)
         {
             BitmapCi bitmap = menu.p.BitmapCreate(canvas.width, canvas.height);
             menu.p.BitmapSetPixelsArgb(bitmap, exportPixels);

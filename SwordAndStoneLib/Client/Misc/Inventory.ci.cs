@@ -110,6 +110,11 @@
 
 public class GameDataItemsClient
 {
+    public GameDataItemsClient()
+    {
+        MaxStackSize = 64;
+    }
+
     internal Game game;
 
     public string ItemInfo(Packet_Item item)
@@ -139,7 +144,7 @@ public class GameDataItemsClient
         game.platform.ThrowException("ItemClass");
         return 1;
     }
-    public int MaxStackSize = 64;
+    public int MaxStackSize;
     public Packet_Item Stack(Packet_Item itemA, Packet_Item itemB)
     {
         if (itemA.ItemClass == Packet_ItemClassEnum.Block
@@ -174,7 +179,6 @@ public class GameDataItemsClient
     }
     public bool CanWear(int selectedWear, Packet_Item item)
     {
-        if (item == null) { return true; }
         if (item == null) { return true; }
         switch (selectedWear)
         {
