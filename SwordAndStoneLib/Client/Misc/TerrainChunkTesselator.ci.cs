@@ -1009,10 +1009,9 @@ public class TerrainChunkTesselatorCi
             AddTorch(x, y, z, type, tiletype);
             return;
         }
-        else if (tiletype == 8)
+        else if (isFluid[tiletype])
         {
-            //TODO: replace the (x == 8) in this part with (IsLiquid(x)) to make it work for all fluids
-            if (currentChunk[Index3d(xx, yy, zz - 1, chunksize + 2, chunksize + 2)] == 8)
+            if (isFluid[currentChunk[Index3d(xx, yy, zz - 1, chunksize + 2, chunksize + 2)]])
             {
                 //flow down in the lower block
                 vOffsetX = 0;

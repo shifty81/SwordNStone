@@ -620,6 +620,20 @@ namespace SwordAndStone.Mods
 			               	WalkableType = WalkableType.Solid,
 			               	Sounds = solidSounds,
 			               });
+			m.SetBlockType(75, "Snow", new BlockType()
+			               {
+			               	AllTextures = "WhiteCloth",
+			               	DrawType = DrawType.Solid,
+			               	WalkableType = WalkableType.Solid,
+			               	Sounds = snowSounds,
+			               });
+			m.SetBlockType(76, "Ice", new BlockType()
+			               {
+			               	AllTextures = "Ice",
+			               	DrawType = DrawType.Solid,
+			               	WalkableType = WalkableType.Solid,
+			               	Sounds = solidSounds,
+			               });
 			m.SetBlockType(100, "BrushedMetal", new BlockType()
 			               {
 			               	AllTextures = "BrushedMetal",

@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="AssetLoaderTests.cs" />
     <Compile Include="BlockTypeDetectionTests.cs" />
+    <Compile Include="EnetDeliveryMethodTests.cs" />
+    <Compile Include="FluidRenderingTests.cs" />
     <Compile Include="InventoryTests.cs" />
     <Compile Include="ItemHandlingTests.cs" />
     <Compile Include="MapBoundsTests.cs" />
