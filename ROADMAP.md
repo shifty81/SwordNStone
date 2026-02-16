@@ -156,12 +156,95 @@ Sword & Stone aims to be a comprehensive voxel-based adventure game combining th
   - ⏳ Recipe discovery system
   - ⏳ Crafting stations (workbench, furnace, anvil)
   - ⏳ Tool durability
+  - ⏳ Skill-driven crafting quality (learn-by-doing)
+  - ⏳ Interactive crafting stages (knapping, forging, pottery)
 
 - **Resource Gathering**
   - 🔄 Block breaking with tools
   - ⏳ Different tool efficiencies
   - ⏳ Block drop system
   - ⏳ Inventory management improvements
+  - ⏳ Weight-based inventory system
+
+### Water System Overhaul
+- **Water Physics**
+  - ⏳ Dirty-queue water solver (performance optimization)
+  - ⏳ Water levels (0–15 per cell)
+  - ⏳ Gravity + lateral flow rules
+  - ⏳ River current forces on entities
+
+- **Water Rendering**
+  - ⏳ Surface-only water mesh per chunk (replace per-voxel cubes)
+  - ⏳ Smooth vertex height interpolation
+  - ⏳ Animated water shader (waves, fresnel, depth color)
+  - ⏳ LOD water meshes for distance rendering
+
+- **Water Interactions**
+  - ⏳ Swimming movement mode with buoyancy
+  - ⏳ Boat controller with steering and river currents
+  - ⏳ Ice system (freeze/melt tied to seasons)
+  - ⏳ Ice weight/cracking mechanics
+
+- See [WATER_SYSTEM_DESIGN.md](WATER_SYSTEM_DESIGN.md) for full design
+
+### World Simulation (Vintage Story–Inspired)
+- **Seasons & Weather**
+  - ⏳ World calendar with season progression
+  - ⏳ Local weather cells (temperature, rainfall, wind)
+  - ⏳ Snow accumulation and melt
+  - ⏳ Seasonal terrain tinting
+
+- **Soil & Farming**
+  - ⏳ Soil type system (soil, loam, clay, peat)
+  - ⏳ Crop growth tied to soil, season, and skill
+  - ⏳ Food spoilage and preservation (drying, smoking, salting, fermenting)
+  - ⏳ Erosion from water flow and traffic
+
+- **NPC Settlements**
+  - ⏳ System-driven settlement placement (river + soil scoring)
+  - ⏳ Village/town/city/outpost hierarchy
+  - ⏳ Population growth/decline from food and climate
+  - ⏳ Social class system and labor specialization
+
+- **Trade & Economy**
+  - ⏳ Trade route generation along roads
+  - ⏳ Caravan mechanics (seasonal, weather-affected)
+  - ⏳ Salt as strategic preservation resource
+
+- **Emergent Narrative**
+  - ⏳ NPC memory system (remembers events)
+  - ⏳ Procedural dialogue tied to world history
+  - ⏳ Belief systems tied to harvest success
+  - ⏳ Myth generation from extinct settlements
+  - ⏳ Multi-generation NPC lineage
+
+- See [WORLD_SIMULATION_DESIGN.md](WORLD_SIMULATION_DESIGN.md) for full design
+
+### Character Persistence (Valheim-Style)
+- **Character Data Separation**
+  - ⏳ Characters saved independently of worlds
+  - ⏳ Inventory travels with character between worlds
+  - ⏳ Skills and injuries persist across sessions
+
+- **Character Creation (Vintage Story DNA)**
+  - ⏳ Earth-tone UI with parchment aesthetic
+  - ⏳ Origin backgrounds (soft skill biases, not classes)
+  - ⏳ Physical identity, face, and hair presets
+
+- **Movement Feel (Hytale-Inspired)**
+  - ⏳ Acceleration-based movement (not velocity snapping)
+  - ⏳ Turn inertia for natural rotation
+  - ⏳ Procedural body motion (head/torso lag)
+
+- See [GAME_DESIGN.md](GAME_DESIGN.md) for full design
+
+### Terrain Rendering Upgrade
+- **Material System**
+  - ⏳ Triplanar mapping (no UV seams on cliffs)
+  - ⏳ Soil-driven material blending
+  - ⏳ Moisture-based darkening
+  - ⏳ Macro noise overlay (kills texture repetition)
+  - ⏳ Seasonal color tinting
 
 ---
 
@@ -204,10 +287,11 @@ Sword & Stone aims to be a comprehensive voxel-based adventure game combining th
   - Brush sizes
 
 #### 3. Player Progression
-- **Experience System**
-  - XP from mining, building, combat
-  - Level up system
-  - Stat improvements
+- **Learn-By-Doing Skill System**
+  - Skills improve through usage, not XP allocation
+  - Failure teaches faster than success
+  - Tool tier and equipment affect efficiency
+  - No visible XP bars — mastery is felt, not shown
 
 - **Skills/Abilities**
   - Skill trees (mining, building, combat, magic)
@@ -220,15 +304,22 @@ Sword & Stone aims to be a comprehensive voxel-based adventure game combining th
 #### 4. World Expansion
 - **More Biomes**
   - Desert, snow, jungle, swamp
+  - Climate-driven biome assignment (temperature + rainfall)
   - Biome-specific blocks and resources
   - Weather effects per biome
-  - Temperature system
+  - Temperature system (season + latitude + elevation)
 
 - **Structures**
-  - Villages
+  - System-driven NPC villages and towns
   - Dungeons
   - Temples and ruins
   - Generated loot
+
+- **Hydrology**
+  - River generation (rainfall → downhill flow → ocean)
+  - Oceans (sea level fill, gentle seabed noise)
+  - River erosion shaping terrain over time
+  - Floodplains and sediment deposits
 
 - **Dimensions**
   - Underground world (deeper caves)
@@ -285,10 +376,12 @@ Sword & Stone aims to be a comprehensive voxel-based adventure game combining th
 
 #### 8. Farming & Automation
 - **Agriculture**
-  - Crop planting and growth
-  - Animal husbandry
-  - Food cooking system
-  - Hunger/saturation mechanics
+  - Crop planting and growth (season + soil + skill dependent)
+  - Animal husbandry with grazing pressure
+  - Food cooking and preservation system
+  - Hunger/nutrition mechanics
+  - Livestock breeding and disease
+  - Seasonal crop rotation
 
 - **Redstone/Logic**
   - Logic blocks (AND, OR, NOT gates)
@@ -367,6 +460,9 @@ Sword & Stone aims to be a comprehensive voxel-based adventure game combining th
   - ✅ Testing guide (TESTING.md)
   - ✅ WoW GUI documentation (WOW_GUI_README.md)
   - ✅ This roadmap
+  - ✅ Game design vision (GAME_DESIGN.md)
+  - ✅ Water system design (WATER_SYSTEM_DESIGN.md)
+  - ✅ World simulation design (WORLD_SIMULATION_DESIGN.md)
   - 🔄 API documentation
   - ⏳ Modding tutorials
   - ⏳ Video tutorials
@@ -639,6 +735,9 @@ Sword & Stone aims to be a comprehensive voxel-based adventure game combining th
 - [BUILD.md](BUILD.md) - Build instructions
 - [TESTING.md](TESTING.md) - Testing guide
 - [WOW_GUI_README.md](WOW_GUI_README.md) - UI system documentation
+- [GAME_DESIGN.md](GAME_DESIGN.md) - Core game design vision
+- [WATER_SYSTEM_DESIGN.md](WATER_SYSTEM_DESIGN.md) - Water system design
+- [WORLD_SIMULATION_DESIGN.md](WORLD_SIMULATION_DESIGN.md) - World simulation design
 - [COPYING.md](COPYING.md) - License information
 
 ### External Resources
