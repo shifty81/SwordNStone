@@ -1377,12 +1377,8 @@
 
     internal bool IsWater(int blockType)
     {
-        string name = blocktypes[blockType].Name;
-        if (name == null)
-        {
-            return false;
-        }
-        return platform.StringContains(name, "Water"); // TODO: Do not use name
+        return blocktypes[blockType].DrawType == Packet_DrawTypeEnum.Fluid
+            && blocktypes[blockType].DamageToPlayer == 0;
     }
 
     internal int mouseCurrentX;
@@ -2330,12 +2326,8 @@
 
     internal bool IsLava(int blockType)
     {
-        string name = blocktypes[blockType].Name;
-        if (name == null)
-        {
-            return false;
-        }
-        return platform.StringContains(name, "Lava"); // TODO: Do not use name
+        return blocktypes[blockType].DrawType == Packet_DrawTypeEnum.Fluid
+            && blocktypes[blockType].DamageToPlayer > 0;
     }
 
     internal int terraincolor()

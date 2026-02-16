@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetLoaderTests.cs" />
+    <Compile Include="BlockTypeDetectionTests.cs" />
     <Compile Include="InventoryTests.cs" />
     <Compile Include="ItemHandlingTests.cs" />
     <Compile Include="MapBoundsTests.cs" />
