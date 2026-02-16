@@ -19,11 +19,8 @@ namespace SwordAndStone.Common
 			try
 			{
 				int flags = EnetPacketFlags.Reliable;
-				if (method == MyNetDeliveryMethod.Unreliable)
-				{
-					flags = EnetPacketFlags.None;
-				}
-				else if (method == MyNetDeliveryMethod.UnreliableSequenced)
+				if (method == MyNetDeliveryMethod.Unreliable
+					|| method == MyNetDeliveryMethod.UnreliableSequenced)
 				{
 					flags = EnetPacketFlags.None;
 				}
