@@ -1284,7 +1284,7 @@ namespace SwordAndStone.Server
 			{
 				string targetName = targetClient.playername;
 				string sourcename = GetClient(sourceClientId).playername;
-				int maxStack = 9999; //TODO: Fetch this dynamically for each item - stacking
+				int maxStack = ((GameDataItemsBlocks)d_DataItems).MaxStackSize;
 				for (int i = 0; i < BlockTypes.Length; i++)
 				{
 					if (!BlockTypes[i].IsBuildable)
@@ -1352,7 +1352,7 @@ namespace SwordAndStone.Server
 			{
 				string targetName = targetClient.playername;
 				string sourcename = GetClient(sourceClientId).playername;
-				int maxStack = 9999; //TODO: Fetch this dynamically for each item - stacking
+				int maxStack = ((GameDataItemsBlocks)d_DataItems).MaxStackSize;
 				if (amount < 0)
 				{
 					return false;

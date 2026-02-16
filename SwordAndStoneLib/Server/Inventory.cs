@@ -594,10 +594,6 @@ namespace SwordAndStone.Server
 			{
 				return true;
 			}
-			if (item == null)
-			{
-				return true;
-			}
 			switch (selectedWear)
 			{
 			//case WearPlace.LeftHand: return false;

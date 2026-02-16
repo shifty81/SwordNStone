@@ -45,3 +45,7 @@ final_hotbar_template.png
 gui_template_reference.png
 hotbar_template.png
 HOTBAR_COMPLETE.png
+
+# Test output
+TestResult.xml
+packages/NUnit.ConsoleRunner.*/

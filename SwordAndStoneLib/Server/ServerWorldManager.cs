@@ -159,7 +159,11 @@ namespace SwordAndStone.Server
 					continue;
 				}
 
-				// TODO: check bounds.
+				// Check bounds before accessing chunk
+				if (!MapUtil.IsValidChunkPos(d_Map, k.Key.X, k.Key.Y, k.Key.Z, chunksize))
+				{
+					continue;
+				}
 				ServerChunk c = d_Map.GetChunkValid(k.Key.X, k.Key.Y, k.Key.Z);
 				if (c == null)
 				{
@@ -193,15 +197,22 @@ namespace SwordAndStone.Server
 					continue;
 				}
 
-				// TODO: check bounds.
-				ServerChunk c = d_Map.GetChunkValid(k.Key.X + offsetX, k.Key.Y + offsetY, k.Key.Z + offsetZ);
+				// Check bounds before accessing chunk
+				int cx = k.Key.X + offsetX;
+				int cy = k.Key.Y + offsetY;
+				int cz = k.Key.Z + offsetZ;
+				if (!MapUtil.IsValidChunkPos(d_Map, cx, cy, cz, chunksize))
+				{
+					continue;
+				}
+				ServerChunk c = d_Map.GetChunkValid(cx, cy, cz);
 				if (c == null)
 				{
 					c = new ServerChunk();
 				}
 				c.data = k.Value;
 				c.DirtyForSaving = true;
-				d_Map.SetChunkValid(k.Key.X + offsetX, k.Key.Y + offsetY, k.Key.Z + offsetZ, c);
+				d_Map.SetChunkValid(cx, cy, cz, c);
 			}
 
 			// update related chunk at clients

@@ -21,7 +21,7 @@ if [ ! -f "Packet.proto" ]; then
     echo "ERROR: Packet.proto not found"
     exit 1
 fi
-if ! command -v mono &> /dev/null; then
+if ! command -v mono > /dev/null 2>&1; then
     echo "ERROR: Mono not found - required for building"
     echo "Install with: sudo apt-get install mono-complete"
     exit 1
