@@ -215,6 +215,41 @@ namespace SwordAndStone.Server
 						}
 					}
 					return false;
+				case ItemClass.Weapon:
+				case ItemClass.MainArmor:
+				case ItemClass.Boots:
+				case ItemClass.Helmet:
+				case ItemClass.Gauntlet:
+				case ItemClass.Shield:
+				case ItemClass.Other:
+					if (d_Inventory.RightHand[ActiveMaterial] == null)
+					{
+						d_Inventory.RightHand[ActiveMaterial] = item;
+						return true;
+					}
+					for (int i = 0; i < 10; i++)
+					{
+						if (d_Inventory.RightHand[i] == null)
+						{
+							d_Inventory.RightHand[i] = item;
+							return true;
+						}
+					}
+					//grab to main area - adding
+					for (int y = 0; y < CellCountY; y++)
+					{
+						for (int x = 0; x < CellCountX; x++)
+						{
+							IntRef pCount = new IntRef();
+							PointRef[] p = ItemsAtArea(x, y, d_Items.ItemSizeX(item), d_Items.ItemSizeY(item), pCount);
+							if (p != null && pCount.value == 0)
+							{
+								d_Inventory.Items[new ProtoPoint(x, y)] = item;
+								return true;
+							}
+						}
+					}
+					return false;
 				default:
 					throw new NotImplementedException();
 			}
@@ -508,7 +543,7 @@ namespace SwordAndStone.Server
 			{
 				return 1;
 			}
-			throw new NotImplementedException();
+			return 1;
 		}
 
 		public int ItemSizeY(Item item)
@@ -517,7 +552,7 @@ namespace SwordAndStone.Server
 			{
 				return 1;
 			}
-			throw new NotImplementedException();
+			return 1;
 		}
 
 		public int MaxStackSize = 64;
@@ -584,7 +619,15 @@ namespace SwordAndStone.Server
 
 		public string ItemGraphics(Item item)
 		{
-			throw new NotImplementedException();
+			if (item.ItemClass == ItemClass.Block)
+			{
+				return item.BlockId.ToString();
+			}
+			if (item.ItemId != null)
+			{
+				return item.ItemId;
+			}
+			return item.ItemClass.ToString();
 		}
 	}
 }

@@ -407,7 +407,12 @@ namespace FragLabs.HTTP
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (asyncArgs != null)
+            {
+                asyncArgs.Dispose();
+                asyncArgs = null;
+            }
+            socket = null;
         }
     }
 

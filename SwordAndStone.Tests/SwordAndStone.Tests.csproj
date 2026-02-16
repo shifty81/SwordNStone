@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AssetLoaderTests.cs" />
     <Compile Include="InventoryTests.cs" />
+    <Compile Include="ItemHandlingTests.cs" />
     <Compile Include="SampleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
