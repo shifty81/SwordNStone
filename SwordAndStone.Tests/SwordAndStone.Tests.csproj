@@ -44,6 +44,7 @@
     <Compile Include="ItemHandlingTests.cs" />
     <Compile Include="MapBoundsTests.cs" />
     <Compile Include="SampleTests.cs" />
+    <Compile Include="ServerValidationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

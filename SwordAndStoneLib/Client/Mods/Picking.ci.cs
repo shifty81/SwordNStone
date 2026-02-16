@@ -87,7 +87,7 @@
         {
             ispistolshoot = game.mouseleftdeclick;
         }
-        //grenade cooking - TODO: fix instant explosion when closing ESC menu
+        //grenade cooking - timer reset when ESC menu is opened to prevent instant explosion
         if (game.mouseleftclick)
         {
             game.grenadecookingstartMilliseconds = game.platform.TimeMillisecondsFromStart();

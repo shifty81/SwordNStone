@@ -1500,9 +1500,14 @@ public partial class Server : ICurrentTime, IDropItem
                 break;
             case Packet_ClientIdEnum.Health:
                 {
-                    //TODO: server side
                     var stats = GetPlayerStats(clients[clientid].playername);
-                    stats.CurrentHealth = packet.Health.CurrentHealth;
+                    int health = packet.Health.CurrentHealth;
+                    // Server-side validation: clamp to valid range
+                    if (health > stats.MaxHealth)
+                    {
+                        health = stats.MaxHealth;
+                    }
+                    stats.CurrentHealth = health;
                     if (stats.CurrentHealth < 1)
                     {
                         //death - reset health. More stuff done in Death packet handling
@@ -1531,9 +1536,18 @@ public partial class Server : ICurrentTime, IDropItem
                 break;
             case Packet_ClientIdEnum.Oxygen:
                 {
-                    //TODO: server side
                     var stats = GetPlayerStats(clients[clientid].playername);
-                    stats.CurrentOxygen = packet.Oxygen.CurrentOxygen;
+                    int oxygen = packet.Oxygen.CurrentOxygen;
+                    // Server-side validation: clamp to valid range
+                    if (oxygen < 0)
+                    {
+                        oxygen = 0;
+                    }
+                    if (oxygen > stats.MaxOxygen)
+                    {
+                        oxygen = stats.MaxOxygen;
+                    }
+                    stats.CurrentOxygen = oxygen;
                     clients[clientid].IsPlayerStatsDirty = true;
                 }
                 break;
@@ -2573,7 +2587,7 @@ public partial class Server : ICurrentTime, IDropItem
                     }
                     break;
                 default:
-                    //TODO: exception handling?
+                    Console.WriteLine("ProcessCommandBuild: unhandled ItemClass {0}", item.ItemClass);
                     return false;
             }
         }
@@ -3326,7 +3340,7 @@ public partial class Server : ICurrentTime, IDropItem
                 }
                 break;
             default:
-                //TODO: exception handling?
+                Console.WriteLine("DropItem: unhandled ItemClass {0}", item.ItemClass);
                 break;
         }
     }
