@@ -95,7 +95,11 @@ namespace SwordAndStone.Mods
 				return;
 			}
 
-			// TODO: Check permissions
+			if (!m.PlayerHasPrivilege(player, ServerClientMisc.Privilege.build))
+			{
+				m.SendMessage(player, "&4Insufficient privileges to edit signs.");
+				return;
+			}
 
 			Dialog d = new Dialog();
 			d.Width = 400;
@@ -122,7 +126,11 @@ namespace SwordAndStone.Mods
 				return;
 			}
 
-			// TODO: Check permissions
+			if (!m.PlayerHasPrivilege(player, ServerClientMisc.Privilege.build))
+			{
+				m.SendMessage(player, "&4Insufficient privileges to place signs.");
+				return;
+			}
 
 			ServerEntity e = new ServerEntity();
 			e.position = new ServerEntityPositionAndOrientation();

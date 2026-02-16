@@ -506,7 +506,12 @@
                         string[] sound = game.d_Data.CloneSound()[clonesource];
                         if (sound != null) // && sound.Length > 0)
                         {
-                            game.AudioPlay(game.platform.StringFormat("{0}.ogg", sound[0])); //TODO: sound cycle
+                            int soundCount = GetSoundCount(sound);
+                            if (soundCount > 0)
+                            {
+                                int soundIndex = game.rnd.Next() % soundCount;
+                                game.AudioPlay(game.platform.StringFormat("{0}.ogg", sound[soundIndex]));
+                            }
                         }
                     }
                 }
@@ -546,7 +551,12 @@
                             string[] sound = left ? game.d_Data.BreakSound()[blocktype] : game.d_Data.BuildSound()[blocktype];
                             if (sound != null) // && sound.Length > 0)
                             {
-                                game.AudioPlay(game.platform.StringFormat("{0}.ogg", sound[0])); //TODO: sound cycle
+                                int soundCount = GetSoundCount(sound);
+                                if (soundCount > 0)
+                                {
+                                    int soundIndex = game.rnd.Next() % soundCount;
+                                    game.AudioPlay(game.platform.StringFormat("{0}.ogg", sound[soundIndex]));
+                                }
                             }
                         }
                         //normal attack
@@ -1042,5 +1052,18 @@
             }
         }
         return pick_distance;
+    }
+
+    int GetSoundCount(string[] sound)
+    {
+        int count = 0;
+        for (int i = 0; i < GameData.SoundCount; i++)
+        {
+            if (sound[i] != null)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 }
