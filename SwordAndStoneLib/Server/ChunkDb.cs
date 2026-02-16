@@ -269,7 +269,7 @@ namespace SwordAndStone.Server
 		}
 		public void Backup(string backupFilename)
 		{
-			// TODO: what to do here?
+			// In-memory dummy: no persistent storage to back up
 		}
 		public IEnumerable<byte[]> GetChunks(IEnumerable<Xyz> chunkpositions)
 		{
@@ -302,12 +302,29 @@ namespace SwordAndStone.Server
 		}
 		public Dictionary<Xyz, byte[]> GetChunksFromFile(IEnumerable<Xyz> chunkpositions, string filename)
 		{
-			// TODO: what to do here?
-			return null;
+			// In-memory dummy: return chunks from memory regardless of filename
+			Dictionary<Xyz, byte[]> result = new Dictionary<Xyz, byte[]>();
+			foreach (Xyz pos in chunkpositions)
+			{
+				byte[] c;
+				if (chunks.TryGetValue(pos, out c))
+				{
+					result[pos] = c;
+				}
+				else
+				{
+					result[pos] = null;
+				}
+			}
+			return result;
 		}
 		public void SetChunksToFile(IEnumerable<DbChunk> chunks, string filename)
 		{
-			// TODO: what to do here?
+			// In-memory dummy: store chunks in memory regardless of filename
+			foreach (DbChunk c in chunks)
+			{
+				this.chunks[c.Position] = c.Chunk;
+			}
 		}
 		byte[] globaldata = null;
 		public byte[] GetGlobalData()

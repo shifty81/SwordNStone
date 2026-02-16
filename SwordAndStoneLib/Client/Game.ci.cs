@@ -3568,6 +3568,7 @@
         menustate = new MenuState();
         platform.ExitMousePointerLock();
         escapeMenuRestart = true;
+        grenadecookingstartMilliseconds = 0;
     }
 
     public void ShowEscapeMenu()
@@ -3575,6 +3576,7 @@
         guistate = GuiState.EscapeMenu;
         menustate = new MenuState();
         SetFreeMouse(true);
+        grenadecookingstartMilliseconds = 0;
     }
 
     public void ShowInventory()
