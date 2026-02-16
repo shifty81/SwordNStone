@@ -1051,7 +1051,9 @@ namespace SwordAndStone.ClientNative
 		{
 			if (sock != null)
 			{
-				try { sock.Close(); } catch { }
+				try { sock.Close(); }
+				catch (ObjectDisposedException) { }
+				catch (System.Net.Sockets.SocketException) { }
 				sock = null;
 			}
 
