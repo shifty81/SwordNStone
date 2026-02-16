@@ -207,9 +207,7 @@ namespace SwordAndStone.ClientNative
 
 			AVISaveOptions(0, 0, 1, ptr_ps, pp);
 
-
-
-			// TODO: AVISaveOptionsFree(...)
+			AVISaveOptionsFree(1, pp);
 
 			int hr = AVIMakeCompressedStream(out psCompressed_, ps_, ref opts, 0);
 			if (hr != 0)
@@ -258,6 +256,10 @@ namespace SwordAndStone.ClientNative
 		[DllImport("avifil32.dll")]
 		unsafe private static extern int AVISaveOptions(
 			int hwnd, UInt32 flags, int nStreams, IntPtr* ptr_ptr_avi, AVICOMPRESSOPTIONS** ao);
+
+		[DllImport("avifil32.dll")]
+		unsafe private static extern int AVISaveOptionsFree(
+			int nStreams, AVICOMPRESSOPTIONS** ao);
 
 		[DllImport("avifil32.dll")]
 		private static extern int AVIStreamWrite(

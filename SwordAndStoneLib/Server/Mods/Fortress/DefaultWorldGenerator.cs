@@ -24,8 +24,8 @@ namespace SwordAndStone.Mods
 			BLOCK_CLAY = m.GetBlockId ("Stone");
 			BLOCK_BEDROCK = m.GetBlockId ("Adminium");
 			BLOCK_AIR = m.GetBlockId ("Empty");
-			BLOCK_SNOW = m.GetBlockId ("Grass");
-			BLOCK_ICE = m.GetBlockId ("Water");
+			BLOCK_SNOW = m.GetBlockId ("Snow");
+			BLOCK_ICE = m.GetBlockId ("Ice");
 			BLOCK_GRASS = m.GetBlockId ("Grass");
 			BLOCK_WATER = m.GetBlockId ("Water");
 			BLOCK_GRAVEL = m.GetBlockId ("Gravel");
@@ -206,8 +206,8 @@ namespace SwordAndStone.Mods
 		int BLOCK_CLAY; //stone
 		int BLOCK_BEDROCK;
 		int BLOCK_AIR;
-		int BLOCK_SNOW; //TODO: create blocktype
-		int BLOCK_ICE; //TODO: create blocktype
+		int BLOCK_SNOW;
+		int BLOCK_ICE;
 		int BLOCK_GRASS;
 		int BLOCK_WATER;
 		int BLOCK_GRAVEL;

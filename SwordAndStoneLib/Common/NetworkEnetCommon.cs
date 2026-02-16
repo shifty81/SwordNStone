@@ -14,12 +14,24 @@ namespace SwordAndStone.Common
 			return IPEndPointCiDefault.Create(peer.GetRemoteAddress().AddressToString());
 		}
 
-		// TODO: Use or remove method parameter
 		public override void SendMessage(INetOutgoingMessage msg, MyNetDeliveryMethod method, int sequenceChannel)
 		{
 			try
 			{
-				((EnetPeerNative)peer).peer.Send(0, msg.message, (ENet.PacketFlags)EnetPacketFlags.Reliable);
+				int flags = EnetPacketFlags.Reliable;
+				if (method == MyNetDeliveryMethod.Unreliable)
+				{
+					flags = EnetPacketFlags.None;
+				}
+				else if (method == MyNetDeliveryMethod.UnreliableSequenced)
+				{
+					flags = EnetPacketFlags.None;
+				}
+				else if (method == MyNetDeliveryMethod.ReliableUnordered)
+				{
+					flags = EnetPacketFlags.Reliable | EnetPacketFlags.Unsequenced;
+				}
+				((EnetPeerNative)peer).peer.Send(0, msg.message, (ENet.PacketFlags)flags);
 			}
 			catch
 			{
