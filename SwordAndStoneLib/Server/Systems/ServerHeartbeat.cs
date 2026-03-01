@@ -161,13 +161,13 @@ namespace SwordAndStone.Server
 			}
 			StringWriter sw = new StringWriter();//&salt={4}
 			string staticData = String.Format("name={0}&max={1}&public={2}&passwordProtected={3}&allowGuests={4}&port={5}&version={6}&fingerprint={7}"
-            , System.Web.HttpUtility.UrlEncode(Name),
+            , System.Net.WebUtility.UrlEncode(Name),
 				                    MaxClients, Public, PasswordProtected, AllowGuests, Port, Version, Key.Replace("-", ""));
 
 			string requestString = staticData +
 			                       "&users=" + UsersCount +
-			                       "&motd=" + System.Web.HttpUtility.UrlEncode(Motd) +
-			                       "&gamemode=" + System.Web.HttpUtility.UrlEncode(GameMode) +
+			                       "&motd=" + System.Net.WebUtility.UrlEncode(Motd) +
+			                       "&gamemode=" + System.Net.WebUtility.UrlEncode(GameMode) +
 			                       "&players=" + string.Join(",", Players.ToArray());
 
 			var request = (HttpWebRequest)WebRequest.Create(fListUrl);

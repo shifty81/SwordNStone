@@ -234,7 +234,7 @@ namespace SwordAndStone.Server
                         string errormsg = "Can't load mod: " + k.Key + "\n" + errors;
                         try
                         {
-                            System.Windows.Forms.MessageBox.Show(errormsg);
+                            Console.Error.WriteLine(errormsg);
                         }
                         catch
                         {
@@ -325,7 +325,7 @@ namespace SwordAndStone.Server
                     {
                         try
                         {
-                            System.Windows.Forms.MessageBox.Show(string.Format("Can't load mod {0} because its dependency {1} couldn't be loaded.", name, required_name));
+                            Console.Error.WriteLine(string.Format("[Mod error] Can't load mod {0} because its dependency {1} couldn't be loaded.", name, required_name));
                         }
                         catch
                         {
