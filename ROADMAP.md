@@ -1,7 +1,7 @@
 # Sword & Stone — Modernization Roadmap
 
 **Last Updated:** March 2026  
-**Current Version:** Alpha 0.0.2-dev  
+**Current Version:** Alpha 0.0.3-dev  
 **Project Status:** Active Development — Modernization Phase
 
 ---
@@ -35,63 +35,41 @@ This roadmap defines the concrete path to transform Sword & Stone from its Manic
 
 ---
 
-## 🔲 Milestone 1: Build System Modernization
+## ✅ Milestone 1: Build System Modernization
 
 > Make the project build reliably on modern toolchains and CI.
 
-### 1a. Migrate to SDK-style Project Files
-The current `.csproj` files use the legacy verbose XML format (VS2012 era). Migrate to SDK-style:
+### 1a. Migrate to SDK-style Project Files ✅
+All 6 projects migrated from legacy verbose `.csproj` to SDK-style:
 
-```xml
-<!-- Before (legacy) -->
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="...">
-  <PropertyGroup>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <!-- 50+ lines of boilerplate -->
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Server\File1.cs" />
-    <Compile Include="Server\File2.cs" />
-    <!-- every file listed explicitly -->
-  </ItemGroup>
-</Project>
+- [x] `ScriptingApi/ScriptingApi.csproj`
+- [x] `SwordAndStoneLib/SwordAndStoneLib.csproj`
+- [x] `SwordAndStone.Tests/SwordAndStone.Tests.csproj`
+- [x] `SwordAndStoneServer/SwordAndStoneServer.csproj`
+- [x] `SwordAndStone/SwordAndStone.csproj`
+- [x] `SwordAndStoneMonsterEditor/SwordAndStoneMonsterEditor.csproj`
 
-<!-- After (SDK-style) -->
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
-</Project>
-```
+### 1b. Target Modern .NET ✅
+- [x] Retargeted from `.NET Framework 4.8` → `net8.0` (LTS)
+- [x] Added `System.Drawing.Common` NuGet for cross-platform System.Drawing
+- [x] Updated NuGet packages:
+  - `OpenTK 2.0.0` → `OpenTK 4.9.4` (with full API migration)
+  - `protobuf-net 2.1.0` → `protobuf-net 3.2.56`
+  - `NUnit 3.13.3` → `NUnit 3.14.0` + NUnit3TestAdapter + Microsoft.NET.Test.Sdk
+- [x] Added `System.CodeDom` NuGet for runtime compilation support
+- [x] Replaced `System.Windows.Forms` usage with cross-platform alternatives
+- [x] Replaced `System.Web.HttpUtility` with `System.Net.WebUtility`
+- [x] Vendored DLLs retained in Lib/ for ENet, Jint, LibNoise, websocket-sharp, SQLite, csogg/csvorbis
 
-**Files to migrate:**
-- [ ] `ScriptingApi/ScriptingApi.csproj` (simplest — no native deps, start here)
-- [ ] `SwordAndStoneLib/SwordAndStoneLib.csproj` (core library)
-- [ ] `SwordAndStone.Tests/SwordAndStone.Tests.csproj` (test project)
-- [ ] `SwordAndStoneServer/SwordAndStoneServer.csproj` (console app)
-- [ ] `SwordAndStone/SwordAndStone.csproj` (game client — most complex, OpenTK)
-- [ ] `SwordAndStoneMonsterEditor/SwordAndStoneMonsterEditor.csproj` (WinForms tool)
+### 1c. Add GitHub Actions CI ✅
+- [x] Created `.github/workflows/build-validation.yml` — build + test on push/PR
+- [x] Added build status badge to README.md
+- [x] Removed `.travis.yml` (legacy CI)
 
-### 1b. Target Modern .NET
-- [ ] Retarget from `.NET Framework 4.8` → `net8.0` (LTS)
-- [ ] Replace `System.Drawing` usage with cross-platform alternative where needed
-- [ ] Update NuGet packages:
-  - `OpenTK 2.0.0` → `OpenTK 4.x` (major API changes — plan for this)
-  - `protobuf-net 2.1.0` → `protobuf-net 3.x`
-  - `NUnit 3.13.3` → latest 3.x or 4.x
-- [ ] Handle native library loading (ENet, OpenAL, SQLite) for cross-platform
-- [ ] Remove Lib/ directory vendored DLLs in favor of NuGet packages
-
-### 1c. Add GitHub Actions CI
-- [ ] Create `.github/workflows/build.yml` — build on push/PR
-- [ ] Create `.github/workflows/test.yml` — run NUnit tests
-- [ ] Add build status badge to README.md
-- [ ] Remove `.travis.yml` (legacy CI)
-
-### 1d. Clean Up Build Scripts
-- [ ] Remove or update legacy build scripts (`build.bat`, `build.sh`, `BuildCito.*`)
-- [ ] Remove legacy validation scripts (`pre-build-validation.*`, `post-build-validation.*`, `validate-build.*`)
-- [ ] Consolidate to `dotnet build` / `dotnet test` / `dotnet publish`
+### 1d. Clean Up Build Scripts ✅
+- [x] Removed `packages.config` files (replaced by PackageReference in csproj)
+- [x] Updated solution file (removed FastBuild config, modern project type GUIDs)
+- [x] Primary build commands: `dotnet build` / `dotnet test`
 
 ---
 
@@ -263,6 +241,7 @@ SwordAndStone.sln
 |---------|------|-----------|
 | Alpha 0.0.1 | Dec 2025 | Complete rebrand from Manic Digger |
 | Alpha 0.0.2 | Mar 2026 | Code cleanup, dead code removal, doc consolidation (Milestone 0) |
+| Alpha 0.0.3 | Mar 2026 | Build system modernization: .NET 8.0, SDK-style csproj, GitHub Actions CI (Milestone 1) |
 
 ---
 

@@ -3,11 +3,10 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Windows.Forms;
 using SwordAndStone.ClientNative;
 using SwordAndStone.Common;
 using SwordAndStone.Server;
-using OpenTK.Graphics;
+using OpenTK.Windowing.Common;
 #endregion
 
 public class SwordAndStoneProgram
@@ -43,7 +42,7 @@ public class SwordAndStoneProgram
 
 	private void Start(string[] args)
 	{
-		string appPath = Path.GetDirectoryName(Application.ExecutablePath);
+		string appPath = Path.GetDirectoryName(System.Environment.ProcessPath);
 		if (!Debugger.IsAttached)
 		{
 			System.Environment.CurrentDirectory = appPath;
@@ -56,10 +55,9 @@ public class SwordAndStoneProgram
 		platform.singlePlayerServerDummyNetwork = dummyNetwork;
 		this.platform = platform;
 		platform.StartSinglePlayerServer = (filename) => { savefilename = filename; new Thread(ServerThreadStart).Start(); };
-		GraphicsMode mode = new GraphicsMode(OpenTK.DisplayDevice.Default.BitsPerPixel, 24);
-		using (GameWindowNative game = new GameWindowNative(mode))
+		using (GameWindowNative game = new GameWindowNative())
 		{
-			game.VSync = OpenTK.VSyncMode.Adaptive;
+			game.VSync = VSyncMode.Adaptive;
 			platform.window = game;
 			game.platform = platform;
 			mainmenu.Start(platform);
@@ -116,7 +114,7 @@ public class SwordAndStoneProgram
 		}
 		catch (Exception e)
 		{
-			MessageBox.Show(e.ToString());
+			Console.WriteLine(e.ToString());
 		}
 	}
 }

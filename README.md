@@ -1,5 +1,7 @@
 Sword&Stone
 ============
+[![Build & Test](https://github.com/shifty81/SwordNStone/actions/workflows/build-validation.yml/badge.svg)](https://github.com/shifty81/SwordNStone/actions/workflows/build-validation.yml)
+
 Sword&Stone is a 3D voxel survival adventure game with deep simulation systems.  
 Build, farm, trade, and survive in a world where seasons, weather, and soil shape civilization. Characters persist across worlds — your skills, inventory, and scars travel with you.
 

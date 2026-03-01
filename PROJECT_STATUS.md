@@ -1,25 +1,25 @@
 # Project Status — Sword & Stone
 
 **Last Updated:** March 2026  
-**Current Version:** Alpha 0.0.2-dev  
-**Modernization Phase:** Milestone 0 Complete
+**Current Version:** Alpha 0.0.3-dev  
+**Modernization Phase:** Milestone 1 Complete
 
 ---
 
 ## Current State
 
-Sword & Stone has completed its code audit and initial cleanup (Milestone 0 of the modernization roadmap). The project compiles on Windows with Visual Studio / Mono and has a clean foundation for further modernization.
+Sword & Stone has completed its build system modernization (Milestone 1 of the modernization roadmap). All 6 projects have been migrated to SDK-style `.csproj` files targeting .NET 8.0, with updated NuGet packages and GitHub Actions CI.
 
 ### Build System
 | Item | Status | Notes |
 |------|--------|-------|
 | Solution structure | ✅ Working | 6 projects in `SwordAndStone.sln` |
-| Target framework | ⚠️ Legacy | .NET Framework 4.8 — needs migration to .NET 8.0 |
-| Project file format | ⚠️ Legacy | Old-style verbose `.csproj` — needs SDK-style migration |
-| Windows build | ✅ Working | Visual Studio 2012+ or MSBuild |
-| Linux/Mac build | ⚠️ Partial | Requires Mono — no .NET 8+ SDK support yet |
-| CI/CD | ❌ None | `.travis.yml` exists but outdated; needs GitHub Actions |
-| NuGet packages | ⚠️ Outdated | OpenTK 2.0, protobuf-net 2.1, NUnit 3.13.3 |
+| Target framework | ✅ Modern | .NET 8.0 (MonsterEditor: net8.0-windows) |
+| Project file format | ✅ Modern | SDK-style `.csproj` files |
+| Windows build | ✅ Working | `dotnet build` with .NET 8.0 SDK |
+| Linux/Mac build | ✅ Working | `dotnet build` (except MonsterEditor: Windows-only) |
+| CI/CD | ✅ Active | GitHub Actions — build + test on every push/PR |
+| NuGet packages | ✅ Current | OpenTK 4.9.4, protobuf-net 3.2.56, NUnit 3.14.0 |
 
 ### Projects
 | Project | Type | Status |
@@ -38,7 +38,7 @@ Sword & Stone has completed its code audit and initial cleanup (Milestone 0 of t
 | Bare exceptions | ✅ Fixed | All `throw new Exception()` replaced with descriptive messages |
 | Stale TODOs | ✅ Resolved | ServerWorldManager.cs "TODO: wrong?" resolved (5 locations) |
 | Duplicate code | ✅ Refactored | Inventory `MoveToInventory` extracted to `TryPlaceItemInMainArea()` |
-| Compiler warnings | ⚠️ ~107 | Unused variables, obsolete APIs — non-blocking |
+| Compiler warnings | ⚠️ ~302 | Mostly CA1416 platform compatibility warnings — non-blocking |
 | Remaining TODOs | ⚠️ ~40 | Mostly performance notes, not missing features |
 | Test coverage | ⚠️ Minimal | 9 test files with basic coverage — needs expansion |
 

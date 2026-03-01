@@ -5,10 +5,8 @@ output2
 /cito/output
 bin
 obj
-/Packet.Serializer.cs
-/ManicDiggerLib/Server/Mods/current.txt
-/Packet.Serializer.ci.cs
 /Packet.cs
+/Packet.Serializer.cs
 /ProtocolParser.cs
 /Assets.ci.cs
 
@@ -49,3 +47,6 @@ HOTBAR_COMPLETE.png
 # Test output
 TestResult.xml
 packages/NUnit.ConsoleRunner.*/
+
+# Build artifacts
+*.csproj.bak

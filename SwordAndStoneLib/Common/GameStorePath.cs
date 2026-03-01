@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Forms;
+using System.Reflection;
 
 namespace SwordAndStone.Common
 {
@@ -13,7 +13,7 @@ namespace SwordAndStone.Common
 
 		public static string GetStorePath()
 		{
-			string apppath = Path.GetDirectoryName(Application.ExecutablePath);
+			string apppath = AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 			try
 			{
 				var di = new DirectoryInfo(apppath);

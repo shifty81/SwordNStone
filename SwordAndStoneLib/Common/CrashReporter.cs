@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
-using System.Windows.Forms;
+using System.Reflection;
 
 namespace SwordAndStone.Common
 {
@@ -207,15 +207,10 @@ namespace SwordAndStone.Common
 		{
 			try
 			{
-				//Display error
-				for (int i = 0; i < 5; i++)
-				{
-					Cursor.Show();
-					Thread.Sleep(100);
-					Application.DoEvents();
-				}
-
-				MessageBox.Show(strTxt, "Critical error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Thread.Sleep(500);
+				Console.Error.WriteLine("=== Critical error ===");
+				Console.Error.WriteLine(strTxt);
+				Console.Error.WriteLine("======================");
 			}
 			catch
 			{
