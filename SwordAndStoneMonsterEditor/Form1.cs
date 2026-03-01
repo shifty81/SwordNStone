@@ -12,6 +12,7 @@ using SwordAndStone.ClientNative;
 using SwordAndStone.Server;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Mathematics;
 
 namespace MdMonsterEditor
 {
@@ -53,29 +54,29 @@ namespace MdMonsterEditor
 
 		private void RichTextBoxContextMenu(RichTextBox richTextBox)
 		{
-			ContextMenu cm = new ContextMenu();
-			MenuItem mi = new MenuItem("Cut");
+			ContextMenuStrip cm = new ContextMenuStrip();
+			ToolStripMenuItem mi = new ToolStripMenuItem("Cut");
 			mi.Click += (a, b) =>
 			{
 				richTextBox.Cut();
 			};
-			cm.MenuItems.Add(mi);
+			cm.Items.Add(mi);
 
-			mi = new MenuItem("Copy");
+			mi = new ToolStripMenuItem("Copy");
 			mi.Click += (a, b) =>
 			{
 				richTextBox.Copy();
 			};
-			cm.MenuItems.Add(mi);
+			cm.Items.Add(mi);
 
-			mi = new MenuItem("Paste");
+			mi = new ToolStripMenuItem("Paste");
 			mi.Click += (a, b) =>
 			{
 				richTextBox.Paste(DataFormats.GetFormat(DataFormats.UnicodeText));
 			};
-			cm.MenuItems.Add(mi);
+			cm.Items.Add(mi);
 
-			richTextBox.ContextMenu = cm;
+			richTextBox.ContextMenuStrip = cm;
 		}
 
 		private void UpdateLabels()

@@ -291,13 +291,13 @@ namespace SwordAndStoneServer
 			ProcessStartInfo p = new ProcessStartInfo();
 			if (!IsMono)
 			{
-				p.FileName = System.Windows.Forms.Application.ExecutablePath;
+				p.FileName = Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? "SwordAndStoneServer";
 				p.Arguments = Process.GetCurrentProcess().Id.ToString();
 			}
 			else
 			{
 				p.FileName = "mono";
-				p.Arguments = System.Windows.Forms.Application.ExecutablePath + " " + Process.GetCurrentProcess().Id.ToString();
+				p.Arguments = (Environment.ProcessPath ?? Process.GetCurrentProcess().MainModule?.FileName ?? "SwordAndStoneServer") + " " + Process.GetCurrentProcess().Id.ToString();
 			}
 
 			p.RedirectStandardOutput = true;

@@ -6,6 +6,7 @@ output2
 bin
 obj
 /Packet.cs
+/Packet.Serializer.cs
 /ProtocolParser.cs
 /Assets.ci.cs
 
