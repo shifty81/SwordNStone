@@ -7,6 +7,7 @@
     <AssemblyName>SwordAndStone</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>CA1416</NoWarn>
     <ApplicationIcon>md.ico</ApplicationIcon>
   </PropertyGroup>
 

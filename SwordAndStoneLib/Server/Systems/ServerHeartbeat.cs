@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using SwordAndStone.Common;
 
 namespace SwordAndStone.Server
@@ -151,15 +152,15 @@ namespace SwordAndStone.Server
 		public string Motd { get; set; }
 		public string GameMode { get; set; }
 
+		private static readonly HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(15) };
+
 		public string ReceivedKey { get; set; }
 		public void SendHeartbeat()
 		{
 			if (fListUrl == null)
 			{
-				WebClient c = new WebClient();
-				fListUrl = c.DownloadString("http://manicdigger.sourceforge.net/heartbeat.txt");
+				fListUrl = httpClient.GetStringAsync("http://manicdigger.sourceforge.net/heartbeat.txt").GetAwaiter().GetResult();
 			}
-			StringWriter sw = new StringWriter();//&salt={4}
 			string staticData = String.Format("name={0}&max={1}&public={2}&passwordProtected={3}&allowGuests={4}&port={5}&version={6}&fingerprint={7}"
             , System.Net.WebUtility.UrlEncode(Name),
 				                    MaxClients, Public, PasswordProtected, AllowGuests, Port, Version, Key.Replace("-", ""));
@@ -170,31 +171,10 @@ namespace SwordAndStone.Server
 			                       "&gamemode=" + System.Net.WebUtility.UrlEncode(GameMode) +
 			                       "&players=" + string.Join(",", Players.ToArray());
 
-			var request = (HttpWebRequest)WebRequest.Create(fListUrl);
-			request.Method = "POST";
-			request.Timeout = 15000; // 15s timeout
-			request.ContentType = "application/x-www-form-urlencoded";
-			request.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
-
-			byte[] formData = Encoding.ASCII.GetBytes(requestString);
-			request.ContentLength = formData.Length;
-
-			System.Net.ServicePointManager.Expect100Continue = false; // fixes lighthttpd 417 error
-
-			using (Stream requestStream = request.GetRequestStream())
-			{
-				requestStream.Write(formData, 0, formData.Length);
-				requestStream.Flush();
-			}
-
-			WebResponse response = request.GetResponse();
+			var content = new StringContent(requestString, Encoding.ASCII, "application/x-www-form-urlencoded");
+			var response = httpClient.PostAsync(fListUrl, content).GetAwaiter().GetResult();
 			ReceivedKey = null;
-			using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-			{
-				ReceivedKey = sr.ReadToEnd();
-			}
-
-			request.Abort();
+			ReceivedKey = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 		}
 	}
 }

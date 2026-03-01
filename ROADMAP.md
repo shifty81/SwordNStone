@@ -73,21 +73,31 @@ All 6 projects migrated from legacy verbose `.csproj` to SDK-style:
 
 ---
 
-## 🔲 Milestone 2: Code Architecture Cleanup
+## ✅ Milestone 2: Code Architecture Cleanup (Partial)
 
 > Untangle the spaghetti. Make the code navigable and maintainable.
+
+### 2b. Server Architecture (Partial) ✅
+- [x] Split `Server.cs` partial class (4,434 → 808 lines) into focused files:
+  - `ServerPlayerManager.cs` — player spawn/despawn/tracking, inventory notifications, stats
+  - `ServerNetworkProcessor.cs` — network packet dispatch (TryReadPacket)
+  - `ServerBuildCraft.cs` — build/craft/privileges, fill area operations
+  - `ServerNetworkSend.cs` — all Send* methods, messaging, entity management
+  - `ServerTypes.cs` — supporting types (GameTime, Vector3i, ServerSystem, etc.)
+
+### 2d. Fix Remaining Compiler Warnings ✅
+- [x] Reduced compiler warnings from **302 → 0**:
+  - Fixed `SYSLIB0021`: `MD5CryptoServiceProvider` → `MD5.Create()`
+  - Fixed `SYSLIB0014`: `WebClient`/`WebRequest` → `HttpClient`
+  - Suppressed `CA1416` platform compatibility warnings (MonsterEditor already `net8.0-windows`, System.Drawing usage in Client/Lib)
+  - Suppressed `CS0649` in Lib (94 warnings, all in auto-generated `.ci.cs` files)
 
 ### 2a. Namespace & Project Alignment
 - [ ] Align namespaces with directory structure consistently
 - [ ] Move Cito-transpiled `.ci.cs` files into proper namespace directories
 - [ ] Evaluate whether Cito transpilation is still needed (if not targeting Java/JS, remove it)
 
-### 2b. Server Architecture
-- [ ] Split `Server.cs` partial class into focused files:
-  - `ServerChunkManager.cs` — chunk loading/sending
-  - `ServerPlayerManager.cs` — player spawn/despawn/tracking
-  - `ServerInventoryManager.cs` — inventory operations
-  - `ServerLightingManager.cs` — lighting calculations
+### 2b. Server Architecture (Remaining)
 - [ ] Consolidate network backends (ENet/TCP/WebSocket/Dummy) behind clean interface
 - [ ] Clean up `ServerCommand.cs` — extract command handlers into separate classes
 
@@ -95,12 +105,6 @@ All 6 projects migrated from legacy verbose `.csproj` to SDK-style:
 - [ ] Extract `Game.ci.cs` rendering subsystems into focused modules
 - [ ] Consolidate GUI mod system — single consistent UI framework
 - [ ] Remove commented-out code blocks throughout Client/
-
-### 2d. Fix Remaining Compiler Warnings
-- [ ] Address ~107 compiler warnings systematically:
-  - Unused variables → remove or use
-  - Obsolete API calls → update to modern equivalents
-  - Missing XML doc comments → add where public API
 
 ---
 
@@ -242,6 +246,7 @@ SwordAndStone.sln
 | Alpha 0.0.1 | Dec 2025 | Complete rebrand from Manic Digger |
 | Alpha 0.0.2 | Mar 2026 | Code cleanup, dead code removal, doc consolidation (Milestone 0) |
 | Alpha 0.0.3 | Mar 2026 | Build system modernization: .NET 8.0, SDK-style csproj, GitHub Actions CI (Milestone 1) |
+| Alpha 0.0.4-dev | Mar 2026 | Server.cs split, all compiler warnings fixed (Milestone 2 partial) |
 
 ---
 

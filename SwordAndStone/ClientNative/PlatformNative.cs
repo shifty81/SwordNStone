@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
@@ -312,13 +313,14 @@ namespace SwordAndStone.ClientNative
 			public HttpResponseCi response;
 		}
 
+		private static readonly HttpClient httpClientInstance = new HttpClient() { Timeout = TimeSpan.FromSeconds(15) };
+
 		void DownloadData(object o)
 		{
 			DownloadDataArgs args = (DownloadDataArgs)o;
-			WebClient c = new WebClient();
 			try
 			{
-				byte[] data = c.DownloadData(args.url);
+				byte[] data = httpClientInstance.GetByteArrayAsync(args.url).GetAwaiter().GetResult();
 				args.response.SetValue(data);
 				args.response.SetValueLength(data.Length);
 				args.response.SetDone(true);
@@ -699,34 +701,13 @@ namespace SwordAndStone.ClientNative
 			UploadData d = (UploadData)o;
 			try
 			{
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(d.url);
-				request.Method = "POST";
-				request.Timeout = 15000; // 15s timeout
-				request.ContentType = "application/x-www-form-urlencoded";
-				request.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
-
-				request.ContentLength = d.dataLength;
-
-				System.Net.ServicePointManager.Expect100Continue = false; // fixes lighthttpd 417 error
-
-				using (Stream requestStream = request.GetRequestStream())
-				{
-					requestStream.Write(d.data, 0, d.dataLength);
-					requestStream.Flush();
-				}
-				WebResponse response_ = request.GetResponse();
-
-				MemoryStream m = new MemoryStream();
-				using (Stream s = response_.GetResponseStream())
-				{
-					CopyTo(s, m);
-				}
-				d.response.SetValue(m.ToArray());
-				d.response.SetValueLength(d.response.GetValue().Length);
+				var content = new ByteArrayContent(d.data, 0, d.dataLength);
+				content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/x-www-form-urlencoded");
+				var response_ = httpClientInstance.PostAsync(d.url, content).GetAwaiter().GetResult();
+				byte[] responseData = response_.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult();
+				d.response.SetValue(responseData);
+				d.response.SetValueLength(responseData.Length);
 				d.response.SetDone(true);
-
-				request.Abort();
-
 			}
 			catch
 			{

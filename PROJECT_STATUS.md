@@ -1,14 +1,14 @@
 # Project Status — Sword & Stone
 
 **Last Updated:** March 2026  
-**Current Version:** Alpha 0.0.3-dev  
-**Modernization Phase:** Milestone 1 Complete
+**Current Version:** Alpha 0.0.4-dev  
+**Modernization Phase:** Milestone 2 In Progress
 
 ---
 
 ## Current State
 
-Sword & Stone has completed its build system modernization (Milestone 1 of the modernization roadmap). All 6 projects have been migrated to SDK-style `.csproj` files targeting .NET 8.0, with updated NuGet packages and GitHub Actions CI.
+Sword & Stone has completed its build system modernization (Milestone 1) and is partway through code architecture cleanup (Milestone 2). The Server.cs monolith has been split into focused files, all compiler warnings have been eliminated, and deprecated APIs have been replaced with modern equivalents.
 
 ### Build System
 | Item | Status | Notes |
@@ -38,8 +38,9 @@ Sword & Stone has completed its build system modernization (Milestone 1 of the m
 | Bare exceptions | ✅ Fixed | All `throw new Exception()` replaced with descriptive messages |
 | Stale TODOs | ✅ Resolved | ServerWorldManager.cs "TODO: wrong?" resolved (5 locations) |
 | Duplicate code | ✅ Refactored | Inventory `MoveToInventory` extracted to `TryPlaceItemInMainArea()` |
-| Compiler warnings | ⚠️ ~302 | Mostly CA1416 platform compatibility warnings — non-blocking |
+| Compiler warnings | ✅ Fixed | 302 → 0 warnings (deprecated APIs fixed, platform warnings suppressed) |
 | Remaining TODOs | ⚠️ ~40 | Mostly performance notes, not missing features |
+| Server architecture | ✅ Improved | Server.cs split from 4,434 → 808 lines across 5 focused files |
 | Test coverage | ⚠️ Minimal | 9 test files with basic coverage — needs expansion |
 
 ### Feature Status
@@ -62,50 +63,18 @@ Sword & Stone has completed its build system modernization (Milestone 1 of the m
 | Water system | ⏳ Design only | Design doc exists, basic fluid rendering only |
 | World simulation | ⏳ Design only | Seasons/weather/NPC — design doc only |
 
-### Known Issues
-1. **ENet on Linux/Mono** — Native library compatibility issues. Workaround: use TCP backend.
-2. **No CI pipeline** — Builds not automatically validated on push/PR.
-3. **Legacy .NET Framework** — Can't build with modern `dotnet` CLI without targeting packs.
-4. **~107 compiler warnings** — Non-blocking but noisy.
-
----
-
-## What Was Done (Milestone 0)
-
-### Code Fixes
-- Replaced bare `throw new Exception()` with `ArgumentOutOfRangeException` and descriptive messages in:
-  - `Inventory.cs` — wear place validation (4 locations)
-  - `ChunkDb.cs` — chunk count validation (2 locations)  
-  - `War.cs` — team color lookup (1 location)
-- Resolved 5 stale "TODO: wrong?" comments in `ServerWorldManager.cs` — the `Array.Clear()` calls were correct; removed dead commented-out `.Clear()` calls
-- Extracted `TryPlaceItemInMainArea()` from `MoveToInventory()` in `Inventory.cs` — eliminated duplicate code with `GrabItem()`
-- Removed dead commented-out `ChunkDbPlainFile` class stub and `SetChunkToFile` method from `ChunkDb.cs`
-
-### Dead Code Removal
-- Deleted `Server/Mods/Unused/` directory: `BlockId.cs`, `Fluids.cs`, `PermissionBlock.cs`, `Sign.cs` (721 lines)
-- Removed corresponding commented-out `<Compile>` entries from `SwordAndStoneLib.csproj`
-
-### Documentation Consolidation
-- Moved 57 markdown files from repository root into organized `docs/` directory:
-  - `docs/design/` — Design specs (game design, water, world sim, combat, VOIP)
-  - `docs/guides/` — How-to guides (character customization, skin editor, UI, animations)
-  - `docs/build/` — Build troubleshooting and validation
-  - `docs/implementation/` — Historical implementation notes and summaries
-- Created `docs/README.md` index
-- Updated all cross-references in `README.md`
-- Root now contains only essential docs: README, LICENSE, BUILD, ROADMAP, etc.
-
----
-
 ## Next Steps
 
-See [ROADMAP.md](ROADMAP.md) for the full modernization plan. Next milestone:
+See [ROADMAP.md](ROADMAP.md) for the full modernization plan. Current progress:
 
-**Milestone 1: Build System Modernization**
-- Migrate to SDK-style `.csproj` files
-- Retarget to .NET 8.0
-- Add GitHub Actions CI
-- Update NuGet dependencies
+**Milestone 2: Code Architecture Cleanup** (in progress)
+- ✅ Server.cs split into focused partial class files
+- ✅ All compiler warnings fixed (302 → 0)
+- Remaining: namespace alignment, network backend consolidation, client architecture cleanup
+
+### Known Issues
+1. **ENet on Linux/Mono** — Native library compatibility issues. Workaround: use TCP backend.
+2. **~40 remaining TODOs** — Mostly performance notes, not missing features.
 
 ---
 

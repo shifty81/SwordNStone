@@ -103,7 +103,7 @@ namespace SwordAndStone.Common
 			}
 		}
 
-		MD5CryptoServiceProvider sha1 = new MD5CryptoServiceProvider();
+		System.Security.Cryptography.MD5 sha1 = System.Security.Cryptography.MD5.Create();
 		string Md5(byte[] data)
 		{
 			string hash = ToHex(sha1.ComputeHash(data), false);

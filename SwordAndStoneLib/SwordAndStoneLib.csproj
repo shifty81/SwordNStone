@@ -6,6 +6,7 @@
     <AssemblyName>SwordAndStoneLib</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>CA1416;CS0649</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
