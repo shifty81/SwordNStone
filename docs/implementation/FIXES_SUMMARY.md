@@ -254,7 +254,7 @@ Or use validation script to detect missing files:
 ## Support
 
 ### Questions?
-- Review [BUILD.md](BUILD.md) for build instructions
+- Review [BUILD.md](../../BUILD.md) for build instructions
 - Review [BUILD_ERROR_PREVENTION.md](BUILD_ERROR_PREVENTION.md) for prevention strategies
 - Review [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines
 - Open an issue on GitHub for specific problems

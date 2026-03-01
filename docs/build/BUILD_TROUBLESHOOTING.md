@@ -429,7 +429,7 @@ CiTo.exe -l cs SwordAndStoneLib\SwordAndStoneLib.csproj
 
 **Need More Help?**
 
-- Check [BUILD.md](BUILD.md) for general build instructions
+- Check [BUILD.md](../../BUILD.md) for general build instructions
 - See GitHub Issues for known problems
 - Ask on community Discord or forums
 

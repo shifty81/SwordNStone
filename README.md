@@ -59,10 +59,10 @@ Create your own unique character skins from scratch!
 - **Tools:** Brush, Eraser, Fill Bucket, Color Picker
 - **Features:** RGB color picker, dual layers, real-time 3D preview
 - **Templates:** Start with blank templates or pre-made example skins
-- See [PIXEL_ART_SKIN_SYSTEM.md](PIXEL_ART_SKIN_SYSTEM.md) for complete guide
+- See [PIXEL_ART_SKIN_SYSTEM.md](docs/guides/PIXEL_ART_SKIN_SYSTEM.md) for complete guide
 
 **For Content Creators:**
-The system supports custom character textures! See [CHARACTER_CUSTOMIZATION.md](CHARACTER_CUSTOMIZATION.md), [PIXEL_ART_SKIN_SYSTEM.md](PIXEL_ART_SKIN_SYSTEM.md), and [EXAMPLE_SKINS_GUIDE.md](EXAMPLE_SKINS_GUIDE.md) for details on creating your own character skins.
+The system supports custom character textures! See [CHARACTER_CUSTOMIZATION.md](docs/guides/CHARACTER_CUSTOMIZATION.md), [PIXEL_ART_SKIN_SYSTEM.md](docs/guides/PIXEL_ART_SKIN_SYSTEM.md), and [EXAMPLE_SKINS_GUIDE.md](docs/guides/EXAMPLE_SKINS_GUIDE.md) for details on creating your own character skins.
 
 
 Code
@@ -88,7 +88,7 @@ post-build-validation.bat Debug
 ```
 
 For detailed build instructions, see [BUILD.md](BUILD.md).  
-For validation procedures, see [QUICK_START_VALIDATION.md](QUICK_START_VALIDATION.md).
+For validation procedures, see [QUICK_START_VALIDATION.md](docs/guides/QUICK_START_VALIDATION.md).
 
 Quick start:
 - **Windows**: Open `SwordAndStone.sln` in Visual Studio and build
@@ -107,11 +107,13 @@ If you want to help developing Sword&Stone feel free to fork this repository on 
 
 Design Documentation
 --------------------
-- [GAME_DESIGN.md](GAME_DESIGN.md) — Core design vision (character persistence, skills, combat, visual style)
-- [WATER_SYSTEM_DESIGN.md](WATER_SYSTEM_DESIGN.md) — Water physics, rendering, boats, swimming, and ice
-- [WORLD_SIMULATION_DESIGN.md](WORLD_SIMULATION_DESIGN.md) — Seasons, weather, crops, NPC villages, trade, and emergent story
+- [GAME_DESIGN.md](docs/design/GAME_DESIGN.md) — Core design vision (character persistence, skills, combat, visual style)
+- [WATER_SYSTEM_DESIGN.md](docs/design/WATER_SYSTEM_DESIGN.md) — Water physics, rendering, boats, swimming, and ice
+- [WORLD_SIMULATION_DESIGN.md](docs/design/WORLD_SIMULATION_DESIGN.md) — Seasons, weather, crops, NPC villages, trade, and emergent story
+- [COMBAT_SYSTEM_IMPLEMENTATION.md](docs/design/COMBAT_SYSTEM_IMPLEMENTATION.md) — Combat mechanics (Phase 1)
 - [ROADMAP.md](ROADMAP.md) — Development timeline and feature priorities
-- [COMBAT_SYSTEM_IMPLEMENTATION.md](COMBAT_SYSTEM_IMPLEMENTATION.md) — Combat mechanics (Phase 1)
+
+Additional documentation (guides, build troubleshooting, implementation notes) is organized in the `docs/` directory.
 
 
 Credits

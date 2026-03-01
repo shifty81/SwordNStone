@@ -443,6 +443,6 @@ Once verification is complete:
 **Last Updated**: December 2025
 
 For more information, see:
-- [BUILD.md](BUILD.md) - Build instructions
-- [TESTING.md](TESTING.md) - Testing guide  
+- [BUILD.md](../../BUILD.md) - Build instructions
+- [TESTING.md](../../TESTING.md) - Testing guide  
 - [QUICKSTART.md](QUICKSTART.md) - Quick start guide

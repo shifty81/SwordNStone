@@ -102,7 +102,7 @@ walk    legr    10      rot     -45     0       0
 **Full Guides:**
 - [ANIMATION_SYSTEM_GUIDE.md](ANIMATION_SYSTEM_GUIDE.md) - Complete animation tutorial
 - [VOIP_AND_EMOTE_SYSTEM.md](VOIP_AND_EMOTE_SYSTEM.md) - VOIP architecture & emote wheel
-- [ROADMAP.md](ROADMAP.md) - Project roadmap & optimizations
+- [ROADMAP.md](../../ROADMAP.md) - Project roadmap & optimizations
 - [CHARACTER_ANIMATION_SUMMARY.md](CHARACTER_ANIMATION_SUMMARY.md) - Implementation summary
 
 **Key Sections:**

@@ -414,7 +414,7 @@ Every year reshapes the world. Nothing is isolated. Nothing is cosmetic.
 
 - [GAME_DESIGN.md](GAME_DESIGN.md) — Core design vision and character systems
 - [WATER_SYSTEM_DESIGN.md](WATER_SYSTEM_DESIGN.md) — Water physics and rendering
-- [ROADMAP.md](ROADMAP.md) — Development timeline
+- [ROADMAP.md](../../ROADMAP.md) — Development timeline
 - [COMBAT_SYSTEM_IMPLEMENTATION.md](COMBAT_SYSTEM_IMPLEMENTATION.md) — Combat mechanics
 
 ---

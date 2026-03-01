@@ -7,7 +7,7 @@ using ManicDigger;
 
 namespace SwordAndStone.Server
 {
-	//separate class because it's used by server and client. TODO: verify
+	//Shared by server and client for inventory operations.
 	public class InventoryUtil
 	{
 		public InventoryUtil()
@@ -109,7 +109,7 @@ namespace SwordAndStone.Server
 				case WearPlace_.Gauntlet:
 					return d_Inventory.Gauntlet;
 				default:
-					throw new Exception();
+					throw new ArgumentOutOfRangeException("wearPlace", wearPlace, "Unknown wear place");
 			}
 		}
 
@@ -134,7 +134,7 @@ namespace SwordAndStone.Server
 					d_Inventory.Gauntlet = item;
 					break;
 				default:
-					throw new Exception();
+					throw new ArgumentOutOfRangeException("wearPlace", wearPlace, "Unknown wear place");
 			}
 		}
 
@@ -461,7 +461,7 @@ namespace SwordAndStone.Server
 			}
 			else
 			{
-				throw new Exception();
+				throw new ArgumentOutOfRangeException("pos.Type", pos.Type, "Unknown inventory position type");
 			}
 		}
 		private void SendInventory()
@@ -470,7 +470,6 @@ namespace SwordAndStone.Server
 
 		public override void WearItem(Packet_InventoryPosition from, Packet_InventoryPosition to)
 		{
-			//TODO: what to do here?
 			ProtoPoint originPoint = new ProtoPoint(from.AreaX, from.AreaY);
 			if (from.Type == Packet_InventoryPositionTypeEnum.MainArea
 			         && to.Type == Packet_InventoryPositionTypeEnum.MaterialSelector
@@ -485,51 +484,60 @@ namespace SwordAndStone.Server
 
 		public override void MoveToInventory(Packet_InventoryPosition from)
 		{
-			//TODO: what to do here?
 			if (from.Type == Packet_InventoryPositionTypeEnum.MaterialSelector)
 			{
-				//duplicate code with GrabItem().
-
 				Item item = d_Inventory.RightHand[from.MaterialId];
 				if (item == null)
 				{
 					return;
 				}
-				//grab to main area - stacking
-				for (int x = 0; x < d_InventoryUtil.CellCountX; x++)
+				if (TryPlaceItemInMainArea(item))
 				{
-					for (int y = 0; y < d_InventoryUtil.CellCountY; y++)
-					{
-						IntRef pCount = new IntRef();
-						PointRef[] p = d_InventoryUtil.ItemsAtArea(x, y, d_Items.ItemSizeX(item), d_Items.ItemSizeY(item), pCount);
-						if (p != null && pCount.value == 1)
-						{
-							var stacked = d_Items.Stack(d_Inventory.Items[new ProtoPoint(p[0].X, p[0].Y)], item);
-							if (stacked != null)
-							{
-								d_Inventory.Items[new ProtoPoint(x, y)] = stacked;
-								d_Inventory.RightHand[from.MaterialId] = null;
-								return;
-							}
-						}
-					}
+					d_Inventory.RightHand[from.MaterialId] = null;
 				}
-				//grab to main area - adding
-				for (int x = 0; x < d_InventoryUtil.CellCountX; x++)
+			}
+		}
+
+		/// <summary>
+		/// Tries to place an item into the main inventory area, first by stacking
+		/// with existing items, then by finding an empty slot.
+		/// </summary>
+		/// <returns>True if the item was placed successfully.</returns>
+		private bool TryPlaceItemInMainArea(Item item)
+		{
+			// Try stacking with existing items first
+			for (int x = 0; x < d_InventoryUtil.CellCountX; x++)
+			{
+				for (int y = 0; y < d_InventoryUtil.CellCountY; y++)
 				{
-					for (int y = 0; y < d_InventoryUtil.CellCountY; y++)
+					IntRef pCount = new IntRef();
+					PointRef[] p = d_InventoryUtil.ItemsAtArea(x, y, d_Items.ItemSizeX(item), d_Items.ItemSizeY(item), pCount);
+					if (p != null && pCount.value == 1)
 					{
-						IntRef pCount = new IntRef();
-						PointRef[] p = d_InventoryUtil.ItemsAtArea(x, y, d_Items.ItemSizeX(item), d_Items.ItemSizeY(item), pCount);
-						if (p != null && pCount.value == 0)
+						var stacked = d_Items.Stack(d_Inventory.Items[new ProtoPoint(p[0].X, p[0].Y)], item);
+						if (stacked != null)
 						{
-							d_Inventory.Items[new ProtoPoint(x, y)] = item;
-							d_Inventory.RightHand[from.MaterialId] = null;
-							return;
+							d_Inventory.Items[new ProtoPoint(x, y)] = stacked;
+							return true;
 						}
 					}
 				}
 			}
+			// Try finding an empty slot
+			for (int x = 0; x < d_InventoryUtil.CellCountX; x++)
+			{
+				for (int y = 0; y < d_InventoryUtil.CellCountY; y++)
+				{
+					IntRef pCount = new IntRef();
+					PointRef[] p = d_InventoryUtil.ItemsAtArea(x, y, d_Items.ItemSizeX(item), d_Items.ItemSizeY(item), pCount);
+					if (p != null && pCount.value == 0)
+					{
+						d_Inventory.Items[new ProtoPoint(x, y)] = item;
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 	}
 	public class GameDataItemsBlocks : IGameDataItems
@@ -608,7 +616,7 @@ namespace SwordAndStone.Server
 				case WearPlace_.Gauntlet:
 					return false;
 				default:
-					throw new Exception();
+					throw new ArgumentOutOfRangeException("selectedWear", selectedWear, "Unknown wear place");
 			}
 		}
 

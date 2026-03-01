@@ -135,11 +135,9 @@ namespace SwordAndStone.Server
 				c.data = data;
 				c.DirtyForSaving = true;
 				d_Map.SetChunkValid(x, y, z, c);
-				// update related chunk at clients
+				// Reset chunk visibility for all clients so they re-fetch updated chunks
 				foreach (var k in clients)
 				{
-					//TODO: wrong?
-					//k.Value.chunksseen.Clear();
 					Array.Clear(k.Value.chunksseen, 0, k.Value.chunksseen.Length);
 				}
 			}
@@ -174,11 +172,9 @@ namespace SwordAndStone.Server
 				d_Map.SetChunkValid(k.Key.X, k.Key.Y, k.Key.Z, c);
 			}
 
-			// update related chunk at clients
+			// Reset chunk visibility for all clients so they re-fetch updated chunks
 			foreach (var k in clients)
 			{
-				//TODO: wrong
-				//k.Value.chunksseen.Clear();
 				Array.Clear(k.Value.chunksseen, 0, k.Value.chunksseen.Length);
 			}
 		}
@@ -215,11 +211,9 @@ namespace SwordAndStone.Server
 				d_Map.SetChunkValid(cx, cy, cz, c);
 			}
 
-			// update related chunk at clients
+			// Reset chunk visibility for all clients so they re-fetch updated chunks
 			foreach (var k in clients)
 			{
-				//TODO: wrong
-				//k.Value.chunksseen.Clear();
 				Array.Clear(k.Value.chunksseen, 0, k.Value.chunksseen.Length);
 			}
 		}
@@ -244,11 +238,9 @@ namespace SwordAndStone.Server
 				z = z / chunksize;
 				ChunkDb.DeleteChunk(d_ChunkDb, x, y, z);
 				d_Map.SetChunkValid(x, y, z, null);
-				// update related chunk at clients
+				// Reset chunk visibility for all clients so they re-fetch updated chunks
 				foreach (var k in clients)
 				{
-					//TODO: wrong?
-					//k.Value.chunksseen.Clear();
 					Array.Clear(k.Value.chunksseen, 0, k.Value.chunksseen.Length);
 				}
 			}
@@ -270,11 +262,9 @@ namespace SwordAndStone.Server
 			if (chunks.Count != 0)
 			{
 				ChunkDb.DeleteChunks(d_ChunkDb, chunks);
-				// force to update chunks at clients
+				// Reset chunk visibility for all clients so they re-fetch updated chunks
 				foreach (var k in clients)
 				{
-					//TODO: wrong?
-					//k.Value.chunksseen.Clear();
 					Array.Clear(k.Value.chunksseen, 0, k.Value.chunksseen.Length);
 				}
 			}

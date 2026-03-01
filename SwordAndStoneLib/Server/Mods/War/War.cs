@@ -266,8 +266,9 @@ namespace SwordAndStone.Mods.War
 					return GreenColor;
 				case Team.Spectator:
 					return SpectatorColor;
+				default:
+					throw new ArgumentOutOfRangeException("team", team, "Unknown team type");
 			}
-			throw new Exception();
 		}
 		
 		void DialogClickSelectTeam(int playerid, string widget)
