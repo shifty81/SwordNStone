@@ -13,7 +13,7 @@ namespace SwordAndStone.Common
 
 		public static string GetStorePath()
 		{
-			string apppath = Path.GetDirectoryName(AppContext.BaseDirectory);
+			string apppath = AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 			try
 			{
 				var di = new DirectoryInfo(apppath);
