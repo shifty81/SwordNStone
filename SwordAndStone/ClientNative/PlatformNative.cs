@@ -11,13 +11,14 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Windows.Forms;
 using System.Xml.Serialization;
 using SwordAndStone.Common;
-using OpenTK;
-using OpenTK.Audio;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Common.Input;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Input;
 
 namespace SwordAndStone.ClientNative
 {
@@ -229,7 +230,7 @@ namespace SwordAndStone.ClientNative
 
 		public override void ClipboardSetText(string s)
 		{
-			System.Windows.Forms.Clipboard.SetText(s);
+			// Clipboard not available without WinForms
 		}
 		SwordAndStone.Renderers.TextRenderer r = new SwordAndStone.Renderers.TextRenderer();
 		Dictionary<TextAndFont, SizeF> textsizes = new Dictionary<TextAndFont, SizeF>();
@@ -639,7 +640,7 @@ namespace SwordAndStone.ClientNative
 
 		public override void MessageBoxShowError(string text, string caption)
 		{
-			System.Windows.Forms.MessageBox.Show(text, caption, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
+			Console.WriteLine("[{0}] {1}", caption, text);
 		}
 
 		public override int ByteArrayLength(byte[] arr)
@@ -662,12 +663,12 @@ namespace SwordAndStone.ClientNative
 
 		public override bool ClipboardContainsText()
 		{
-			return Clipboard.ContainsText();
+			return false;
 		}
 
 		public override string ClipboardGetText()
 		{
-			return Clipboard.GetText();
+			return "";
 		}
 
 		public void SetExit(GameExit exit)
@@ -746,19 +747,7 @@ namespace SwordAndStone.ClientNative
 
 		public override string FileOpenDialog(string extension, string extensionName, string initialDirectory)
 		{
-			OpenFileDialog d = new OpenFileDialog();
-			d.InitialDirectory = initialDirectory;
-			d.FileName = "Default." + extension;
-			d.Filter = string.Format("{1}|*.{0}|All files|*.*", extension, extensionName);
-			d.CheckFileExists = false;
-			d.CheckPathExists = true;
-			string dir = System.Environment.CurrentDirectory;
-			DialogResult result = d.ShowDialog();
-			System.Environment.CurrentDirectory = dir;
-			if (result == DialogResult.OK)
-			{
-				return d.FileName;
-			}
+			// File dialogs not available without WinForms
 			return null;
 		}
 
@@ -766,7 +755,6 @@ namespace SwordAndStone.ClientNative
 		{
 			if (IsMono)
 			{
-				Application.DoEvents();
 				Thread.Sleep(0);
 			}
 		}
@@ -1224,31 +1212,30 @@ namespace SwordAndStone.ClientNative
 
 		public override int GetCanvasWidth()
 		{
-			return window.Width;
+			return window.ClientSize.X;
 		}
 
 		public override int GetCanvasHeight()
 		{
-			return window.Height;
+			return window.ClientSize.Y;
 		}
 
 		public void Start()
 		{
-			window.Keyboard.KeyRepeat = true;
-			window.KeyDown += new EventHandler<KeyboardKeyEventArgs>(game_KeyDown);
-			window.KeyUp += new EventHandler<KeyboardKeyEventArgs>(game_KeyUp);
-			window.KeyPress += new EventHandler<OpenTK.KeyPressEventArgs>(game_KeyPress);
-			window.MouseDown += new EventHandler<MouseButtonEventArgs>(Mouse_ButtonDown);
-			window.MouseUp += new EventHandler<MouseButtonEventArgs>(Mouse_ButtonUp);
-			window.MouseMove += new EventHandler<MouseMoveEventArgs>(Mouse_Move);
-			window.MouseWheel += new EventHandler<OpenTK.Input.MouseWheelEventArgs>(Mouse_WheelChanged);
-			window.RenderFrame += new EventHandler<OpenTK.FrameEventArgs>(window_RenderFrame);
-			window.Closed += new EventHandler<EventArgs>(window_Closed);
-			window.TargetRenderFrequency = 0;
+			window.KeyDown += game_KeyDown;
+			window.KeyUp += game_KeyUp;
+			window.TextInput += game_KeyPress;
+			window.MouseDown += Mouse_ButtonDown;
+			window.MouseUp += Mouse_ButtonUp;
+			window.MouseMove += Mouse_Move;
+			window.MouseWheel += Mouse_WheelChanged;
+			window.RenderFrame += window_RenderFrame;
+			window.Closing += window_Closed;
+			window.UpdateFrequency = 0;
 			window.Title = "Manic Digger";
 		}
 
-		void window_Closed(object sender, EventArgs e)
+		void window_Closed(System.ComponentModel.CancelEventArgs e)
 		{
 			gameexit.SetExit(true);
 		}
@@ -1281,7 +1268,7 @@ namespace SwordAndStone.ClientNative
 			{
 				gameexit.SetExit(true);
 			}
-			window.Exit();
+			window.Close();
 		}
 
 		public override void SetTitle(string applicationname)
@@ -1291,9 +1278,9 @@ namespace SwordAndStone.ClientNative
 
 		public override string KeyName(int key)
 		{
-			if (Enum.IsDefined(typeof(OpenTK.Input.Key), key))
+			if (Enum.IsDefined(typeof(Keys), key))
 			{
-				string s = Enum.GetName(typeof(OpenTK.Input.Key), key);
+				string s = Enum.GetName(typeof(Keys), key);
 				return s;
 			}
 			//if (Enum.IsDefined(typeof(SpecialKey), key))
@@ -1310,18 +1297,27 @@ namespace SwordAndStone.ClientNative
 			if (resolutions == null)
 			{
 				resolutions = new DisplayResolutionCi[1024];
-				foreach (var r in DisplayDevice.Default.AvailableResolutions)
+				var monitors = Monitors.GetMonitors();
+				if (monitors.Count > 0)
 				{
-					if (r.Width < 800 || r.Height < 600 || r.BitsPerPixel < 16)
+					var monitor = monitors[0];
+					foreach (var mode in monitor.SupportedVideoModes)
 					{
-						continue;
+						int w = mode.Width;
+						int h = mode.Height;
+						int bpp = mode.RedBits + mode.GreenBits + mode.BlueBits;
+						float rr = mode.RefreshRate;
+						if (w < 800 || h < 600 || bpp < 16)
+						{
+							continue;
+						}
+						DisplayResolutionCi r2 = new DisplayResolutionCi();
+						r2.Width = w;
+						r2.Height = h;
+						r2.BitsPerPixel = bpp;
+						r2.RefreshRate = rr;
+						resolutions[resolutionsCount++] = r2;
 					}
-					DisplayResolutionCi r2 = new DisplayResolutionCi();
-					r2.Width = r.Width;
-					r2.Height = r.Height;
-					r2.BitsPerPixel = r.BitsPerPixel;
-					r2.RefreshRate = r.RefreshRate;
-					resolutions[resolutionsCount++] = r2;
 				}
 			}
 			retResolutionsCount.SetValue(resolutionsCount);
@@ -1335,22 +1331,27 @@ namespace SwordAndStone.ClientNative
 
 		public override void SetWindowState(WindowState value)
 		{
-			window.WindowState = (OpenTK.WindowState)value;
+			window.WindowState = (OpenTK.Windowing.Common.WindowState)value;
 		}
 
 		public override void ChangeResolution(int width, int height, int bitsPerPixel, float refreshRate)
 		{
-			DisplayDevice.Default.ChangeResolution(width, height, bitsPerPixel, refreshRate);
+			// DisplayDevice.ChangeResolution removed in OpenTK 4. Resolution changes are handled by the OS/window manager.
 		}
 
 		public override DisplayResolutionCi GetDisplayResolutionDefault()
 		{
-			DisplayDevice d = DisplayDevice.Default;
 			DisplayResolutionCi r = new DisplayResolutionCi();
-			r.Width = d.Width;
-			r.Height = d.Height;
-			r.BitsPerPixel = d.BitsPerPixel;
-			r.RefreshRate = d.RefreshRate;
+			var monitors = Monitors.GetMonitors();
+			if (monitors.Count > 0)
+			{
+				var monitor = monitors[0];
+				var mode = monitor.CurrentVideoMode;
+				r.Width = mode.Width;
+				r.Height = mode.Height;
+				r.BitsPerPixel = mode.RedBits + mode.GreenBits + mode.BlueBits;
+				r.RefreshRate = mode.RefreshRate;
+			}
 			return r;
 		}
 
@@ -1579,7 +1580,7 @@ namespace SwordAndStone.ClientNative
 			if (ENABLE_TRANSPARENCY)
 			{
 				GL.Enable(EnableCap.Blend);
-				GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+				GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 				//GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (int)TextureEnvMode.Blend);
 				//GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvColor, new Color4(0, 0, 0, byte.MaxValue));
 			}
@@ -1700,7 +1701,7 @@ namespace SwordAndStone.ClientNative
 
 		public override void GlCullFaceBack()
 		{
-			GL.CullFace(CullFaceMode.Back);
+			GL.CullFace(TriangleFace.Back);
 		}
 
 		public override void GlEnableLighting()
@@ -1715,7 +1716,7 @@ namespace SwordAndStone.ClientNative
 
 		public override void GlColorMaterialFrontAndBackAmbientAndDiffuse()
 		{
-			GL.ColorMaterial(MaterialFace.FrontAndBack, ColorMaterialParameter.AmbientAndDiffuse);
+			GL.ColorMaterial(TriangleFace.FrontAndBack, ColorMaterialParameter.AmbientAndDiffuse);
 		}
 
 		public override void GlShadeModelSmooth()
@@ -1840,7 +1841,7 @@ namespace SwordAndStone.ClientNative
 
 		bool mousePointerLocked;
 		bool mouseCursorVisible = true;
-		MouseState current, previous;
+		Vector2 currentMousePos, previousMousePos;
 		int lastX, lastY;
 
 		public override bool IsMousePointerLocked()
@@ -1892,7 +1893,7 @@ namespace SwordAndStone.ClientNative
 			window.Cursor = MouseCursor.Default;
 		}
 
-		public static int ToGlKey(OpenTK.Input.Key key)
+		public static int ToGlKey(Keys key)
 		{
 			return (int)key;
 		}
@@ -1910,7 +1911,7 @@ namespace SwordAndStone.ClientNative
 					//Cursor already hidden. Do nothing.
 					return;
 				}
-				window.CursorVisible = false;
+				window.CursorState = CursorState.Hidden;
 				mouseCursorVisible = false;
 			}
 			else
@@ -1920,7 +1921,7 @@ namespace SwordAndStone.ClientNative
 					//Cursor already visible. Do nothing.
 					return;
 				}
-				window.CursorVisible = true;
+				window.CursorState = CursorState.Normal;
 				mouseCursorVisible = true;
 			}
 		}
@@ -1939,10 +1940,10 @@ namespace SwordAndStone.ClientNative
 
 		public override bool Focused()
 		{
-			return window.Focused;
+			return window.IsFocused;
 		}
 
-		void window_RenderFrame(object sender, OpenTK.FrameEventArgs e)
+		void window_RenderFrame(FrameEventArgs e)
 		{
 			UpdateMousePosition();
 			foreach (NewFrameHandler h in newFrameHandlers)
@@ -1956,16 +1957,16 @@ namespace SwordAndStone.ClientNative
 
 		void UpdateMousePosition()
 		{
-			current = Mouse.GetState();
-			if (!window.Focused)
+			currentMousePos = window.MousePosition;
+			if (!window.IsFocused)
 			{
 				return;
 			}
-			if (current != previous)
+			if (currentMousePos != previousMousePos)
 			{
 				// Mouse state has changed
-				int xdelta = current.X - previous.X;
-				int ydelta = current.Y - previous.Y;
+				int xdelta = (int)(currentMousePos.X - previousMousePos.X);
+				int ydelta = (int)(currentMousePos.Y - previousMousePos.Y);
 				foreach (MouseEventHandler h in mouseEventHandlers)
 				{
 					MouseEventArgs args = new MouseEventArgs();
@@ -1977,7 +1978,7 @@ namespace SwordAndStone.ClientNative
 					h.OnMouseMove(args);
 				}
 			}
-			previous = current;
+			previousMousePos = currentMousePos;
 			if (mousePointerLocked)
 			{
 				/*
@@ -1997,16 +1998,13 @@ namespace SwordAndStone.ClientNative
 				* Opening "mission control" by gesture does not free cursor
 				*/
 
-				int centerx = window.Bounds.Left + (window.Bounds.Width / 2);
-				int centery = window.Bounds.Top + (window.Bounds.Height / 2);
-
-				// Setting cursor position this way works on Windows and Mac
-				Mouse.SetPosition(centerx, centery);
+				// Center cursor using client coordinates
+				window.MousePosition = new Vector2(window.ClientSize.X / 2f, window.ClientSize.Y / 2f);
 			}
 		}
 
 		int lastMouseWheelTick;
-		void Mouse_WheelChanged(object sender, OpenTK.Input.MouseWheelEventArgs e)
+		void Mouse_WheelChanged(OpenTK.Windowing.Common.MouseWheelEventArgs e)
 		{
 			int currentTick = TimeMillisecondsFromStart();
 			if (currentTick - lastMouseWheelTick < 10)
@@ -2020,23 +2018,23 @@ namespace SwordAndStone.ClientNative
 			foreach (MouseEventHandler h in mouseEventHandlers)
 			{
 				MouseWheelEventArgs args = new MouseWheelEventArgs();
-				args.SetDelta(e.Delta);
-				args.SetDeltaPrecise(e.DeltaPrecise);
+				args.SetDelta((int)e.OffsetY);
+				args.SetDeltaPrecise(e.OffsetY);
 				h.OnMouseWheel(args);
 			}
 
 			lastMouseWheelTick = currentTick;
 		}
 
-		void Mouse_ButtonDown(object sender, MouseButtonEventArgs e)
+		void Mouse_ButtonDown(MouseButtonEventArgs e)
 		{
 			if (TouchTest)
 			{
 				foreach (TouchEventHandler h in touchEventHandlers)
 				{
 					TouchEventArgs args = new TouchEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
+					args.SetX((int)window.MousePosition.X);
+					args.SetY((int)window.MousePosition.Y);
 					args.SetId(0);
 					h.OnTouchStart(args);
 				}
@@ -2046,23 +2044,23 @@ namespace SwordAndStone.ClientNative
 				foreach (MouseEventHandler h in mouseEventHandlers)
 				{
 					MouseEventArgs args = new MouseEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
+					args.SetX((int)window.MousePosition.X);
+					args.SetY((int)window.MousePosition.Y);
 					args.SetButton((int)e.Button);
 					h.OnMouseDown(args);
 				}
 			}
 		}
 
-		void Mouse_ButtonUp(object sender, MouseButtonEventArgs e)
+		void Mouse_ButtonUp(MouseButtonEventArgs e)
 		{
 			if (TouchTest)
 			{
 				foreach (TouchEventHandler h in touchEventHandlers)
 				{
 					TouchEventArgs args = new TouchEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
+					args.SetX((int)window.MousePosition.X);
+					args.SetY((int)window.MousePosition.Y);
 					args.SetId(0);
 					h.OnTouchEnd(args);
 				}
@@ -2072,25 +2070,25 @@ namespace SwordAndStone.ClientNative
 				foreach (MouseEventHandler h in mouseEventHandlers)
 				{
 					MouseEventArgs args = new MouseEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
+					args.SetX((int)window.MousePosition.X);
+					args.SetY((int)window.MousePosition.Y);
 					args.SetButton((int)e.Button);
 					h.OnMouseUp(args);
 				}
 			}
 		}
 
-		void Mouse_Move(object sender, MouseMoveEventArgs e)
+		void Mouse_Move(MouseMoveEventArgs e)
 		{
-			lastX = e.X;
-			lastY = e.Y;
+			lastX = (int)e.Position.X;
+			lastY = (int)e.Position.Y;
 			if (TouchTest)
 			{
 				foreach (TouchEventHandler h in touchEventHandlers)
 				{
 					TouchEventArgs args = new TouchEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
+					args.SetX((int)e.Position.X);
+					args.SetY((int)e.Position.Y);
 					args.SetId(0);
 					h.OnTouchMove(args);
 				}
@@ -2100,27 +2098,27 @@ namespace SwordAndStone.ClientNative
 				foreach (MouseEventHandler h in mouseEventHandlers)
 				{
 					MouseEventArgs args = new MouseEventArgs();
-					args.SetX(e.X);
-					args.SetY(e.Y);
-					args.SetMovementX(e.XDelta);
-					args.SetMovementY(e.YDelta);
+					args.SetX((int)e.Position.X);
+					args.SetY((int)e.Position.Y);
+					args.SetMovementX((int)e.Delta.X);
+					args.SetMovementY((int)e.Delta.Y);
 					args.SetEmulated(false);
 					h.OnMouseMove(args);
 				}
 			}
 		}
 
-		void game_KeyPress(object sender, OpenTK.KeyPressEventArgs e)
+		void game_KeyPress(TextInputEventArgs e)
 		{
 			foreach (KeyEventHandler h in keyEventHandlers)
 			{
 				KeyPressEventArgs args = new KeyPressEventArgs();
-				args.SetKeyChar((int)e.KeyChar);
+				args.SetKeyChar(e.Unicode);
 				h.OnKeyPress(args);
 			}
 		}
 
-		void game_KeyDown(object sender, KeyboardKeyEventArgs e)
+		void game_KeyDown(KeyboardKeyEventArgs e)
 		{
 			foreach (KeyEventHandler h in keyEventHandlers)
 			{
@@ -2133,7 +2131,7 @@ namespace SwordAndStone.ClientNative
 			}
 		}
 
-		void game_KeyUp(object sender, KeyboardKeyEventArgs e)
+		void game_KeyUp(KeyboardKeyEventArgs e)
 		{
 			foreach (KeyEventHandler h in keyEventHandlers)
 			{
@@ -2251,14 +2249,14 @@ namespace SwordAndStone.ClientNative
 	}
 
 
-	public class GameWindowNative : OpenTK.GameWindow
+	public class GameWindowNative : OpenTK.Windowing.Desktop.GameWindow
 	{
 		public GamePlatformNative platform;
-		public GameWindowNative(OpenTK.Graphics.GraphicsMode mode)
-			: base(1280, 720, mode)
+		public GameWindowNative()
+			: base(GameWindowSettings.Default, new NativeWindowSettings { ClientSize = new OpenTK.Mathematics.Vector2i(1280, 720) })
 		{
-			VSync = OpenTK.VSyncMode.Off;
-			WindowState = OpenTK.WindowState.Normal;
+			VSync = VSyncMode.Off;
+			WindowState = OpenTK.Windowing.Common.WindowState.Normal;
 		}
 	}
 }

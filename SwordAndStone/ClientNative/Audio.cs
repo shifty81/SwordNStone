@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using OpenTK.Audio;
+using OpenTK.Audio.OpenAL;
 using System.Threading;
 using System.Diagnostics;
-using OpenTK;
+using OpenTK.Mathematics;
 
 namespace SwordAndStone.ClientNative
 {
@@ -16,8 +16,9 @@ namespace SwordAndStone.ClientNative
 		{
 			try
 			{
-				IList<string> x = AudioContext.AvailableDevices;//only with this line an exception can be catched.
-				context = new AudioContext();
+				device = ALC.OpenDevice(null);
+				context = ALC.CreateContext(device, (int[])null);
+				ALC.MakeContextCurrent(context);
 			}
 			catch (Exception e)
 			{
@@ -35,7 +36,8 @@ namespace SwordAndStone.ClientNative
 				Console.WriteLine(e);
 			}
 		}
-		AudioContext context;
+		ALDevice device;
+		ALContext context;
 		// Loads a wave/riff audio file.
 		public static byte[] LoadWave(Stream stream, out int channels, out int bits, out int rate)
 		{
@@ -143,7 +145,7 @@ namespace SwordAndStone.ClientNative
 
 					int buffer = OpenTK.Audio.OpenAL.AL.GenBuffer();
 
-					OpenTK.Audio.OpenAL.AL.BufferData(buffer, GetSoundFormat(sample.Channels, sample.BitsPerSample), sample.Pcm, sample.Pcm.Length, sample.Rate);
+					OpenTK.Audio.OpenAL.AL.BufferData(buffer, GetSoundFormat(sample.Channels, sample.BitsPerSample), sample.Pcm, sample.Rate);
 					//audiofiles[filename]=buffer;
 
 					OpenTK.Audio.OpenAL.AL.DistanceModel(OpenTK.Audio.OpenAL.ALDistanceModel.InverseDistance);

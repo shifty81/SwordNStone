@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
-using OpenTK.Graphics;
-using OpenTK;
+using OpenTK.Windowing.Desktop;
 using OpenTK.Graphics.OpenGL;
 using System.IO;
 
@@ -29,13 +28,10 @@ namespace SwordAndStone.ClientNative
         // Returns a System.Drawing.Bitmap with the contents of the current framebuffer
         public Bitmap GrabScreenshot()
         {
-            if (GraphicsContext.CurrentContext == null)
-                throw new GraphicsContextMissingException();
-
-            Bitmap bmp = new Bitmap(d_GameWindow.ClientSize.Width, d_GameWindow.ClientSize.Height);
+            Bitmap bmp = new Bitmap(d_GameWindow.ClientSize.X, d_GameWindow.ClientSize.Y);
             System.Drawing.Imaging.BitmapData data =
-                bmp.LockBits(d_GameWindow.ClientRectangle, System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-            GL.ReadPixels(0, 0, d_GameWindow.ClientSize.Width, d_GameWindow.ClientSize.Height, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, data.Scan0);
+                bmp.LockBits(new Rectangle(0, 0, d_GameWindow.ClientSize.X, d_GameWindow.ClientSize.Y), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            GL.ReadPixels(0, 0, d_GameWindow.ClientSize.X, d_GameWindow.ClientSize.Y, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, data.Scan0);
             bmp.UnlockBits(data);
 
             bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
