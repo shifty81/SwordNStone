@@ -327,7 +327,7 @@ To make this checklist automatic:
 
 ## Reference Documents
 
-- [BUILD.md](BUILD.md) - Complete build instructions
+- [BUILD.md](../../BUILD.md) - Complete build instructions
 - [BUILD_TROUBLESHOOTING.md](BUILD_TROUBLESHOOTING.md) - Detailed troubleshooting guide
 - [BUILD_ERROR_PREVENTION.md](BUILD_ERROR_PREVENTION.md) - Prevention strategies
 - [.github/workflows/build-validation.yml](.github/workflows/build-validation.yml) - CI validation

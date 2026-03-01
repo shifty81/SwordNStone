@@ -214,7 +214,7 @@ Tool progression drives era advancement (Stone Age → Bronze Age → Iron Age �
 
 ## 📚 Related Documents
 
-- [ROADMAP.md](ROADMAP.md) — Development timeline and priorities
+- [ROADMAP.md](../../ROADMAP.md) — Development timeline and priorities
 - [WATER_SYSTEM_DESIGN.md](WATER_SYSTEM_DESIGN.md) — Water physics, rendering, boats, and ice
 - [WORLD_SIMULATION_DESIGN.md](WORLD_SIMULATION_DESIGN.md) — Seasons, weather, crops, NPCs, trade, and story
 - [COMBAT_SYSTEM_IMPLEMENTATION.md](COMBAT_SYSTEM_IMPLEMENTATION.md) — Combat mechanics (Phase 1)

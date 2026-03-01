@@ -176,7 +176,7 @@ Start here for different needs:
 - **Quick Start:** [QUICK_START_VALIDATION.md](QUICK_START_VALIDATION.md)
 - **Complete Procedures:** [BUILD_VALIDATION_CHECKLIST.md](BUILD_VALIDATION_CHECKLIST.md)
 - **System Design:** [METADATA_ERROR_PREVENTION_SYSTEM.md](METADATA_ERROR_PREVENTION_SYSTEM.md)
-- **Build Instructions:** [BUILD.md](BUILD.md)
+- **Build Instructions:** [BUILD.md](../../BUILD.md)
 - **Troubleshooting:** [BUILD_TROUBLESHOOTING.md](BUILD_TROUBLESHOOTING.md)
 
 ## Conclusion

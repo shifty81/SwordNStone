@@ -1,270 +1,125 @@
-# Project Status - Sword & Stone
+# Project Status — Sword & Stone
 
-## Current State - Alpha 0.0.1
+**Last Updated:** March 2026  
+**Current Version:** Alpha 0.0.2-dev  
+**Modernization Phase:** Milestone 0 Complete
 
-This repository has been fully rebranded from Manic Digger to Sword & Stone and is configured for development with Visual Studio. The project can be built and tested on both Windows and Linux/Mac platforms.
+---
 
-### ✅ What Works
+## Current State
 
-1. **Building**
-   - All 6 projects compile successfully
-   - Both Debug and Release configurations work
-   - Compatible with Visual Studio 2012+ and Mono/xbuild
-   - NuGet package restoration functional
+Sword & Stone has completed its code audit and initial cleanup (Milestone 0 of the modernization roadmap). The project compiles on Windows with Visual Studio / Mono and has a clean foundation for further modernization.
 
-2. **Projects**
-   - ✅ SwordAndStone (Game Client)
-   - ✅ SwordAndStoneLib (Core Library)
-   - ✅ SwordAndStoneServer (Dedicated Server)
-   - ✅ ScriptingApi (Modding API)
-   - ✅ SwordAndStoneMonsterEditor (Monster Editor)
-   - ✅ SwordAndStone.Tests (Test Project)
+### Build System
+| Item | Status | Notes |
+|------|--------|-------|
+| Solution structure | ✅ Working | 6 projects in `SwordAndStone.sln` |
+| Target framework | ⚠️ Legacy | .NET Framework 4.8 — needs migration to .NET 8.0 |
+| Project file format | ⚠️ Legacy | Old-style verbose `.csproj` — needs SDK-style migration |
+| Windows build | ✅ Working | Visual Studio 2012+ or MSBuild |
+| Linux/Mac build | ⚠️ Partial | Requires Mono — no .NET 8+ SDK support yet |
+| CI/CD | ❌ None | `.travis.yml` exists but outdated; needs GitHub Actions |
+| NuGet packages | ⚠️ Outdated | OpenTK 2.0, protobuf-net 2.1, NUnit 3.13.3 |
 
-3. **Testing Infrastructure**
-   - NUnit 3.13.3 test framework integrated
-   - Sample tests demonstrating test patterns
-   - Ready for expansion with more tests
-   - Compatible with Visual Studio Test Explorer
+### Projects
+| Project | Type | Status |
+|---------|------|--------|
+| `SwordAndStone` | Game Client (WinExe) | ✅ Compiles |
+| `SwordAndStoneLib` | Core Library (DLL) | ✅ Compiles |
+| `SwordAndStoneServer` | Dedicated Server (Console) | ✅ Compiles |
+| `ScriptingApi` | Modding API (DLL) | ✅ Compiles |
+| `SwordAndStoneMonsterEditor` | Model Editor (WinForms) | ✅ Compiles |
+| `SwordAndStone.Tests` | Unit Tests (NUnit) | ✅ Compiles |
 
-4. **Documentation**
-   - ✅ BUILD.md - Comprehensive build instructions
-   - ✅ TESTING.md - Testing guide and best practices
-   - ✅ QUICKSTART.md - Quick start guide for developers
-   - ✅ VERIFICATION.md - How to verify builds work
-   - ✅ PROJECT_STATUS.md - This file
-   - ✅ README.md - Updated with build info
+### Code Quality
+| Area | Status | Details |
+|------|--------|---------|
+| Dead code | ✅ Cleaned | Removed `Server/Mods/Unused/` (4 files, 721 lines) |
+| Bare exceptions | ✅ Fixed | All `throw new Exception()` replaced with descriptive messages |
+| Stale TODOs | ✅ Resolved | ServerWorldManager.cs "TODO: wrong?" resolved (5 locations) |
+| Duplicate code | ✅ Refactored | Inventory `MoveToInventory` extracted to `TryPlaceItemInMainArea()` |
+| Compiler warnings | ⚠️ ~107 | Unused variables, obsolete APIs — non-blocking |
+| Remaining TODOs | ⚠️ ~40 | Mostly performance notes, not missing features |
+| Test coverage | ⚠️ Minimal | 9 test files with basic coverage — needs expansion |
 
-5. **Development Workflow**
-   - Git workflow established
-   - .gitignore properly configured
-   - Build artifacts excluded from repo
-   - NuGet packages managed correctly
+### Feature Status
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Voxel building | ✅ Working | Place/break blocks, multiple types, large worlds |
+| Creative mode | ✅ Working | Unlimited blocks |
+| Multiplayer | ✅ Working | Dedicated server, ENet/TCP/WebSocket backends |
+| Day/night cycle | ✅ Working | Sky sphere, lighting system |
+| Golden UI system | ✅ Working | WoW-inspired interface, action bar, minimap |
+| Character animation | ✅ Working | Walk, idle, head rotation |
+| Character customization | 🔄 Partial | UI exists, not fully wired to rendering |
+| Pixel art skin editor | 🔄 Partial | Editor exists, integration incomplete |
+| Survival mode | 🔄 Partial | Basic mechanics, no crafting loop |
+| Combat system | 🔄 Partial | Animations defined, damage not wired |
+| War mode | ✅ Working | FPS game mode via server mod |
+| World generation | ✅ Working | Noise terrain, caves, ores |
+| Modding API | ✅ Working | C# and JavaScript server mods |
+| VOIP | ⏳ Design only | Design doc exists, no implementation |
+| Water system | ⏳ Design only | Design doc exists, basic fluid rendering only |
+| World simulation | ⏳ Design only | Seasons/weather/NPC — design doc only |
 
-### ⚠️ Known Issues
+### Known Issues
+1. **ENet on Linux/Mono** — Native library compatibility issues. Workaround: use TCP backend.
+2. **No CI pipeline** — Builds not automatically validated on push/PR.
+3. **Legacy .NET Framework** — Can't build with modern `dotnet` CLI without targeting packs.
+4. **~107 compiler warnings** — Non-blocking but noisy.
 
-1. **ENet Native Library (Mono)**
-   - Server has runtime issues with ENet native library on Linux/Mono
-   - This is a known compatibility issue between Mono and native libraries
-   - Workaround: Run on Windows or use different network backend
-   - Not a build issue - compilation succeeds
+---
 
-2. **Client GUI (Linux)**
-   - Client requires X11 display on Linux
-   - Designed primarily for Windows
-   - Can run on Linux with X server but may have limited functionality
+## What Was Done (Milestone 0)
 
-3. **Build Warnings**
-   - ~107 compiler warnings in codebase
-   - These are mostly unused variables and obsolete APIs
-   - Do not prevent building or running
-   - Can be addressed gradually as code is improved
+### Code Fixes
+- Replaced bare `throw new Exception()` with `ArgumentOutOfRangeException` and descriptive messages in:
+  - `Inventory.cs` — wear place validation (4 locations)
+  - `ChunkDb.cs` — chunk count validation (2 locations)  
+  - `War.cs` — team color lookup (1 location)
+- Resolved 5 stale "TODO: wrong?" comments in `ServerWorldManager.cs` — the `Array.Clear()` calls were correct; removed dead commented-out `.Clear()` calls
+- Extracted `TryPlaceItemInMainArea()` from `MoveToInventory()` in `Inventory.cs` — eliminated duplicate code with `GrabItem()`
+- Removed dead commented-out `ChunkDbPlainFile` class stub and `SetChunkToFile` method from `ChunkDb.cs`
 
-### 📦 What's Included
+### Dead Code Removal
+- Deleted `Server/Mods/Unused/` directory: `BlockId.cs`, `Fluids.cs`, `PermissionBlock.cs`, `Sign.cs` (721 lines)
+- Removed corresponding commented-out `<Compile>` entries from `SwordAndStoneLib.csproj`
 
-**New Files:**
-- `SwordAndStone.Tests/` - Complete test project with samples
-- `BUILD.md` - Detailed build instructions
-- `TESTING.md` - Testing documentation
-- `QUICKSTART.md` - Quick start guide
-- `VERIFICATION.md` - Verification procedures
-- `PROJECT_STATUS.md` - This status document
+### Documentation Consolidation
+- Moved 57 markdown files from repository root into organized `docs/` directory:
+  - `docs/design/` — Design specs (game design, water, world sim, combat, VOIP)
+  - `docs/guides/` — How-to guides (character customization, skin editor, UI, animations)
+  - `docs/build/` — Build troubleshooting and validation
+  - `docs/implementation/` — Historical implementation notes and summaries
+- Created `docs/README.md` index
+- Updated all cross-references in `README.md`
+- Root now contains only essential docs: README, LICENSE, BUILD, ROADMAP, etc.
 
-**Modified Files:**
-- `SwordAndStone.sln` - Added test project
-- `README.md` - Added build section
-- `.gitignore` - Added nuget.exe exclusion
-
-**Dependencies Added:**
-- NUnit 3.13.3 (test framework)
-
-## Platform Support
-
-### Windows
-- ✅ **Full Support**: All features work
-- ✅ Build with Visual Studio or MSBuild
-- ✅ Client and Server both functional
-- ✅ GUI tools work perfectly
-
-### Linux
-- ✅ **Build Support**: Complete
-- ✅ Build with Mono and xbuild
-- ⚠️ **Runtime Support**: Partial
-  - Server builds but has networking issues
-  - Client requires X11 and may have compatibility issues
-  - Best used for development and testing builds
-
-### Mac
-- ✅ **Build Support**: Should work (untested)
-- ✅ Build with Mono and xbuild
-- ⚠️ **Runtime Support**: Likely similar to Linux
-  - Server may have networking issues
-  - Client may have compatibility issues
-
-## How to Use This Project
-
-### For Development (Windows)
-1. Clone repository
-2. Open `SwordAndStone.sln` in Visual Studio
-3. Build and run
-4. Make changes, test, commit
-
-**Recommended**: Visual Studio 2022 or later
-
-### For Development (Linux/Mac)
-1. Install Mono: `sudo apt-get install mono-complete`
-2. Clone repository
-3. Download NuGet: `wget https://dist.nuget.org/win-x86-commandline/latest/nuget.exe`
-4. Restore packages: `mono nuget.exe restore SwordAndStone.sln`
-5. Build: `xbuild SwordAndStone.sln`
-6. Test modifications
-
-**Note**: Runtime testing limited - server has networking issues on Mono
-
-### For Building Releases
-1. Ensure all tests pass
-2. Build Release configuration
-3. Run build script:
-   - Windows: `build.bat`
-   - Linux: `./build.sh`
-4. Distributable package created in `output/`
-
-### For Contributing
-1. Fork repository on GitHub
-2. Create feature branch
-3. Make changes and add tests
-4. Verify builds on your platform
-5. Submit pull request
-6. Wait for review and feedback
-
-## Testing Status
-
-### Current Tests
-- **Sample Tests**: Basic examples demonstrating testing infrastructure
-- **Unit Tests**: Framework in place, ready for expansion
-- **Integration Tests**: Can be added as needed
-
-### Test Coverage
-- Currently minimal (sample tests only)
-- Ready for expansion
-- Areas needing tests:
-  - Game logic (block placement, physics)
-  - Multiplayer synchronization
-  - World generation
-  - Modding API functionality
-  - Rendering components
-
-### How to Add Tests
-1. Open `SwordAndStone.Tests` project
-2. Add new test class or expand existing
-3. Write tests using NUnit attributes
-4. Build and run tests
-5. Verify tests pass
-
-See [TESTING.md](TESTING.md) for detailed instructions.
-
-## Build Statistics
-
-- **Projects**: 6 (5 original + 1 test project)
-- **Configuration**: Debug, Release, FastBuild
-- **Build Time**: ~4 seconds (on modern hardware)
-- **Lines of Code**: Thousands (exact count TBD)
-- **Dependencies**: OpenTK, protobuf-net, various native libs
+---
 
 ## Next Steps
 
-### Immediate (Ready Now)
-1. ✅ Start developing features
-2. ✅ Add automated tests
-3. ✅ Build and test locally
-4. ✅ Use documentation as guide
+See [ROADMAP.md](ROADMAP.md) for the full modernization plan. Next milestone:
 
-### Short Term (Recommended)
-1. Add more unit tests for core functionality
-2. Fix compiler warnings gradually
-3. Document major code components
-4. Add examples to test project
+**Milestone 1: Build System Modernization**
+- Migrate to SDK-style `.csproj` files
+- Retarget to .NET 8.0
+- Add GitHub Actions CI
+- Update NuGet dependencies
 
-### Medium Term (Future Enhancement)
-1. Migrate to modern .NET (.NET 8/9) for better cross-platform support
-2. Update to SDK-style project files
-3. Add continuous integration (GitHub Actions)
-4. Improve Linux/Mac runtime compatibility
-5. Expand test coverage significantly
+---
 
-### Long Term (Nice to Have)
-1. Full cross-platform support
-2. Comprehensive test suite
-3. Automated performance testing
-4. Improved documentation
-5. More modding examples
+## Platform Support
+
+| Platform | Build | Runtime | Notes |
+|----------|-------|---------|-------|
+| Windows | ✅ Full | ✅ Full | Visual Studio or MSBuild |
+| Linux | ⚠️ Mono | ⚠️ Partial | ENet issues, X11 required for client |
+| macOS | ⚠️ Mono | ⚠️ Untested | Likely similar to Linux |
+
+---
 
 ## Community Resources
 
-- **Wiki**: http://manicdigger.sourceforge.net/wiki/
-- **Forum**: http://manicdigger.sourceforge.net/forum/
-- **IRC**: #manicdigger on irc.esper.net
-- **GitHub**: Submit issues and pull requests
-
-## Version History
-
-### Current Version (December 2025)
-- Added test project infrastructure
-- Created comprehensive documentation
-- Verified build on multiple platforms
-- Ready for active development
-
-### Previous
-- Original repository state
-- Working but undocumented build process
-- No test infrastructure
-
-## Maintainer Notes
-
-### For Future Maintainers
-- Documentation is in Markdown files at repo root
-- Test project uses NUnit 3.13.3
-- Build scripts create distribution in `output/`
-- Native libraries in `Lib/` directory
-- Keep documentation updated as project evolves
-
-### Common Maintenance Tasks
-1. **Update NuGet packages**: `mono nuget.exe update SwordAndStone.sln`
-2. **Clean build**: Delete `bin/`, `obj/`, `packages/` then rebuild
-3. **Add new project**: Update solution file and dependencies
-4. **Update docs**: Keep BUILD.md, TESTING.md current
-
-## License
-
-See [COPYING.md](COPYING.md) for license information.
-
-## Questions?
-
-- Check documentation files first
-- Search existing GitHub issues
-- Ask on forum or IRC
-- Create new GitHub issue if needed
-
----
-
-**Project is ready for development!**
-
-See [QUICKSTART.md](QUICKSTART.md) to get started right away.
-
----
-
-## Alpha 0.0.1 - Full Rebrand Complete
-
-**Release Date**: December 14, 2025
-
-### Major Changes:
-- ✅ **Complete Rebrand**: All references to "Manic Digger" replaced with "Sword & Stone"
-- ✅ **Project Structure**: All directories renamed (SwordAndStone, SwordAndStoneLib, SwordAndStoneServer, etc.)
-- ✅ **Code Namespaces**: Updated 254+ namespace references throughout codebase
-- ✅ **GUI Asset Fix**: Fixed missing asset paths (orange/yellow box issue resolved)
-- ✅ **Title Screen**: Sword & Stone branding now displays correctly
-- ✅ **Documentation**: Updated all documentation to reflect new branding
-
-### What's Next:
-This marks the official start of Sword & Stone as Alpha 0.0.1. The project is now ready for active development with a clear identity and roadmap.
-
-**Last Updated**: December 14, 2025
+- **GitHub**: [github.com/shifty81/SwordNStone](https://github.com/shifty81/SwordNStone)
+- **License**: Public domain ([Unlicense](http://unlicense.org))

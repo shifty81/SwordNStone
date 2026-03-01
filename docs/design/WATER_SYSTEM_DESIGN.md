@@ -237,7 +237,7 @@ if (loadKg > capacity) → crack/break-through
 
 - [GAME_DESIGN.md](GAME_DESIGN.md) — Core design vision
 - [WORLD_SIMULATION_DESIGN.md](WORLD_SIMULATION_DESIGN.md) — Seasons, weather, and world systems
-- [ROADMAP.md](ROADMAP.md) — Development timeline
+- [ROADMAP.md](../../ROADMAP.md) — Development timeline
 
 ---
 

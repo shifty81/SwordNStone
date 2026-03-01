@@ -1,799 +1,269 @@
-# Sword & Stone - Development Roadmap
+# Sword & Stone — Modernization Roadmap
 
-**Last Updated:** December 14, 2025  
-**Current Version:** Alpha 0.0.1  
-**Project Status:** Active Development
-
----
-
-## 🎉 Alpha 0.0.1 - Foundation Release (December 14, 2025)
-
-### What's New in Alpha 0.0.1:
-
-This release marks the official rebrand and foundation of Sword & Stone as an independent project.
-
-**Major Changes:**
-- ✅ **Complete Rebrand**: Fully transitioned from Manic Digger to Sword & Stone
-  - All project directories renamed
-  - All namespaces updated (254+ code references)
-  - Solution and project files restructured
-  - Documentation completely updated
-
-- ✅ **GUI Fixes**: 
-  - Fixed missing texture paths causing orange/yellow placeholder boxes
-  - Title screen now properly displays Sword & Stone branding
-  - All UI assets loading correctly
-
-- ✅ **Infrastructure**:
-  - Proper project structure for future development
-  - Clear separation of concerns (Client, Library, Server, Tests, Tools)
-  - Updated build system and documentation
-
-**This is Alpha 0.0.1** - The foundation is set, and we're ready to build!
+**Last Updated:** March 2026  
+**Current Version:** Alpha 0.0.2-dev  
+**Project Status:** Active Development — Modernization Phase
 
 ---
 
-## 🎯 Project Vision
+## Overview
 
-Sword & Stone aims to be a comprehensive voxel-based adventure game combining the creativity of building games with RPG elements, multiplayer cooperation, and combat mechanics. Our goal is to create an immersive world where players can build, explore, fight, and socialize together.
+This roadmap defines the concrete path to transform Sword & Stone from its Manic Digger heritage into a clean, modern, standalone game. Each milestone builds on the previous one. Work items are ordered by dependency — complete them in sequence.
 
----
-
-## ✅ Current Features (Implemented)
-
-### Core Gameplay
-- **Voxel Building System**
-  - Place and break blocks
-  - Multiple block types (stone, dirt, wood, grass, sand, water, etc.)
-  - Large worlds (9984×9984×128 blocks by default)
-  - Chunk-based rendering and loading
-
-- **Game Modes**
-  - Creative Mode: Unlimited blocks for building
-  - Survival Mode: Resource gathering (in development)
-  - War Mode: First-person shooter mechanics
-
-- **Multiplayer**
-  - Dedicated server support
-  - Online multiplayer with server browser
-  - Player synchronization
-  - Local and remote server support
-
-### Graphics & UI
-- **3D Rendering**
-  - OpenGL-based graphics engine
-  - Day/night cycle
-  - Sky sphere and celestial bodies
-  - Lighting system (torch light, sunlight, block light)
-  - Frustum culling for performance
-
-- **Golden UI System (Enhanced)**
-  - WoW-inspired immersive interface
-  - Action bar with 10 hotkey slots
-  - Unit frames (player and target)
-  - Minimap with terrain visualization
-  - Consistent golden aesthetic across all UI elements
-  - Inventory system with visual feedback
-  - Chat system
-
-### Player Systems
-- **Character Animation**
-  - Walk animation with leg and arm movement
-  - Idle animation with breathing
-  - Head rotation following camera
-  - Animated player models
-  - Support for custom player skins
-
-- **Player Physics**
-  - Gravity and jumping
-  - Collision detection
-  - Swimming and oxygen system
-  - Fall damage
-
-### World Generation
-- **Procedural Terrain**
-  - Noise-based terrain generation
-  - Multiple biomes
-  - Caves and underground systems
-  - Ore distribution
-
-### Modding & Extensibility
-- **Server-Side Modding**
-  - C# mod support
-  - JavaScript mod support (interpreted)
-  - Powerful modding API (ScriptingApi)
-  - Custom game modes possible
-
-- **Asset Customization**
-  - Custom textures support
-  - Custom player models
-  - Custom block definitions
+**Guiding Principles:**
+- Fix the foundation before adding features
+- Every system must be integrated, not bolted on
+- If code isn't called, it's deleted
+- If a feature isn't finished, it's either completed or removed
 
 ---
 
-## 🚧 In Progress
+## ✅ Milestone 0: Code Cleanup & Foundation (This Release)
 
-### Enhanced Character System
-- **Advanced Animations** (PRIORITY)
-  - ✅ Chopping/mining animation (tool swinging)
-  - ✅ Bow drawing and firing animation
-  - ✅ Sword and shield combat animations
-  - ✅ Emote system (wave, point, cheer, talk)
-  - 🔄 Animation state machine implementation
-  - 🔄 Equipment-specific animation triggers
-  - 🔄 Smooth animation blending
+> Clean house. Remove dead code, fix bare exceptions, consolidate docs.
 
-- **Equipment System**
-  - 🔄 Visible equipped items on character
-  - 🔄 Tool/weapon switching with visual feedback
-  - 🔄 Armor rendering on player model
-  - ⏳ Attachment points for items (hands, back, belt)
-
-### VOIP & Social Features (Planned Foundation)
-- **Voice Chat Integration**
-  - ⏳ VOIP library integration (Opus codec recommended)
-  - ⏳ Voice indicator UI (speaking animation trigger)
-  - ⏳ Proximity-based voice chat
-  - ⏳ Push-to-talk keybind
-  - ⏳ Voice volume controls
-
-- **Emote System**
-  - ✅ Basic emote animations created
-  - 🔄 Emote command interface (/wave, /point, etc.)
-  - ⏳ Emote wheel/radial menu
-  - ⏳ Custom emotes support
-  - ⏳ Synchronized emote playback in multiplayer
-
-- **Character Expression**
-  - ⏳ Talking animation synced with VOIP
-  - ⏳ Lip-sync approximation (volume-based)
-  - ⏳ Facial expression system (if higher-res models added)
-  - ⏳ Hand gestures during speech
-
-### Survival Mode Enhancements
-- **Crafting System**
-  - 🔄 Enhanced crafting UI using golden frames
-  - ⏳ Recipe discovery system
-  - ⏳ Crafting stations (workbench, furnace, anvil)
-  - ⏳ Tool durability
-  - ⏳ Skill-driven crafting quality (learn-by-doing)
-  - ⏳ Interactive crafting stages (knapping, forging, pottery)
-
-- **Resource Gathering**
-  - 🔄 Block breaking with tools
-  - ⏳ Different tool efficiencies
-  - ⏳ Block drop system
-  - ⏳ Inventory management improvements
-  - ⏳ Weight-based inventory system
-
-### Water System Overhaul
-- **Water Physics**
-  - ⏳ Dirty-queue water solver (performance optimization)
-  - ⏳ Water levels (0–15 per cell)
-  - ⏳ Gravity + lateral flow rules
-  - ⏳ River current forces on entities
-
-- **Water Rendering**
-  - ⏳ Surface-only water mesh per chunk (replace per-voxel cubes)
-  - ⏳ Smooth vertex height interpolation
-  - ⏳ Animated water shader (waves, fresnel, depth color)
-  - ⏳ LOD water meshes for distance rendering
-
-- **Water Interactions**
-  - ⏳ Swimming movement mode with buoyancy
-  - ⏳ Boat controller with steering and river currents
-  - ⏳ Ice system (freeze/melt tied to seasons)
-  - ⏳ Ice weight/cracking mechanics
-
-- See [WATER_SYSTEM_DESIGN.md](WATER_SYSTEM_DESIGN.md) for full design
-
-### World Simulation (Vintage Story–Inspired)
-- **Seasons & Weather**
-  - ⏳ World calendar with season progression
-  - ⏳ Local weather cells (temperature, rainfall, wind)
-  - ⏳ Snow accumulation and melt
-  - ⏳ Seasonal terrain tinting
-
-- **Soil & Farming**
-  - ⏳ Soil type system (soil, loam, clay, peat)
-  - ⏳ Crop growth tied to soil, season, and skill
-  - ⏳ Food spoilage and preservation (drying, smoking, salting, fermenting)
-  - ⏳ Erosion from water flow and traffic
-
-- **NPC Settlements**
-  - ⏳ System-driven settlement placement (river + soil scoring)
-  - ⏳ Village/town/city/outpost hierarchy
-  - ⏳ Population growth/decline from food and climate
-  - ⏳ Social class system and labor specialization
-
-- **Trade & Economy**
-  - ⏳ Trade route generation along roads
-  - ⏳ Caravan mechanics (seasonal, weather-affected)
-  - ⏳ Salt as strategic preservation resource
-
-- **Emergent Narrative**
-  - ⏳ NPC memory system (remembers events)
-  - ⏳ Procedural dialogue tied to world history
-  - ⏳ Belief systems tied to harvest success
-  - ⏳ Myth generation from extinct settlements
-  - ⏳ Multi-generation NPC lineage
-
-- See [WORLD_SIMULATION_DESIGN.md](WORLD_SIMULATION_DESIGN.md) for full design
-
-### Character Persistence (Valheim-Style)
-- **Character Data Separation**
-  - ⏳ Characters saved independently of worlds
-  - ⏳ Inventory travels with character between worlds
-  - ⏳ Skills and injuries persist across sessions
-
-- **Character Creation (Vintage Story DNA)**
-  - ⏳ Earth-tone UI with parchment aesthetic
-  - ⏳ Origin backgrounds (soft skill biases, not classes)
-  - ⏳ Physical identity, face, and hair presets
-
-- **Movement Feel (Hytale-Inspired)**
-  - ⏳ Acceleration-based movement (not velocity snapping)
-  - ⏳ Turn inertia for natural rotation
-  - ⏳ Procedural body motion (head/torso lag)
-
-- See [GAME_DESIGN.md](GAME_DESIGN.md) for full design
-
-### Terrain Rendering Upgrade
-- **Material System**
-  - ⏳ Triplanar mapping (no UV seams on cliffs)
-  - ⏳ Soil-driven material blending
-  - ⏳ Moisture-based darkening
-  - ⏳ Macro noise overlay (kills texture repetition)
-  - ⏳ Seasonal color tinting
+- [x] **Audit** — Full codebase audit identifying stubs, dead code, spaghetti patterns
+- [x] **Exception hygiene** — Replace all bare `throw new Exception()` with descriptive messages
+  - Inventory.cs: `ArgumentOutOfRangeException` for invalid wear places
+  - ChunkDb.cs: Descriptive messages with coordinates
+  - War.cs: `ArgumentOutOfRangeException` for unknown team types
+- [x] **Dead code removal** — Delete `Server/Mods/Unused/` directory (4 files, 721 lines)
+- [x] **Stale TODO cleanup** — Resolve 5 "TODO: wrong?" in ServerWorldManager.cs (Array.Clear was correct)
+- [x] **Inventory refactor** — Extract `TryPlaceItemInMainArea()` helper, eliminate duplicate code
+- [x] **Documentation consolidation** — Move 57 scattered .md files from root into organized `docs/` directory
+- [x] **Remove dead stubs** — ChunkDbPlainFile commented-out class, SetChunkToFile dead code
 
 ---
 
-## 📋 Planned Features
+## 🔲 Milestone 1: Build System Modernization
 
-### Short Term (Next 3-6 Months)
+> Make the project build reliably on modern toolchains and CI.
 
-#### 1. Combat System
-- **Melee Combat**
-  - Sword swing hitboxes
-  - Shield blocking mechanics
-  - Damage calculation
-  - Weapon durability
-  - Different weapon types (sword, axe, mace)
+### 1a. Migrate to SDK-style Project Files
+The current `.csproj` files use the legacy verbose XML format (VS2012 era). Migrate to SDK-style:
 
-- **Ranged Combat**
-  - Bow and arrow projectiles
-  - Arrow physics and collision
-  - Crossbow alternative
-  - Throwable items
+```xml
+<!-- Before (legacy) -->
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="...">
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <!-- 50+ lines of boilerplate -->
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Server\File1.cs" />
+    <Compile Include="Server\File2.cs" />
+    <!-- every file listed explicitly -->
+  </ItemGroup>
+</Project>
 
-- **Enemy AI**
-  - Basic hostile mobs (zombies, skeletons)
-  - Passive mobs (animals for resources)
-  - Pathfinding
-  - Day/night spawn mechanics
-  - Boss encounters
+<!-- After (SDK-style) -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
 
-#### 2. Enhanced Building
-- **Advanced Placement**
-  - Rotation of placed blocks
-  - Half-blocks and stairs
-  - Slope blocks
-  - Different block shapes
+**Files to migrate:**
+- [ ] `ScriptingApi/ScriptingApi.csproj` (simplest — no native deps, start here)
+- [ ] `SwordAndStoneLib/SwordAndStoneLib.csproj` (core library)
+- [ ] `SwordAndStone.Tests/SwordAndStone.Tests.csproj` (test project)
+- [ ] `SwordAndStoneServer/SwordAndStoneServer.csproj` (console app)
+- [ ] `SwordAndStone/SwordAndStone.csproj` (game client — most complex, OpenTK)
+- [ ] `SwordAndStoneMonsterEditor/SwordAndStoneMonsterEditor.csproj` (WinForms tool)
 
-- **Building Tools**
-  - Copy/paste regions
-  - Fill tool for large areas
-  - Symmetry mode
-  - Brush sizes
+### 1b. Target Modern .NET
+- [ ] Retarget from `.NET Framework 4.8` → `net8.0` (LTS)
+- [ ] Replace `System.Drawing` usage with cross-platform alternative where needed
+- [ ] Update NuGet packages:
+  - `OpenTK 2.0.0` → `OpenTK 4.x` (major API changes — plan for this)
+  - `protobuf-net 2.1.0` → `protobuf-net 3.x`
+  - `NUnit 3.13.3` → latest 3.x or 4.x
+- [ ] Handle native library loading (ENet, OpenAL, SQLite) for cross-platform
+- [ ] Remove Lib/ directory vendored DLLs in favor of NuGet packages
 
-#### 3. Player Progression
-- **Learn-By-Doing Skill System**
-  - Skills improve through usage, not XP allocation
-  - Failure teaches faster than success
-  - Tool tier and equipment affect efficiency
-  - No visible XP bars — mastery is felt, not shown
+### 1c. Add GitHub Actions CI
+- [ ] Create `.github/workflows/build.yml` — build on push/PR
+- [ ] Create `.github/workflows/test.yml` — run NUnit tests
+- [ ] Add build status badge to README.md
+- [ ] Remove `.travis.yml` (legacy CI)
 
-- **Skills/Abilities**
-  - Skill trees (mining, building, combat, magic)
-  - Special abilities unlockable
-  - Cooldown-based powers
-  - Skill UI integration
-
-### Medium Term (6-12 Months)
-
-#### 4. World Expansion
-- **More Biomes**
-  - Desert, snow, jungle, swamp
-  - Climate-driven biome assignment (temperature + rainfall)
-  - Biome-specific blocks and resources
-  - Weather effects per biome
-  - Temperature system (season + latitude + elevation)
-
-- **Structures**
-  - System-driven NPC villages and towns
-  - Dungeons
-  - Temples and ruins
-  - Generated loot
-
-- **Hydrology**
-  - River generation (rainfall → downhill flow → ocean)
-  - Oceans (sea level fill, gentle seabed noise)
-  - River erosion shaping terrain over time
-  - Floodplains and sediment deposits
-
-- **Dimensions**
-  - Underground world (deeper caves)
-  - Sky islands
-  - Nether/hell dimension
-  - Dimension portals
-
-#### 5. Advanced Multiplayer
-- **Guilds/Clans**
-  - Guild creation and management
-  - Guild territory/claims
-  - Guild bank/shared storage
-  - Guild chat channel
-
-- **Economy**
-  - Trading system
-  - Currency
-  - Shops (NPC and player-run)
-  - Auction house
-
-- **PvP Systems**
-  - Arena mode
-  - Territorial control
-  - Faction wars
-  - Ranked combat
-
-#### 6. Quality of Life
-- **UI Improvements**
-  - Quest log
-  - Achievement system
-  - Statistics tracking
-  - Settings menu redesign with golden UI
-
-- **Controls**
-  - Gamepad support
-  - Customizable keybinds
-  - Mouse sensitivity options
-  - Touchscreen improvements (mobile)
-
-### Long Term (12+ Months)
-
-#### 7. Magic System
-- **Spellcasting**
-  - Spell book interface
-  - Mana system
-  - Elemental magic (fire, ice, lightning)
-  - Spell crafting
-
-- **Enchanting**
-  - Enchantment table
-  - Item enchantments
-  - Magical effects
-  - Rune system
-
-#### 8. Farming & Automation
-- **Agriculture**
-  - Crop planting and growth (season + soil + skill dependent)
-  - Animal husbandry with grazing pressure
-  - Food cooking and preservation system
-  - Hunger/nutrition mechanics
-  - Livestock breeding and disease
-  - Seasonal crop rotation
-
-- **Redstone/Logic**
-  - Logic blocks (AND, OR, NOT gates)
-  - Pistons and moving blocks
-  - Automated doors and traps
-  - Minecarts and rails
-
-#### 9. Companions & Pets
-- **Pet System**
-  - Tameable animals
-  - Pet commands (follow, stay, attack)
-  - Pet inventory
-  - Pet leveling
-
-- **Summons**
-  - Magic summons
-  - Temporary companions
-  - Necromancy (skeleton warriors)
-
-#### 10. Story & Quests
-- **Quest System**
-  - NPC quest givers
-  - Quest chains
-  - Story progression
-  - Quest rewards
-
-- **Lore & World Building**
-  - Readable books and scrolls
-  - Environmental storytelling
-  - Hidden secrets
-  - Achievement lore
+### 1d. Clean Up Build Scripts
+- [ ] Remove or update legacy build scripts (`build.bat`, `build.sh`, `BuildCito.*`)
+- [ ] Remove legacy validation scripts (`pre-build-validation.*`, `post-build-validation.*`, `validate-build.*`)
+- [ ] Consolidate to `dotnet build` / `dotnet test` / `dotnet publish`
 
 ---
 
-## 🔧 Technical Improvements
+## 🔲 Milestone 2: Code Architecture Cleanup
 
-### Performance Optimization (Ongoing)
-- **Rendering**
-  - ✅ Chunk-based frustum culling implemented
-  - 🔄 Occlusion culling for hidden chunks
-  - ⏳ Level of detail (LOD) for distant terrain
-  - ⏳ Mesh batching optimization
-  - ⏳ Texture atlas optimization
+> Untangle the spaghetti. Make the code navigable and maintainable.
 
-- **Networking**
-  - 🔄 Bandwidth optimization
-  - ⏳ Delta compression for position updates
-  - ⏳ Chunk streaming improvements
-  - ⏳ Server performance profiling
+### 2a. Namespace & Project Alignment
+- [ ] Align namespaces with directory structure consistently
+- [ ] Move Cito-transpiled `.ci.cs` files into proper namespace directories
+- [ ] Evaluate whether Cito transpilation is still needed (if not targeting Java/JS, remove it)
 
-- **Memory Management**
-  - ⏳ Chunk unloading improvements
-  - ⏳ Texture memory pooling
-  - ⏳ Asset streaming
+### 2b. Server Architecture
+- [ ] Split `Server.cs` partial class into focused files:
+  - `ServerChunkManager.cs` — chunk loading/sending
+  - `ServerPlayerManager.cs` — player spawn/despawn/tracking
+  - `ServerInventoryManager.cs` — inventory operations
+  - `ServerLightingManager.cs` — lighting calculations
+- [ ] Consolidate network backends (ENet/TCP/WebSocket/Dummy) behind clean interface
+- [ ] Clean up `ServerCommand.cs` — extract command handlers into separate classes
 
-### Platform Support
-- **Current Support**
-  - ✅ Windows (full support)
-  - ✅ Linux (build support, limited runtime)
-  - ⏳ macOS (untested, likely works)
+### 2c. Client Architecture
+- [ ] Extract `Game.ci.cs` rendering subsystems into focused modules
+- [ ] Consolidate GUI mod system — single consistent UI framework
+- [ ] Remove commented-out code blocks throughout Client/
 
-- **Future Targets**
-  - ⏳ Mobile (Android/iOS) - major undertaking
-  - ⏳ Web (WebGL/WebAssembly)
-  - ⏳ Console (if feasible)
-
-### Code Quality
-- **Testing**
-  - ✅ Unit test framework (NUnit) set up
-  - 🔄 Expand test coverage
-  - ⏳ Integration tests
-  - ⏳ Automated UI tests
-
-- **Documentation**
-  - ✅ Build documentation (BUILD.md)
-  - ✅ Testing guide (TESTING.md)
-  - ✅ WoW GUI documentation (WOW_GUI_README.md)
-  - ✅ This roadmap
-  - ✅ Game design vision (GAME_DESIGN.md)
-  - ✅ Water system design (WATER_SYSTEM_DESIGN.md)
-  - ✅ World simulation design (WORLD_SIMULATION_DESIGN.md)
-  - 🔄 API documentation
-  - ⏳ Modding tutorials
-  - ⏳ Video tutorials
+### 2d. Fix Remaining Compiler Warnings
+- [ ] Address ~107 compiler warnings systematically:
+  - Unused variables → remove or use
+  - Obsolete API calls → update to modern equivalents
+  - Missing XML doc comments → add where public API
 
 ---
 
-## 🎨 Art & Audio (Future)
+## 🔲 Milestone 3: Feature Integration
 
-### Visual Enhancements
-- **Graphics**
-  - ⏳ Shader effects (water, glass, reflections)
-  - ⏳ Particle effects (smoke, fire, magic)
-  - ⏳ Weather effects (rain, snow, fog)
-  - ⏳ Dynamic shadows
-  - ⏳ Post-processing (bloom, SSAO)
+> Wire up the features that exist but aren't connected.
 
-- **Models**
-  - ✅ Enhanced player model with more animations
-  - ⏳ Higher resolution player models (optional)
-  - ⏳ More mob models
-  - ⏳ Animated decorative blocks
+### 3a. Combat System Integration
+- [ ] Wire up `CombatSystem.cs` and `Weapons.cs` in Fortress mod to game loop
+- [ ] Connect combat animations to actual damage calculations
+- [ ] Implement health/damage display in UI unit frames
+- [ ] Complete War.cs `//TODO: medic subclass` and `//TODO: support subclass`
 
-### Audio System
-- **Music**
-  - ⏳ Background music system
-  - ⏳ Biome-specific music
-  - ⏳ Combat music
-  - ⏳ Menu/ambient tracks
+### 3b. Character System Integration
+- [ ] Connect character customization selections to actual rendered models
+- [ ] Wire up pixel art skin editor output to character rendering
+- [ ] Implement character persistence (save/load character data independently of world)
+- [ ] Connect equipment visuals to inventory system
 
-- **Sound Effects**
-  - ⏳ Block breaking sounds
-  - ⏳ Footstep sounds (different surfaces)
-  - ⏳ Combat sounds
-  - ⏳ Environmental ambience
-  - ⏳ UI sound effects
+### 3c. Survival Mode Completion
+- [ ] Wire up crafting recipes to actual block/item creation
+- [ ] Connect tool durability to block breaking system
+- [ ] Implement hunger/health regeneration loop
+- [ ] Connect resource drops to block destruction
 
-- **Voice**
-  - ✅ VOIP system (planned)
-  - ⏳ NPC dialogue (text-to-speech or recordings)
-  - ⏳ Player voice commands
+### 3d. UI Consolidation
+- [ ] Merge overlapping GUI implementations (golden UI + standard UI)
+- [ ] Wire up minimap to actual terrain data
+- [ ] Connect action bar slots to inventory hotbar
+- [ ] Implement settings menu that persists preferences
 
 ---
 
-## 🤝 Community & Contribution
+## 🔲 Milestone 4: Testing & Quality
 
-### Open Source Development
-- **Current State**
-  - ✅ Public domain license (Unlicense)
-  - ✅ GitHub repository open
-  - ✅ Fork-friendly for game creation
-  - ⏳ Contribution guidelines
+> Build confidence that changes don't break things.
 
-- **Community Features** (Future)
-  - ⏳ Discord server
-  - ⏳ Official forums
-  - ⏳ Mod repository/workshop
-  - ⏳ Community showcase
-  - ⏳ Regular development updates
+### 4a. Expand Unit Test Coverage
+Current test files cover basic scenarios. Target coverage areas:
+- [ ] Inventory system — stacking, overflow, wear places, move-to-inventory
+- [ ] Chunk database — read/write/delete operations
+- [ ] Server commands — command parsing and execution
+- [ ] Network packet serialization — round-trip tests
+- [ ] World generation — deterministic seed tests
+- [ ] Combat damage calculation
 
-### Modding Support
-- **Current**
-  - ✅ Server-side C# mods
-  - ✅ JavaScript mod support
-  - ✅ Custom texture packs
-  - ✅ Custom models
+### 4b. Integration Tests
+- [ ] Single-player game loop — start game, place block, verify
+- [ ] Client-server connection — connect, authenticate, receive chunks
+- [ ] Mod loading — load mod, verify hooks fire
 
-- **Planned**
-  - ⏳ Mod loader/manager
-  - ⏳ Client-side mods
-  - ⏳ Mod configuration UI
-  - ⏳ Mod compatibility checking
-  - ⏳ Hot-reload for development
+### 4c. Automated Quality Gates
+- [ ] Require tests pass before merge (CI)
+- [ ] Add code coverage reporting
+- [ ] Add linting / code style enforcement
 
 ---
 
-## 📊 Priority Matrix
+## 🔲 Milestone 5: Standalone Game Polish
 
-### Critical (Must Have)
-1. ✅ Core building mechanics
-2. ✅ Multiplayer functionality
-3. 🔄 Combat system (in progress)
-4. 🔄 Enhanced animations (in progress)
-5. ⏳ Survival mode completion
-6. ⏳ Performance optimization
+> Make it feel like a real game, not a tech demo.
 
-### High Priority (Should Have)
-1. ⏳ Enemy mobs and AI
-2. ⏳ Crafting system improvements
-3. ⏳ VOIP integration
-4. ⏳ Quest system
-5. ⏳ More biomes
-6. ⏳ Achievement system
+### 5a. New Player Experience
+- [ ] Main menu → single player → world generation → gameplay loop (seamless)
+- [ ] Tutorial hints for first-time players
+- [ ] Default key bindings that make sense
+- [ ] Loading screen with progress indicator
 
-### Medium Priority (Nice to Have)
-1. ⏳ Magic system
-2. ⏳ Farming and automation
-3. ⏳ Guild/clan system
-4. ⏳ Pet system
-5. ⏳ Weather effects
-6. ⏳ Audio system
+### 5b. Audio
+- [ ] Block place/break sounds
+- [ ] Footstep sounds (surface-dependent)
+- [ ] Ambient background audio
+- [ ] UI click/hover sounds
 
-### Low Priority (Future Enhancement)
-1. ⏳ Advanced shaders
-2. ⏳ Mobile port
-3. ⏳ Story mode
-4. ⏳ Additional dimensions
-5. ⏳ Console support
+### 5c. Visual Polish
+- [ ] Consistent block textures
+- [ ] Particle effects (block breaking, torch flames)
+- [ ] Smooth camera transitions
+- [ ] Day/night cycle lighting improvements
+
+### 5d. Packaging & Distribution
+- [ ] Single executable or installer
+- [ ] Bundled assets (no external file dependencies)
+- [ ] Platform-specific builds (Windows, Linux, macOS)
+- [ ] Version number in title bar and about screen
 
 ---
 
-## 📈 Development Methodology
+## Future: Feature Roadmap (Post-Modernization)
 
-### Version Scheme
-- **Major.Minor.Patch** (e.g., 1.2.3)
-  - **Major:** Significant feature additions or breaking changes
-  - **Minor:** New features, non-breaking improvements
-  - **Patch:** Bug fixes, small tweaks
+Once the foundation is solid, these features can be developed cleanly:
 
-### Release Cycle
-- **Development Builds:** Continuous (main branch)
-- **Beta Releases:** Monthly (feature complete but testing)
-- **Stable Releases:** Quarterly (fully tested)
+| Priority | Feature | Design Doc |
+|----------|---------|------------|
+| High | Water system overhaul | [docs/design/WATER_SYSTEM_DESIGN.md](docs/design/WATER_SYSTEM_DESIGN.md) |
+| High | World simulation (seasons, weather, farming) | [docs/design/WORLD_SIMULATION_DESIGN.md](docs/design/WORLD_SIMULATION_DESIGN.md) |
+| High | Enemy mobs and AI pathfinding | — |
+| Medium | VOIP and emote system | [docs/design/VOIP_AND_EMOTE_SYSTEM.md](docs/design/VOIP_AND_EMOTE_SYSTEM.md) |
+| Medium | Magic system | — |
+| Medium | Quest and NPC dialogue system | — |
+| Low | Mobile port | — |
+| Low | Advanced shaders and post-processing | — |
 
-### Testing Philosophy
-1. Unit tests for core systems
-2. Integration tests for multiplayer
-3. Manual playtesting for gameplay
-4. Community beta testing before stable release
+See [docs/design/GAME_DESIGN.md](docs/design/GAME_DESIGN.md) for the full design vision.
 
 ---
 
-## 💡 Optimization Suggestions
+## Architecture Reference
 
-### Current Optimizations Implemented
-1. ✅ Chunk-based rendering (only visible chunks drawn)
-2. ✅ Frustum culling (objects outside camera view ignored)
-3. ✅ Texture atlasing for blocks
-4. ✅ VBO/VAO for efficient mesh rendering
-5. ✅ Delta time for frame-independent animation
-
-### Recommended Future Optimizations
-
-#### Rendering
-1. **Greedy Meshing**
-   - Combine adjacent faces of same block type
-   - Reduces polygon count by 50-80%
-   - Priority: High
-
-2. **Occlusion Culling**
-   - Don't render chunks completely hidden by others
-   - Use bounding box tests
-   - Priority: High
-
-3. **Level of Detail (LOD)**
-   - Distant chunks use simplified meshes
-   - Reduce detail beyond certain distance
-   - Priority: Medium
-
-4. **Instanced Rendering**
-   - For repeated models (trees, grass, items)
-   - Single draw call for many objects
-   - Priority: Medium
-
-#### Networking
-1. **Chunk Compression**
-   - Compress chunk data before sending
-   - Use run-length encoding for sparse data
-   - Priority: High
-
-2. **Delta Updates**
-   - Only send changed blocks, not entire chunks
-   - Track dirty chunks
-   - Priority: High
-
-3. **Entity Interpolation**
-   - Smooth player movement between updates
-   - Reduce network update frequency
-   - Priority: Medium
-
-4. **Interest Management**
-   - Only send updates for nearby entities/chunks
-   - Reduce bandwidth per player
-   - Priority: High
-
-#### Memory
-1. **Texture Streaming**
-   - Load high-res textures on demand
-   - Keep low-res in memory
-   - Priority: Low (mobile priority: High)
-
-2. **Chunk Pooling**
-   - Reuse chunk objects instead of GC
-   - Reduces memory allocation overhead
-   - Priority: Medium
-
-3. **Asset Bundling**
-   - Bundle related assets together
-   - Reduce file I/O operations
-   - Priority: Low
-
-#### Gameplay
-1. **AI Optimization**
-   - Limit pathfinding updates
-   - Use spatial partitioning for entity queries
-   - Sleep distant entities
-   - Priority: High (when mobs added)
-
-2. **Physics Optimization**
-   - Spatial hashing for collision detection
-   - Sleep static entities
-   - Reduce physics update frequency for distant entities
-   - Priority: Medium
+```
+SwordAndStone.sln
+├── ScriptingApi/           # Server-side modding API (public interface for mods)
+├── SwordAndStoneLib/       # Core shared library
+│   ├── Client/             # Client game logic, rendering, UI
+│   │   ├── MainMenu/       # Menu screens, editors
+│   │   ├── Mods/           # Client-side mod hooks (GUI, HUD)
+│   │   └── Misc/           # Utilities, math, helpers
+│   ├── Server/             # Server game logic
+│   │   ├── Mods/           # Game modes (Fortress, War)
+│   │   └── Systems/        # Server subsystems (loading, heartbeat, etc.)
+│   └── Common/             # Shared code (network, assets, compression)
+├── SwordAndStone/          # Game client executable
+├── SwordAndStoneServer/    # Dedicated server executable
+├── SwordAndStoneMonsterEditor/ # Model editor tool
+├── SwordAndStone.Tests/    # NUnit test project
+└── docs/                   # Organized documentation
+    ├── design/             # Design specs for planned features
+    ├── guides/             # How-to guides
+    ├── build/              # Build troubleshooting
+    └── implementation/     # Historical implementation notes
+```
 
 ---
 
-## 🐛 Known Issues & Limitations
+## Version History
 
-### Current Known Issues
-1. **Linux/Mono Networking**
-   - ENet native library compatibility issues
-   - Workaround: Use Windows for server hosting
-   - Priority: Medium
-
-2. **GUI Scaling**
-   - Some UI elements may not scale perfectly on all resolutions
-   - Mostly affects ultra-wide monitors
-   - Priority: Low
-
-3. **Build Warnings**
-   - ~107 compiler warnings (unused variables, obsolete APIs)
-   - Don't affect functionality
-   - Priority: Low (cleanup)
-
-### Limitations
-1. **World Height:** Fixed at 128 blocks (expandable with code changes)
-2. **World Size:** 9984×9984 default (customizable but limited by memory)
-3. **Max Players:** Server-dependent (typically 50-100)
-4. **Mobile:** Not currently supported (major undertaking)
+| Version | Date | Milestone |
+|---------|------|-----------|
+| Alpha 0.0.1 | Dec 2025 | Complete rebrand from Manic Digger |
+| Alpha 0.0.2 | Mar 2026 | Code cleanup, dead code removal, doc consolidation (Milestone 0) |
 
 ---
 
-## 📞 Getting Involved
-
-### For Players
-- Download and play the game
-- Report bugs on GitHub Issues
-- Share your creations
-- Join the community (when established)
-
-### For Developers
-- Fork the repository for your own game
-- Contribute bug fixes and features
-- Create mods and share them
-- Improve documentation
-- Write tests
-
-### For Content Creators
-- Create texture packs
-- Design player models
-- Build showcase worlds
-- Make tutorial videos
-- Stream gameplay
-
----
-
-## 📚 Additional Resources
-
-### Documentation
-- [README.md](README.md) - Project overview
-- [BUILD.md](BUILD.md) - Build instructions
-- [TESTING.md](TESTING.md) - Testing guide
-- [WOW_GUI_README.md](WOW_GUI_README.md) - UI system documentation
-- [GAME_DESIGN.md](GAME_DESIGN.md) - Core game design vision
-- [WATER_SYSTEM_DESIGN.md](WATER_SYSTEM_DESIGN.md) - Water system design
-- [WORLD_SIMULATION_DESIGN.md](WORLD_SIMULATION_DESIGN.md) - World simulation design
-- [COPYING.md](COPYING.md) - License information
-
-### External Resources
-- **Cito Language:** [cito.sourceforge.net](http://cito.sourceforge.net/)
-- **Original Manic Digger:** [github.com/manicdigger/manicdigger](https://github.com/manicdigger/manicdigger)
-
----
-
-## 🎯 2025 Goals
-
-### Q4 2024 / Q1 2025 (Completed)
-- ✅ Enhanced character animations
-- ✅ Comprehensive roadmap
-- ✅ Complete rebrand to Sword & Stone (Alpha 0.0.1)
-- ✅ GUI asset system fixes
-- 🔄 VOIP system design and foundation (in progress)
-- ⏳ Combat system alpha (planned)
-
-### Q2 2025 (Apr-Jun)
-- ⏳ Enemy mobs implementation
-- ⏳ Basic crafting expansion
-- ⏳ Performance optimization pass
-- ⏳ Achievement system
-
-### Q3 2025 (Jul-Sep)
-- ⏳ Magic system foundation
-- ⏳ More biomes
-- ⏳ Quest system alpha
-- ⏳ Guild system
-
-### Q4 2025 (Oct-Dec)
-- ⏳ Survival mode 1.0
-- ⏳ Audio system implementation
-- ⏳ Community features
-- ⏳ Major stable release
-
----
-
-## 🏆 Long-term Vision (2026+)
-
-By the end of 2026, Sword & Stone aims to be:
-- A feature-complete voxel adventure game
-- A thriving multiplayer community
-- A platform for creative builders and modders
-- An example of successful open-source game development
-- A game that players can truly call their own
-
-**The journey continues...**
-
----
-
-*Legend:*
-- ✅ Completed
-- 🔄 In Progress
-- ⏳ Planned/Not Started
-
----
-
-**This roadmap is a living document and will be updated regularly as development progresses.**
+*This is a living document. Updated as milestones are completed.*
