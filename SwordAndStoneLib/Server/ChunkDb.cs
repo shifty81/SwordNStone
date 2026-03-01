@@ -50,7 +50,7 @@ namespace SwordAndStone.Server
 			}));
 			if (chunks.Count > 1)
 			{
-				throw new Exception();
+				throw new Exception(string.Format("Expected at most 1 chunk at ({0},{1},{2}), but found {3}", x, y, z, chunks.Count));
 			}
 			if (chunks.Count == 0)
 			{
@@ -93,7 +93,7 @@ namespace SwordAndStone.Server
 			}, filename);
 			if (chunks.Count > 1)
 			{
-				throw new Exception();
+				throw new Exception(string.Format("Expected at most 1 chunk at ({0},{1},{2}) from file '{3}', but found {4}", x, y, z, filename, chunks.Count));
 			}
 			if (chunks.Count == 0)
 			{
@@ -101,12 +101,6 @@ namespace SwordAndStone.Server
 			}
 			return chunks[new Xyz() { X = x, Y = y, Z = z }];
 		}
-		/*
-	    public static void SetChunkToFile(IChunkDb db, int x, int y, int z, byte[] c, string filename)
-	    {
-	        db.SetChunksToFile(new DbChunk[] { new DbChunk() { Position = new Xyz() { X = x, Y = y, Z = z }, Chunk = c } }, filename);
-	    }
-	    */
 	}
 
 	/// <summary>
@@ -674,24 +668,4 @@ namespace SwordAndStone.Server
 			ReadOnly = value;
 		}
 	}
-	/// <summary>
-	/// Chunk storage using a plain file structure to store data
-	/// TODO: This is just a draft. Implement.
-	/// </summary>
-	/*public class ChunkDbPlainFile : IChunkDb
-	{
-	    private string currentlyOpened;
-	
-	    public void Open(string filename);
-	    public void Backup(string backupFilename);
-	    public IEnumerable<byte[]> GetChunks(IEnumerable<Xyz> chunkpositions);
-	    public void SetChunks(IEnumerable<DbChunk> chunks);
-	    public void DeleteChunks(IEnumerable<Xyz> chunkpositions);
-	    public byte[] GetGlobalData();
-	    public void SetGlobalData(byte[] data);
-	    public Dictionary<Xyz, byte[]> GetChunksFromFile(IEnumerable<Xyz> chunkpositions, string filename);
-	    public void SetChunksToFile(IEnumerable<DbChunk> chunks, string filename);
-	    public bool GetReadOnly();
-	    public void SetReadOnly(bool value);
-	}*/
 }
