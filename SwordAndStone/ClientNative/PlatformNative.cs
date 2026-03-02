@@ -1906,10 +1906,13 @@ namespace SwordAndStone.ClientNative
 			if (!glStateInitialized)
 			{
 				glStateInitialized = true;
-				GL.Enable(EnableCap.AlphaTest);
-				GL.AlphaFunc(AlphaFunction.Greater, 0.5f);
-				GL.Enable(EnableCap.Blend);
-				GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+				if (ENABLE_TRANSPARENCY)
+				{
+					GL.Enable(EnableCap.AlphaTest);
+					GL.AlphaFunc(AlphaFunction.Greater, 0.5f);
+					GL.Enable(EnableCap.Blend);
+					GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+				}
 			}
 			UpdateMousePosition();
 			foreach (NewFrameHandler h in newFrameHandlers)
