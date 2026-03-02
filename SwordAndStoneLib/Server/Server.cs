@@ -370,17 +370,9 @@ public partial class Server : ICurrentTime, IDropItem
         d_DataItems = new GameDataItemsBlocks() { d_Data = data };
         if (server.mainSockets == null)
         {
-            server.mainSockets = new NetServer[3];
-            server.mainSocketsCount = 3;
-            mainSockets[0] = new EnetNetServer();
-            if (mainSockets[1] == null)
-            {
-                mainSockets[1] = new WebSocketNetServer();
-            }
-            if (mainSockets[2] == null)
-            {
-                mainSockets[2] = new TcpNetServer();
-            }
+            int count;
+            server.mainSockets = NetworkBackendFactory.CreateAll(NetworkBackendFactory.DefaultConfigs, out count);
+            server.mainSocketsCount = count;
         }
 
         all_privileges.AddRange(ServerClientMisc.Privilege.All());
@@ -441,18 +433,7 @@ public partial class Server : ICurrentTime, IDropItem
     void Start(int port)
     {
         Port = port;
-        mainSockets[0].SetPort(port);
-        mainSockets[0].Start();
-        if (mainSockets[1] != null)
-        {
-            mainSockets[1].SetPort(port);
-            mainSockets[1].Start();
-        }
-        if (mainSockets[2] != null)
-        {
-            mainSockets[2].SetPort(port + 2);
-            mainSockets[2].Start();
-        }
+        NetworkBackendFactory.StartAll(mainSockets, NetworkBackendFactory.DefaultConfigs, port);
     }
     internal int Port;
     public void Stop()

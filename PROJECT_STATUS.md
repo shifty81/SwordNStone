@@ -40,8 +40,8 @@ Sword & Stone has completed its build system modernization (Milestone 1) and is 
 | Duplicate code | ✅ Refactored | Inventory `MoveToInventory` extracted to `TryPlaceItemInMainArea()` |
 | Compiler warnings | ✅ Fixed | 302 → 0 warnings (deprecated APIs fixed, platform warnings suppressed) |
 | Remaining TODOs | ⚠️ ~40 | Mostly performance notes, not missing features |
-| Server architecture | ✅ Improved | Server.cs split from 4,434 → 808 lines across 5 focused files |
-| Test coverage | ⚠️ Minimal | 9 test files with basic coverage — needs expansion |
+| Server architecture | ✅ Improved | Server.cs split from 4,434 → 808 lines; ServerCommand.cs split from 2,191 → 712 lines; NetworkBackendFactory |
+| Test coverage | ⚠️ Growing | 11 test files, 108 tests — expanding |
 
 ### Feature Status
 | Feature | Status | Notes |
@@ -69,8 +69,10 @@ See [ROADMAP.md](ROADMAP.md) for the full modernization plan. Current progress:
 
 **Milestone 2: Code Architecture Cleanup** (in progress)
 - ✅ Server.cs split into focused partial class files
+- ✅ ServerCommand.cs split into focused partial class files (Chat, Admin, Gameplay)
+- ✅ Network backends consolidated behind NetworkBackendFactory
 - ✅ All compiler warnings fixed (302 → 0)
-- Remaining: namespace alignment, network backend consolidation, client architecture cleanup
+- Remaining: namespace alignment, client architecture cleanup
 
 ### Known Issues
 1. **ENet on Linux/Mono** — Native library compatibility issues. Workaround: use TCP backend.
