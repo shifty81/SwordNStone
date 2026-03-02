@@ -663,7 +663,7 @@ namespace SwordAndStone.Server
 					{
 						if (k.Value.clientGroup.Name.Equals(targetGroup.Name))
 						{
-							// Inform only if there is no spawn set under clients.
+							// Inform only if there is no fill limit set under clients.
 							foreach (ManicDigger.Client client in serverClient.Clients)
 							{
 								if (client.Name.Equals(k.Value.playername, StringComparison.InvariantCultureIgnoreCase))
@@ -682,7 +682,7 @@ namespace SwordAndStone.Server
 						}
 					}
 					SendMessage(sourceClientId, string.Format(language.Get("Server_CommandFillLimitGroupSuccess"), colorSuccess, targetGroup.Name, maxFill));
-					ServerEventLog(String.Format("{0} sets spawn of group {1} to {2}.", GetClient(sourceClientId).playername, targetGroup.Name, maxFill));
+					ServerEventLog(String.Format("{0} sets fill area limit of group {1} to {2}.", GetClient(sourceClientId).playername, targetGroup.Name, maxFill));
 					return true;
 				case "-player":
 				case "-p":
@@ -767,12 +767,12 @@ namespace SwordAndStone.Server
 						{
 							TimeSpan time;
 
-							int nMinuts = 0;
-							if (int.TryParse(strValue, out nMinuts))
+							int nMinutes = 0;
+							if (int.TryParse(strValue, out nMinutes))
 							{
 								//only a number
 								//take it as minutes
-								_time.Add(TimeSpan.FromMinutes(nMinuts));
+								_time.Add(TimeSpan.FromMinutes(nMinutes));
 								SendMessage(sourceClientId, "The time is: " + _time.Time.ToString());
 							}
 							else

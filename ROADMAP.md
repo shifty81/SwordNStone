@@ -84,6 +84,13 @@ All 6 projects migrated from legacy verbose `.csproj` to SDK-style:
   - `ServerBuildCraft.cs` — build/craft/privileges, fill area operations
   - `ServerNetworkSend.cs` — all Send* methods, messaging, entity management
   - `ServerTypes.cs` — supporting types (GameTime, Vector3i, ServerSystem, etc.)
+- [x] Split `ServerCommand.cs` partial class (2,191 → 712 lines) into focused files:
+  - `ServerCommandChat.cs` — chat/messaging (PrivateMessage, AnswerMessage, WelcomeMessage, Announcement)
+  - `ServerCommandAdmin.cs` — admin/moderation (ChangeGroup, Kick, Login, Privileges, List, Restart, Shutdown)
+  - `ServerCommandGameplay.cs` — gameplay (Give, Teleport, SetSpawn, Time, Monsters, Areas, FillLimit)
+- [x] Consolidated network backends behind `NetworkBackendFactory`:
+  - `NetworkBackendFactory.cs` — enum-based creation, configuration, StartAll
+  - Replaced hardcoded array indices with factory pattern in Server.cs
 
 ### 2d. Fix Remaining Compiler Warnings ✅
 - [x] Reduced compiler warnings from **302 → 0**:
@@ -98,8 +105,8 @@ All 6 projects migrated from legacy verbose `.csproj` to SDK-style:
 - [ ] Evaluate whether Cito transpilation is still needed (if not targeting Java/JS, remove it)
 
 ### 2b. Server Architecture (Remaining)
-- [ ] Consolidate network backends (ENet/TCP/WebSocket/Dummy) behind clean interface
-- [ ] Clean up `ServerCommand.cs` — extract command handlers into separate classes
+- [x] Clean up `ServerCommand.cs` — extracted command handlers into 3 partial class files
+- [x] Consolidate network backends (ENet/TCP/WebSocket) behind `NetworkBackendFactory`
 
 ### 2c. Client Architecture
 - [ ] Extract `Game.ci.cs` rendering subsystems into focused modules
