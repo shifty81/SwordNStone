@@ -1520,28 +1520,7 @@ namespace SwordAndStone.ClientNative
 			GL.Enable(EnableCap.Texture2D);
 			int id = GL.GenTexture();
 			GL.BindTexture(TextureTarget.Texture2D, id);
-			if (!ENABLE_MIPMAPS)
-			{
-				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
-				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
-			}
-			else
-			{
-				//GL.GenerateMipmap(GenerateMipmapTarget.Texture2D); //DOES NOT WORK ON ATI GRAPHIC CARDS
-				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.GenerateMipmap, 1); //DOES NOT WORK ON ???
-				int[] MipMapCount = new int[1];
-				GL.GetTexParameter(TextureTarget.Texture2D, GetTextureParameter.TextureMaxLevel, out MipMapCount[0]);
-				if (MipMapCount[0] == 0)
-				{
-					GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
-				}
-				else
-				{
-					GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.NearestMipmapLinear);
-				}
-				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, linearMag ? (int)TextureMagFilter.Linear : (int)TextureMagFilter.Nearest);
-				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMaxLevel, 4);
-			}
+
 			BitmapData bmp_data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
 			GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bmp_data.Width, bmp_data.Height, 0,
@@ -1549,21 +1528,17 @@ namespace SwordAndStone.ClientNative
 
 			bmp.UnlockBits(bmp_data);
 
-			GL.Enable(EnableCap.DepthTest);
-
-			if (ENABLE_TRANSPARENCY)
+			if (!ENABLE_MIPMAPS)
 			{
-				GL.Enable(EnableCap.AlphaTest);
-				GL.AlphaFunc(AlphaFunction.Greater, 0.5f);
+				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
+				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
 			}
-
-
-			if (ENABLE_TRANSPARENCY)
+			else
 			{
-				GL.Enable(EnableCap.Blend);
-				GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-				//GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (int)TextureEnvMode.Blend);
-				//GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvColor, new Color4(0, 0, 0, byte.MaxValue));
+				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMaxLevel, 4);
+				GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
+				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.NearestMipmapLinear);
+				GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, linearMag ? (int)TextureMagFilter.Linear : (int)TextureMagFilter.Nearest);
 			}
 
 			if (convertedbitmap)
@@ -1924,8 +1899,21 @@ namespace SwordAndStone.ClientNative
 			return window.IsFocused;
 		}
 
+		bool glStateInitialized;
+
 		void window_RenderFrame(FrameEventArgs e)
 		{
+			if (!glStateInitialized)
+			{
+				glStateInitialized = true;
+				if (ENABLE_TRANSPARENCY)
+				{
+					GL.Enable(EnableCap.AlphaTest);
+					GL.AlphaFunc(AlphaFunction.Greater, 0.5f);
+					GL.Enable(EnableCap.Blend);
+					GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+				}
+			}
 			UpdateMousePosition();
 			foreach (NewFrameHandler h in newFrameHandlers)
 			{
@@ -2234,7 +2222,11 @@ namespace SwordAndStone.ClientNative
 	{
 		public GamePlatformNative platform;
 		public GameWindowNative()
-			: base(GameWindowSettings.Default, new NativeWindowSettings { ClientSize = new OpenTK.Mathematics.Vector2i(1280, 720) })
+			: base(GameWindowSettings.Default, new NativeWindowSettings
+			{
+				ClientSize = new OpenTK.Mathematics.Vector2i(1280, 720),
+				Profile = ContextProfile.Compatability
+			})
 		{
 			VSync = VSyncMode.Off;
 			WindowState = OpenTK.Windowing.Common.WindowState.Normal;

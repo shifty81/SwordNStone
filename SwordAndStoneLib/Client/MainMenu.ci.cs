@@ -271,6 +271,7 @@
         {
             cubeModel = p.CreateModel(QuadModelData.GetQuadModelData());
         }
+        p.GlEnableTexture2d();
         p.BindTexture2d(textureid);
         p.GLDisableAlphaTest();
         p.DrawModel(cubeModel);
