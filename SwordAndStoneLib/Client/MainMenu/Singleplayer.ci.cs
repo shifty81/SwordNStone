@@ -191,7 +191,7 @@
             {
                 extension = "mdss";
             }
-            string result = menu.p.FileOpenDialog(extension, "Manic Digger Savegame", menu.p.PathSavegames());
+            string result = menu.p.FileOpenDialog(extension, "Sword & Stone Savegame", menu.p.PathSavegames());
             if (result != null)
             {
                 // Show character creator before starting world

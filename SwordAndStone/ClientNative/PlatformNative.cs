@@ -1213,7 +1213,7 @@ namespace SwordAndStone.ClientNative
 			window.RenderFrame += window_RenderFrame;
 			window.Closing += window_Closed;
 			window.UpdateFrequency = 0;
-			window.Title = "Manic Digger";
+			window.Title = "Sword & Stone";
 		}
 
 		void window_Closed(System.ComponentModel.CancelEventArgs e)
